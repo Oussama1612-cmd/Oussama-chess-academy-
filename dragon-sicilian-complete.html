@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>كورس دراغون سيسيلي | أكاديمية الشطرنج العربي</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Cairo',sans-serif;background:#0d1117;color:#e6edf3;min-height:100vh}
+
+/* TOPBAR */
+.topbar{background:#1a6fba;padding:13px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;box-shadow:0 2px 12px rgba(0,0,0,0.5)}
+.topbar-title{font-size:1rem;font-weight:800;color:#fff;display:flex;align-items:center;gap:8px}
+.progress-wrap{flex:1;max-width:240px;margin:0 16px}
+.progress-lbl{font-size:0.7rem;color:rgba(255,255,255,0.7);margin-bottom:3px}
+.progress-bar{height:6px;background:rgba(255,255,255,0.2);border-radius:10px;overflow:hidden}
+.progress-fill{height:100%;background:#4fc3f7;border-radius:10px;transition:width .5s}
+.score-badges{display:flex;gap:8px}
+.badge{background:rgba(255,255,255,0.15);border-radius:20px;padding:4px 12px;font-size:0.75rem;font-weight:700;color:#fff}
+.badge.green{background:rgba(63,185,80,0.3);color:#3fb950}
+.badge.red{background:rgba(248,81,73,0.3);color:#f85149}
+
+/* LAYOUT */
+.layout{display:flex;height:calc(100vh - 52px)}
+
+/* SIDEBAR */
+.sidebar{width:320px;min-width:320px;background:#161b22;overflow-y:auto;border-left:1px solid rgba(255,255,255,0.07);flex-shrink:0}
+.sidebar::-webkit-scrollbar{width:4px}
+.sidebar::-webkit-scrollbar-thumb{background:#30363d;border-radius:4px}
+
+.sec-header{padding:13px 16px;background:#1c2128;border-bottom:1px solid rgba(255,255,255,0.06);cursor:pointer;display:flex;align-items:center;gap:8px;user-select:none;transition:background .2s}
+.sec-header:hover{background:#21262d}
+.sec-icon{font-size:1rem}
+.sec-name{font-size:0.88rem;font-weight:700;color:#e6edf3;flex:1}
+.sec-count{font-size:0.68rem;color:rgba(255,255,255,0.35)}
+.sec-arrow{font-size:0.75rem;color:rgba(255,255,255,0.35);transition:transform .3s}
+.sec-header.collapsed .sec-arrow{transform:rotate(180deg)}
+
+.lesson-row{display:flex;align-items:center;gap:10px;padding:11px 16px;border-bottom:1px solid rgba(255,255,255,0.04);cursor:pointer;transition:all .15s;position:relative}
+.lesson-row::before{content:'';position:absolute;right:0;top:0;bottom:0;width:3px;background:transparent;transition:background .2s}
+.lesson-row:hover{background:rgba(255,255,255,0.04)}
+.lesson-row.active{background:rgba(26,111,186,0.15)}
+.lesson-row.active::before{background:#1a6fba}
+.check{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.8rem;flex-shrink:0;border:2px solid #30363d;color:#30363d;transition:all .2s}
+.check.done{background:#3fb950;border-color:#3fb950;color:#fff}
+.check.current{background:#1a6fba;border-color:#1a6fba;color:#fff}
+.check.wrong{background:#f85149;border-color:#f85149;color:#fff}
+.linfo{flex:1;min-width:0}
+.ltitle{font-size:0.82rem;font-weight:600;color:#c9d1d9;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lesson-row.active .ltitle{color:#fff}
+.lmeta{font-size:0.68rem;color:rgba(255,255,255,0.3);margin-top:1px;display:flex;align-items:center;gap:4px}
+
+/* MAIN */
+.main{flex:1;overflow-y:auto;background:#0d1117}
+.main::-webkit-scrollbar{width:6px}
+.main::-webkit-scrollbar-thumb{background:#21262d;border-radius:4px}
+
+/* VIDEO LESSON */
+.lesson-view{padding:32px 40px;max-width:860px}
+.lesson-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(26,111,186,0.15);border:1px solid rgba(26,111,186,0.3);color:#4fc3f7;font-size:0.72rem;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:12px;letter-spacing:.5px}
+.lesson-view h1{font-size:1.65rem;font-weight:900;color:#fff;margin-bottom:10px;line-height:1.3}
+.lesson-meta-row{display:flex;gap:16px;font-size:0.8rem;color:rgba(255,255,255,0.4);margin-bottom:24px;flex-wrap:wrap}
+.video-box{background:#161b22;border:1px solid rgba(255,255,255,0.08);border-radius:14px;aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all .3s;margin-bottom:24px;position:relative;overflow:hidden}
+.video-box::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(26,111,186,0.08) 0%,transparent 70%)}
+.video-box:hover{border-color:rgba(26,111,186,0.4);transform:translateY(-2px)}
+.play-btn{width:64px;height:64px;border-radius:50%;background:rgba(26,111,186,0.9);display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin-bottom:12px;position:relative;z-index:1;box-shadow:0 0 30px rgba(26,111,186,0.4)}
+.video-lbl{font-size:0.9rem;color:rgba(255,255,255,0.45);position:relative;z-index:1}
+.moves-box{background:#161b22;border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:20px;margin-bottom:20px}
+.moves-box h3{font-size:0.88rem;font-weight:700;color:#4fc3f7;margin-bottom:14px;display:flex;align-items:center;gap:6px}
+.moves-row{display:flex;flex-wrap:wrap;gap:6px}
+.mc{background:#0d1117;border:1px solid rgba(255,255,255,0.1);border-radius:7px;padding:5px 10px;font-size:0.82rem;color:#e6edf3;font-family:monospace}
+.mc.key{border-color:#1a6fba;color:#4fc3f7;font-weight:700}
+.mc.num{background:none;border:none;color:rgba(255,255,255,0.3);padding:5px 3px}
+.desc{font-size:0.92rem;line-height:1.9;color:rgba(255,255,255,0.6);margin-bottom:20px}
+.highlight{background:rgba(79,195,247,0.08);border-right:3px solid #4fc3f7;padding:12px 16px;border-radius:0 10px 10px 0;margin:14px 0;color:rgba(255,255,255,0.75);font-size:0.9rem;line-height:1.8}
+.concepts{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:24px}
+.concept{background:#161b22;border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:16px;transition:all .2s}
+.concept:hover{border-color:rgba(26,111,186,0.3);transform:translateY(-2px)}
+.concept .ico{font-size:1.4rem;margin-bottom:6px}
+.concept h4{font-size:0.85rem;font-weight:700;color:#e6edf3;margin-bottom:4px}
+.concept p{font-size:0.75rem;color:rgba(255,255,255,0.4);line-height:1.6}
+.divider{height:1px;background:rgba(255,255,255,0.07);margin:24px 0}
+.nav-btns{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap}
+.nbtn{flex:1;min-width:140px;padding:13px 20px;border-radius:10px;font-family:'Cairo',sans-serif;font-size:0.88rem;font-weight:700;cursor:pointer;border:none;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s}
+.nbtn.prev{background:#21262d;color:rgba(255,255,255,0.65)}
+.nbtn.prev:hover{background:#30363d;color:#fff}
+.nbtn.complete{background:#238636;color:#fff;box-shadow:0 4px 14px rgba(35,134,54,.35)}
+.nbtn.complete:hover{background:#2ea043;transform:translateY(-1px)}
+.nbtn.next{background:#1a6fba;color:#fff;box-shadow:0 4px 14px rgba(26,111,186,.35)}
+.nbtn.next:hover{background:#2079cc;transform:translateY(-1px)}
+
+/* ===== PUZZLE VIEW ===== */
+.puzzle-view{padding:24px 30px;max-width:1000px}
+.puzzle-header{margin-bottom:20px}
+.puzzle-header h1{font-size:1.4rem;font-weight:900;color:#fff;margin-bottom:6px}
+.puzzle-num-badge{display:inline-block;background:#1a6fba;color:#fff;font-size:0.75rem;font-weight:700;padding:3px 12px;border-radius:20px;margin-left:8px}
+
+.puzzle-layout{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:start}
+@media(max-width:700px){.puzzle-layout{grid-template-columns:1fr}.board-col{display:flex;justify-content:center}}
+
+/* BOARD */
+.board-wrap{display:inline-block;position:relative}
+.coords-left{position:absolute;right:-20px;top:0;height:100%;display:flex;flex-direction:column}
+.coords-left span{flex:1;display:flex;align-items:center;font-size:0.7rem;color:rgba(255,255,255,0.35);padding-right:3px}
+.coords-bottom{display:flex;margin-top:4px;margin-right:0}
+.coords-bottom span{flex:1;text-align:center;font-size:0.7rem;color:rgba(255,255,255,0.35)}
+.chessboard{display:grid;grid-template-columns:repeat(8,60px);grid-template-rows:repeat(8,60px);border:2px solid #30363d;border-radius:5px;overflow:hidden;box-shadow:0 0 30px rgba(0,0,0,.7)}
+.sq{width:60px;height:60px;display:flex;align-items:center;justify-content:center;font-size:1.75rem;cursor:pointer;position:relative;transition:filter .1s;user-select:none}
+.sq.light{background:#f0d9b5}
+.sq.dark-sq{background:#b58863}
+.sq.selected{box-shadow:inset 0 0 0 3px #4fc3f7;background:rgba(79,195,247,0.35)!important}
+.sq.hint{background:rgba(63,185,80,0.45)!important}
+.sq.last-from{background:rgba(255,230,0,0.4)!important}
+.sq.last-to{background:rgba(255,230,0,0.6)!important}
+.sq.wrong{animation:shake .35s;background:rgba(248,81,73,0.5)!important}
+.sq.correct{background:rgba(63,185,80,0.55)!important}
+.sq:hover{filter:brightness(1.1)}
+.sq.possible::after{content:'';position:absolute;width:32%;height:32%;border-radius:50%;background:rgba(26,111,186,0.4);pointer-events:none}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+/* PUZZLE INFO PANEL */
+.pinfo{display:flex;flex-direction:column;gap:16px}
+.turn-banner{padding:14px 18px;border-radius:12px;font-size:1rem;font-weight:700;display:flex;align-items:center;gap:10px}
+.turn-banner.black{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:#e6edf3}
+.turn-banner .piece-ico{font-size:1.5rem}
+
+.feedback-box{padding:16px 18px;border-radius:12px;font-size:0.9rem;font-weight:600;display:flex;align-items:flex-start;gap:10px;line-height:1.6;min-height:60px}
+.feedback-box.waiting{background:#1c2128;border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.45)}
+.feedback-box.correct{background:rgba(63,185,80,0.12);border:1px solid rgba(63,185,80,0.35);color:#3fb950}
+.feedback-box.wrong{background:rgba(248,81,73,0.12);border:1px solid rgba(248,81,73,0.3);color:#f85149}
+.feedback-box.partial{background:rgba(210,160,60,0.12);border:1px solid rgba(210,160,60,0.3);color:#d4a843}
+.feedback-ico{font-size:1.2rem;flex-shrink:0;margin-top:1px}
+
+.hint-box{background:#161b22;border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:16px}
+.hint-box h4{font-size:0.8rem;font-weight:700;color:#4fc3f7;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.hint-box p{font-size:0.82rem;color:rgba(255,255,255,0.5);line-height:1.7}
+
+.solution-box{background:#161b22;border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:16px;display:none}
+.solution-box.show{display:block}
+.solution-box h4{font-size:0.8rem;font-weight:700;color:#3fb950;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.sol-moves{display:flex;flex-wrap:wrap;gap:6px}
+.sol-move{background:#0d1117;border:1px solid rgba(63,185,80,0.3);border-radius:7px;padding:4px 10px;font-size:0.82rem;font-family:monospace;color:#3fb950}
+
+.p-btns{display:flex;gap:8px;flex-wrap:wrap}
+.pbtn{padding:10px 18px;border-radius:8px;font-family:'Cairo',sans-serif;font-size:0.85rem;font-weight:700;cursor:pointer;border:none;transition:all .2s;display:flex;align-items:center;gap:6px}
+.pbtn.hint-btn{background:#21262d;color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.1)}
+.pbtn.hint-btn:hover{background:#30363d;color:#fff}
+.pbtn.reset-btn{background:#21262d;color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.1)}
+.pbtn.reset-btn:hover{background:#30363d;color:#fff}
+.pbtn.next-btn{background:#1a6fba;color:#fff;flex:1}
+.pbtn.next-btn:hover{background:#2079cc}
+.pbtn.sol-btn{background:#21262d;color:#d4a843;border:1px solid rgba(212,168,67,0.25)}
+.pbtn.sol-btn:hover{background:rgba(212,168,67,0.1)}
+
+.stats-mini{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stat-mini{background:#161b22;border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:12px;text-align:center}
+.stat-mini .n{font-size:1.4rem;font-weight:900;line-height:1}
+.stat-mini .l{font-size:0.68rem;color:rgba(255,255,255,0.35);margin-top:3px;letter-spacing:.3px}
+.n.g{color:#3fb950}.n.r{color:#f85149}.n.b{color:#4fc3f7}
+
+/* RESULTS VIEW */
+.results-view{padding:40px;text-align:center;max-width:600px;margin:0 auto}
+.trophy{font-size:5rem;margin-bottom:16px;animation:bounce 1s ease infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.results-view h2{font-size:2rem;font-weight:900;color:#fff;margin-bottom:8px}
+.results-view p{color:rgba(255,255,255,0.5);font-size:1rem;margin-bottom:30px}
+.score-circles{display:flex;gap:20px;justify-content:center;margin-bottom:30px;flex-wrap:wrap}
+.score-circle{width:110px;height:110px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;border:3px solid}
+.score-circle.g{border-color:#3fb950;background:rgba(63,185,80,0.1)}
+.score-circle.r{border-color:#f85149;background:rgba(248,81,73,0.1)}
+.score-circle.b{border-color:#4fc3f7;background:rgba(79,195,247,0.1)}
+.circle-num{font-size:2rem;font-weight:900}
+.g .circle-num{color:#3fb950}.r .circle-num{color:#f85149}.b .circle-num{color:#4fc3f7}
+.circle-lbl{font-size:0.72rem;color:rgba(255,255,255,0.4)}
+.restart-btn{background:#1a6fba;color:#fff;padding:14px 40px;border-radius:30px;font-family:'Cairo',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;border:none;box-shadow:0 4px 20px rgba(26,111,186,.4);transition:all .2s}
+.restart-btn:hover{background:#2079cc;transform:translateY(-2px)}
+
+/* MOBILE */
+@media(max-width:768px){
+  .layout{flex-direction:column}
+  .sidebar{width:100%;min-width:unset;height:auto;max-height:45vh}
+  .main{flex:1}
+  .lesson-view,.puzzle-view{padding:16px}
+  .lesson-view h1{font-size:1.2rem}
+  .chessboard{grid-template-columns:repeat(8,40px);grid-template-rows:repeat(8,40px)}
+  .sq{width:40px;height:40px;font-size:1.15rem}
+  .puzzle-layout{grid-template-columns:1fr}
+  .progress-wrap{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-title">♟ أكاديمية الشطرنج العربي</div>
+  <div class="progress-wrap">
+    <div class="progress-lbl" id="progLbl">0 / 22 مكتمل</div>
+    <div class="progress-bar"><div class="progress-fill" id="progFill" style="width:0%"></div></div>
+  </div>
+  <div class="score-badges">
+    <span class="badge green" id="scoreGood">✓ 0</span>
+    <span class="badge red" id="scoreWrong">✗ 0</span>
+  </div>
+</div>
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+
+  <!-- SECTION: INTRO -->
+  <div class="sec-header" onclick="toggleSec(this)">
+    <span class="sec-icon">🏆</span><span class="sec-name">المقدمة والتاريخ</span>
+    <span class="sec-count">3 دروس</span><span class="sec-arrow">▲</span>
+  </div>
+  <div class="sec-lessons">
+    <div class="lesson-row" onclick="go(0)" id="lr0"><div class="check" id="ck0">1</div><div class="linfo"><div class="ltitle">مقدمة كورس دراغون سيسيلي</div><div class="lmeta">▶ VIDEO · 3 MIN</div></div></div>
+    <div class="lesson-row" onclick="go(1)" id="lr1"><div class="check" id="ck1">2</div><div class="linfo"><div class="ltitle">Alekhine vs Botvinnik 1936</div><div class="lmeta">▶ VIDEO · 8 MIN</div></div></div>
+    <div class="lesson-row" onclick="go(2)" id="lr2"><div class="check" id="ck2">3</div><div class="linfo"><div class="ltitle">Pollock vs Bird 1889</div><div class="lmeta">▶ VIDEO · 7 MIN</div></div></div>
+  </div>
+
+  <!-- SECTION: YUGOSLAV -->
+  <div class="sec-header" onclick="toggleSec(this)">
+    <span class="sec-icon">⚔️</span><span class="sec-name">الهجوم اليوغوسلافي</span>
+    <span class="sec-count">5 دروس</span><span class="sec-arrow">▲</span>
+  </div>
+  <div class="sec-lessons">
+    <div class="lesson-row" onclick="go(3)" id="lr3"><div class="check" id="ck3">4</div><div class="linfo"><div class="ltitle">Yugoslav - الخطط والأفكار</div><div class="lmeta">▶ VIDEO · 1 MIN</div></div></div>
+    <div class="lesson-row" onclick="go(4)" id="lr4"><div class="check" id="ck4">5</div><div class="linfo"><div class="ltitle">Lesson 2 - 9. Bc4</div><div class="lmeta">▶ VIDEO · 4 MIN</div></div></div>
+    <div class="lesson-row" onclick="go(5)" id="lr5"><div class="check" id="ck5">6</div><div class="linfo"><div class="ltitle">Lesson 3 - Yugoslav 9. Bh6</div><div class="lmeta">▶ VIDEO · 13 MIN</div></div></div>
+    <div class="lesson-row" onclick="go(6)" id="lr6"><div class="check" id="ck6">7</div><div class="linfo"><div class="ltitle">Lesson 4 - Yugoslav 9. 0-0-0</div><div class="lmeta">▶ VIDEO · 15 MIN</div></div></div>
+    <div class="lesson-row" onclick="go(7)" id="lr7"><div class="check" id="ck7">8</div><div class="linfo"><div class="ltitle">Lesson 5 - 9. g4</div><div class="lmeta">▶ VIDEO · 10 MIN</div></div></div>
+  </div>
+
+  <!-- SECTION: CLASSICAL -->
+  <div class="sec-header" onclick="toggleSec(this)">
+    <span class="sec-icon">🎓</span><span class="sec-name">الأنظمة الكلاسيكية</span>
+    <span class="sec-count">4 دروس</span><span class="sec-arrow">▲</span>
+  </div>
+  <div class="sec-lessons">
+    <div class="lesson-row" onclick="go(8)" id="lr8"><div class="check" id="ck8">9</div><div class="linfo"><div class="ltitle">Lesson 6 - Classical 6. Be2</div><div class="lmeta">▶ VIDEO · 12 MIN</div></div></div>
+    <div class="lesson-row" onclick="go(9)" id="lr9"><div class="check" id="ck9">10</div><div class="linfo"><div class="ltitle">Lesson 7 - 6. Bc4</div><div class="lmeta">▶ VIDEO · 6 MIN</div></div></div>
+    <div class="lesson-row" onclick="go(10)" id="lr10"><div class="check" id="ck10">11</div><div class="linfo"><div class="ltitle">Lesson 8 - 6. g3</div><div class="lmeta">▶ VIDEO · 5 MIN</div></div></div>
+    <div class="lesson-row" onclick="go(11)" id="lr11"><div class="check" id="ck11">12</div><div class="linfo"><div class="ltitle">Lesson 9 - 6. f4</div><div class="lmeta">▶ VIDEO · 4 MIN</div></div></div>
+  </div>
+
+  <!-- SECTION: TACTICS -->
+  <div class="sec-header" onclick="toggleSec(this)">
+    <span class="sec-icon">⚡</span><span class="sec-name">تمارين التكتيك التفاعلية</span>
+    <span class="sec-count">29 تمرين</span><span class="sec-arrow">▲</span>
+  </div>
+  <div class="sec-lessons" id="tactics-sec">
+  </div>
+
+  <!-- SECTION: DOWNLOAD -->
+  <div class="sec-header" onclick="toggleSec(this)">
+    <span class="sec-icon">📥</span><span class="sec-name">ملف التحميل</span>
+    <span class="sec-count">1 ملف</span><span class="sec-arrow">▲</span>
+  </div>
+  <div class="sec-lessons">
+    <div class="lesson-row" onclick="go(41)" id="lr41"><div class="check" id="ck41">★</div><div class="linfo"><div class="ltitle">Chessbase Dragon - PGN</div><div class="lmeta">☁ DOWNLOAD</div></div></div>
+  </div>
+
+</div>
+
+<!-- MAIN -->
+<div class="main" id="main"></div>
+</div>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+const LESSONS = [
+  {type:'video',title:'مقدمة كورس دراغون سيسيلي',sec:'🏆 المقدمة',dur:'3 دقائق',
+   moves:'1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 g6',key:'5...g6',
+   desc:'مرحباً بك في كورس <strong>دراغون سيسيلي</strong> - أحد أكثر الافتتاحيات إثارة في الشطرنج.',
+   hl:'🐉 الدراغون دفاع للأسود ضد 1.e4 يتميز بتطوير سريع وهجوم حاد على جانب الملكة. ستتعلم مواجهة الهجوم اليوغوسلافي وألعاب كاسباروف وكارلسن.',
+   concepts:[{i:'♟',t:'التطوير السريع',d:'الأسود يطوّر قطعه ويهاجم من جانب الملكة'},{i:'🐉',t:'الفيل التنين',d:'Bg7 يسيطر على القطر الطويل'},{i:'⚔️',t:'هجوم مقابل',d:'الأبيض يهاجم ملكياً والأسود ملكوياً'}]},
+  {type:'video',title:'Alekhine vs Botvinnik - نوتنغهام 1936',sec:'🏆 المقدمة',dur:'8 دقائق',
+   moves:'1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 g6 6. Be2 Bg7 7. Be3 Nc6 8. Nb3 Be6 9. f4 O-O 10. g4 d5',key:'10...d5!',
+   desc:'لعبة تاريخية 1936 بين عملاقَي الشطرنج. الأبيض يلعب g4 ليفتح الجناح الملكي.',
+   hl:'💡 الأسود يرد بـ d5! ضرباً مضاداً في المركز لوقف الهجوم. درس كلاسيكي في التوازن.',
+   concepts:[{i:'📖',t:'درس 1936',d:'من أولى ألعاب الدراغون الموثقة'},{i:'⚡',t:'g4 الأبيض',d:'فتح الجناح الملكي'},{i:'🛡️',t:'d5! الرد',d:'الضربة المضادة في المركز'}]},
+  {type:'video',title:'Pollock vs Bird - نيويورك 1889',sec:'🏆 المقدمة',dur:'7 دقائق',
+   moves:'1. e4 c5 2. d4 cxd4 3. Nf3 Nc6 4. Nxd4 d6 5. Be3 g6 6. Nc3 Bg7',key:'5...g6',
+   desc:'لعبة تعود لعام 1889! دليل على عراقة الدراغون وأصالته في تاريخ الشطرنج.',
+   hl:'📜 شتاينيتز علّق على هذه اللعبة وأوضح الأفكار الجوهرية التي لا تزال صالحة حتى اليوم.',
+   concepts:[{i:'🗓️',t:'1889',d:'إحدى أقدم ألعاب الدراغون'},{i:'📝',t:'تعليق شتاينيتز',d:'الأسطورة علّق على هذه اللعبة'},{i:'🎯',t:'الأفكار ثابتة',d:'لم تتغير منذ 130 سنة'}]},
+  {type:'video',title:'Yugoslav - الخطط والأفكار الرئيسية',sec:'⚔️ Yugoslav',dur:'1 دقيقة',
+   moves:'1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 g6 6. Be3 Bg7 7. f3 a6',key:'7...a6!!',
+   desc:'الهجوم اليوغوسلافي أخطر نظام ضد الدراغون. الأبيض يلعب f3 ويستعد لتفجير الجناح الملكي.',
+   hl:'🔑 السر: 7...a6!! بدلاً من 7...Nc6. تبدأ هجوم الملكة فوراً، تتحكم في b5، تؤخر التحصين، وتعتمد على الأفكار لا الحفظ!',
+   concepts:[{i:'⚔️',t:'اليوغوسلافي',d:'أخطر نظام - يتطلب معرفة دقيقة'},{i:'🌟',t:'7...a6!!',d:'الحل المعتمد على الأفكار'},{i:'♟',t:'التحصين المؤجل',d:'يربك خطة الأبيض الهجومية'}]},
+  {type:'video',title:'Lesson 2 - 9. Bc4',sec:'⚔️ Yugoslav',dur:'4 دقائق',
+   moves:'1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 g6 6. Be3 Bg7 7. f3 a6 8. Qd2 Nbd7 9. Bc4 h6',key:'9...h6!',
+   desc:'Bc4 يستهدف قطر a2-g8 ويهدد f7. الأسود يرد بـ h6 منعاً لـ Bh6.',
+   hl:'💡 h6! يمنع تبادل الفيل المدافع Bg7. بعدها b5 يبدأ هجوم جانب الملكة مباشرة.',
+   concepts:[{i:'🎯',t:'Bc4 الخطر',d:'يستهدف f7 عبر القطر'},{i:'🛡️',t:'h6! الرد',d:'يمنع Bh6 ويحافظ على Bg7'},{i:'♟',t:'b5 الهجوم',d:'يبدأ فوراً بعد التحصين'}]},
+  {type:'video',title:'Lesson 3 - Yugoslav 9. Bh6',sec:'⚔️ Yugoslav',dur:'13 دقيقة',
+   moves:'1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 g6 6. Be3 Bg7 7. f3 a6 8. Qd2 Nbd7 9. Bh6 Bxh6 10. Qxh6 b5',key:'10...b5!',
+   desc:'الأبيض يتبادل الفيل التنين. لكن الأسود لديه خطة رائعة - b5 فوراً!',
+   hl:'🔥 بعد Bxh6 Qxh6، يلعب b5! لمنع Bc4. ثم Bb7→Rc8→Rxc3! تضحية استراتيجية شهيرة.',
+   concepts:[{i:'😈',t:'Rxc3! التضحية',d:'تكسر حصن الأبيض على جانب الملكة'},{i:'⚡',t:'b5 فوري',d:'يمنع Bc4 ويبدأ الهجوم'},{i:'🗝️',t:'Bb7 المفتاح',d:'يسيطر على d5 ويفتح للرخ'}]},
+  {type:'video',title:'Lesson 4 - Yugoslav 9. 0-0-0',sec:'⚔️ Yugoslav',dur:'15 دقيقة',
+   moves:'1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 g6 6. Be3 Bg7 7. f3 a6 8. Qd2 Nbd7 9. O-O-O b5',key:'9...b5!',
+   desc:'عندما يتحصن الأبيض على جانب الملكة، هذا الوقت المثالي للأسود ليلعب b5!',
+   hl:'⚡ الأبيض حصّن ملكه على c1 - الأسود يبدأ الهجوم فوراً! كل حركة تأخير تمنح الأبيض وقتاً.',
+   concepts:[{i:'🏃',t:'السرعة أساسية',d:'التحصين المعاكس يتطلب سرعة'},{i:'📌',t:'Bb7 الاستراتيجي',d:'السيطرة على d5'},{i:'💣',t:'Rc8 القاتل',d:'الرخ أمام ملك الأبيض مباشرة'}]},
+  {type:'video',title:'Lesson 5 - 9. g4',sec:'⚔️ Yugoslav',dur:'10 دقائق',
+   moves:'1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 g6 6. Be3 Bg7 7. f3 a6 8. Qd2 Nbd7 9. g4 b5',key:'9...b5',
+   desc:'الأبيض يلعب g4 لاختصار طريق الهجوم. الرد الأمثل: b5 وعدم التوقف!',
+   hl:'🎯 كلما تقدّم الأبيض في الجناح الملكي بسرعة، كان رد الأسود على جانب الملكة أكثر إلحاحاً وقوة!',
+   concepts:[{i:'🚀',t:'g4 العدواني',d:'يسرع الهجوم الملكي'},{i:'⚖️',t:'التوازن',d:'رد معاكس بنفس السرعة'},{i:'🧠',t:'الأفكار',d:'فهم الخطة أهم من الحفظ'}]},
+  {type:'video',title:'Lesson 6 - Classical 6. Be2',sec:'🎓 Classical',dur:'12 دقيقة',
+   moves:'1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 g6 6. Be2 Bg7 7. Be3 Nc6 8. Nb3 Be6',key:'8...Be6',
+   desc:'النظام الكلاسيكي Be2 نهج أهدأ. الأسود يلعب بانسجام: Ne5→Nc4 للضغط على الفيل.',
+   hl:'📚 Ne5→Nc4: الفارس يهاجم ويكسب الفيل أو يفتح ملف b. تطوير منسجم وخطة واضحة.',
+   concepts:[{i:'🧘',t:'الكلاسيكي',d:'Be2 أهدأ من اليوغوسلافي'},{i:'♞',t:'Ne5-Nc4',d:'الفارس يهاجم ويكسب الفيل'},{i:'⚖️',t:'التوازن',d:'لعب منتظم ومنظم'}]},
+  {type:'video',title:'Lesson 7 - 6. Bc4',sec:'🎓 Classical',dur:'6 دقائق',
+   moves:'1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 g6 6. Bc4 Bg7',key:'6. Bc4',
+   desc:'Bc4 أكثر عدوانية - الفيل يستهدف f7 مباشرة! الأسود يرد بشكل منظم.',
+   hl:'💡 Bg7 ثم 0-0 ثم Nc6 - لا تحاول كسب الوقت بأفكار متسرعة! التطوير المنظم يكفي.',
+   concepts:[{i:'⚡',t:'Bc4 العدواني',d:'يستهدف f7 عبر القطر'},{i:'🛡️',t:'الرد المنظم',d:'Bg7→0-0→Nc6'},{i:'🎯',t:'الهدوء',d:'تطوير منتظم يكسب'}]},
+  {type:'video',title:'Lesson 8 - 6. g3',sec:'🎓 Classical',dur:'5 دقائق',
+   moves:'1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 g6 6. g3 Bg7',key:'6. g3',
+   desc:'g3 نهج هادئ جداً - الأبيض يريد Bg2. هذا يمنح الأسود حرية كاملة في الهجوم!',
+   hl:'😊 لا تحتاج نظرية معقدة! العب بشكل طبيعي: Bg7, 0-0, Nc6, Be6 وستكون بخير.',
+   concepts:[{i:'😴',t:'g3 الهادئ',d:'لا يهدد الأسود مباشرة'},{i:'🎯',t:'حرية الأسود',d:'يمكنك اللعب بشكل عدواني'},{i:'✅',t:'بدون نظرية',d:'أسهل الأنظمة للمواجهة'}]},
+  {type:'video',title:'Lesson 9 - 6. f4',sec:'🎓 Classical',dur:'4 دقائق',
+   moves:'1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 g6 6. f4 Bg7',key:'6. f4',
+   desc:'f4 يريد السيطرة على المركز بسرعة. الأسود يرد بـ Nc6 ثم d5 في الوقت المناسب.',
+   hl:'🔑 الضربة المضادة d5 في المركز هي دائماً الحل ضد f4. كسر مركز الأبيض بسرعة!',
+   concepts:[{i:'🏃',t:'f4 السريع',d:'يريد فتح الجناح الملكي'},{i:'💥',t:'d5! الرد',d:'كسر المركز في الوقت المناسب'},{i:'⚖️',t:'التوازن',d:'الرد الصحيح يمنح مساواة'}]},
+];
+
+// 29 PUZZLES from real PGN FEN positions
+const PUZZLES = [
+  {n:1,fen:'2r5/4ppk1/1N1pb1p1/1p5p/1r2P2P/K4P2/2PR2P1/4R3 b - - 0 31',
+   answer:'c8c2',solution:['Rxc2'],hint:'هجوم مزدوج! هل يمكنك مهاجمة الرخ وتهديد المات في نفس الوقت؟',
+   explain:'31...Rxc2! تهاجم رخ d2 وتهدد Rb3# في نفس الوقت. أناند استسلم فوراً!'},
+  {n:2,fen:'2r1k2r/1bqn1p1p/p2p1np1/4p3/1p2P1P1/1N3P2/PPPQN2P/2KR1B1R b k - 0 16',
+   answer:'f6e4',solution:['Nxe4','fxe4','Bxe4'],hint:'الرخ على h1 بعيد عن اللعبة! كيف تستغل ذلك؟',
+   explain:'Nxe4! يهاجم الملكة. بعد fxe4 Bxe4 - الفيل يهاجم الرخ h1 والبيدق c2 معاً.'},
+  {n:3,fen:'2rqk2r/1b1npp1p/p2p1npQ/1p6/3NP1P1/2N2P2/PPP4P/1K1R1B1R b k - 0 13',
+   answer:'c8c3',solution:['Rxc3','bxc3','Qc7'],hint:'التضحية الاستراتيجية الشهيرة في الدراغون! الرخ يضحي نفسه.',
+   explain:'Rxc3! tضحية رائعة تكسر هيكل بيادق الأبيض. بعد bxc3 Qc7 - الضغط على c3 لا يتوقف.'},
+  {n:4,fen:'r1b1k2r/3npp1p/pq1p1np1/8/Pp1NP3/4QP2/NPP3PP/R3KB1R b KQkq - 0 13',
+   answer:'e7e5',solution:['e5'],hint:'الحصان على d4 يحمي الملكة! ماذا يحدث لو أزلت حمايته؟',
+   explain:'e5! يطرد الحصان من d4 والملكة على e3 ستُفقد لأن الحصان لا يستطيع الحركة.'},
+  {n:5,fen:'r3k2r/1b2ppbp/p2p1np1/q3n3/1p1NP1PP/4BP2/PPPQ4/1KNR1B1R b kq - 0 14',
+   answer:'f6f3',solution:['Nxf3','Nxf3','Nxe4','Qd3','Bxb2','Kxb2','Nc3'],hint:'فيل b7 يتطلع لـ c6. كيف تضعف دفاع الأبيض أولاً؟',
+   explain:'Nxf3! يضعف البيدق e4. ثم Nxe4 يهاجم الملكة وبعدها سلسلة من التهديدات.'},
+  {n:6,fen:'2r2rk1/2q2pbp/p3p1p1/6P1/1QnN1P2/PP4P1/2P2B2/2KR3R b - - 0 24',
+   answer:'c4e3',solution:['Ne3'],hint:'الحصان يريد مربعاً مثالياً! أين يمكنه الذهاب ليفتح ملف c؟',
+   explain:'Ne3! يفتح ملف c للملكة والرخ. الحصان محمي من الفيل g7 لأن Nd4 يحمي c2.'},
+  {n:7,fen:'1rN1k2r/4ppbp/p2p1np1/4n3/1p2P1PP/1N2BP2/qPPQ4/2KR1B1R b k - 0 15',
+   answer:'e5e4',solution:['Nxe4','fxe4','Nc4'],hint:'الملكة على a2 تهدد. كيف تحسّن موقفها وتهاجم في نفس الوقت؟',
+   explain:'Nxe4! يهاجم الملكة. بعد fxe4 Nc4 - شوكة تهاجم الملكة والبيدق b2 معاً!'},
+  {n:8,fen:'2rq1rk1/pp1bppbp/3p1np1/4nPP1/4P3/1NN1B3/PPP1B2P/R2Q1RK1 b - - 0 13',
+   answer:'c8c3',solution:['Rxc3'],hint:'التضحية الكلاسيكية للرخ مرة أخرى! ما هدفها هنا؟',
+   explain:'Rxc3! تزيل الحصان المدافع عن e4 وتدمر هيكل بيادق الأبيض على جانب الملكة.'},
+  {n:9,fen:'2rq1rk1/pp1bppbp/3p1np1/4nP2/3BP1P1/1NN5/PPP1B2P/R2Q1RK1 b - - 0 13',
+   answer:'c8c3',solution:['Rxc3','Bxc3','Nxe4','Bd4','Bc6'],hint:'نفس الفكرة - الرخ يضحي! ماذا يحدث بعد أخذ الحصان؟',
+   explain:'Rxc3! بعد Bxc3 Nxe4 يهاجم الفيل. ثم Bc6 يحسن الوضع مع تهديد مستمر.'},
+  {n:10,fen:'2rq1rk1/pp1bppbp/3p1np1/4nP2/4P1P1/2N1B3/PPPNB2P/R2Q1RK1 b - - 0 13',
+   answer:'c8c3',solution:['Rxc3','bxc3','Bc6','Bf3','Nxf3','Qxf3','d5'],hint:'ثالث مرة نرى نفس الفكرة! الرخ يضحي ثم يأتي d5!',
+   explain:'Rxc3! bxc3 Bc6 يهاجم e4. بعد Bf3 Nxf3 Qxf3 d5! - البيدق e4 يُهاجم 3 مرات ولا يمكن الدفاع عنه.'},
+  {n:11,fen:'r1bqk2r/pp2ppbp/2np1np1/8/3NP3/2N5/PPP1BPPP/R1BQR1K1 b kq - 0 8',
+   answer:'f6e4',solution:['Nxe4','Nxc6','Nxc3','Nxd8','Nxd1','Nxf7','Kxf7'],hint:'الفارس يهاجم مرتين! الأبيض لعب Re1 بدلاً من Nb3 - استغل ذلك!',
+   explain:'Nxe4! Nxc6 Nxc3! بعد Nxd8 Nxd1 Nxf7 Kxf7 - الأسود ساوى اللعبة بشكل جميل.'},
+  {n:12,fen:'r1bq1rk1/pp2ppbp/2np1np1/8/4PP2/1NN5/PPP1B1PP/R1BQ1RK1 b - - 0 9',
+   answer:'b7b5',solution:['b5'],hint:'هجوم على f4! إذا أخذ b5، ماذا سيحدث للبيدق e4؟',
+   explain:'b5! إذا أخذ الأبيض Qb6+ ثم Nxe4 يكسب بيدقاً. الأسود يحصل على هجوم ممتاز.'},
+  {n:13,fen:'r1q2rk1/4ppb1/1B3npp/pN1b4/P7/3Q4/1PP1BPPP/R3R1K1 b - - 0 18',
+   answer:'c8b7',solution:['Qb7'],hint:'هجوم مزدوج على فيل وبيدق! ما الحركة التي تهاجم شيئين؟',
+   explain:'Qb7! تهاجم الفيل على b6 والبيدق g2 في نفس الوقت. الأبيض سيخسر مادة.'},
+  {n:14,fen:'2r2rk1/pp2pp1p/1q1pbnpQ/4n3/4P3/1NN4P/PPP1BPP1/3R1RK1 b - - 0 14',
+   answer:'c8c3',solution:['Rxc3','bxc3','Nxe4'],hint:'التضحية الكلاسيكية! الدراغون يعتمد على هذه الفكرة كثيراً.',
+   explain:'Rxc3! bxc3 Nxe4 - الأسود يحصل على تعويض ممتاز: هيكل بيادق أفضل وضغط على c3.'},
+  {n:15,fen:'r1bq1rk1/pp2ppbp/2np1np1/8/3NPP2/2N5/PPP1B1PP/R1BQ1R1K b - - 0 9',
+   answer:'f6e4',solution:['Nxe4','Nxc6','Nxc3','Nxd8','Nxd1'],hint:'نفس فكرة المسألة 11! الملك على h1 بدلاً من g1.',
+   explain:'Nxe4! Nxc6 Nxc3! بعد Nxd8 Nxd1 - الأسود يكسب بيدقاً مع موقف أفضل.'},
+  {n:16,fen:'2rq1rk1/pp1b1pb1/3p2p1/4p3/4P1P1/2N1B2R/PPP1Q3/2KR4 b - - 0 18',
+   answer:'c8c3',solution:['Rxc3','bxc3','Qc8'],hint:'Rxc3 ثم الملكة تهاجم مربعين! أين تذهب الملكة بعد bxc3؟',
+   explain:'Rxc3! bxc3 Qc8! تهاجم g4 وc3 في نفس الوقت. الأسود سيكسب بيدقاً على الأقل.'},
+  {n:17,fen:'r2q1rk1/p3ppbp/2p3p1/3pP3/5Bb1/2N5/PPPQ1PPP/R4RK1 b - - 0 13',
+   answer:'d8b8',solution:['Qb8'],hint:'شوكة على بيدقين! أي ملكة تهاجم بيدقين في نفس الوقت؟',
+   explain:'Qb8! تهاجم b2 وe5 في نفس الوقت. الأبيض سيخسر بيدقاً.'},
+  {n:18,fen:'r1b2rk1/pp3pbp/6p1/8/8/2N1P3/PPP1B1PP/R2R2K1 b - - 0 15',
+   answer:'c8c3',solution:['Bxc3','bxc3','Be6'],hint:'ليس رخاً هذه المرة! قطعة أخرى تضحي نفسها لتدمير الهيكل.',
+   explain:'Bxc3! bxc3 Be6 - الأسود يدمر هيكل بيادق الأبيض. رغم أن الأبيض عنده بيدق إضافي، فإن البيادق المعطوبة تعطي الأسود مزية في النهاية.'},
+  {n:19,fen:'rnbqkb1r/pp2pp1p/3p1np1/8/3NPP2/2N5/PPP3PP/R1BQKB1R b KQkq - 0 6',
+   answer:'b8d7',solution:['Nbd7'],hint:'الأبيض يهدد e5! ما الحركة الوحيدة التي تمنعها وتطور قطعة في نفس الوقت؟',
+   explain:'Nbd7! يمنع e5 ويطور الحصان. حركة دفاعية وهجومية في نفس الوقت.'},
+  {n:20,fen:'r1bqkb1r/pp2pp1p/2np1np1/8/3NP3/2N3P1/PPP2PBP/R1BQK2R b KQkq - 0 7',
+   answer:'c6d4',solution:['Nxd4','Qxd4','Bg7'],hint:'كيف تجبر الملكة على الوقوف في طريق فيل g7؟',
+   explain:'Nxd4! Qxd4 Bg7 - الفيل يهاجم الملكة ويجبرها على التحرك مع كسب وقت ثمين.'},
+  {n:21,fen:'r1bq1rk1/pp2ppbp/2np1np1/8/3NP3/2N1B1P1/PPP2PBP/R2Q1RK1 b - - 0 9',
+   answer:'f6g4',solution:['Ng4'],hint:'الفيل e3 مقيّد! الحصان يهاجم الفيل ولا يمكن إزالة الحماية. لماذا؟',
+   explain:'Ng4! يهاجم Be3 الذي لا يستطيع الحركة لأن Nd4 يحتاج حماية. الأسود يكسب الفيل.'},
+  {n:22,fen:'1r1q1rk1/3bppbp/3p1np1/1p2n3/3NP3/1PN1B1PP/2P2PB1/R2Q1RK1 b - - 0 15',
+   answer:'d8c8',solution:['Qc8'],hint:'هجوم مزدوج - الملكة تهاجم حصاناً وبيدقاً! أين؟',
+   explain:'Qc8! تهاجم الحصان c3 والبيدق h3 في نفس الوقت. الأبيض لن يستطيع الدفاع عن كليهما.'},
+  {n:23,fen:'2rq1rk1/pp2ppbp/3pbnp1/4n1B1/4P1P1/1NN2P2/PPPQB2P/2KR3R b - - 0 12',
+   answer:'f6d7',solution:['Nfd7'],hint:'الحصان يبحث عن طريق للوصول إلى مربع مثالي. أين يتجه عبر d7؟',
+   explain:'Nfd7! يتبعه Nb6 ثم Nec4 - الأحصنة تسيطر على مربعات مثالية وتضغط على جانب الملكة.'},
+  {n:24,fen:'2rq1rk1/pp2pp1p/3pbnpQ/8/1n2P2P/1NN2P2/PPP3P1/2KR1B1R b - - 0 13',
+   answer:'f6b3',solution:['Bxb3','axb3','Qa5'],hint:'تبادل الفيل أولاً ثم الملكة تهاجم! ماذا يهدد Qa5؟',
+   explain:'Bxb3! axb3 Qa5! تهدد Qa1+ مات أو كسب مادة. الأبيض في موقف صعب جداً.'},
+  {n:25,fen:'r1bqk2r/pp2ppbp/2np1np1/6B1/3NP3/2N5/PPPQ1PPP/2KR1B1R b kq - 0 8',
+   answer:'f6e4',solution:['Nxe4'],hint:'نفس الفكرة الكلاسيكية - الأبيض لعب Bg5 بدلاً من Be3. استغل ذلك!',
+   explain:'Nxe4! يهاجم الملكة ويفتح القطر للفيل g7 ليهاجم الحصان d4. الأبيض في مشكلة.'},
+  {n:26,fen:'r1b2rk1/p3pp1p/1qpp1npQ/8/4P3/1BN5/PPP2PPP/R3K2R b KQ - 0 12',
+   answer:'b6f2',solution:['Qxf2','Kxf2','Ng4'],hint:'تضحية الملكة! ماذا يحدث بعد Kxf2؟',
+   explain:'Qxf2+! Kxf2 Ng4+ - الأسود يكسب الملكة مرة أخرى بشوكة الحصان. كسب بيدق مجاناً!'},
+  {n:27,fen:'r1b2rk1/p3pp1p/6p1/q7/8/2N5/PPP2PPP/R1Q1K2R b KQ - 0 16',
+   answer:'c8a6',solution:['Ba6'],hint:'الفيل يمنع التحصين! إذا لم يتحصن الأبيض، ماذا ستكون مشكلته؟',
+   explain:'Ba6! يمنع 0-0 تماماً. الملك الأبيض سيبقى في المركز وسيواجه مشاكل في تطوير قطعه.'},
+  {n:28,fen:'r1bq1rk1/pp2ppbp/2np1np1/8/2B1PP2/2N2N2/PPP3PP/R1BQ1RK1 b - - 0 9',
+   answer:'b7b5',solution:['b5'],hint:'b5 يهاجم الفيل c4! وإذا تحرك الحصان c3، ماذا يحدث؟',
+   explain:'b5! يهاجم Bc4. إذا تحرك Nc3 يُؤخذ e4. وإذا Bxb5 فـ Qb6+! ثم Nxe4 مع ميزة للأسود.'},
+  {n:29,fen:'r2q1rk1/pp1bppb1/3p2pp/4n3/2B1P3/2N4P/PPPBQPP1/R3R1K1 b - - 0 14',
+   answer:'g7h3',solution:['Bxh3','gxh3','Qc8'],hint:'تضحية الفيل لفتح الخطوط! ماذا تهاجم Qc8 بعد gxh3؟',
+   explain:'Bxh3! gxh3 Qc8! تهاجم Bc4 والبيدق h3. إذا أخذ الأبيض Bxh3 قادم Nf3+ مع هجوم رهيب.'},
+];
+
+// ============================================================
+// STATE
+// ============================================================
+let cur = 0;
+let completed = new Set();
+let puzzleCorrect = 0;
+let puzzleWrong = 0;
+let puzzleCur = 0; // index in PUZZLES
+let selected = null;
+let boardState = {};
+let isBlackTurn = true;
+let answered = false;
+let hintShown = false;
+const TOTAL = LESSONS.length + PUZZLES.length + 1; // +1 download
+
+// Map lesson IDs: 0-11=lessons, 12-40=puzzles, 41=download
+function go(id) {
+  cur = id;
+  // update sidebar
+  document.querySelectorAll('.lesson-row').forEach(r=>r.classList.remove('active'));
+  const row = document.getElementById('lr'+id);
+  if(row){row.classList.add('active');row.scrollIntoView({behavior:'smooth',block:'nearest'});}
+  if(id < LESSONS.length) renderLesson(id);
+  else if(id === 41) renderDownload();
+  else renderPuzzle(id - LESSONS.length);
+  updateProgress();
+}
+
+function toggleSec(h){
+  const list = h.nextElementSibling;
+  const arr = h.querySelector('.sec-arrow');
+  if(h.classList.contains('collapsed')){
+    h.classList.remove('collapsed');
+    list.style.display='';
+    arr.textContent='▲';
+  } else {
+    h.classList.add('collapsed');
+    list.style.display='none';
+    arr.textContent='▼';
+  }
+}
+
+function updateProgress(){
+  const done = completed.size;
+  document.getElementById('progLbl').textContent = done+' / '+TOTAL+' مكتمل';
+  document.getElementById('progFill').style.width=(done/TOTAL*100)+'%';
+  document.getElementById('scoreGood').textContent='✓ '+puzzleCorrect;
+  document.getElementById('scoreWrong').textContent='✗ '+puzzleWrong;
+}
+
+function markDone(id){
+  completed.add(id);
+  const ck = document.getElementById('ck'+id);
+  if(ck){ck.classList.add('done');ck.textContent='✓';}
+  updateProgress();
+}
+
+// ============================================================
+// RENDER LESSON
+// ============================================================
+function renderLesson(id){
+  const l = LESSONS[id];
+  const moveParts = l.moves.split(' ');
+  let movesHTML='';
+  for(let t of moveParts){
+    if(/^\d+\.$/.test(t)) movesHTML+=`<span class="mc num">${t}</span>`;
+    else if(t.replace(/[!?]/g,'')=== l.key.replace(/[!?]/g,'').split(' ').pop()) movesHTML+=`<span class="mc key">${t}</span>`;
+    else movesHTML+=`<span class="mc">${t}</span>`;
+  }
+  const conHTML = l.concepts.map(c=>`<div class="concept"><div class="ico">${c.i}</div><h4>${c.t}</h4><p>${c.d}</p></div>`).join('');
+  const prev = id>0?`<button class="nbtn prev" onclick="go(${id-1})">← السابق</button>`:'';
+  const next = id<LESSONS.length-1?`<button class="nbtn next" onclick="go(${id+1})">التالي ←</button>`:
+               `<button class="nbtn next" onclick="go(12)">⚡ ابدأ التمارين ←</button>`;
+  document.getElementById('main').innerHTML=`
+  <div class="lesson-view">
+    <div class="lesson-tag">${l.sec}</div>
+    <h1>${l.title}</h1>
+    <div class="lesson-meta-row"><span>▶ فيديو</span><span>⏱ ${l.dur}</span><span>🔑 ${l.key}</span></div>
+    <div class="video-box" onclick="alert('سيتم تشغيل الفيديو هنا')">
+      <div class="play-btn">▶</div><div class="video-lbl">شاهد الدرس</div>
+    </div>
+    <div class="moves-box"><h3>♟ تسلسل الحركات</h3><div class="moves-row">${movesHTML}</div></div>
+    <div class="desc">${l.desc}</div>
+    <div class="highlight">${l.hl}</div>
+    <div class="divider"></div>
+    <div class="concepts">${conHTML}</div>
+    <div class="nav-btns">
+      ${prev}
+      <button class="nbtn complete" onclick="markDone(${id});this.textContent='✓ تم';this.disabled=true">✓ أكملت الدرس</button>
+      ${next}
+    </div>
+  </div>`;
+}
+
+// ============================================================
+// RENDER PUZZLE
+// ============================================================
+function renderPuzzle(pidx){
+  puzzleCur = pidx;
+  if(pidx >= PUZZLES.length){ renderResults(); return; }
+  const p = PUZZLES[pidx];
+  answered = false; hintShown = false; selected = null;
+  boardState = parseFEN(p.fen);
+  isBlackTurn = p.fen.split(' ')[1]==='b';
+
+  const boardHTML = buildBoardHTML();
+  const lessonId = 12 + pidx;
+
+  document.getElementById('main').innerHTML=`
+  <div class="puzzle-view">
+    <div class="puzzle-header">
+      <div class="lesson-tag">⚡ تمارين التكتيك</div>
+      <h1>تمرين رقم ${p.n} <span class="puzzle-num-badge">${pidx+1} / ${PUZZLES.length}</span></h1>
+    </div>
+    <div class="stats-mini" style="margin-bottom:18px">
+      <div class="stat-mini"><div class="n g" id="sg">${puzzleCorrect}</div><div class="l">صحيح</div></div>
+      <div class="stat-mini"><div class="n r" id="sw">${puzzleWrong}</div><div class="l">خطأ</div></div>
+      <div class="stat-mini"><div class="n b">${PUZZLES.length - pidx}</div><div class="l">متبقي</div></div>
+    </div>
+    <div class="puzzle-layout">
+      <div class="board-col">
+        <div class="board-lbl" style="font-size:.75rem;color:rgba(255,255,255,.45);margin-bottom:6px;text-align:center">
+          ${isBlackTurn?'الأسود يلعب':'الأبيض يلعب'}
+        </div>
+        <div class="board-wrap">
+          <div class="chessboard" id="board">${boardHTML}</div>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:4px;padding:0 2px">
+          <span style="font-size:.65rem;color:rgba(255,255,255,.3)">a</span>
+          <span style="font-size:.65rem;color:rgba(255,255,255,.3)">b</span>
+          <span style="font-size:.65rem;color:rgba(255,255,255,.3)">c</span>
+          <span style="font-size:.65rem;color:rgba(255,255,255,.3)">d</span>
+          <span style="font-size:.65rem;color:rgba(255,255,255,.3)">e</span>
+          <span style="font-size:.65rem;color:rgba(255,255,255,.3)">f</span>
+          <span style="font-size:.65rem;color:rgba(255,255,255,.3)">g</span>
+          <span style="font-size:.65rem;color:rgba(255,255,255,.3)">h</span>
+        </div>
+      </div>
+      <div class="pinfo">
+        <div class="turn-banner black">
+          <span class="piece-ico">${isBlackTurn?'⬛':'⬜'}</span>
+          <div><div style="font-size:.8rem;font-weight:900">${isBlackTurn?'الأسود يلعب':'الأبيض يلعب'}</div>
+          <div style="font-size:.75rem;color:rgba(255,255,255,.45);margin-top:2px">ابحث عن أفضل حركة</div></div>
+        </div>
+        <div class="feedback-box waiting" id="fb">
+          <span class="feedback-ico">🤔</span>
+          <span>انقر على قطعة لتحريكها واختر أفضل حركة في هذا الموقف</span>
+        </div>
+        <div class="hint-box">
+          <h4>💡 تلميح</h4>
+          <p id="hint-text" style="filter:blur(5px);cursor:pointer" onclick="showHint()">${p.hint}</p>
+        </div>
+        <div class="solution-box" id="sol-box">
+          <h4>✅ الحل الصحيح</h4>
+          <div class="sol-moves">${p.solution.map(m=>`<span class="sol-move">${m}</span>`).join('')}</div>
+          <p style="font-size:.8rem;color:rgba(255,255,255,.5);margin-top:10px;line-height:1.6">${p.explain}</p>
+        </div>
+        <div class="p-btns">
+          <button class="pbtn hint-btn" onclick="showHint()">💡 تلميح</button>
+          <button class="pbtn reset-btn" onclick="resetBoard()">↺ إعادة</button>
+          <button class="pbtn sol-btn" onclick="showSolution()">👁 الحل</button>
+          <button class="pbtn next-btn" id="next-pbtn" onclick="nextPuzzle()" disabled>التالي ←</button>
+        </div>
+      </div>
+    </div>
+    <div class="nav-btns" style="margin-top:20px">
+      ${pidx>0?`<button class="nbtn prev" onclick="go(${11+pidx})">← السابق</button>`:''}
+      <button class="nbtn prev" onclick="go(0)">📚 العودة للدروس</button>
+    </div>
+  </div>`;
+  attachBoardEvents();
+}
+
+function showHint(){
+  document.getElementById('hint-text').style.filter='none';
+  hintShown=true;
+}
+
+function showSolution(){
+  document.getElementById('sol-box').classList.add('show');
+  document.getElementById('next-pbtn').disabled=false;
+  if(!answered){
+    answered=true;
+    puzzleWrong++;
+    markDone(12+puzzleCur);
+    document.getElementById('ck'+(12+puzzleCur)).classList.add('wrong');
+    document.getElementById('ck'+(12+puzzleCur)).textContent='✗';
+    updateProgress();
+  }
+}
+
+function nextPuzzle(){
+  markDone(12+puzzleCur);
+  go(13+puzzleCur);
+}
+
+function resetBoard(){
+  renderPuzzle(puzzleCur);
+}
+
+// ============================================================
+// CHESS BOARD ENGINE
+// ============================================================
+const PIECE_MAP = {
+  'K':'♔','Q':'♕','R':'♖','B':'♗','N':'♘','P':'♙',
+  'k':'♚','q':'♛','r':'♜','b':'♝','n':'♞','p':'♟'
+};
+
+function parseFEN(fen){
+  const parts = fen.split(' ');
+  const rows = parts[0].split('/');
+  const state = {};
+  for(let r=0;r<8;r++){
+    let c=0;
+    for(let ch of rows[r]){
+      if(/\d/.test(ch)) c+=parseInt(ch);
+      else{ state[r+','+c]=ch; c++; }
+    }
+  }
+  return state;
+}
+
+function squareId(row,col){ return String.fromCharCode(97+col)+(8-row); }
+function fromId(id){ const c=id.charCodeAt(0)-97; const r=8-parseInt(id[1]); return [r,c]; }
+
+function buildBoardHTML(){
+  let html='';
+  for(let r=0;r<8;r++){
+    for(let c=0;c<8;c++){
+      const light=(r+c)%2===0;
+      const sqId=squareId(r,c);
+      const piece=boardState[r+','+c];
+      const pieceChar=piece?PIECE_MAP[piece]:'';
+      html+=`<div class="sq ${light?'light':'dark-sq'}" id="sq${sqId}" data-sq="${sqId}" onclick="sqClick('${sqId}')">${pieceChar}</div>`;
+    }
+  }
+  return html;
+}
+
+function attachBoardEvents(){}
+
+function sqClick(sqId){
+  if(answered) return;
+  const p = PUZZLES[puzzleCur];
+  const [r,c] = fromId(sqId);
+  const piece = boardState[r+','+c];
+
+  if(selected){
+    const move = selected+sqId;
+    const correct = p.answer===move || p.answer===selected+sqId;
+    // clear hints
+    document.querySelectorAll('.sq.hint').forEach(s=>s.classList.remove('hint'));
+    document.querySelectorAll('.sq.selected').forEach(s=>s.classList.remove('selected'));
+
+    if(correct){
+      answered=true;
+      puzzleCorrect++;
+      document.getElementById('sq'+selected).classList.add('last-from');
+      document.getElementById('sq'+sqId).classList.add('last-to');
+      // move piece on board
+      const movingPiece = boardState[fromId(selected)[0]+','+fromId(selected)[1]];
+      delete boardState[fromId(selected)[0]+','+fromId(selected)[1]];
+      boardState[r+','+c] = movingPiece;
+      document.getElementById('sq'+selected).textContent='';
+      document.getElementById('sq'+sqId).textContent=PIECE_MAP[movingPiece]||'';
+      document.getElementById('sq'+sqId).classList.add('correct');
+      document.getElementById('fb').className='feedback-box correct';
+      document.getElementById('fb').innerHTML='<span class="feedback-ico">✅</span><span>ممتاز! حركة صحيحة! '+p.explain+'</span>';
+      document.getElementById('sol-box').classList.add('show');
+      document.getElementById('next-pbtn').disabled=false;
+      markDone(12+puzzleCur);
+      const ck=document.getElementById('ck'+(12+puzzleCur));
+      ck.classList.add('done');ck.textContent='✓';
+      document.getElementById('sg').textContent=puzzleCorrect;
+      updateProgress();
+    } else {
+      // wrong - but if clicking another own piece, select it
+      const isOwn = piece && (isBlackTurn ? piece===piece.toLowerCase() : piece===piece.toUpperCase());
+      if(isOwn){
+        selected=sqId;
+        document.getElementById('sq'+sqId).classList.add('selected');
+        return;
+      }
+      document.getElementById('sq'+sqId).classList.add('wrong');
+      setTimeout(()=>document.getElementById('sq'+sqId).classList.remove('wrong'),400);
+      document.getElementById('fb').className='feedback-box wrong';
+      document.getElementById('fb').innerHTML='<span class="feedback-ico">❌</span><span>حركة خاطئة! حاول مرة أخرى. تلميح: '+p.hint+'</span>';
+      puzzleWrong++;
+      document.getElementById('sw').textContent=puzzleWrong;
+      updateProgress();
+    }
+    selected=null;
+  } else {
+    // select
+    const isOwn = piece && (isBlackTurn ? piece===piece.toLowerCase() : piece===piece.toUpperCase());
+    if(!isOwn) return;
+    selected=sqId;
+    document.querySelectorAll('.sq.selected').forEach(s=>s.classList.remove('selected'));
+    document.getElementById('sq'+sqId).classList.add('selected');
+    document.getElementById('fb').className='feedback-box waiting';
+    document.getElementById('fb').innerHTML='<span class="feedback-ico">🎯</span><span>اختار الوجهة للقطعة المحددة</span>';
+  }
+}
+
+// ============================================================
+// DOWNLOAD PAGE
+// ============================================================
+function renderDownload(){
+  document.getElementById('main').innerHTML=`
+  <div class="lesson-view">
+    <div class="lesson-tag">📥 التحميلات</div>
+    <h1>Chessbase Dragon - ملف PGN الكامل</h1>
+    <div class="highlight">📥 هذا الملف يحتوي على 167+ لعبة وموقف تكتيكي. افتحه في ChessBase أو Lichess.org لتصفح المواد بشكل تفاعلي كامل.</div>
+    <div class="desc">
+      <strong>محتويات الملف:</strong><br><br>
+      ✅ ألعاب تاريخية من 1889 حتى 2019<br>
+      ✅ تحليلات كاملة للهجوم اليوغوسلافي<br>
+      ✅ 29 موقف تكتيكي مع شرح<br>
+      ✅ ألعاب كاسباروف وكارلسن ورادجابوف وأناند<br>
+      ✅ الأنظمة الكلاسيكية والأخرى
+    </div>
+    <div class="nav-btns">
+      <button class="nbtn prev" onclick="go(40)">← السابق</button>
+      <button class="nbtn complete" onclick="markDone(41);this.textContent='✓ تم التحميل';this.disabled=true">📥 تأكيد التحميل</button>
+    </div>
+  </div>`;
+}
+
+// ============================================================
+// RESULTS
+// ============================================================
+function renderResults(){
+  const pct = Math.round(puzzleCorrect/PUZZLES.length*100);
+  const trophy = pct>=80?'🏆':pct>=60?'🥈':'🥉';
+  const msg = pct>=80?'أداء رائع! أنت جاهز للبطولات!':pct>=60?'جيد جداً! تدرب أكثر.':'استمر في التدريب!';
+  document.getElementById('main').innerHTML=`
+  <div class="results-view">
+    <div class="trophy">${trophy}</div>
+    <h2>${msg}</h2>
+    <p>أكملت جميع تمارين التكتيك في كورس دراغون سيسيلي</p>
+    <div class="score-circles">
+      <div class="score-circle g"><div class="circle-num">${puzzleCorrect}</div><div class="circle-lbl">صحيح</div></div>
+      <div class="score-circle r"><div class="circle-num">${puzzleWrong}</div><div class="circle-lbl">خطأ</div></div>
+      <div class="score-circle b"><div class="circle-num">${pct}%</div><div class="circle-lbl">نسبة النجاح</div></div>
+    </div>
+    <button class="restart-btn" onclick="puzzleCorrect=0;puzzleWrong=0;go(12)">↺ إعادة التمارين</button>
+    <br><br>
+    <button class="restart-btn" style="background:#21262d;margin-top:10px" onclick="go(0)">📚 العودة للدروس</button>
+  </div>`;
+}
+
+// ============================================================
+// BUILD SIDEBAR TACTICS
+// ============================================================
+function buildTacticsSidebar(){
+  const sec = document.getElementById('tactics-sec');
+  let html='';
+  for(let i=0;i<PUZZLES.length;i++){
+    const lid=12+i;
+    html+=`<div class="lesson-row" onclick="go(${lid})" id="lr${lid}">
+      <div class="check" id="ck${lid}">${i+1}</div>
+      <div class="linfo">
+        <div class="ltitle">تمرين ${i+1} - ${getTacticTheme(i)}</div>
+        <div class="lmeta">🧩 تكتيك تفاعلي</div>
+      </div>
+    </div>`;
+  }
+  sec.innerHTML=html;
+}
+
+function getTacticTheme(i){
+  const themes=['Rxc2!! - ضربة مزدوجة','Nxe4! - استغلال الرخ','Rxc3! - تضحية الرخ','e5! - إزالة الحماية','Nxf3! - تضعيف المركز','Ne3! - فتح الملف','Nxe4! - شوكة','Rxc3! - تكتيك كلاسيكي','Rxc3! - سلسلة تكتيكية','Rxc3!+d5! - هجوم مركب','Nxe4! - كسب بيدق','b5! - هجوم على الفيل','Qb7! - هجوم مزدوج','Rxc3! - تضحية الدراغون','Nxe4! - ميزة بيدق','Rxc3!+Qc8! - مزدوج','Qb8! - شوكة على البيدقين','Bxc3! - تضحية الفيل','Nbd7! - دفاع وهجوم','Nxd4! - ربح الوقت','Ng4! - هجوم الفيل','Qc8! - هجوم مزدوج','Nfd7! - تحسين الموقف','Bxb3!+Qa5! - هجوم على الملك','Nxe4! - استغلال Bg5','Qxf2+! - تضحية الملكة','Ba6! - منع التحصين','b5! - ضد f4','Bxh3!+Qc8! - هجوم مركب'];
+  return themes[i]||'تمرين تكتيكي';
+}
+
+// INIT
+buildTacticsSidebar();
+go(0);
+</script>
+</body>
+</html>

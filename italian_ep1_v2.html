@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>الافتتاح الإيطالي — الحلقة ١: مقدمة</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0f1117;--bg2:#181c24;--bg3:#1e2330;--brd:#2a3040;
+  --gold:#d4a84b;--gold2:#f0c96a;--gold3:#8a6528;
+  --txt:#e2e8f0;--txt2:#8896a8;--txt3:#4a5568;
+  --bl:#f0d9b5;--bd:#b58863;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;overflow-x:hidden}
+body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;display:flex;flex-direction:column}
+
+/* ── TOPBAR ── */
+.tb{background:var(--bg2);border-bottom:1px solid var(--brd);height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;position:sticky;top:0;z-index:200;flex-shrink:0}
+.tb-brand{display:flex;align-items:center;gap:8px}
+.tb-icon{font-size:22px}
+.tb-name{font-family:'Amiri',serif;font-size:15px;color:var(--gold);font-weight:700}
+.tb-badge{background:linear-gradient(135deg,var(--gold3),var(--gold));color:#0a0c10;font-size:10px;font-weight:800;padding:4px 11px;border-radius:20px;letter-spacing:.4px;white-space:nowrap}
+
+/* ── LAYOUT ── */
+.app{display:flex;flex:1;height:calc(100vh - 54px)}
+
+/* ── SIDEBAR desktop ── */
+.sb{width:260px;background:var(--bg2);border-left:1px solid var(--brd);overflow-y:auto;flex-shrink:0;display:flex;flex-direction:column}
+.sb::-webkit-scrollbar{width:3px}.sb::-webkit-scrollbar-thumb{background:var(--brd);border-radius:2px}
+.sb-hd{padding:16px 14px 10px;border-bottom:1px solid var(--brd);position:sticky;top:0;background:var(--bg2);z-index:5}
+.sb-hd h3{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
+.sb-hd p{font-size:11px;color:var(--txt3);margin-top:3px}
+
+.grp{border-bottom:1px solid var(--brd)}
+.gtog{width:100%;background:none;border:none;color:var(--txt);font-family:'Cairo',sans-serif;font-size:12px;font-weight:700;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;text-align:right;transition:background .15s}
+.gtog:hover{background:rgba(255,255,255,.03)}
+.gtog .arr{font-size:9px;color:var(--txt3);transition:transform .2s;flex-shrink:0}
+.gtog.open .arr{transform:rotate(180deg)}
+.gnum{background:var(--bg3);border:1px solid var(--brd);color:var(--txt3);font-size:10px;padding:1px 7px;border-radius:10px;font-weight:700}
+
+.ll{display:none}.ll.open{display:block}
+.li{display:flex;align-items:center;gap:8px;padding:8px 14px 8px 10px;cursor:pointer;transition:background .15s;border-right:3px solid transparent}
+.li:hover{background:rgba(255,255,255,.03)}
+.li.active{background:rgba(212,168,75,.09);border-right-color:var(--gold)}
+.li .ln{font-size:10px;font-weight:800;color:var(--txt3);min-width:18px;text-align:center;flex-shrink:0}
+.li.active .ln{color:var(--gold)}
+.li .lname{font-size:11.5px;color:var(--txt2);flex:1;line-height:1.4}
+.li.active .lname{color:var(--txt);font-weight:600}
+
+/* ── MOBILE NAV ── */
+.mob-nav{display:none;background:var(--bg2);border-bottom:1px solid var(--brd);padding:10px 12px;gap:8px;overflow-x:auto;scrollbar-width:none}
+.mob-nav::-webkit-scrollbar{display:none}
+.mob-btn{background:var(--bg3);border:1px solid var(--brd);color:var(--txt2);font-family:'Cairo',sans-serif;font-size:11px;font-weight:600;padding:7px 13px;border-radius:8px;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:all .15s}
+.mob-btn.active{background:rgba(212,168,75,.15);border-color:var(--gold);color:var(--gold)}
+
+/* ── MAIN ── */
+.main{flex:1;overflow-y:auto;display:flex;flex-direction:column;align-items:center;padding:20px 16px 40px}
+.main::-webkit-scrollbar{width:4px}.main::-webkit-scrollbar-thumb{background:var(--brd)}
+
+/* ── LESSON ── */
+.lc{display:none;flex-direction:column;gap:20px;width:100%;max-width:720px}
+.lc.active{display:flex}
+
+.lhd{width:100%}
+.ley{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.ltitle{font-family:'Amiri',serif;font-size:26px;font-weight:700;color:var(--txt);line-height:1.3;margin-bottom:7px}
+.lsub{font-size:13px;color:var(--txt2);line-height:1.75}
+
+/* ── BOARD AREA ── */
+.ba{display:flex;gap:18px;width:100%;align-items:flex-start;flex-wrap:wrap}
+
+/* ── BOARD ── */
+.bwrap{display:flex;flex-direction:column;align-items:center;width:100%}
+.bcon{box-shadow:0 0 0 2px var(--bd),0 0 0 5px #000,0 16px 48px rgba(0,0,0,.7);border-radius:3px;overflow:hidden;width:100%;max-width:400px}
+.board{display:grid;grid-template-columns:repeat(8,1fr);aspect-ratio:1;width:100%}
+.sq{aspect-ratio:1;display:flex;align-items:center;justify-content:center;position:relative}
+.sq.lt{background:var(--bl)}.sq.dk{background:var(--bd)}
+.sq.hl{background:rgba(212,168,75,.55)!important}
+.sq .rl{position:absolute;top:1px;right:2px;font-size:7px;font-weight:700;opacity:.55;font-family:'Cairo',sans-serif;line-height:1}
+.sq .fl{position:absolute;bottom:1px;left:2px;font-size:7px;font-weight:700;opacity:.55;font-family:'Cairo',sans-serif;line-height:1}
+.sq.lt .rl,.sq.lt .fl{color:var(--bd)}.sq.dk .rl,.sq.dk .fl{color:var(--bl)}
+
+/* ── PIECES ── */
+.pc{font-size:clamp(24px,5.5vw,38px);line-height:1;user-select:none}
+.pc.w{color:#fff;-webkit-text-stroke:1.2px #444;filter:drop-shadow(0 2px 3px rgba(0,0,0,.5))}
+.pc.b{color:#111;-webkit-text-stroke:.5px #000;filter:drop-shadow(0 2px 4px rgba(0,0,0,.65))}
+
+/* ── CONTROLS ── */
+.ctrl{display:flex;align-items:center;gap:5px;margin-top:10px;direction:ltr;width:100%;max-width:400px}
+.cb{background:var(--bg3);border:1px solid var(--brd);color:var(--txt2);width:38px;height:38px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .15s;flex-shrink:0}
+.cb:hover,.cb:active{border-color:var(--gold3);color:var(--gold);background:var(--bg2)}
+.mc{flex:1;text-align:center;font-size:11px;color:var(--txt3);font-weight:600;padding:0 4px;line-height:1.3}
+
+/* ── MOVES BAR ── */
+.mb{display:flex;flex-wrap:wrap;gap:3px;margin-top:8px;width:100%;max-width:400px;max-height:68px;overflow-y:auto;direction:ltr}
+.mb::-webkit-scrollbar{height:3px}.mb::-webkit-scrollbar-thumb{background:var(--brd)}
+.mt{padding:3px 9px;border-radius:5px;font-size:11px;font-weight:700;font-family:'Courier New',monospace;background:var(--bg3);border:1px solid var(--brd);color:var(--txt3);cursor:pointer;transition:all .15s}
+.mt:hover,.mt:active{border-color:var(--gold3);color:var(--txt2)}
+.mt.active{background:var(--gold);border-color:var(--gold);color:#0a0c10}
+.mn{padding:3px 4px;font-size:10px;color:var(--txt3);font-family:monospace}
+
+/* ── INFO PANEL ── */
+.ip{width:100%;display:flex;flex-direction:column;gap:12px}
+.ic{background:var(--bg3);border:1px solid var(--brd);border-radius:10px;padding:16px}
+.ic h4{font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.ki{display:flex;gap:9px;padding:8px 0;border-bottom:1px solid var(--brd);align-items:flex-start}
+.ki:last-child{border-bottom:none;padding-bottom:0}
+.ki .ico{font-size:16px;flex-shrink:0;margin-top:1px}
+.ki .ktxt{font-size:13px;color:var(--txt2);line-height:1.6}
+.ki .ktxt strong{color:var(--txt)}
+
+/* ── VARIATIONS LIST ── */
+.vlist{display:flex;flex-direction:column;gap:8px}
+.vrow{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--bg);border:1px solid var(--brd);border-radius:8px;cursor:pointer;transition:all .15s}
+.vrow:hover{border-color:var(--gold3);background:rgba(212,168,75,.05)}
+.vrow .vnum{font-size:11px;font-weight:800;color:var(--gold);font-family:monospace;min-width:28px;padding-top:1px}
+.vrow .vinfo{}
+.vrow .vname{font-size:13px;font-weight:700;color:var(--txt);margin-bottom:2px}
+.vrow .vdesc{font-size:12px;color:var(--txt2);line-height:1.5}
+.vrow .vtag{display:inline-block;background:rgba(212,168,75,.12);border:1px solid rgba(212,168,75,.25);color:var(--gold2);font-size:10px;font-weight:700;padding:2px 8px;border-radius:5px;margin-top:4px;font-family:monospace}
+
+/* ── NOTE BOX ── */
+.notebox{background:rgba(212,168,75,.07);border:1px solid rgba(212,168,75,.2);border-radius:10px;padding:14px 16px;width:100%}
+.notebox .ntitle{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.notebox p{font-size:13px;color:var(--txt2);line-height:1.75}
+.notebox p strong{color:var(--gold2)}
+
+/* ── DESKTOP sidebar visible, mob-nav hidden ── */
+@media(min-width:641px){
+  .mob-nav{display:none!important}
+  .sb{display:flex}
+}
+/* ── MOBILE ── */
+@media(max-width:640px){
+  .sb{display:none!important}
+  .mob-nav{display:flex!important}
+  .app{flex-direction:column;height:auto;overflow:visible}
+  .main{padding:16px 12px 40px;overflow:visible}
+  .ltitle{font-size:22px}
+  .ba{gap:12px}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="tb">
+  <div class="tb-brand">
+    <span class="tb-icon">♟</span>
+    <span class="tb-name">أكاديمية أسامة للشطرنج</span>
+  </div>
+  <span class="tb-badge">الحلقة ١ من ٢٨</span>
+</div>
+
+<div class="app">
+
+  <!-- SIDEBAR (desktop) -->
+  <div class="sb">
+    <div class="sb-hd">
+      <h3>الحلقة الأولى</h3>
+      <p>مقدمة — الافتتاح الإيطالي</p>
+    </div>
+    <div class="grp">
+      <button class="gtog open" onclick="tog(this)">
+        <span>محتوى الحلقة</span>
+        <span style="display:flex;gap:7px;align-items:center"><span class="gnum">4</span><span class="arr">▼</span></span>
+      </button>
+      <div class="ll open">
+        <div class="li active" onclick="show(0,this)"><span class="ln">١</span><span class="lname">ما هو الافتتاح الإيطالي؟</span></div>
+        <div class="li" onclick="show(1,this)"><span class="ln">٢</span><span class="lname">الحركات الأساسية الثلاث</span></div>
+        <div class="li" onclick="show(2,this)"><span class="ln">٣</span><span class="lname">الأهداف الاستراتيجية</span></div>
+        <div class="li" onclick="show(3,this)"><span class="ln">٤</span><span class="lname">نظرة على المتغيرات</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOBILE NAV -->
+  <div class="mob-nav" id="mobnav">
+    <button class="mob-btn active" onclick="show(0,null,0)">١ · المقدمة</button>
+    <button class="mob-btn" onclick="show(1,null,1)">٢ · الحركات</button>
+    <button class="mob-btn" onclick="show(2,null,2)">٣ · الأهداف</button>
+    <button class="mob-btn" onclick="show(3,null,3)">٤ · المتغيرات</button>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- ══ LESSON 0: ما هو الافتتاح الإيطالي ══ -->
+    <div class="lc active" id="lc0">
+      <div class="lhd">
+        <div class="ley">الحلقة الأولى · الدرس الأول</div>
+        <div class="ltitle">ما هو الافتتاح الإيطالي؟</div>
+        <div class="lsub">الافتتاح الإيطالي — Italian Game — واحد من أقدم الافتتاحيات الموثقة في تاريخ الشطرنج. يلعبه المبتدئون والأبطال العالميون على حدٍّ سواء.</div>
+      </div>
+
+      <div class="ba">
+        <div class="bwrap">
+          <div class="bcon"><div class="board" id="b0"></div></div>
+          <div class="ctrl">
+            <button class="cb" onclick="nav(0,-2)">⏮</button>
+            <button class="cb" onclick="nav(0,-1)">◀</button>
+            <span class="mc" id="mc0">الوضع الابتدائي</span>
+            <button class="cb" onclick="nav(0,1)">▶</button>
+            <button class="cb" onclick="nav(0,99)">⏭</button>
+          </div>
+          <div class="mb" id="mb0"></div>
+        </div>
+        <div class="ip">
+          <div class="ic">
+            <h4>لماذا الافتتاح الإيطالي؟</h4>
+            <div class="ki"><span class="ico">📜</span><span class="ktxt">موثق منذ القرن السادس عشر — من أقدم الافتتاحيات في التاريخ</span></div>
+            <div class="ki"><span class="ico">🌍</span><span class="ktxt">يلعبه الجميع من المبتدئ إلى <strong>بطل العالم</strong> — شعبيته في ذروتها اليوم</span></div>
+            <div class="ki"><span class="ico">🎓</span><span class="ktxt">مثالي للتعلم لأنه يُعلّم <strong>أساسيات الاستراتيجية</strong> بشكل طبيعي</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="notebox">
+        <div class="ntitle">⚠️ ملاحظة مهمة</div>
+        <p>هذه الحلقة هي <strong>مقدمة عامة فقط</strong> — نتعرف فيها على الافتتاح الإيطالي ونرى كل المتغيرات بشكل سريع.<br>كل متغيرة ستُدرس بعمق كامل في حلقتها الخاصة لاحقًا.</p>
+      </div>
+    </div>
+
+    <!-- ══ LESSON 1: الحركات الثلاث ══ -->
+    <div class="lc" id="lc1">
+      <div class="lhd">
+        <div class="ley">الحلقة الأولى · الدرس الثاني</div>
+        <div class="ltitle">الحركات الأساسية الثلاث</div>
+        <div class="lsub">الافتتاح الإيطالي ينشأ بعد ثلاث حركات محددة — كل حركة لها هدف واضح.</div>
+      </div>
+      <div class="ba">
+        <div class="bwrap">
+          <div class="bcon"><div class="board" id="b1"></div></div>
+          <div class="ctrl">
+            <button class="cb" onclick="nav(1,-2)">⏮</button>
+            <button class="cb" onclick="nav(1,-1)">◀</button>
+            <span class="mc" id="mc1">الوضع الابتدائي</span>
+            <button class="cb" onclick="nav(1,1)">▶</button>
+            <button class="cb" onclick="nav(1,99)">⏭</button>
+          </div>
+          <div class="mb" id="mb1"></div>
+        </div>
+        <div class="ip">
+          <div class="ic">
+            <h4>شرح كل حركة</h4>
+            <div class="ki"><span class="ico">①</span><span class="ktxt"><strong>1.e4</strong> — يسيطر على المركز ويفتح طريق الفيل والملكة</span></div>
+            <div class="ki"><span class="ico">②</span><span class="ktxt"><strong>1...e5</strong> — الأسود يتحدى السيطرة ويطالب بنصيبه</span></div>
+            <div class="ki"><span class="ico">③</span><span class="ktxt"><strong>2.Nf3</strong> — يهاجم e5 ويطور قطعة في الوقت ذاته</span></div>
+            <div class="ki"><span class="ico">④</span><span class="ktxt"><strong>2...Nc6</strong> — يدافع عن e5 ويطور فارسه</span></div>
+            <div class="ki"><span class="ico">⑤</span><span class="ktxt"><strong>3.Bc4 ♗</strong> — الحركة المميزة! يضغط على النقطة الحساسة <strong>f7</strong></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ LESSON 2: الأهداف الاستراتيجية ══ -->
+    <div class="lc" id="lc2">
+      <div class="lhd">
+        <div class="ley">الحلقة الأولى · الدرس الثالث</div>
+        <div class="ltitle">الأهداف الاستراتيجية</div>
+        <div class="lsub">ما الذي يريده الأبيض من وضع فيله على c4؟ وما الخطط الرئيسية لكلا الطرفين؟</div>
+      </div>
+      <div class="ba">
+        <div class="bwrap">
+          <div class="bcon"><div class="board" id="b2"></div></div>
+          <div class="ctrl">
+            <button class="cb" onclick="nav(2,-2)">⏮</button>
+            <button class="cb" onclick="nav(2,-1)">◀</button>
+            <span class="mc" id="mc2">بعد 3.Bc4</span>
+            <button class="cb" onclick="nav(2,1)">▶</button>
+            <button class="cb" onclick="nav(2,99)">⏭</button>
+          </div>
+          <div class="mb" id="mb2"></div>
+        </div>
+        <div class="ip">
+          <div class="ic">
+            <h4>أهداف الأبيض</h4>
+            <div class="ki"><span class="ico">🎯</span><span class="ktxt">الضغط على <strong>f7</strong> — أضعف نقطة في موقع الأسود</span></div>
+            <div class="ki"><span class="ico">🏰</span><span class="ktxt">التحصين سريعًا والحفاظ على سلامة الملك</span></div>
+            <div class="ki"><span class="ico">♟</span><span class="ktxt">الدفع بـ <strong>d4</strong> في الوقت المناسب لكسب المركز</span></div>
+          </div>
+          <div class="ic">
+            <h4>أهداف الأسود</h4>
+            <div class="ki"><span class="ico">⚖️</span><span class="ktxt">تعادل المركز أو مجاراة الأبيض في التطوير</span></div>
+            <div class="ki"><span class="ico">🔄</span><span class="ktxt">اختيار المتغيرة المناسبة لأسلوب لعبه</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ LESSON 3: نظرة على المتغيرات ══ -->
+    <div class="lc" id="lc3">
+      <div class="lhd">
+        <div class="ley">الحلقة الأولى · الدرس الرابع</div>
+        <div class="ltitle">نظرة على المتغيرات</div>
+        <div class="lsub">بعد <strong>3.Bc4</strong> يختار الأسود اتجاهه — هنا نرى كل المتغيرات بشكل سريع. كل واحدة ستُدرس بعمق في حلقتها الخاصة.</div>
+      </div>
+
+      <div class="notebox">
+        <div class="ntitle">🗺️ خريطة السلسلة</div>
+        <p>هذه الحلقة هي <strong>الخريطة</strong> فقط — لا تقلق إن لم تفهم تفاصيل كل متغيرة الآن. لكل منها حلقة كاملة قادمة.</p>
+      </div>
+
+      <div class="ic" style="background:var(--bg3);border:1px solid var(--brd);border-radius:10px;padding:16px">
+        <h4 style="font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px">بعد 3...Bc5 — Giuoco Piano (الخط الرئيسي)</h4>
+        <div class="vlist">
+          <div class="vrow">
+            <span class="vnum">3:36</span>
+            <div class="vinfo">
+              <div class="vname">Greco Gambit — الخط التقليدي</div>
+              <div class="vdesc">الأبيض يبني مركزًا قويًا بـ c3 و d4</div>
+              <span class="vtag">3...Bc5 4.c3 Nf6 5.d4</span>
+            </div>
+          </div>
+          <div class="vrow">
+            <span class="vnum">4:09</span>
+            <div class="vinfo">
+              <div class="vname">Giuoco Pianissimo</div>
+              <div class="vdesc">اللعب الهادئ جداً — بناء تدريجي صبور</div>
+              <span class="vtag">4.c3 Nf6 5.d3</span>
+            </div>
+          </div>
+          <div class="vrow">
+            <span class="vnum">5:01</span>
+            <div class="vinfo">
+              <div class="vname">Evans Gambit</div>
+              <div class="vdesc">غامبيت مشهور — الأبيض يضحي ببيدق لمبادرة قوية</div>
+              <span class="vtag">4.b4!?</span>
+            </div>
+          </div>
+          <div class="vrow">
+            <span class="vnum">7:04</span>
+            <div class="vinfo">
+              <div class="vname">Deutz Gambit</div>
+              <div class="vdesc">غامبيت أقل شيوعًا لكن خطير</div>
+              <span class="vtag">4.Nc3 Nf6 5.d4!?</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ic" style="background:var(--bg3);border:1px solid var(--brd);border-radius:10px;padding:16px;margin-top:4px">
+        <h4 style="font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px">بعد 3...Nf6 — Two Knights Defense</h4>
+        <div class="vlist">
+          <div class="vrow">
+            <span class="vnum">7:40</span>
+            <div class="vinfo">
+              <div class="vname">Four Knights — Noa Gambit</div>
+              <div class="vdesc">الأسود يضحي بيدقًا لكسر المركز</div>
+              <span class="vtag">4.Nc3 Nxe4!?</span>
+            </div>
+          </div>
+          <div class="vrow">
+            <span class="vnum">8:50</span>
+            <div class="vinfo">
+              <div class="vname">Knight Attack</div>
+              <div class="vdesc">الأبيض يهدد f7 مباشرة</div>
+              <span class="vtag">4.Ng5</span>
+            </div>
+          </div>
+          <div class="vrow">
+            <span class="vnum">9:27</span>
+            <div class="vinfo">
+              <div class="vname">Fried-Liver Attack</div>
+              <div class="vdesc">من أشرس الهجومات — تضحية الفارس على f7!</div>
+              <span class="vtag">6.Nxf7!!</span>
+            </div>
+          </div>
+          <div class="vrow">
+            <span class="vnum">9:44</span>
+            <div class="vinfo">
+              <div class="vname">Lolli Attack</div>
+              <div class="vdesc">بديل لـ Fried-Liver — هجوم من زاوية مختلفة</div>
+              <span class="vtag">7.d4</span>
+            </div>
+          </div>
+          <div class="vrow">
+            <span class="vnum">10:03</span>
+            <div class="vinfo">
+              <div class="vname">Polerio Defense</div>
+              <div class="vdesc">الأسود يتهرب من Fried-Liver</div>
+              <span class="vtag">5...Na5</span>
+            </div>
+          </div>
+          <div class="vrow">
+            <span class="vnum">10:24</span>
+            <div class="vinfo">
+              <div class="vname">Ulverstadt Variation</div>
+              <div class="vdesc">تضحية بيدق لكسب التطوير</div>
+              <span class="vtag">5...b5!?</span>
+            </div>
+          </div>
+          <div class="vrow">
+            <span class="vnum">10:47</span>
+            <div class="vinfo">
+              <div class="vname">Traxler Counterattack</div>
+              <div class="vdesc">رد مذهل! الأسود يتجاهل التهديد ويهجم</div>
+              <span class="vtag">4...Bc5!?</span>
+            </div>
+          </div>
+          <div class="vrow">
+            <span class="vnum">11:08</span>
+            <div class="vinfo">
+              <div class="vname">Modern Bishops Opening (Open Variation)</div>
+              <div class="vdesc">بديل حديث يؤدي لمواقف مفتوحة ومثيرة</div>
+              <span class="vtag">4.d4</span>
+            </div>
+          </div>
+          <div class="vrow">
+            <span class="vnum">11:58</span>
+            <div class="vinfo">
+              <div class="vname">Scotch Gambit</div>
+              <div class="vdesc">ينتقل للأراضي المشتركة مع Scotch Opening</div>
+              <span class="vtag">4.d4 exd4 5.Ng5</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ic" style="background:var(--bg3);border:1px solid var(--brd);border-radius:10px;padding:16px;margin-top:4px">
+        <h4 style="font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px">خيارات أخرى بعد 3.Bc4</h4>
+        <div class="vlist">
+          <div class="vrow">
+            <span class="vnum">14:37</span>
+            <div class="vinfo">
+              <div class="vname">Hungarian Defense</div>
+              <div class="vdesc">دفاع صلب ومتحفظ — الأسود يلعب بأمان</div>
+              <span class="vtag">3...Be7</span>
+            </div>
+          </div>
+          <div class="vrow">
+            <span class="vnum">14:40</span>
+            <div class="vinfo">
+              <div class="vname">Rousseau Gambit</div>
+              <div class="vdesc">هجوم جريء من الأسود لكسر مركز الأبيض</div>
+              <span class="vtag">3...f5!?</span>
+            </div>
+          </div>
+          <div class="vrow">
+            <span class="vnum">14:47</span>
+            <div class="vinfo">
+              <div class="vname">Anti-Fried Liver Defense</div>
+              <div class="vdesc">الأسود يتهرب من الـ Fried-Liver بذكاء</div>
+              <span class="vtag">4...d5</span>
+            </div>
+          </div>
+          <div class="vrow">
+            <span class="vnum">14:56</span>
+            <div class="vinfo">
+              <div class="vname">Blackburne Shilling Gambit</div>
+              <div class="vdesc">فخ خطير للأبيض غير المستعد!</div>
+              <span class="vtag">3...Nd4!?</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /lc3 -->
+
+  </div><!-- /main -->
+</div><!-- /app -->
+
+<script>
+const Wp={K:'♔',Q:'♕',R:'♖',B:'♗',N:'♘',P:'♙'};
+const Bp={K:'♚',Q:'♛',R:'♜',B:'♝',N:'♞',P:'♟'};
+
+function parseFen(fen){
+  const rows=fen.split(' ')[0].split('/'),b=[];
+  for(let r=0;r<8;r++){const row=[];for(const c of rows[r]){if(isNaN(c))row.push(c);else for(let i=0;i<+c;i++)row.push(null);}b.push(row);}
+  return b;
+}
+function pHtml(code){
+  if(!code)return'';
+  const w=code===code.toUpperCase();
+  const m={K:Wp.K,Q:Wp.Q,R:Wp.R,B:Wp.B,N:Wp.N,P:Wp.P,k:Bp.K,q:Bp.Q,r:Bp.R,b:Bp.B,n:Bp.N,p:Bp.P};
+  return`<span class="pc ${w?'w':'b'}">${m[code]}</span>`;
+}
+function drawBoard(id,fen){
+  const el=document.getElementById(id);if(!el)return;
+  const bd=parseFen(fen);el.innerHTML='';
+  const fl=['a','b','c','d','e','f','g','h'];
+  for(let r=0;r<8;r++)for(let c=0;c<8;c++){
+    const sq=document.createElement('div');
+    sq.className='sq '+((r+c)%2===0?'lt':'dk');
+    if(c===7)sq.innerHTML+=`<span class="rl">${8-r}</span>`;
+    if(r===7)sq.innerHTML+=`<span class="fl">${fl[c]}</span>`;
+    sq.innerHTML+=pHtml(bd[r][c]);
+    el.appendChild(sq);
+  }
+}
+
+const S='rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
+const DATA=[
+  // 0: intro
+  [{f:S,l:'الوضع الابتدائي',n:''},
+   {f:'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1',l:'1.e4',n:'السيطرة على المركز'},
+   {f:'rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2',l:'1...e5',n:'الأسود يتحدى'},
+   {f:'rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2',l:'2.Nf3',n:'يهاجم e5 ويطور'},
+   {f:'r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3',l:'2...Nc6',n:'يدافع ويطور'},
+   {f:'r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 3 3',l:'3.Bc4',n:'الافتتاح الإيطالي — يستهدف f7'}],
+  // 1: moves
+  [{f:S,l:'الوضع الابتدائي',n:''},
+   {f:'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1',l:'1.e4',n:'يسيطر على d5، e5، f5'},
+   {f:'rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2',l:'1...e5',n:'الأسود يردّ بالمنطق ذاته'},
+   {f:'rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2',l:'2.Nf3',n:'تطوير + ضغط على e5'},
+   {f:'r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3',l:'2...Nc6',n:'دفاع وتطوير في آنٍ واحد'},
+   {f:'r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 3 3',l:'3.Bc4',n:'♗ على c4 — يضغط على f7'}],
+  // 2: strategy
+  [{f:'r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 3 3',l:'بعد 3.Bc4',n:'الأبيض يضغط على f7'},
+   {f:'r1bqkbnr/pppp1ppp/2n5/4p3/2BPP3/5N2/PPP2PPP/RNBQK2R b KQkq d3 0 4',l:'الهدف: d4',n:'الأبيض يريد دفع d4 لكسر المركز'},
+   {f:'r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4',l:'3...Bc5 — ردّ الأسود',n:'الأسود يطور فيله ويتحدى'}],
+];
+
+const cur=DATA.map(()=>0);
+
+function buildMB(li){
+  const bar=document.getElementById('mb'+li);if(!bar)return;
+  bar.innerHTML='';let mn=1;
+  DATA[li].forEach((m,i)=>{
+    if(i===0)return;
+    if(i%2===1){const ns=document.createElement('span');ns.className='mn';ns.textContent=mn+'.';bar.appendChild(ns);mn++;}
+    const t=document.createElement('span');t.className='mt';t.textContent=m.l;t.dataset.i=i;
+    t.onclick=()=>setM(li,i);bar.appendChild(t);
+  });
+}
+
+function setM(li,idx){
+  const moves=DATA[li];
+  if(idx<0)idx=0;if(idx>=moves.length)idx=moves.length-1;
+  cur[li]=idx;
+  drawBoard('b'+li,moves[idx].f);
+  const mc=document.getElementById('mc'+li);
+  if(mc)mc.textContent=idx===0?moves[0].l:(moves[idx].n||moves[idx].l);
+  const bar=document.getElementById('mb'+li);
+  if(bar)bar.querySelectorAll('.mt').forEach(t=>t.classList.toggle('active',+t.dataset.i===idx));
+}
+
+function nav(li,d){
+  const max=DATA[li].length-1;
+  let nx=d===-2?0:d===99?max:Math.max(0,Math.min(max,cur[li]+d));
+  setM(li,nx);
+}
+
+function show(idx,el,mIdx){
+  document.querySelectorAll('.lc').forEach(l=>l.classList.remove('active'));
+  document.querySelectorAll('.li').forEach(l=>l.classList.remove('active'));
+  document.querySelectorAll('.mob-btn').forEach(b=>b.classList.remove('active'));
+  const lc=document.getElementById('lc'+idx);if(lc)lc.classList.add('active');
+  if(el)el.classList.add('active');
+  if(mIdx!==undefined){const mb=document.querySelectorAll('.mob-btn')[mIdx];if(mb)mb.classList.add('active');}
+  if(DATA[idx])setM(idx,0);
+}
+
+function tog(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open');}
+
+window.addEventListener('DOMContentLoaded',()=>{
+  for(let i=0;i<DATA.length;i++){buildMB(i);setM(i,0);}
+});
+</script>
+</body>
+</html>

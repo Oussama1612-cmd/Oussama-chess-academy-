@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slav Defence | أكاديمية أسامة للشطرنج</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Cairo',sans-serif;background:#0d1117;color:#e6edf3}
+.top{background:#1a0a0a;border-bottom:1px solid rgba(248,81,73,0.3);padding:12px 20px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100}
+.top h2{font-size:1rem;font-weight:900;color:#fff;flex:1}
+.top span{background:rgba(248,81,73,0.15);color:#f85149;font-size:0.65rem;font-weight:700;padding:3px 10px;border-radius:20px;border:1px solid rgba(248,81,73,0.3)}
+.lay{display:flex;height:calc(100vh - 50px)}
+.side{width:280px;background:#080c14;overflow-y:auto;border-left:1px solid #1a1010;flex-shrink:0}
+.side::-webkit-scrollbar{width:3px}
+.side::-webkit-scrollbar-thumb{background:#2a1010;border-radius:4px}
+.grp-hd{padding:10px 14px;background:#100a0a;cursor:pointer;display:flex;align-items:center;gap:8px;border-bottom:1px solid #1a0a0a;font-size:0.82rem;font-weight:800;color:#e6edf3}
+.grp-hd:hover{background:#1a0a0a}
+.row{display:flex;align-items:center;gap:9px;padding:9px 14px;border-bottom:1px solid rgba(255,255,255,0.03);cursor:pointer;position:relative}
+.row::before{content:'';position:absolute;right:0;top:0;bottom:0;width:2px;background:transparent}
+.row:hover{background:rgba(248,81,73,0.04)}
+.row.on{background:rgba(248,81,73,0.08)}
+.row.on::before{background:#f85149}
+.dot{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.68rem;font-weight:700;border:1.5px solid #30363d;color:#30363d;flex-shrink:0}
+.dot.ok{background:#3fb950;border-color:#3fb950;color:#fff}
+.dot.cur{background:#f85149;border-color:#f85149;color:#fff}
+.rt{flex:1;min-width:0}
+.rt .tl{font-size:0.78rem;font-weight:600;color:#c9d1d9;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row.on .tl{color:#ff8585}
+.rt .sub{font-size:0.6rem;color:rgba(255,255,255,0.3);margin-top:1px}
+.main{flex:1;overflow-y:auto}
+.lp{padding:28px 36px;max-width:860px}
+.tag{display:inline-flex;align-items:center;gap:5px;border-radius:20px;font-size:0.68rem;font-weight:800;padding:4px 12px;margin-bottom:12px;background:rgba(248,81,73,0.1);border:1px solid rgba(248,81,73,0.3);color:#f85149}
+.lp h1{font-size:1.45rem;font-weight:900;color:#fff;margin-bottom:16px;line-height:1.3}
+.vid{background:#100a0a;border:1px solid rgba(248,81,73,0.1);border-radius:13px;aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;margin-bottom:20px}
+.vid:hover{border-color:rgba(248,81,73,0.3)}
+.vplay{width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#b71c1c,#f85149);display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:8px}
+.vid span{font-size:0.85rem;color:rgba(255,255,255,0.4)}
+.bsec{display:flex;gap:18px;margin-bottom:20px;flex-wrap:wrap;align-items:flex-start}
+.bwrap{flex-shrink:0}
+.bd{display:grid;grid-template-columns:repeat(8,52px);grid-template-rows:repeat(8,52px);border:2px solid #2a1010;border-radius:5px;overflow:hidden}
+.sq{width:52px;height:52px;display:flex;align-items:center;justify-content:center;font-size:1.55rem;user-select:none}
+.sq.l{background:#e8d5b7}.sq.d{background:#7b5e3a}
+.sq.hf{background:rgba(248,81,73,0.5)!important}.sq.ht{background:rgba(248,81,73,0.7)!important}
+.cr{display:flex;margin-top:2px}
+.cr span{font-size:0.57rem;color:rgba(255,255,255,0.25);width:52px;text-align:center}
+.binfo{flex:1;min-width:220px;display:flex;flex-direction:column;gap:9px}
+.mc{background:#100a0a;border:1px solid rgba(248,81,73,0.2);border-radius:9px;padding:13px}
+.mc .mn{font-size:0.7rem;font-weight:800;color:#f85149;margin-bottom:3px}
+.mc .ms{font-size:0.95rem;font-weight:900;color:#fff;margin-bottom:5px;font-family:monospace}
+.mc .me{font-size:0.82rem;color:rgba(255,255,255,0.6);line-height:1.7}
+.mctrl{display:flex;gap:6px}
+.mb{padding:7px 11px;border-radius:7px;font-family:'Cairo',sans-serif;font-size:0.79rem;font-weight:700;cursor:pointer;border:none;transition:all .2s}
+.mb.f,.mb.p,.mb.l{background:#100a0a;color:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.08)}
+.mb.n{background:linear-gradient(135deg,#b71c1c,#f85149);color:#fff;flex:1}
+.mb:disabled{opacity:0.3;cursor:not-allowed}
+.mbar{display:flex;flex-wrap:wrap;gap:3px;margin-top:7px}
+.mi{background:#080c14;border:1px solid rgba(255,255,255,0.06);border-radius:4px;padding:2px 7px;font-size:0.71rem;font-family:monospace;color:rgba(255,255,255,0.4);cursor:pointer}
+.mi:hover{border-color:rgba(248,81,73,0.4);color:#ff8585}
+.mi.on{background:rgba(248,81,73,0.12);border-color:#f85149;color:#f85149;font-weight:700}
+.ib{border-radius:10px;padding:13px 16px;margin-bottom:11px;font-size:0.87rem;line-height:1.9}
+.ib.b{background:rgba(79,195,247,0.07);border-right:3px solid #4fc3f7;color:rgba(255,255,255,0.7)}
+.ib.g{background:rgba(255,193,7,0.07);border-right:3px solid #ffc107;color:rgba(255,255,255,0.7)}
+.ib.gr{background:rgba(63,185,80,0.07);border-right:3px solid #3fb950;color:rgba(255,255,255,0.7)}
+.ib.r{background:rgba(248,81,73,0.07);border-right:3px solid #f85149;color:rgba(255,255,255,0.7)}
+.ib.p{background:rgba(180,80,255,0.07);border-right:3px solid #b450ff;color:rgba(255,255,255,0.7)}
+.ib strong{color:#e6edf3}
+.st{display:flex;gap:9px;margin:7px 0;align-items:flex-start}
+.sn2{background:linear-gradient(135deg,#b71c1c,#f85149);color:#fff;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:900;flex-shrink:0;margin-top:2px}
+.stx{flex:1;font-size:0.84rem;line-height:1.8;color:rgba(255,255,255,0.65)}
+.stx strong{color:#e6edf3}
+.bt{font-size:0.81rem;font-weight:800;color:#f85149;margin:15px 0 10px;display:flex;align-items:center;gap:8px;text-transform:uppercase;letter-spacing:0.5px}
+.bt::after{content:'';flex:1;height:1px;background:rgba(248,81,73,0.15)}
+.dv{height:1px;background:rgba(255,255,255,0.06);margin:16px 0}
+.nbs{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
+.nb{flex:1;min-width:120px;padding:11px 15px;border-radius:9px;font-family:'Cairo',sans-serif;font-size:0.85rem;font-weight:700;cursor:pointer;border:none;display:flex;align-items:center;justify-content:center;gap:5px;transition:all .2s}
+.nb.pv{background:#100a0a;color:rgba(255,255,255,0.55);border:1px solid rgba(255,255,255,0.08)}
+.nb.cm{background:linear-gradient(135deg,#238636,#2ea043);color:#fff}
+.nb.nx{background:linear-gradient(135deg,#b71c1c,#f85149);color:#fff;font-weight:800}
+.pp{padding:20px 28px;max-width:920px}
+.pp h1{font-size:1.2rem;font-weight:900;color:#fff;margin-bottom:12px}
+.pb2{display:grid;grid-template-columns:repeat(8,52px);grid-template-rows:repeat(8,52px);border:2px solid #2a1010;border-radius:5px;overflow:hidden}
+.psq{width:52px;height:52px;display:flex;align-items:center;justify-content:center;font-size:1.55rem;cursor:pointer;user-select:none}
+.psq.l{background:#e8d5b7}.psq.d{background:#7b5e3a}
+.psq.sl{box-shadow:inset 0 0 0 3px #f85149;background:rgba(248,81,73,0.3)!important}
+.psq.pf{background:rgba(248,81,73,0.4)!important}.psq.pt{background:rgba(248,81,73,0.6)!important}
+.psq.wr{animation:sh .3s;background:rgba(248,81,73,0.5)!important}
+.psq.ri{background:rgba(63,185,80,0.5)!important}
+@keyframes sh{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.pi{display:flex;flex-direction:column;gap:10px}
+.tb{padding:11px 13px;border-radius:9px;font-weight:700;display:flex;align-items:center;gap:9px;background:#100a0a;border:1px solid rgba(248,81,73,0.12)}
+.fb{padding:11px 13px;border-radius:9px;font-size:0.84rem;font-weight:600;display:flex;align-items:flex-start;gap:7px;line-height:1.6;min-height:50px}
+.fb.w{background:#100a0a;border:1px solid rgba(255,255,255,0.07);color:rgba(255,255,255,0.4)}
+.fb.ok{background:rgba(63,185,80,0.1);border:1px solid rgba(63,185,80,0.3);color:#3fb950}
+.fb.no{background:rgba(248,81,73,0.1);border:1px solid rgba(248,81,73,0.25);color:#f85149}
+.hb{background:#100a0a;border:1px solid rgba(255,255,255,0.07);border-radius:9px;padding:11px}
+.hb h4{font-size:0.73rem;font-weight:800;color:#f85149;margin-bottom:5px}
+.hb p{font-size:0.77rem;color:rgba(255,255,255,0.45);line-height:1.7}
+.sb{background:#100a0a;border:1px solid rgba(63,185,80,0.2);border-radius:9px;padding:11px;display:none}
+.sb.sh{display:block}
+.sb h4{font-size:0.73rem;font-weight:800;color:#3fb950;margin-bottom:6px}
+.sm{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px}
+.sv{background:#080c14;border:1px solid rgba(63,185,80,0.25);border-radius:5px;padding:3px 7px;font-size:0.73rem;font-family:monospace;color:#3fb950}
+.sb p{font-size:0.76rem;color:rgba(255,255,255,0.45);line-height:1.7}
+.pbs{display:flex;gap:5px;flex-wrap:wrap}
+.pb3{padding:7px 11px;border-radius:7px;font-family:'Cairo',sans-serif;font-size:0.79rem;font-weight:700;cursor:pointer;border:none;transition:all .2s}
+.pb3.h{background:#100a0a;color:rgba(255,255,255,0.55);border:1px solid rgba(255,255,255,0.08)}
+.pb3.s{background:#100a0a;color:#f85149;border:1px solid rgba(248,81,73,0.2)}
+.pb3.nx{background:linear-gradient(135deg,#b71c1c,#f85149);color:#fff;flex:1;font-weight:800}
+.pb3.nx:disabled{opacity:0.4;cursor:not-allowed}
+.st2{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:12px}
+.sc{background:#100a0a;border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:8px;text-align:center}
+.sv2{font-size:1.2rem;font-weight:900}.sv2.g{color:#3fb950}.sv2.r{color:#f85149}.sv2.b{color:#f85149}
+.sl2{font-size:0.6rem;color:rgba(255,255,255,0.3);margin-top:1px}
+.pla{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start}
+@media(max-width:700px){.pla{grid-template-columns:1fr}}
+@media(max-width:768px){
+  .lay{flex-direction:column}
+  .side{width:100%;height:auto;max-height:38vh}
+  .lp,.pp{padding:12px}
+  .lp h1{font-size:1.1rem}
+  .bd,.pb2{grid-template-columns:repeat(8,38px);grid-template-rows:repeat(8,38px)}
+  .sq,.psq{width:38px;height:38px;font-size:1rem}
+  .cr span{width:38px}
+}
+</style>
+</head>
+<body>
+<div class="top">
+  <h2>♛ أكاديمية أسامة للشطرنج</h2>
+  <span>🏰 Slav Defence</span>
+</div>
+<div class="lay">
+<div class="side">
+
+<div class="grp-hd" onclick="tg(this)">📖 المقدمة</div>
+<div class="gr">
+  <div class="row on" onclick="go(0)" id="r0"><div class="dot cur" id="c0">▶</div><div class="rt"><div class="tl">مقدمة Slav - الفلسفة والأهداف</div><div class="sub">مقدمة</div></div></div>
+</div>
+
+<div class="grp-hd" onclick="tg(this)">♗ الخط الرئيسي: Bf5</div>
+<div class="gr">
+  <div class="row" onclick="go(1)" id="r1"><div class="dot" id="c1">1</div><div class="rt"><div class="tl">الافتتاح - Bf5 الحر الكلاسيكي</div><div class="sub">افتتاح</div></div></div>
+  <div class="row" onclick="go(2)" id="r2"><div class="dot" id="c2">2</div><div class="rt"><div class="tl">وسط الدور: خطة Nc5 للضغط</div><div class="sub">وسط الدور</div></div></div>
+  <div class="row" onclick="go(3)" id="r3"><div class="dot" id="c3">3</div><div class="rt"><div class="tl">وسط الدور: الهجوم المركزي e4</div><div class="sub">وسط الدور</div></div></div>
+</div>
+
+<div class="grp-hd" onclick="tg(this)">⚡ تفريع dxc4: قبول البيدق</div>
+<div class="gr">
+  <div class="row" onclick="go(4)" id="r4"><div class="dot" id="c4">1</div><div class="rt"><div class="tl">الافتتاح - dxc4 وB5!!</div><div class="sub">افتتاح</div></div></div>
+  <div class="row" onclick="go(5)" id="r5"><div class="dot" id="c5">2</div><div class="rt"><div class="tl">وسط الدور: Rxc3!! التضحية الكلاسيكية</div><div class="sub">وسط الدور</div></div></div>
+</div>
+
+<div class="grp-hd" onclick="tg(this)">🌟 تفريع Chebanenko: a6!!</div>
+<div class="gr">
+  <div class="row" onclick="go(6)" id="r6"><div class="dot" id="c6">1</div><div class="rt"><div class="tl">الافتتاح - a6!! الثورة الحديثة</div><div class="sub">افتتاح</div></div></div>
+  <div class="row" onclick="go(7)" id="r7"><div class="dot" id="c7">2</div><div class="rt"><div class="tl">وسط الدور بعد Chebanenko</div><div class="sub">وسط الدور</div></div></div>
+</div>
+
+<div class="grp-hd" onclick="tg(this)">🔥 تفريع Moscow: Bg5 الحاد</div>
+<div class="gr">
+  <div class="row" onclick="go(8)" id="r8"><div class="dot" id="c8">1</div><div class="rt"><div class="tl">الافتتاح - Bg5 وe4!! المتفجر</div><div class="sub">افتتاح</div></div></div>
+  <div class="row" onclick="go(9)" id="r9"><div class="dot" id="c9">2</div><div class="rt"><div class="tl">وسط الدور بعد Moscow</div><div class="sub">وسط الدور</div></div></div>
+</div>
+
+<div class="grp-hd" onclick="tg(this)">⚠️ الفخاخ والأخطاء</div>
+<div class="gr">
+  <div class="row" onclick="go(10)" id="r10"><div class="dot" id="c10">1</div><div class="rt"><div class="tl">الفخاخ الشائعة في Slav</div><div class="sub">فخاخ</div></div></div>
+</div>
+
+<div class="grp-hd" onclick="tg(this)">⚡ التمارين التفاعلية</div>
+<div class="gr">
+  <div class="row" onclick="go(11)" id="r11"><div class="dot" id="c11">⚡</div><div class="rt"><div class="tl">تمرين 1 - الافتتاح</div><div class="sub">تمرين</div></div></div>
+  <div class="row" onclick="go(12)" id="r12"><div class="dot" id="c12">⚡</div><div class="rt"><div class="tl">تمرين 2 - وسط الدور</div><div class="sub">تمرين</div></div></div>
+</div>
+
+</div>
+<div class="main" id="main"></div>
+</div>
+
+<script>
+var P={K:"♔",Q:"♕",R:"♖",B:"♗",N:"♘",P:"♙",k:"♚",q:"♛",r:"♜",b:"♝",n:"♞",p:"♟"};
+var cur=0,done={},pC=0,pW=0,bMov=[],bIdx=0,pSel=null,pBs={},pIsB=false,pAns=false,pCur=0;
+
+function tg(h){var g=h.nextElementSibling;g.style.display=g.style.display==="none"?"":"none";}
+
+function go(id){
+  cur=id;
+  document.querySelectorAll(".row").forEach(function(r){r.classList.remove("on");});
+  var r=document.getElementById("r"+id);
+  if(r){r.classList.add("on");r.scrollIntoView({behavior:"smooth",block:"nearest"});}
+  if(id===11||id===12) showPuzzle(id-11,id);
+  else showLesson(id);
+}
+
+function parseFen(fen){
+  var b={},rows=fen.split(" ")[0].split("/");
+  for(var r=0;r<8;r++){var c=0;for(var i=0;i<rows[r].length;i++){var ch=rows[r][i];if(ch>="1"&&ch<="8"){c+=parseInt(ch);}else{b[r+","+c]=ch;c++;}}}
+  return b;
+}
+function sqN(r,c){return String.fromCharCode(97+c)+(8-r);}
+
+function drawBd(id,pos){
+  var h="";
+  for(var r=0;r<8;r++){for(var c=0;c<8;c++){var lt=(r+c)%2===0;var pc=pos[r+","+c]||"";h+="<div class='sq "+(lt?"l":"d")+"'>"+(pc?P[pc]||"":"")+"</div>";}}
+  var el=document.getElementById(id);if(el)el.innerHTML=h;
+}
+
+function updBoard(){
+  if(!bMov.length)return;
+  var m=bMov[bIdx];
+  drawBd("bd",parseFen(m.f));
+  var info=document.getElementById("binfo");
+  if(info)info.innerHTML="<div class='mn'>نقلة "+(bIdx+1)+" من "+bMov.length+"</div><div class='ms'>"+m.s+"</div><div class='me'>"+m.e+"</div>";
+  var bar=document.getElementById("bbar");
+  if(bar){var h="";for(var i=0;i<bMov.length;i++){h+="<span class='mi"+(i===bIdx?" on":"")+"' onclick='jmp("+i+")'>"+bMov[i].s+"</span>";}bar.innerHTML=h;}
+  document.getElementById("bf").disabled=bIdx<=0;
+  document.getElementById("bp").disabled=bIdx<=0;
+  document.getElementById("bn").disabled=bIdx>=bMov.length-1;
+  document.getElementById("bl").disabled=bIdx>=bMov.length-1;
+}
+
+function jmp(i){bIdx=i;updBoard();}
+function bN(){if(bIdx<bMov.length-1){bIdx++;updBoard();}}
+function bP(){if(bIdx>0){bIdx--;updBoard();}}
+function bF(){bIdx=0;updBoard();}
+function bL(){bIdx=bMov.length-1;updBoard();}
+
+var TITLES=["مقدمة Slav Defence - الفلسفة والأهداف","خط Bf5 - الافتتاح الكلاسيكي","خط Bf5 - وسط الدور: خطة Nc5","خط Bf5 - وسط الدور: الهجوم المركزي e4","تفريع dxc4 - الافتتاح وb5!!","تفريع dxc4 - وسط الدور: Rxc3!!","تفريع Chebanenko - a6!! الثورة","تفريع Chebanenko - وسط الدور","تفريع Moscow - Bg5 وe4!!","تفريع Moscow - وسط الدور","الفخاخ والأخطاء الشائعة في Slav"];
+
+var MOVES=[
+// 0 - intro
+[{s:"الموقف الابتدائي",e:"الرقعة جاهزة. اضغط التالي لمشاهدة نقلات Slav Defence مع الشرح.",f:"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"},
+{s:"1. d4 d5 2. c4",e:"قمبيط الملكة! الأبيض يعرض بيدق c4. الأسود لديه خياران: يأخذ (QGA) أو يدافع.",f:"rnbqkbnr/ppp1pppp/8/3p4/2PP4/8/PP2PPPP/RNBQKBNR b KQkq - 0 2"},
+{s:"2... c6",e:"دفاع السلاف! الأسود يلعب c6 بدلاً من e6. الفرق الجوهري: الفيل c8 يبقى حراً!",f:"rnbqkbnr/pp2pppp/2p5/3p4/2PP4/8/PP2PPPP/RNBQKBNR w KQkq - 0 3"},
+{s:"3. Nf3 Nf6 4. Nc3",e:"التطوير الطبيعي لكلا الجانبين. الأبيض يضغط على d5 من حصانين.",f:"rnbqkb1r/pp2pppp/2p2n2/3p4/2PP4/2N2N2/PP2PPPP/R1BQKB1R b KQkq - 0 4"},
+{s:"4... Bf5!!",e:"الفيل يخرج قبل أن تُحبسه البيادق! هذا هو جوهر Slav - الفيل c8 حر دائماً في Slav ومحبوس في QGD.",f:"rnbqkb1r/pp2pppp/2p2n2/3p1b2/2PP4/2N2N2/PP2PPPP/R1BQKB1R w KQkq - 0 5"},
+{s:"5. cxd5 cxd5 6. Qb3",e:"الأبيض يتبادل ثم يهاجم b7 ود5 في آن واحد! الأسود يجب أن يرد بذكاء.",f:"rnbqkb1r/pp2pppp/5n2/3p1b2/3P4/1QN2N2/PP2PPPP/R1B1KB1R b KQkq - 0 6"},
+{s:"6... Qc8!!",e:"رد ذكي جداً! الملكة تحمي الفيل f5 وتستعد للهجوم. Qb3 لم تحصل على فائدة!",f:"rn1qkb1r/pp2pppp/5n2/3p1b2/3P4/1QN2N2/PP2PPPP/R1B1KB1R w KQkq - 0 7"}],
+// 1 - Bf5 opening
+[{s:"الموقف الابتدائي",e:"سندرس خط Bf5 الكلاسيكي - الأقوى والأشهر في Slav.",f:"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"},
+{s:"4. Nc3 Bf5",e:"الفيل يخرج! هذا هو قلب Slav - الفيل حر على f5 يسيطر على e4.",f:"rnbqkb1r/pp2pppp/2p2n2/3p1b2/2PP4/2N2N2/PP2PPPP/R1BQKB1R w KQkq - 0 5"},
+{s:"5. e3 e6",e:"الأبيض يدعم d4 والأسود يحضر Be7 والتحصين. e6 مقبولة لأن الفيل c8 خرج أولاً!",f:"rnbqkb1r/pp3ppp/2p1pn2/3p1b2/2PP4/2N1PN2/PP3PPP/R1BQKB1R w KQkq - 0 6"},
+{s:"6. Nh4 Bg6",e:"الأبيض يهاجم الفيل! Nh4 يطرده. الفيل يتراجع لـ g6 ويبقى نشطاً.",f:"rnbqkb1r/pp3ppp/2p1pnb1/3p4/2PP3N/2N1P3/PP3PPP/R1BQKB1R w KQkq - 0 7"},
+{s:"7. Nxg6 hxg6",e:"الأبيض يبادل الفيل وملف h ينفتح! الأسود يستعيد بالبيدق h ويحصل على ملف h للرخ.",f:"rnbqkb1r/pp3pp1/2p1pnp1/3p4/2PP4/2N1P3/PP3PPP/R1BQKB1R w KQkq - 0 8"},
+{s:"8. Bd3 Bd6",e:"كلا الفيلين يتطوران. الفيل d6 يضغط على h2 بشكل غير مباشر.",f:"rnbqk2r/pp3pp1/2pbpnp1/3p4/2PP4/2NBP3/PP3PPP/R1BQK2R w KQkq - 0 9"},
+{s:"9. O-O O-O",e:"كلا الجانبين يتحصنان. الأسود لديه بنية متماسكة مع فيل نشط على d6.",f:"rnbq1rk1/pp3pp1/2pbpnp1/3p4/2PP4/2NBP3/PP3PPP/R1BQ1RK1 w - - 0 10"},
+{s:"10. Qf3 Nbd7",e:"الملكة تضغط على d5 والحصان يتطور. الأسود يستعد لـ c5 لكسر المركز.",f:"rnbq1rk1/pp1n1pp1/2pbpnp1/3p4/2PP4/2NBP1Q1/PP3PPP/R1B2RK1 b - - 0 10"},
+{s:"10... c5!!",e:"الضربة المركزية! c5 يهاجم d4 ويفتح اللعبة. الأسود يساوي تقريباً الآن.",f:"rnbq1rk1/pp1n1pp1/3bpnp1/2pp4/2PP4/2NBP1Q1/PP3PPP/R1B2RK1 w - - 0 11"}],
+// 2 - Bf5 middlegame Nc5
+[{s:"الموقف",e:"الأبيض يطبق خطة Nc5 الاستراتيجية. الحصان سيتمركز في c5 لا يُقهر!",f:"r1bq1rk1/pp1nbppp/2p1pn2/3p4/2PP4/2N1PN2/PP3PPP/R1BQKB1R w KQ - 0 8"},
+{s:"Rc1",e:"الرخ يضغط على ملف c مبكراً! استعداد لخطة Nc5.",f:"r1bq1rk1/pp1nbppp/2p1pn2/3p4/2PP4/2N1PN2/PP3PPP/2RQKB1R b K - 0 8"},
+{s:"Nd2",e:"الحصان يبدأ رحلته! Nd2 → Nb3 → Nc5. مسار منهجي وعميق.",f:"r1bq1rk1/pp1nbppp/2p1pn2/3p4/2PP4/2N1PN2/PP1N1PPP/2RQK2R b K - 0 9"},
+{s:"Nb3",e:"المحطة الثانية في رحلة الحصان. من هنا يتجه لـ c5.",f:"r1bq1rk1/pp1nbppp/2p1pn2/3p4/2PP4/1NN1P3/PP3PPP/2RQK2R b K - 0 10"},
+{s:"Nc5!!",e:"الوصول! الحصان على c5 يضغط على b7 وe6 وa6 في آن واحد. موقع لا يُقهر!",f:"r1bq1rk1/pp1nbppp/2p1pn2/2Np4/2PP4/1N2P3/PP3PPP/2RQK2R b K - 0 11"},
+{s:"Bxc5 dxc5",e:"الأسود يبادل الحصان! الأبيض يسترد بالبيدق ويحصل على خطين قويين.",f:"r1bq1rk1/pp1nbppp/2p1pn2/2pp4/3P4/1N2P3/PP3PPP/2RQK2R w K - 0 12"},
+{s:"Qxd8 Rxd8",e:"تبادل الملكتين! الأبيض يدخل نهاية أفضل. البيدق c5 الأسود ضعيف ومعزول.",f:"r2r1rk1/pp1nbppp/2p1pn2/2p5/3P4/1N2P3/PP3PPP/2R1K2R w K - 0 13"},
+{s:"Rxc5",e:"الرخ يسترد البيدق! الأبيض أفضل في النهاية مع ضغط دائم على الجناح.",f:"r2r1rk1/pp1nbppp/4pn2/2Rp4/3P4/1N2P3/PP3PPP/4K2R b K - 0 13"}],
+// 3 - Bf5 e4 attack
+[{s:"الموقف",e:"الأبيض يشن الهجوم المركزي بـ e4!! الأقوى في خط Bf5.",f:"r1bq1rk1/pp1nbppp/2p1pn2/3p1b2/2PP4/2N1PN2/PP3PPP/R1BQK2R w KQ - 0 8"},
+{s:"e4!!",e:"الضربة المركزية الكبرى! e4 يهاجم الفيل f5 ويكسر مركز الأسود.",f:"r1bq1rk1/pp1nbppp/2p1pn2/3p1b2/2PPP3/2N2N2/PP3PPP/R1BQK2R b KQ - 0 8"},
+{s:"dxe4",e:"الأسود يأخذ البيدق. إذا لم يأخذ، الأبيض يدفع e5 ويغلق الجناح لصالحه.",f:"r1bq1rk1/pp1nbppp/2p1pn2/5b2/2PPp3/2N2N2/PP3PPP/R1BQK2R w KQ - 0 9"},
+{s:"Nxe4 Nxe4",e:"تبادل الحصانين. الحصان الأبيض يصبح نشطاً جداً على e4.",f:"r1bq1rk1/pp1nbppp/2p1p3/5b2/2PPN3/5N2/PP3PPP/R1BQK2R b KQ - 0 10"},
+{s:"Bxe4 Bg6",e:"الفيل يتبادل والأبيض يحصل على مركز قوي. الفيل g6 أقل نشاطاً الآن.",f:"r1bq1rk1/pp1nbppp/2p1p1b1/8/2PPB3/5N2/PP3PPP/R1BQK2R w KQ - 0 11"},
+{s:"Bxg6 hxg6",e:"تبادل الفيلين! ملف h ينفتح. الأبيض يحصل على بنية أفضل.",f:"r1bq1rk1/pp1nbpp1/2p1p1p1/8/2PP4/5N2/PP3PPP/R1BQK2R w KQ - 0 12"},
+{s:"Qd3 Nf6",e:"الملكة تأخذ موقعها على d3 تهدد Qxg6 وتستهدف الجناح الملكي.",f:"r1bq1rk1/pp1n1pp1/2p1pnp1/8/2PP4/3Q1N2/PP3PPP/R1B1K2R w KQ - 0 13"},
+{s:"O-O c5",e:"الأبيض يتحصن! الأسود يضرب في المركز بـ c5 محاولاً خلق ضغط مضاد.",f:"r1bq1rk1/pp1n1pp1/4pnp1/2p5/2PP4/3Q1N2/PP3PPP/R1B2RK1 w - - 0 14"},
+{s:"d5!!",e:"الضربة الحاسمة! d5 يكسر مركز الأسود ويمنح الأبيض بيدقاً متقدماً قوياً.",f:"r1bq1rk1/pp1n1pp1/4pnp1/2pP4/2P5/3Q1N2/PP3PPP/R1B2RK1 b - - 0 14"}],
+// 4 - dxc4 opening
+[{s:"الموقف الابتدائي",e:"سندرس تفريع dxc4 - الأسود يقبل البيدق في Slav!",f:"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"},
+{s:"4. Nc3 dxc4!!",e:"الأسود يقبل البيدق! هذا مثل QGA ولكن مع c6 موجود - ميزة إضافية.",f:"rnbqkb1r/pp2pppp/2p2n2/8/2pP4/2N2N2/PP2PPPP/R1BQKB1R w KQkq - 0 5"},
+{s:"5. a4",e:"a4 يمنع b5! الأبيض يضغط على البيدق المأخوذ ويمنع الأسود من الاحتفاظ به.",f:"rnbqkb1r/pp2pppp/2p2n2/8/P1pP4/2N2N2/1P2PPPP/R1BQKB1R b KQkq - 0 5"},
+{s:"5... Bf5!!",e:"الفيل يخرج قبل e6! في تفريع dxc4 هذا مهم جداً - يحافظ على ميزة c6.",f:"rnbqkb1r/pp2pppp/2p2n2/5b2/P1pP4/2N2N2/1P2PPPP/R1BQKB1R w KQkq - 0 6"},
+{s:"6. Nh4 Bc8",e:"الأبيض يطرد الفيل والأسود يتراجع للداخل. يبدو أن الأسود خسر وقتاً لكن...",f:"rnbqkb1r/pp2pppp/2p2n2/8/P1pP3N/2N5/1P2PPPP/R1BQKB1R b KQkq - 0 6"},
+{s:"7. e4 e5",e:"الأسود يضرب في المركز فوراً! e5 يخلق توتراً ويمنع الأبيض من بناء مركز ضخم.",f:"rnbqkb1r/pp3ppp/2p2n2/4p3/P1pPP2N/2N5/1P3PPP/R1BQKB1R w KQkq - 0 7"},
+{s:"8. Nf5 Bc5",e:"الحصان يأتي لـ f5 المثالي. الفيل c5 يضغط على f2 ويدعم e5.",f:"rnbqk2r/pp3ppp/2p2n2/2b1pN2/P1pPP3/2N5/1P3PPP/R1BQKB1R w KQkq - 0 8"},
+{s:"9. b5!!",e:"b5!! يهاجم c6 ويخلق ضغطاً. الأسود يلعب b5 بنفس الروح للاحتفاظ بمبادرته.",f:"rnbqk2r/pp3ppp/2p2n2/1pb1pN2/P1pPP3/2N5/1P3PPP/R1BQKB1R b KQkq - 0 9"}],
+// 5 - dxc4 Rxc3
+[{s:"الموقف",e:"الموقف الأشهر في تفريع dxc4! التضحية الكلاسيكية Rxc3!! على وشك الحدوث.",f:"r1b2rk1/pp3ppp/2p2n2/3p4/2pP4/2N1PN2/PP3PPP/R1BQ1RK1 b - - 0 11"},
+{s:"b5!!",e:"b5 يهاجم الفيل c4! هذا هو التسلسل المثير - الأسود يبدأ هجومه على جانب الملكة.",f:"r1b2rk1/pp3ppp/2p2n2/1p1p4/2pP4/2N1PN2/PP3PPP/R1BQ1RK1 w - - 0 12"},
+{s:"b4",e:"b4 يطرد الحصان c3! الأسود يجبره على الاختيار: أين يذهب الحصان؟",f:"r1b2rk1/pp3ppp/2p2n2/1p1p4/1PpP4/2N1PN2/P4PPP/R1BQ1RK1 b - - 0 12"},
+{s:"Rxc3!!",e:"التضحية الكلاسيكية الرائعة! الرخ يضحي بنفسه لتدمير هيكل بيادق الأبيض إلى الأبد!",f:"r1b2rk1/pp3ppp/2p2n2/1p1p4/1PpP4/2r1PN2/P4PPP/R1BQ1RK1 w - - 0 13"},
+{s:"bxc3 Qa5",e:"الأبيض يأخذ مضطراً. الملكة تأتي لـ a5 تضغط على c3 وتهدد التقدم!",f:"r1b2rk1/pp3ppp/2p2n2/qp1p4/2pP4/2P1PN2/P4PPP/R1BQ1RK1 w - - 0 13"},
+{s:"Rb1",e:"الأبيض يحاول الدفاع. لكن الضغط مستمر - الملكة الأسود قوية جداً.",f:"r1b2rk1/pp3ppp/2p2n2/qp1p4/2pP4/2P1PN2/P4PPP/1RBQ1RK1 b - - 0 14"},
+{s:"b4!!",e:"b4 يواصل الضغط! البيدق b يتقدم ويضيق على الأبيض. التقييم -0.3 للأسود حسب ليلا!",f:"r1b2rk1/pp3ppp/2p2n2/q2p4/1ppP4/2P1PN2/P4PPP/1RBQ1RK1 w - - 0 14"},
+{s:"cxb4 cxb3",e:"سلسلة تبادلات! بيادق الأبيض على جانب الملكة تتفتت. الأسود يحصل على تعويض كافٍ.",f:"r1b2rk1/pp3ppp/2p2n2/q2p4/1P1P4/1p2PN2/P4PPP/1RBQ1RK1 b - - 0 15"}],
+// 6 - Chebanenko a6
+[{s:"الموقف الابتدائي",e:"تفريع Chebanenko - a6!! الثورة الحديثة في Slav!",f:"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"},
+{s:"4. Nc3 a6!!",e:"a6!! الحركة الثورية! بدلاً من Bf5 مباشرة، الأسود يلعب a6 أولاً. لماذا؟",f:"rnbqkb1r/pp2pppp/p1p2n2/3p4/2PP4/2N2N2/PP2PPPP/R1BQKB1R w KQkq - 0 5"},
+{s:"5. e3 Bf5",e:"الآن يخرج الفيل! a6 سبق Bf5 لأسباب مهمة سنشرحها.",f:"rnbqkb1r/pp2pppp/p1p2n2/3p1b2/2PP4/2N1PN2/PP3PPP/R1BQKB1R w KQkq - 0 6"},
+{s:"6. Nh4 Bg6",e:"نفس التسلسل مع Bf5 - الفيل يتراجع لـ g6. لكن ميزة a6 ستظهر لاحقاً!",f:"rnbqkb1r/pp2pppp/p1p2nb1/3p4/2PP3N/2N1P3/PP3PPP/R1BQKB1R w KQkq - 0 7"},
+{s:"7. Nxg6 hxg6",e:"تبادل الفيل وملف h ينفتح. الأسود يستعيد بـ h وليس f لأن ملف h مفيد للرخ.",f:"rnbqkb1r/pp2ppp1/p1p2np1/3p4/2PP4/2N1P3/PP3PPP/R1BQKB1R w KQkq - 0 8"},
+{s:"8. Bd3 b5!!",e:"هنا تظهر فائدة a6!! b5 يهاجم الفيل c4 والأبيض لا يستطيع Bb5+ لأن a6 يمنعه!",f:"rnbqkb1r/pp2ppp1/p1p2np1/1p1p4/2PP4/2NBP3/PP3PPP/R1BQK2R w KQkq - 0 9"},
+{s:"9. Bxb5+ axb5",e:"الأبيض يحاول Bxb5+ لكن الأسود يستعيد بـ a6! الفيل يختفي ومزية مهمة للأسود.",f:"rnbqkb1r/1p2ppp1/2p2np1/1p1p4/2PP4/2N1P3/PP3PPP/R1BQK2R w KQkq - 0 10"},
+{s:"10. Qf3 Nc6",e:"الأسود يطور حصانه ويضغط على d4. الأسود حصل على ملف a مفتوح وهجوم نشط.",f:"r1bqkb1r/1p2ppp1/2pn1np1/1p1p4/2PP4/2N1PQ2/PP3PPP/R1B1K2R b KQkq - 0 10"}],
+// 7 - Chebanenko middlegame
+[{s:"الموقف",e:"وسط الدور في Chebanenko - الأسود يملك ملف a مفتوح وهجوم نشط على جانب الملكة.",f:"r1bq1rk1/1p2ppp1/p1pn1np1/3p4/2PP4/2NBP3/PP3PPP/R1BQ1RK1 w - - 0 11"},
+{s:"b4!!",e:"الأسود يدفع b4 ليطرد الحصان c3 ويبدأ هجومه على جانب الملكة.",f:"r1bq1rk1/1p2ppp1/p1pn1np1/3p4/1pPP4/2NBP3/PP3PPP/R1BQ1RK1 w - - 0 12"},
+{s:"Na4",e:"الحصان يتراجع لـ a4. الأبيض يحاول الحفاظ على توازنه.",f:"r1bq1rk1/1p2ppp1/p1pn1np1/3p4/NpPP4/3BP3/PP3PPP/R1BQ1RK1 b - - 0 12"},
+{s:"Nc4!!",e:"الحصان يصل لـ c4!! يضغط على الفيل d3 ويسيطر على مربعات مهمة. موقع رائع!",f:"r1bq1rk1/1p2ppp1/p1p2np1/3p4/NnPP4/3BP3/PP3PPP/R1BQ1RK1 w - - 0 13"},
+{s:"Bxc4 dxc4",e:"الأبيض يبادل ليزيل الحصان المزعج. الأسود يسترد بالبيدق ويحصل على ضغط على ملف c.",f:"r1bq1rk1/1p2ppp1/p1p2np1/8/N1pP4/4P3/PP3PPP/R1BQ1RK1 b - - 0 13"},
+{s:"Ra7!!",e:"الرخ ينتقل عبر الصف السابع! Rxa7 ثم Rb7 أو Rc7 يخلق ضغطاً رهيباً.",f:"r1bq1rk1/Rp2ppp1/p1p2np1/8/N1pP4/4P3/PP3PPP/R1BQ1RK1 b - - 0 14"},
+{s:"b5!!",e:"b5 يطرد الحصان a4 ويواصل الهجوم. الأسود يملك مبادرة قوية على جانب الملكة.",f:"r1bq1rk1/Rp2ppp1/p1p2np1/1p6/2pP4/4P3/PP3PPP/R1BQ1RK1 w - - 0 15"}],
+// 8 - Moscow opening
+[{s:"الموقف الابتدائي",e:"تفريع Moscow - الأكثر حدة في Slav! Bg5 بدلاً من التطوير العادي.",f:"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"},
+{s:"3. Nf3 Nf6 4. Nc3 dxc4",e:"الأسود يأخذ البيدق أولاً! يحضر للتسلسل المثير.",f:"rnbqkb1r/pp2pppp/2p2n2/8/2pP4/2N2N2/PP2PPPP/R1BQKB1R w KQkq - 0 5"},
+{s:"5. a4 Bg4!!",e:"Bg4!! بدلاً من Bf5! الفيل يثبت Nf3 ويمنع e4. خطة مختلفة تماماً.",f:"rnbqkb1r/pp2pppp/2p2n2/8/P1pP2b1/2N2N2/1P2PPPP/R1BQKB1R w KQkq - 0 6"},
+{s:"6. Ne5 Bh5",e:"الحصان يهاجم الفيل g4! الفيل يتراجع لـ h5 محافظاً على الضغط على Nf3.",f:"rnbqkb1r/pp2pppp/2p2n2/4N3/P1pP3b/2N5/1P2PPPP/R1BQKB1R b KQkq - 0 6"},
+{s:"7. f3 Nfd7!!",e:"الأسود يتراجع الحصان ليهاجم Ne5! خطة ذكية - الحصان يذهب لـ d7 ثم b6.",f:"rnbqkb1r/pp1npppp/2p5/4N3/P1pP3b/2N2P2/1P2P1PP/R1BQKB1R w KQkq - 0 7"},
+{s:"8. Nxd7 Nxd7",e:"الأبيض يبادل الحصانين. الأسود يسترد ويحتفظ ببنية متوازنة.",f:"r1bqkb1r/pp1npppp/2p5/8/P1pP3b/2N2P2/1P2P1PP/R1BQKB1R w KQkq - 0 8"},
+{s:"9. e4 Bg6!!",e:"e4 يكسر المركز. الفيل يتراجع لـ g6 ويبقى نشطاً يسيطر على e4.",f:"r1bqkb1r/pp1npppp/2p3b1/8/P1pPP3/2N2P2/1P4PP/R1BQKB1R b KQkq - 0 9"},
+{s:"10. Bxc4 e6 11. Be3",e:"الأبيض يسترد البيدق. الأسود يلعب e6 ليحضر Be7 والتحصين.",f:"r1bqkb1r/pp1n1ppp/2p1p1b1/8/P2PP3/2N1BP2/1P4PP/R2QKB1R b KQkq - 0 11"}],
+// 9 - Moscow middlegame
+[{s:"الموقف",e:"وسط الدور في تفريع Moscow - موقف حاد ومثير. كلا الجانبين يملك فرصاً!",f:"r1bq1rk1/pp1nbppp/2p1pnb1/8/P2PP3/2N1BP2/1P2NPPP/R2QKB1R w KQ - 0 12"},
+{s:"O-O Bd6",e:"الأبيض يتحصن. الفيل d6 يضغط على h2 ويستهدف الملك.",f:"r1bq1rk1/pp1n1ppp/2pbpnb1/8/P2PP3/2N1BP2/1P2NPPP/R2Q1RK1 w - - 0 13"},
+{s:"f4!!",e:"f4 يدعم e4 ويستعد لـ f5! الأبيض يريد مهاجمة الجناح الملكي.",f:"r1bq1rk1/pp1n1ppp/2pbpnb1/8/P2PPP2/2N1B3/1P2NPPP/R2Q1RK1 b - - 0 13"},
+{s:"Ne4!!",e:"الحصان يقفز لـ e4!! يهاجم النقطة المحورية ويضغط على f2.",f:"r1bq1rk1/pp1n1ppp/2pbp1b1/8/P2PnP2/2N1B3/1P2NPPP/R2Q1RK1 w - - 0 14"},
+{s:"Nxe4 Bxe4",e:"تبادل الحصانين. الفيل e4 نشط جداً يهاجم b1 وg2 في نفس الوقت!",f:"r1bq1rk1/pp1n1ppp/2pbp1b1/8/P2PbP2/4B3/1P2NPPP/R2Q1RK1 w - - 0 15"},
+{s:"Bf2 c5!!",e:"الأبيض يطرد الفيل. الأسود يضرب c5 لفتح المركز ومنح قطعه المزيد من النشاط.",f:"r1bq1rk1/pp1n1ppp/3bp1b1/2p5/P2P1P2/5B2/1P2NPPP/R2Q1RK1 w - - 0 16"},
+{s:"d5!!",e:"d5!! الضربة الحاسمة! يكسر مركز الأسود ويمنح بيدقاً متقدماً قوياً.",f:"r1bq1rk1/pp1n1ppp/3bp1b1/2pP4/P4P2/5B2/1P2NPPP/R2Q1RK1 b - - 0 16"},
+{s:"exd5 e5!!",e:"الأسود يسترد ويدفع e5! التبادلات تؤدي لموقف متوازن مع إمكانيات لكلا الجانبين.",f:"r1bq1rk1/pp1n1ppp/3b2b1/2ppP3/P4P2/5B2/1P2NPPP/R2Q1RK1 w - - 0 17"}],
+// 10 - traps
+[{s:"الموقف",e:"الفخاخ الأكثر شيوعاً في Slav. تعلم منها!",f:"rnbqkb1r/pp2pppp/2p2n2/3p4/2PP4/2N2N2/PP2PPPP/R1BQKB1R b KQkq - 0 4"},
+{s:"4... Bg4?!",e:"Bg4 خطأ مبكر! الفيل يخرج قبل c6 وهذا يعطي الأبيض فرصة عظيمة.",f:"rnbqkb1r/pp2pppp/2p2n2/3p4/2PP2b1/2N2N2/PP2PPPP/R1BQKB1R w KQkq - 0 5"},
+{s:"5. cxd5 cxd5",e:"الأبيض يتبادل ثم يأتي بضربة قاصمة.",f:"rnbqkb1r/pp2pppp/5n2/3p4/3P2b1/2N2N2/PP2PPPP/R1BQKB1R w KQkq - 0 6"},
+{s:"6. Qb3!!",e:"Qb3!! يهاجم b7 ويمنع النمو الطبيعي. الأسود في ورطة: b7 مهدد وd5 تحت ضغط!",f:"rnbqkb1r/pp2pppp/5n2/3p4/3P2b1/1QN2N2/PP2PPPP/R1B1KB1R b KQkq - 0 6"},
+{s:"فخ Cambridge Springs في Slav",e:"4...Nbd7 5.e3 c6 6.Nf3 Qa5!! - نفس الفخ يعمل في Slav أيضاً! الملكة تهاجم Nc3.",f:"r1b1kb1r/pp1n1ppp/2p1pn2/q3B3/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQkq - 0 7"},
+{s:"الفخ الذهبي: Nxd5!!",e:"في بعض مواقف Slav، Nxd5!! يكسب مادة: cxd5 Qxd5 Qxd5 Nxd5 وNd5 يشوك الملك والرخ!",f:"r1b1k2r/pp3ppp/2p1pn2/q2pN3/2PP4/2N1P3/PP3PPP/R1BQK2R b KQkq - 0 8"}]
+];
+
+var CONTENT=[
+// 0
+`<div class="bt">🏰 ما هو Slav Defence؟</div>
+<div class="ib b">بعد <strong>1.d4 d5 2.c4</strong>، يرد الأسود بـ <strong>2...c6</strong>. المنطق الذهبي: يحمي d5 <em>ويحرر الفيل c8</em> في نفس الوقت!</div>
+<div class="bt">⚡ الفرق الجوهري: Slav vs QGD</div>
+<div class="ib g">
+<table style="width:100%;font-size:0.82rem;line-height:2.2;border-collapse:collapse">
+<tr><td style="color:#f85149;font-weight:800;padding:4px">Slav (c6) ✅</td><td style="color:#4fc3f7;font-weight:800;padding:4px">QGD (e6)</td></tr>
+<tr><td style="padding:4px">الفيل c8 حر → Bf5</td><td style="padding:4px">الفيل c8 محبوس</td></tr>
+<tr><td style="padding:4px">+0.15 فقط للأبيض</td><td style="padding:4px">+0.28 للأبيض</td></tr>
+<tr><td style="padding:4px">أصلب وأصعب كسره</td><td style="padding:4px">أكثر مرونة</td></tr>
+<tr><td style="padding:4px">كرامنيك وأناند</td><td style="padding:4px">كاسباروف وفيشر</td></tr>
+</table></div>
+<div class="bt">🗺️ التفريعات الرئيسية في Slav</div>
+<div class="ib p">
+<div class="st"><div class="sn2">1</div><div class="stx"><strong>Bf5 الكلاسيكي:</strong> الفيل يخرج مبكراً - الأشهر والأكثر انتشاراً.</div></div>
+<div class="st"><div class="sn2">2</div><div class="stx"><strong>dxc4 القبول:</strong> الأسود يقبل البيدق كـ QGA لكن مع c6.</div></div>
+<div class="st"><div class="sn2">3</div><div class="stx"><strong>Chebanenko (a6!!):</strong> حركة ثورية حديثة تمنع Bb5+ وتحضر b5.</div></div>
+<div class="st"><div class="sn2">4</div><div class="stx"><strong>Moscow (Bg5):</strong> الأكثر حدة - يؤدي لمواقف مثيرة ومعقدة.</div></div>
+</div>`,
+// 1
+`<div class="bt">♗ لماذا Bf5 هو روح Slav؟</div>
+<div class="ib b">الفيل على f5 هو الهدف الرئيسي في Slav! يسيطر على e4 ويمنع الأبيض من التمركز هناك. هذا هو سبب لعب c6 بدلاً من e6.</div>
+<div class="bt">📋 تسلسل Bf5 الأمثل</div>
+<div class="ib p">
+<div class="st"><div class="sn2">1</div><div class="stx"><strong>4...Bf5!!</strong> الفيل يخرج قبل e6</div></div>
+<div class="st"><div class="sn2">2</div><div class="stx"><strong>5...e6:</strong> الآن يمكن لعب e6 لأن الفيل خرج أولاً!</div></div>
+<div class="st"><div class="sn2">3</div><div class="stx"><strong>Bg6 بعد Nh4:</strong> الفيل يتراجع لـ g6 - لا يزال نشطاً</div></div>
+<div class="st"><div class="sn2">4</div><div class="stx"><strong>hxg6!!</strong> يفضل الاسترداد بـ h لفتح ملف h للرخ</div></div>
+<div class="st"><div class="sn2">5</div><div class="stx"><strong>c5!!</strong> الضربة المركزية لكسر مركز الأبيض</div></div>
+</div>
+<div class="bt">💡 لماذا hxg6 وليس fxg6؟</div>
+<div class="ib g">hxg6 يفتح ملف h للرخ h8. هذا يمنح الأسود فعالية إضافية على الجناح الملكي مستقبلاً.</div>`,
+// 2
+`<div class="bt">🎯 خطة Nc5 - الأكثر منهجية</div>
+<div class="ib b">الأبيض يطبق خطة Rc1→Nd2→Nb3→Nc5!! الحصان على c5 يضغط على b7 وe6 وa6 في آن واحد.</div>
+<div class="bt">📋 رحلة الحصان نحو c5</div>
+<div class="ib p">
+<div class="st"><div class="sn2">1</div><div class="stx"><strong>Rc1!!</strong> يضغط على ملف c مبكراً</div></div>
+<div class="st"><div class="sn2">2</div><div class="stx"><strong>Nd2!!</strong> يبدأ رحلة الحصان</div></div>
+<div class="st"><div class="sn2">3</div><div class="stx"><strong>Nb3!!</strong> المحطة الثانية</div></div>
+<div class="st"><div class="sn2">4</div><div class="stx"><strong>Nc5!!</strong> الوصول - موقع لا يُقهر!</div></div>
+</div>
+<div class="bt">🔄 ردود الأسود</div>
+<div class="ib g">• <strong>Bxc5 dxc5:</strong> يبادل الحصان → البيدق c5 ضعيف<br>• <strong>Ne4!!</strong> يهاجم الحصان بدل الانتظار<br>• <strong>b6:</strong> يطرد الحصان لكن يضعف c6</div>`,
+// 3
+`<div class="bt">💣 الهجوم المركزي e4!! في Bf5</div>
+<div class="ib b">e4 يهاجم الفيل f5 ويكسر مركز الأسود في نفس الوقت. هذا أقوى ردود الأبيض في خط Bf5.</div>
+<div class="bt">📋 ما يحدث بعد e4</div>
+<div class="ib p">
+<div class="st"><div class="sn2">1</div><div class="stx"><strong>dxe4:</strong> الأسود يأخذ → الحصان يسترد بـ Nxe4</div></div>
+<div class="st"><div class="sn2">2</div><div class="stx"><strong>Bxe4 Bg6:</strong> تبادل الفيلين → ملف h ينفتح</div></div>
+<div class="st"><div class="sn2">3</div><div class="stx"><strong>Qd3!!</strong> يهدد Qxg6 ويستهدف الجناح</div></div>
+<div class="st"><div class="sn2">4</div><div class="stx"><strong>d5!!</strong> الضربة الحاسمة تكسر مركز الأسود</div></div>
+</div>
+<div class="ib g"><strong>ليلا زيرو: +0.45 للأبيض بعد e4-d5!!</strong></div>`,
+// 4
+`<div class="bt">⚡ تفريع dxc4 - الأسود يقبل!</div>
+<div class="ib b">الأسود يلعب <strong>4...dxc4!!</strong> - يقبل البيدق كـ QGA لكن مع ميزة إضافية: c6 موجود يمنع Bb5+!</div>
+<div class="bt">💡 ميزة c6 في قبول البيدق</div>
+<div class="ib g">في QGA: الأبيض يلعب Bb5+ مزعجاً<br>في Slav dxc4: <strong>c6 يمنع Bb5+ إلى الأبد!</strong><br>هذا هو الفرق الجوهري.</div>
+<div class="bt">📋 التسلسل المثالي</div>
+<div class="ib p">
+<div class="st"><div class="sn2">1</div><div class="stxt"><strong>dxc4!!</strong> يقبل البيدق</div></div>
+<div class="st"><div class="sn2">2</div><div class="stxt"><strong>Bf5!!</strong> الفيل يخرج قبل e6</div></div>
+<div class="st"><div class="sn2">3</div><div class="stxt"><strong>e5!!</strong> يهاجم المركز</div></div>
+<div class="st"><div class="sn2">4</div><div class="stxt"><strong>b5!!</strong> يحمي c4 ويبدأ هجوم الجناح</div></div>
+</div>`,
+// 5
+`<div class="bt">💥 Rxc3!! - التضحية الكلاسيكية</div>
+<div class="ib b">من أشهر التضحيات في Slav! الأسود يضحي بالرخ لتدمير هيكل بيادق الأبيض على جانب الملكة.</div>
+<div class="bt">💡 لماذا Rxc3!! صحيحة؟</div>
+<div class="ib g">بعد Rxc3 bxc3 Qa5:<br>• بيادق الأبيض على جانب الملكة تتفتت<br>• ملكة الأسود نشطة جداً على a5<br>• البيدق c3 مزدوج وضعيف<br><br><strong>ليلا: -0.3 للأسود = مزية للأسود!</strong></div>
+<div class="bt">📋 المتابعة الصحيحة</div>
+<div class="ib p">
+<div class="st"><div class="sn2">1</div><div class="stxt"><strong>Qa5!!</strong> بعد Rxc3 bxc3 - تضغط على c3</div></div>
+<div class="st"><div class="sn2">2</div><div class="stxt"><strong>b4!!</strong> يواصل الضغط على جانب الملكة</div></div>
+<div class="st"><div class="sn2">3</div><div class="stxt"><strong>Rc8!!</strong> الرخ يأتي لملف c النشط</div></div>
+</div>`,
+// 6
+`<div class="bt">🌟 a6!! - الثورة في Slav</div>
+<div class="ib b">a6!! حركة ثورية! بدلاً من Bf5 مباشرة، الأسود يلعب a6 أولاً لأسباب استراتيجية عميقة.</div>
+<div class="bt">💡 لماذا a6 أولاً؟</div>
+<div class="ib g">
+<div class="st"><div class="sn2">1</div><div class="stxt"><strong>يمنع Bb5+:</strong> في كثير من الخطوط Bb5+ مزعج - a6 يمنعه للأبد</div></div>
+<div class="st"><div class="sn2">2</div><div class="stxt"><strong>يحضر b5:</strong> بعد Bf5 وe6، الأسود يلعب b5!! دون خوف</div></div>
+<div class="st"><div class="sn2">3</div><div class="stxt"><strong>يربك الأبيض:</strong> الأبيض لا يعرف ما الذي سيلعبه الأسود!</div></div>
+</div>
+<div class="bt">⚡ الفائدة العملية: b5!!</div>
+<div class="ib r">بعد 8.Bd3 <strong>b5!!</strong> - الأبيض لا يستطيع Bb5+ لأن a6 يمنعه!<br>هذا يعطي الأسود هجوماً حراً على الجناح.</div>`,
+// 7
+`<div class="bt">⚙️ وسط الدور في Chebanenko</div>
+<div class="ib b">الأسود يستغل ملف a المفتوح وميزة a6 لبناء هجوم قوي على جانب الملكة.</div>
+<div class="bt">📋 خطة الأسود الكاملة</div>
+<div class="ib p">
+<div class="st"><div class="sn2">1</div><div class="stxt"><strong>b4!!</strong> يطرد الحصان c3</div></div>
+<div class="st"><div class="sn2">2</div><div class="stxt"><strong>Nc4!!</strong> الحصان يصل لـ c4 - موقع رائع</div></div>
+<div class="st"><div class="sn2">3</div><div class="stxt"><strong>Ra7!!</strong> الرخ يعمل على الصف السابع</div></div>
+<div class="st"><div class="sn2">4</div><div class="stxt"><strong>b5!!</strong> يواصل الضغط ويطرد الحصان</div></div>
+</div>
+<div class="ib g"><strong>ليلا: الموقف يساوي مع مبادرة للأسود عملياً!</strong></div>`,
+// 8
+`<div class="bt">🔥 تفريع Moscow - الأكثر حدة!</div>
+<div class="ib b">بدلاً من الردود المعتادة، الأسود يلعب <strong>4...dxc4</strong> ثم <strong>Bg4!!</strong> بدلاً من Bf5. خطة مختلفة تماماً!</div>
+<div class="bt">💡 Bg4 vs Bf5 - الفرق</div>
+<div class="ib g">• <strong>Bf5:</strong> يسيطر على e4 من الجانب<br>• <strong>Bg4!!</strong> يثبت Nf3 ويمنع e4 بشكل مختلف<br><br>Bg4 يخلق مواقف أكثر تعقيداً وحدة!</div>
+<div class="bt">📋 التسلسل المثالي</div>
+<div class="ib p">
+<div class="st"><div class="sn2">1</div><div class="stxt"><strong>dxc4!!</strong> يقبل البيدق</div></div>
+<div class="st"><div class="sn2">2</div><div class="stxt"><strong>Bg4!!</strong> يثبت Nf3 - خطة مختلفة</div></div>
+<div class="st"><div class="sn2">3</div><div class="stxt"><strong>Nfd7!!</strong> يهاجم Ne5 بذكاء</div></div>
+<div class="st"><div class="sn2">4</div><div class="stxt"><strong>e5!!</strong> يهاجم المركز في الوقت المناسب</div></div>
+</div>`,
+// 9
+`<div class="bt">⚙️ وسط الدور في Moscow</div>
+<div class="ib b">موقف حاد ومثير! كلا الجانبين لديه فرص. الأسود يملك ضغطاً على المركز والأبيض يهاجم على الجناح.</div>
+<div class="bt">📋 الخطط الرئيسية</div>
+<div class="ib p">
+<div class="st"><div class="sn2">1</div><div class="stxt"><strong>Ne4!!</strong> الحصان يقفز لـ e4 - نقطة محورية</div></div>
+<div class="st"><div class="sn2">2</div><div class="stxt"><strong>c5!!</strong> يفتح المركز في الوقت المناسب</div></div>
+<div class="st"><div class="sn2">3</div><div class="stxt"><strong>Bxe4!!</strong> الفيل يضرب في المركز</div></div>
+</div>
+<div class="bt">📊 تقييم ليلا</div>
+<div class="ib g"><strong>الموقف يساوي تقريباً</strong> مع فرص لكلا الجانبين. Moscow هو أصعب خط على الأبيض في Slav!</div>`,
+// 10
+`<div class="bt">⚠️ الأخطاء القاتلة في Slav</div>
+<div class="ib r"><strong>❌ Bg4 مبكراً:</strong> قبل إعداد الموقف يعطي الأبيض e4 وe5 مجاناً!</div>
+<div class="ib r"><strong>❌ e6 قبل Bf5:</strong> الفيل يُحبس! أهم قاعدة في Slav: Bf5 قبل e6 دائماً.</div>
+<div class="ib r"><strong>❌ Qb3 لا تُوقف بـ b6?:</strong> b6 يضعف البنية. الرد الصحيح هو <strong>Qc8!!</strong></div>
+<div class="bt">✅ الفخ الجميل: Nxd5!!</div>
+<div class="ib gr">في مواقف معينة:<br>Nxd5!! cxd5 Qxd5 Qxd5 Nxd5<br>الحصان يشوك الملك والرخ في آن واحد!<br><strong>يكسب جودة كاملة!</strong></div>
+<div class="bt">🔑 القواعد الذهبية في Slav</div>
+<div class="ib p">
+<div class="st"><div class="sn2">1</div><div class="stxt"><strong>Bf5 قبل e6 دائماً!</strong></div></div>
+<div class="st"><div class="sn2">2</div><div class="stxt"><strong>hxg6</strong> وليس fxg6 لفتح ملف h</div></div>
+<div class="st"><div class="sn2">3</div><div class="stxt"><strong>c5!!</strong> في الوقت المناسب لكسر المركز</div></div>
+<div class="st"><div class="sn2">4</div><div class="stxt"><strong>Qc8!!</strong> هو الرد الصحيح على Qb3</div></div>
+</div>`
+];
+
+var PZ=[
+{n:1,fen:"rnbqkb1r/pp2pppp/2p2n2/3p1b2/2PP4/2N1PN2/PP3PPP/R1BQKB1R b KQkq - 0 5",
+ ans:"f5e4",sol:["Bxe4!!","Nxe4","Qa5+"],
+ hint:"الفيل يضحي! ما الذي يحدث بعد Bxe4 Nxe4 Qa5+?",
+ exp:"Bxe4!! Nxe4 Qa5+! - الملكة تأتي بشاه وتهاجم الحصان e4 في نفس الوقت! الأسود يكسب قطعة."},
+{n:2,fen:"r1b2rk1/pp1nbppp/2p1pn2/3p4/2PP4/2N1PN2/PP3PPP/R1BQ1RK1 b - - 0 9",
+ ans:"d5c4",sol:["dxc4!!","Bxc4","b5!!"],
+ hint:"الأسود يقبل البيدق ثم يهاجم الفيل! ما الخطوتان المتتاليتان؟",
+ exp:"dxc4!! Bxc4 b5!! - الأسود يقبل البيدق ثم يهاجم الفيل c4 بـ b5. هذا هو تفريع dxc4 الشهير في Slav!"}
+];
+
+function showLesson(id){
+  bMov=MOVES[id]||[];
+  bIdx=0;
+  var prev=id>0?"<button class='nb pv' onclick='go("+(id-1)+")'>← السابق</button>":"";
+  var nx=id<10?"<button class='nb nx' onclick='go("+(id+1)+")'>التالي ←</button>":"<button class='nb nx' onclick='go(11)'>التمارين ←</button>";
+  var html="<div class='lp'>"
+  +"<div class='tag'>🏰 Slav Defence</div>"
+  +"<h1>"+TITLES[id]+"</h1>"
+  +"<div class='vid' onclick='alert(\"سيتم تشغيل الفيديو هنا\")'><div class='vplay'>▶</div><span>شاهد الفيديو</span></div>"
+  +"<div class='bsec'>"
+  +"<div class='bwrap'>"
+  +"<div class='bd' id='bd'></div>"
+  +"<div class='cr'>"+["a","b","c","d","e","f","g","h"].map(function(x){return "<span>"+x+"</span>";}).join("")+"</div>"
+  +"<div class='mctrl' style='margin-top:8px'>"
+  +"<button class='mb f' id='bf' onclick='bF()'>⏮</button>"
+  +"<button class='mb p' id='bp' onclick='bP()'>◀</button>"
+  +"<button class='mb n' id='bn' onclick='bN()'>التالي ▶</button>"
+  +"<button class='mb l' id='bl' onclick='bL()'>⏭</button>"
+  +"</div>"
+  +"<div class='mbar' id='bbar'></div>"
+  +"</div>"
+  +"<div class='binfo'><div class='mc' id='binfo'></div></div>"
+  +"</div>"
+  +"<div class='dv'></div>"
+  +CONTENT[id]
+  +"<div class='nbs'>"+prev+"<button class='nb cm' onclick='markDone("+id+");this.textContent=\"✓ تم\";this.disabled=true'>✓ أكملت الدرس</button>"+nx+"</div>"
+  +"</div>";
+  document.getElementById("main").innerHTML=html;
+  document.getElementById("main").scrollTo(0,0);
+  updBoard();
+}
+
+function markDone(id){
+  done[id]=true;
+  var c=document.getElementById("c"+id);
+  if(c){c.classList.remove("cur");c.classList.add("ok");c.textContent="✓";}
+}
+
+function fromN(s){return[8-parseInt(s[1]),s.charCodeAt(0)-97];}
+function sqN2(r,c){return String.fromCharCode(97+c)+(8-r);}
+function pFen(fen){var b={},rows=fen.split(" ")[0].split("/");for(var r=0;r<8;r++){var c=0;for(var i=0;i<rows[r].length;i++){var ch=rows[r][i];if(ch>="1"&&ch<="8"){c+=parseInt(ch);}else{b[r+","+c]=ch;c++;}}}return b;}
+
+function showPuzzle(pi,lid){
+  pCur=pi;pAns=false;pSel=null;
+  var p=PZ[pi];
+  pBs=pFen(p.fen);pIsB=p.fen.split(" ")[1]==="b";
+  var bh="";
+  for(var r=0;r<8;r++){for(var c=0;c<8;c++){var lt=(r+c)%2===0;var sq=sqN2(r,c);var pc=pBs[r+","+c]||"";bh+="<div class='psq "+(lt?"l":"d")+"' id='ps"+sq+"' onclick='pClick(\""+sq+"\","+lid+")'>"+(pc?P[pc]||"":"")+"</div>";}}
+  var prev=lid>0?"<button class='nb pv' onclick='go("+(lid-1)+")'>← السابق</button>":"";
+  var html="<div class='pp'>"
+  +"<div class='tag'>🏰 Slav · ⚡ تمرين</div>"
+  +"<h1>تمرين رقم "+p.n+" <span style='display:inline-block;background:linear-gradient(135deg,#b71c1c,#f85149);color:#fff;font-size:0.67rem;font-weight:800;padding:3px 11px;border-radius:20px;margin-right:8px'>"+(pi+1)+" / "+PZ.length+"</span></h1>"
+  +"<div class='st2'>"
+  +"<div class='sc'><div class='sv2 g' id='psg'>"+pC+"</div><div class='sl2'>صحيح</div></div>"
+  +"<div class='sc'><div class='sv2 r' id='psw'>"+pW+"</div><div class='sl2'>خطأ</div></div>"
+  +"<div class='sc'><div class='sv2 b'>"+(PZ.length-pi)+"</div><div class='sl2'>متبقي</div></div>"
+  +"</div>"
+  +"<div class='pla'>"
+  +"<div>"
+  +"<div style='font-size:.67rem;color:rgba(255,255,255,.35);margin-bottom:4px;text-align:center'>"+(pIsB?"⬛ الأسود يلعب":"⬜ الأبيض يلعب")+"</div>"
+  +"<div class='pb2'>"+bh+"</div>"
+  +"<div style='display:flex;margin-top:2px'>"+["a","b","c","d","e","f","g","h"].map(function(x){return "<span style='font-size:.57rem;color:rgba(255,255,255,.22);width:52px;text-align:center'>"+x+"</span>";}).join("")+"</div>"
+  +"</div>"
+  +"<div class='pi'>"
+  +"<div class='tb'><span style='font-size:1.2rem'>"+(pIsB?"⬛":"⬜")+"</span><div><div style='font-weight:900'>"+(pIsB?"الأسود يلعب":"الأبيض يلعب")+"</div><div style='font-size:.69rem;color:rgba(255,255,255,.38)'>ابحث عن أفضل حركة</div></div></div>"
+  +"<div class='fb w' id='pfb'><span>🤔</span><span>انقر على قطعة واختر وجهتها</span></div>"
+  +"<div class='hb'><h4>💡 تلميح</h4><p id='pht' style='filter:blur(5px);cursor:pointer' onclick='this.style.filter=\"none\"'>"+p.hint+"</p></div>"
+  +"<div class='sb' id='psb'><h4>✅ الحل الصحيح</h4><div class='sm'>"+p.sol.map(function(m){return "<span class='sv'>"+m+"</span>";}).join("")+"</div><p>"+p.exp+"</p></div>"
+  +"<div class='pbs'>"
+  +"<button class='pb3 h' onclick='document.getElementById(\"pht\").style.filter=\"none\"'>💡 تلميح</button>"
+  +"<button class='pb3 h' onclick='showPuzzle("+pi+","+lid+")'>↺ إعادة</button>"
+  +"<button class='pb3 s' onclick='pSol("+lid+")'>👁 الحل</button>"
+  +"<button class='pb3 nx' id='pnx' onclick='pNx("+lid+")' disabled>التالي ←</button>"
+  +"</div>"
+  +"</div>"
+  +"</div>"
+  +"<div class='nbs' style='margin-top:12px'>"+prev+"<button class='nb pv' onclick='go(10)'>📚 الدروس</button></div>"
+  +"</div>";
+  document.getElementById("main").innerHTML=html;
+}
+
+function pSol(lid){
+  document.getElementById("psb").classList.add("sh");
+  document.getElementById("pnx").disabled=false;
+  if(!pAns){pAns=true;pW++;markDone(lid);var c=document.getElementById("c"+lid);if(c){c.classList.add("ok");c.style.background="#f85149";c.style.borderColor="#f85149";c.textContent="✗";}document.getElementById("psw").textContent=pW;}
+}
+
+function pNx(lid){markDone(lid);if(lid<12)go(lid+1);}
+
+function pClick(sqId,lid){
+  if(pAns)return;
+  var p=PZ[pCur];
+  var rc=fromN(sqId);var r=rc[0];var c=rc[1];var pc=pBs[r+","+c]||"";
+  if(pSel){
+    var mv=pSel+sqId;
+    document.querySelectorAll(".psq.sl").forEach(function(s){s.classList.remove("sl");});
+    if(mv===p.ans){
+      pAns=true;pC++;
+      var src=fromN(pSel);var mp=pBs[src[0]+","+src[1]]||"";
+      delete pBs[src[0]+","+src[1]];pBs[r+","+c]=mp;
+      document.getElementById("ps"+pSel).classList.add("pf");document.getElementById("ps"+pSel).textContent="";
+      var t=document.getElementById("ps"+sqId);t.classList.add("pt","ri");t.textContent=P[mp]||"";
+      document.getElementById("pfb").className="fb ok";document.getElementById("pfb").innerHTML="<span>✅</span><span>"+p.exp+"</span>";
+      document.getElementById("psb").classList.add("sh");document.getElementById("pnx").disabled=false;
+      markDone(lid);document.getElementById("psg").textContent=pC;
+    } else {
+      var own=pc&&(pIsB?pc===pc.toLowerCase():pc===pc.toUpperCase());
+      if(own){pSel=sqId;document.getElementById("ps"+sqId).classList.add("sl");return;}
+      document.getElementById("ps"+sqId).classList.add("wr");setTimeout(function(){document.getElementById("ps"+sqId).classList.remove("wr");},400);
+      document.getElementById("pfb").className="fb no";document.getElementById("pfb").innerHTML="<span>❌</span><span>"+p.hint+"</span>";
+      pW++;document.getElementById("psw").textContent=pW;
+    }
+    pSel=null;
+  } else {
+    var own2=pc&&(pIsB?pc===pc.toLowerCase():pc===pc.toUpperCase());
+    if(!own2)return;
+    pSel=sqId;document.querySelectorAll(".psq.sl").forEach(function(s){s.classList.remove("sl");});
+    document.getElementById("ps"+sqId).classList.add("sl");
+    document.getElementById("pfb").className="fb w";document.getElementById("pfb").innerHTML="<span>🎯</span><span>اختر وجهة القطعة</span>";
+  }
+}
+
+go(0);
+</script>
+</body>
+</html>

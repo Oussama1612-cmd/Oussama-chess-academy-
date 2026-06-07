@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QGD | أكاديمية أسامة للشطرنج</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Cairo',sans-serif;background:#0d1117;color:#e6edf3}
+.top{background:#0a1628;border-bottom:1px solid rgba(79,195,247,0.3);padding:12px 20px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100}
+.top h2{font-size:1rem;font-weight:900;color:#fff;flex:1}
+.top span{background:rgba(79,195,247,0.15);color:#4fc3f7;font-size:0.65rem;font-weight:700;padding:3px 10px;border-radius:20px;border:1px solid rgba(79,195,247,0.3)}
+.lay{display:flex;height:calc(100vh - 50px)}
+.side{width:280px;background:#080c14;overflow-y:auto;border-left:1px solid #1a2744;flex-shrink:0}
+.side::-webkit-scrollbar{width:3px}
+.side::-webkit-scrollbar-thumb{background:#1a2744;border-radius:4px}
+.grp-hd{padding:10px 14px;background:#0d1520;cursor:pointer;display:flex;align-items:center;gap:8px;border-bottom:1px solid #111827;font-size:0.82rem;font-weight:800;color:#e6edf3}
+.grp-hd:hover{background:#111827}
+.row{display:flex;align-items:center;gap:9px;padding:9px 14px;border-bottom:1px solid rgba(255,255,255,0.03);cursor:pointer;position:relative}
+.row::before{content:'';position:absolute;right:0;top:0;bottom:0;width:2px;background:transparent}
+.row:hover{background:rgba(79,195,247,0.04)}
+.row.on{background:rgba(79,195,247,0.08)}
+.row.on::before{background:#4fc3f7}
+.dot{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.68rem;font-weight:700;border:1.5px solid #30363d;color:#30363d;flex-shrink:0}
+.dot.ok{background:#3fb950;border-color:#3fb950;color:#fff}
+.dot.cur{background:#4fc3f7;border-color:#4fc3f7;color:#000}
+.rt{flex:1;min-width:0}
+.rt .tl{font-size:0.78rem;font-weight:600;color:#c9d1d9;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row.on .tl{color:#81d4fa}
+.rt .sub{font-size:0.6rem;color:rgba(255,255,255,0.3);margin-top:1px}
+.main{flex:1;overflow-y:auto}
+.lp{padding:28px 36px;max-width:860px}
+.tag{display:inline-flex;align-items:center;gap:5px;border-radius:20px;font-size:0.68rem;font-weight:800;padding:4px 12px;margin-bottom:12px;background:rgba(79,195,247,0.1);border:1px solid rgba(79,195,247,0.3);color:#4fc3f7}
+.lp h1{font-size:1.45rem;font-weight:900;color:#fff;margin-bottom:16px;line-height:1.3}
+.vid{background:#0d1520;border:1px solid rgba(79,195,247,0.1);border-radius:13px;aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;margin-bottom:20px}
+.vid:hover{border-color:rgba(79,195,247,0.3)}
+.vplay{width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#1565c0,#4fc3f7);display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:8px}
+.vid span{font-size:0.85rem;color:rgba(255,255,255,0.4)}
+/* BOARD */
+.bsec{display:flex;gap:18px;margin-bottom:20px;flex-wrap:wrap;align-items:flex-start}
+.bwrap{flex-shrink:0}
+.bd{display:grid;grid-template-columns:repeat(8,52px);grid-template-rows:repeat(8,52px);border:2px solid #1a2744;border-radius:5px;overflow:hidden}
+.sq{width:52px;height:52px;display:flex;align-items:center;justify-content:center;font-size:1.55rem;user-select:none}
+.sq.l{background:#e8d5b7}.sq.d{background:#7b5e3a}
+.sq.hf{background:rgba(79,195,247,0.5)!important}.sq.ht{background:rgba(79,195,247,0.7)!important}
+.cr{display:flex;margin-top:2px}
+.cr span{font-size:0.57rem;color:rgba(255,255,255,0.25);width:52px;text-align:center}
+.binfo{flex:1;min-width:220px;display:flex;flex-direction:column;gap:9px}
+.mc{background:#0d1520;border:1px solid rgba(79,195,247,0.2);border-radius:9px;padding:13px}
+.mc .mn{font-size:0.7rem;font-weight:800;color:#4fc3f7;margin-bottom:3px}
+.mc .ms{font-size:0.95rem;font-weight:900;color:#fff;margin-bottom:5px;font-family:monospace}
+.mc .me{font-size:0.82rem;color:rgba(255,255,255,0.6);line-height:1.7}
+.mctrl{display:flex;gap:6px}
+.mb{padding:7px 11px;border-radius:7px;font-family:'Cairo',sans-serif;font-size:0.79rem;font-weight:700;cursor:pointer;border:none;transition:all .2s}
+.mb.f,.mb.p,.mb.l{background:#0d1520;color:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.08)}
+.mb.n{background:linear-gradient(135deg,#1565c0,#4fc3f7);color:#fff;flex:1}
+.mb:disabled{opacity:0.3;cursor:not-allowed}
+.mbar{display:flex;flex-wrap:wrap;gap:3px;margin-top:7px}
+.mi{background:#080c14;border:1px solid rgba(255,255,255,0.06);border-radius:4px;padding:2px 7px;font-size:0.71rem;font-family:monospace;color:rgba(255,255,255,0.4);cursor:pointer}
+.mi:hover{border-color:rgba(79,195,247,0.4);color:#81d4fa}
+.mi.on{background:rgba(79,195,247,0.12);border-color:#4fc3f7;color:#4fc3f7;font-weight:700}
+/* CONTENT */
+.ib{border-radius:10px;padding:13px 16px;margin-bottom:11px;font-size:0.87rem;line-height:1.9}
+.ib.b{background:rgba(79,195,247,0.07);border-right:3px solid #4fc3f7;color:rgba(255,255,255,0.7)}
+.ib.g{background:rgba(255,193,7,0.07);border-right:3px solid #ffc107;color:rgba(255,255,255,0.7)}
+.ib.gr{background:rgba(63,185,80,0.07);border-right:3px solid #3fb950;color:rgba(255,255,255,0.7)}
+.ib.r{background:rgba(248,81,73,0.07);border-right:3px solid #f85149;color:rgba(255,255,255,0.7)}
+.ib.p{background:rgba(180,80,255,0.07);border-right:3px solid #b450ff;color:rgba(255,255,255,0.7)}
+.ib strong{color:#e6edf3}
+.st{display:flex;gap:9px;margin:7px 0;align-items:flex-start}
+.sn2{background:linear-gradient(135deg,#1565c0,#4fc3f7);color:#fff;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:900;flex-shrink:0;margin-top:2px}
+.stx{flex:1;font-size:0.84rem;line-height:1.8;color:rgba(255,255,255,0.65)}
+.stx strong{color:#e6edf3}
+.bt{font-size:0.81rem;font-weight:800;color:#4fc3f7;margin:15px 0 10px;display:flex;align-items:center;gap:8px;text-transform:uppercase;letter-spacing:0.5px}
+.bt::after{content:'';flex:1;height:1px;background:rgba(79,195,247,0.15)}
+.dv{height:1px;background:rgba(255,255,255,0.06);margin:16px 0}
+.nbs{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
+.nb{flex:1;min-width:120px;padding:11px 15px;border-radius:9px;font-family:'Cairo',sans-serif;font-size:0.85rem;font-weight:700;cursor:pointer;border:none;display:flex;align-items:center;justify-content:center;gap:5px;transition:all .2s}
+.nb.pv{background:#0d1520;color:rgba(255,255,255,0.55);border:1px solid rgba(255,255,255,0.08)}
+.nb.cm{background:linear-gradient(135deg,#238636,#2ea043);color:#fff}
+.nb.nx{background:linear-gradient(135deg,#1565c0,#4fc3f7);color:#fff;font-weight:800}
+/* PUZZLE */
+.pp{padding:20px 28px;max-width:920px}
+.pp h1{font-size:1.2rem;font-weight:900;color:#fff;margin-bottom:12px}
+.pb2{display:grid;grid-template-columns:repeat(8,52px);grid-template-rows:repeat(8,52px);border:2px solid #1a2744;border-radius:5px;overflow:hidden}
+.psq{width:52px;height:52px;display:flex;align-items:center;justify-content:center;font-size:1.55rem;cursor:pointer;user-select:none}
+.psq.l{background:#e8d5b7}.psq.d{background:#7b5e3a}
+.psq.sl{box-shadow:inset 0 0 0 3px #4fc3f7;background:rgba(79,195,247,0.3)!important}
+.psq.pf{background:rgba(79,195,247,0.4)!important}.psq.pt{background:rgba(79,195,247,0.6)!important}
+.psq.wr{animation:sh .3s;background:rgba(248,81,73,0.5)!important}
+.psq.ri{background:rgba(63,185,80,0.5)!important}
+@keyframes sh{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.pi{display:flex;flex-direction:column;gap:10px}
+.tb{padding:11px 13px;border-radius:9px;font-weight:700;display:flex;align-items:center;gap:9px;background:#0d1520;border:1px solid rgba(79,195,247,0.12)}
+.fb{padding:11px 13px;border-radius:9px;font-size:0.84rem;font-weight:600;display:flex;align-items:flex-start;gap:7px;line-height:1.6;min-height:50px}
+.fb.w{background:#0d1520;border:1px solid rgba(255,255,255,0.07);color:rgba(255,255,255,0.4)}
+.fb.ok{background:rgba(63,185,80,0.1);border:1px solid rgba(63,185,80,0.3);color:#3fb950}
+.fb.no{background:rgba(248,81,73,0.1);border:1px solid rgba(248,81,73,0.25);color:#f85149}
+.hb{background:#0d1520;border:1px solid rgba(255,255,255,0.07);border-radius:9px;padding:11px}
+.hb h4{font-size:0.73rem;font-weight:800;color:#4fc3f7;margin-bottom:5px}
+.hb p{font-size:0.77rem;color:rgba(255,255,255,0.45);line-height:1.7}
+.sb{background:#0d1520;border:1px solid rgba(63,185,80,0.2);border-radius:9px;padding:11px;display:none}
+.sb.sh{display:block}
+.sb h4{font-size:0.73rem;font-weight:800;color:#3fb950;margin-bottom:6px}
+.sm{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px}
+.sv{background:#080c14;border:1px solid rgba(63,185,80,0.25);border-radius:5px;padding:3px 7px;font-size:0.73rem;font-family:monospace;color:#3fb950}
+.sb p{font-size:0.76rem;color:rgba(255,255,255,0.45);line-height:1.7}
+.pbs{display:flex;gap:5px;flex-wrap:wrap}
+.pb3{padding:7px 11px;border-radius:7px;font-family:'Cairo',sans-serif;font-size:0.79rem;font-weight:700;cursor:pointer;border:none;transition:all .2s}
+.pb3.h{background:#0d1520;color:rgba(255,255,255,0.55);border:1px solid rgba(255,255,255,0.08)}
+.pb3.s{background:#0d1520;color:#4fc3f7;border:1px solid rgba(79,195,247,0.2)}
+.pb3.nx{background:linear-gradient(135deg,#1565c0,#4fc3f7);color:#fff;flex:1;font-weight:800}
+.pb3.nx:disabled{opacity:0.4;cursor:not-allowed}
+.st2{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:12px}
+.sc{background:#0d1520;border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:8px;text-align:center}
+.sv2{font-size:1.2rem;font-weight:900}.sv2.g{color:#3fb950}.sv2.r{color:#f85149}.sv2.b{color:#4fc3f7}
+.sl2{font-size:0.6rem;color:rgba(255,255,255,0.3);margin-top:1px}
+.pla{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start}
+@media(max-width:700px){.pla{grid-template-columns:1fr}}
+@media(max-width:768px){
+  .lay{flex-direction:column}
+  .side{width:100%;height:auto;max-height:38vh}
+  .lp,.pp{padding:12px}
+  .lp h1{font-size:1.1rem}
+  .bd,.pb2{grid-template-columns:repeat(8,38px);grid-template-rows:repeat(8,38px)}
+  .sq,.psq{width:38px;height:38px;font-size:1rem}
+  .cr span{width:38px}
+}
+</style>
+</head>
+<body>
+<div class="top">
+  <h2>♛ أكاديمية أسامة للشطرنج</h2>
+  <span>🛡️ Queen's Gambit Declined</span>
+</div>
+<div class="lay">
+<div class="side">
+
+<div class="grp-hd" onclick="tg(this)">📖 المقدمة</div>
+<div class="gr">
+  <div class="row on" onclick="go(0)" id="r0"><div class="dot cur" id="c0">▶</div><div class="rt"><div class="tl">مقدمة QGD - الفلسفة والأهداف</div><div class="sub">مقدمة</div></div></div>
+</div>
+
+<div class="grp-hd" onclick="tg(this)">♗ خط Bg5 الكلاسيكي</div>
+<div class="gr">
+  <div class="row" onclick="go(1)" id="r1"><div class="dot" id="c1">1</div><div class="rt"><div class="tl">الافتتاح - من نقلة 1 إلى النهاية</div><div class="sub">افتتاح</div></div></div>
+  <div class="row" onclick="go(2)" id="r2"><div class="dot" id="c2">2</div><div class="rt"><div class="tl">وسط الدور: الهجوم الملكي</div><div class="sub">وسط الدور</div></div></div>
+  <div class="row" onclick="go(3)" id="r3"><div class="dot" id="c3">3</div><div class="rt"><div class="tl">وسط الدور: خطة الأقلية</div><div class="sub">وسط الدور</div></div></div>
+</div>
+
+<div class="grp-hd" onclick="tg(this)">♗ خط Bf4 الحديث</div>
+<div class="gr">
+  <div class="row" onclick="go(4)" id="r4"><div class="dot" id="c4">1</div><div class="rt"><div class="tl">الافتتاح - من نقلة 1 إلى النهاية</div><div class="sub">افتتاح</div></div></div>
+  <div class="row" onclick="go(5)" id="r5"><div class="dot" id="c5">2</div><div class="rt"><div class="tl">وسط الدور: ضربة e4 المركزية</div><div class="sub">وسط الدور</div></div></div>
+  <div class="row" onclick="go(6)" id="r6"><div class="dot" id="c6">3</div><div class="rt"><div class="tl">وسط الدور: الهجوم الملكي</div><div class="sub">وسط الدور</div></div></div>
+</div>
+
+<div class="grp-hd" onclick="tg(this)">♞ خط Tarrasch</div>
+<div class="gr">
+  <div class="row" onclick="go(7)" id="r7"><div class="dot" id="c7">1</div><div class="rt"><div class="tl">الافتتاح - 3.Nd2 والأفكار</div><div class="sub">افتتاح</div></div></div>
+  <div class="row" onclick="go(8)" id="r8"><div class="dot" id="c8">2</div><div class="rt"><div class="tl">وسط الدور بعد Tarrasch</div><div class="sub">وسط الدور</div></div></div>
+</div>
+
+<div class="grp-hd" onclick="tg(this)">⚠️ الفخاخ والأخطاء</div>
+<div class="gr">
+  <div class="row" onclick="go(9)" id="r9"><div class="dot" id="c9">1</div><div class="rt"><div class="tl">الفخاخ الشائعة في QGD</div><div class="sub">فخاخ</div></div></div>
+</div>
+
+<div class="grp-hd" onclick="tg(this)">⚡ التمارين التفاعلية</div>
+<div class="gr">
+  <div class="row" onclick="go(10)" id="r10"><div class="dot" id="c10">⚡</div><div class="rt"><div class="tl">تمرين 1 - التكتيك</div><div class="sub">تمرين</div></div></div>
+  <div class="row" onclick="go(11)" id="r11"><div class="dot" id="c11">⚡</div><div class="rt"><div class="tl">تمرين 2 - وسط الدور</div><div class="sub">تمرين</div></div></div>
+</div>
+
+</div>
+<div class="main" id="main"></div>
+</div>
+
+<script>
+var P={K:"♔",Q:"♕",R:"♖",B:"♗",N:"♘",P:"♙",k:"♚",q:"♛",r:"♜",b:"♝",n:"♞",p:"♟"};
+var cur=0,done={},pC=0,pW=0,bMov=[],bIdx=0,pSel=null,pBs={},pIsB=false,pAns=false,pCur=0;
+
+function tg(h){
+  var g=h.nextElementSibling;
+  g.style.display=g.style.display==="none"?"":"none";
+}
+
+function go(id){
+  cur=id;
+  document.querySelectorAll(".row").forEach(function(r){r.classList.remove("on");});
+  var r=document.getElementById("r"+id);
+  if(r){r.classList.add("on");r.scrollIntoView({behavior:"smooth",block:"nearest"});}
+  if(id===10||id===11) showPuzzle(id-10,id);
+  else showLesson(id);
+}
+
+function parseFen(fen){
+  var b={},rows=fen.split(" ")[0].split("/");
+  for(var r=0;r<8;r++){var c=0;for(var i=0;i<rows[r].length;i++){var ch=rows[r][i];if(ch>="1"&&ch<="8"){c+=parseInt(ch);}else{b[r+","+c]=ch;c++;}}}
+  return b;
+}
+
+function sqn(r,c){return String.fromCharCode(97+c)+(8-r);}
+
+function drawBd(id,pos){
+  var h="";
+  for(var r=0;r<8;r++){for(var c=0;c<8;c++){var lt=(r+c)%2===0;var pc=pos[r+","+c]||"";h+="<div class='sq "+(lt?"l":"d")+"'>"+(pc?P[pc]||"":"")+"</div>";}}
+  var el=document.getElementById(id);if(el)el.innerHTML=h;
+}
+
+function updBoard(){
+  if(!bMov.length)return;
+  var m=bMov[bIdx];
+  drawBd("bd",parseFen(m.f));
+  var info=document.getElementById("binfo");
+  if(info)info.innerHTML="<div class='mn'>نقلة "+(bIdx+1)+" من "+bMov.length+"</div><div class='ms'>"+m.s+"</div><div class='me'>"+m.e+"</div>";
+  var bar=document.getElementById("bbar");
+  if(bar){var h="";for(var i=0;i<bMov.length;i++){h+="<span class='mi"+(i===bIdx?" on":"")+"' onclick='jmp("+i+")'>"+bMov[i].s+"</span>";}bar.innerHTML=h;}
+  document.getElementById("bf").disabled=bIdx<=0;
+  document.getElementById("bp").disabled=bIdx<=0;
+  document.getElementById("bn").disabled=bIdx>=bMov.length-1;
+  document.getElementById("bl").disabled=bIdx>=bMov.length-1;
+}
+
+function jmp(i){bIdx=i;updBoard();}
+function bN(){if(bIdx<bMov.length-1){bIdx++;updBoard();}}
+function bP(){if(bIdx>0){bIdx--;updBoard();}}
+function bF(){bIdx=0;updBoard();}
+function bL(){bIdx=bMov.length-1;updBoard();}
+
+var TITLES=["مقدمة QGD - الفلسفة والأهداف","خط Bg5 - الافتتاح كاملاً","خط Bg5 - الهجوم الملكي f3-g4-h4","خط Bg5 - خطة الأقلية Minority Attack","خط Bf4 - الافتتاح كاملاً","خط Bf4 - ضربة e4 المركزية","خط Bf4 - الهجوم الملكي","خط Tarrasch 3.Nd2 - الافتتاح","خط Tarrasch - وسط الدور","الفخاخ والأخطاء الشائعة"];
+
+var MOVES=[
+// 0 - intro
+[{s:"الموقف الابتدائي",e:"الرقعة جاهزة. اضغط التالي لمشاهدة نقلات QGD مع الشرح.",f:"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"},
+{s:"1. d4",e:"الأبيض يبدأ بـ d4 - أفضل بيدق! يسيطر على المركز ويفتح الطريق للقطع.",f:"rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR b KQkq - 0 1"},
+{s:"1... d5",e:"الأسود يتحدى المركز مباشرة. البيدقان يتواجهان في وسط الرقعة.",f:"rnbqkbnr/ppp1pppp/8/3p4/3P4/8/PPP1PPPP/RNBQKBNR w KQkq - 0 2"},
+{s:"2. c4",e:"قمبيط الملكة! الأبيض يعرض البيدق. هل يأخذه الأسود؟ هذه اللحظة الحاسمة!",f:"rnbqkbnr/ppp1pppp/8/3p4/2PP4/8/PP2PPPP/RNBQKBNR b KQkq - 0 2"},
+{s:"2... e6",e:"QGD! الأسود يرفض البيدق ويلعب e6. يحمي d5 ويحضر تطوير فيل الملك. لكن الفيل c8 سيُحبس!",f:"rnbqkbnr/ppp2ppp/4p3/3p4/2PP4/8/PP2PPPP/RNBQKBNR w KQkq - 0 3"},
+{s:"3. Nc3 Nf6",e:"كلا الجانبين يطوران حصانيهما. Nf6 يحمي d5 ويضغط على e4.",f:"rnbqkb1r/ppp2ppp/4pn2/3p4/2PP4/2N5/PP2PPPP/R1BQKBNR w KQkq - 0 4"}],
+// 1 - Bg5 opening
+[{s:"الموقف الابتدائي",e:"سندرس خط Bg5 الكلاسيكي من البداية. اضغط التالي.",f:"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"},
+{s:"4. Bg5",e:"الخطة الكلاسيكية! الفيل يضغط على Nf6 حارس d5. الأبيض يهدد تبادله لإضعاف المركز.",f:"rnbqkb1r/ppp2ppp/4pn2/3p2B1/2PP4/2N5/PP2PPPP/R2QKBNR b KQkq - 0 4"},
+{s:"4... Be7",e:"الفيل يتطور ويحضر التحصين. الأسود يقول: لا مشكلة - سأتحصن أولاً!",f:"rnbqk2r/ppp1bppp/4pn2/3p2B1/2PP4/2N5/PP2PPPP/R2QKBNR w KQkq - 0 5"},
+{s:"5. e3 O-O",e:"e3 يدعم d4. الأسود يتحصن فوراً - التحصين أولوية دائماً في QGD!",f:"rnbq1rk1/ppp1bppp/4pn2/3p2B1/2PP4/2N1P3/PP3PPP/R2QKBNR w KQ - 0 6"},
+{s:"6. Nf3 Nbd7",e:"الأبيض يكمل التطوير. الأسود يطور حصانه ليحضر c5 أو e5 لاحقاً.",f:"r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQ - 0 7"},
+{s:"7. Rc1",e:"نقلة استراتيجية عميقة! الرخ يضغط على ملف c مبكراً قبل أن يستعد الأسود.",f:"r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2N1PN2/PP3PPP/2RQKB1R b K - 0 7"},
+{s:"7... c6",e:"c6 يدعم d5 ويفتح خيار Rc8. النقلة المحورية في الدفاع الأرثوذكسي!",f:"r1bq1rk1/pp1nbppp/2p1pn2/3p2B1/2PP4/2N1PN2/PP3PPP/2RQKB1R w K - 0 8"},
+{s:"8. Bd3",e:"الفيل يأخذ موقعه المثالي - يستهدف h7 ويدعم e4 في المستقبل!",f:"r1bq1rk1/pp1nbppp/2p1pn2/3p2B1/2PP4/2NBPN2/PP3PPP/2RQK2R b K - 0 8"},
+{s:"8... dxc4",e:"الأسود يتبادل! يجبر الفيل على الحركة ويكسب وقتاً ثميناً.",f:"r1bq1rk1/pp1nbppp/2p1pn2/6B1/2pP4/2NBPN2/PP3PPP/2RQK2R w K - 0 9"},
+{s:"9. Bxc4 Nd5",e:"الحصان يتمركز في المركز ويهاجم Bg5! ضربة مزدوجة رائعة.",f:"r1bq1rk1/pp1nbppp/2p1p3/3n2B1/2BP4/2N1PN2/PP3PPP/2RQK2R w K - 0 10"},
+{s:"10. Bxe7 Qxe7 11. O-O",e:"تبادل الفيل والأبيض يتحصن. الملكة على e7 تستعد للتحصين الطويل!",f:"r1b2rk1/pp1nqppp/2p1p3/3n4/2BP4/2N1PN2/PP3PPP/2RQ1RK1 b - - 0 11"},
+{s:"11... Nxc3 12. Rxc3 e5",e:"الضربة المركزية الكبرى! e5 يكسر المركز ويحصل الأسود على لعبة نشطة!",f:"r1b2rk1/pp1nqppp/2p5/4p3/2BP4/2R1PN2/PP3PPP/3Q1RK1 w - - 0 13"}],
+// 2 - Bg5 kingside attack
+[{s:"الموقف بعد 0-0-0",e:"الأبيض تحصن على جانب الملكة. الآن يبدأ الهجوم الملكي الشهير!",f:"r1bq1rk1/ppp1bppp/2np1n2/3p2B1/2PP4/2N1PN2/PP3PPP/2KR1B1R b - - 0 8"},
+{s:"Kb1",e:"الملك يتراجع لـ b1! يأمن نفسه من أي شاه مفاجئ - خطوة ضرورية جداً.",f:"r1bq1rk1/ppp1bppp/2np1n2/3p2B1/2PP4/2N1PN2/PP3PPP/1K1R1B1R b - - 0 9"},
+{s:"f3",e:"يحضر g4 ويمنع Ng4 المزعج من الأسود. لا تتخطى هذه النقلة التحضيرية!",f:"r1bq1rk1/ppp1bppp/2np1n2/3p2B1/2PP4/2N1PPP1/PP5P/1K1R1B1R b - - 0 10"},
+{s:"g4",e:"يبدأ دفع الجناح الملكي! لا تتردد - الهجوم الآن هو كل شيء.",f:"r1bq1rk1/ppp1bppp/2np1n2/3p2B1/2PP2P1/2N1PP2/PP5P/1K1R1BNR b - - 0 11"},
+{s:"Ng3",e:"السر الذهبي! الحصان يذهب لـ g3 أولاً قبل h4. من هنا يتجه لـ f5.",f:"r1bq1rk1/ppp1bppp/2np1n2/3p2B1/2PP2P1/2N1PPN1/PP5P/1K1R1B1R b - - 0 12"},
+{s:"h4",e:"الآن بعد Ng3 يمكن دفع h4. إذا دفعت h4 قبل Ng3 يرد الأسود بـ g5!!",f:"r1bq1rk1/ppp1bppp/2np1n2/3p2B1/2PP2PP/2N1PPN1/PP6/1K1R1B1R b - - 0 13"},
+{s:"Nf5",e:"الحصان يصل لأفضل مربع! يهدد Nh6+ ويدعم Bxh7+. الهجوم لا يُوقف!",f:"r1bq1rk1/ppp1bppp/2np1n2/3p1NB1/2PP2PP/2N1PP2/PP6/1K1R1B1R b - - 0 14"},
+{s:"h5",e:"h5 الآن! ملف h على وشك الانفتاح. الأسود لا يستطيع الدفاع عن كل شيء.",f:"r1bq1rk1/ppp1bppp/2np1n2/3p1NB1/2PP2PP/2N1PP2/PP6/1K1R1B2 b - - 0 15"},
+{s:"Bxh7+!!",e:"التضحية الكلاسيكية! بعد Kxh7 Qh5+ Kg8 Rh3 المات لا يُوقف! هذا جمال QGD!",f:"r1bq1rk1/ppp1bppB/2np1n2/3p1N2/2PP2PP/2N1PP2/PP6/1K1R4 b - - 0 16"}],
+// 3 - minority attack
+[{s:"الموقف",e:"خطة الأقلية تبدأ! الأبيض يستخدم بيدقين لتدمير ثلاثة بيادق للأسود.",f:"r1bq1rk1/ppp1bppp/2np1n2/3p4/1PPP4/2N1PN2/P4PPP/R1BQ1RK1 b - - 0 9"},
+{s:"b5",e:"يضغط على c6! الأسود لديه خياران: يأخذ أو يدافع. كلاهما له عواقب.",f:"r1bq1rk1/ppp1bppp/2np1n2/1P1p4/2PP4/2N1PN2/P4PPP/R1BQ1RK1 b - - 0 10"},
+{s:"bxc6",e:"الضربة الحاسمة! يخلق بيدق c6 ضعيف لا يتحرك مدى الحياة.",f:"r1bq1rk1/ppp1bppp/2Pp1n2/3p4/2PP4/2N1PN2/P4PPP/R1BQ1RK1 b - - 0 11"},
+{s:"Ne5",e:"الحصان يتمركز في e5 - يضغط على c6 وd7 في آن واحد. موقع لا يُقهر!",f:"r1bq1rk1/ppp1bppp/2Pp1n2/3pN3/2PP4/2N1P3/P4PPP/R1BQ1RK1 b - - 0 12"},
+{s:"Nd3 Nb4",e:"رحلة الحصان الشهيرة! يذهب لـ d3 ثم b4 ليهاجم c6 من زاوية أخرى.",f:"r1bq1rk1/ppp1bppp/2Pp1n2/3p4/1NPP4/2N1P3/P4PPP/R1BQ1RK1 b - - 0 14"},
+{s:"Qb3",e:"الملكة تنضم! تهاجم b7 وd5 في نفس الوقت. ضغط لا ينتهي!",f:"r1bq1rk1/ppp1bppp/2Pp1n2/3p4/1NPP4/1QN1P3/P4PPP/R1B2RK1 b - - 0 15"},
+{s:"Rb1",e:"الرخ يدعم الهجوم على ملف b! كل قطعة تلعب دورها في الخطة.",f:"r1bq1rk1/ppp1bppp/2Pp1n2/3p4/1NPP4/1QN1P3/P4PPP/1R3RK1 b - - 0 16"}],
+// 4 - Bf4 opening
+[{s:"الموقف الابتدائي",e:"خط Bf4 الحديث - اختيار كارلسن وكرامنيك!",f:"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"},
+{s:"4. Nf3 Be7 5. Bf4",e:"Bf4 يذهب لـ f4 قبل e3! يسيطر على e5 ولا يُطرد بـ h6 على خلاف Bg5.",f:"rnbqk2r/ppp1bppp/4pn2/3p4/2PP1B2/2N2N2/PP2PPPP/R2QKB1R b KQkq - 0 5"},
+{s:"5... O-O 6. e3 c5",e:"الأسود يتحصن ثم يهاجم المركز بـ c5! هذا هو الرد الأقوى ضد Bf4.",f:"rnbq1rk1/pp2bppp/4pn2/2pp4/2PP1B2/2N1PN2/PP3PPP/R2QKB1R w KQ - 0 7"},
+{s:"7. dxc5 Bxc5 8. Qc2",e:"الأبيض يأخذ ثم Qc2 يضغط على c7 ويمنع Bb4. كل نقلة متعددة الأهداف!",f:"rnbq1rk1/pp3ppp/4pn2/2bP4/2P2B2/2N1PN2/PPQ2PPP/R3KB1R b KQ - 0 8"},
+{s:"8... Nc6 9. a3",e:"a3 يمنع Bb4 نهائياً! الأبيض يؤمن جانبه ويستعد لـ b4.",f:"r1bq1rk1/pp3ppp/2n1pn2/2bp4/2P2B2/P1N1PN2/1PQ2PPP/R3KB1R b KQ - 0 9"},
+{s:"9... Qa5 10. Nd2",e:"الملكة تهاجم a3 والأبيض يتراجع الحصان ليحضر e4 الكبرى!",f:"r1b2rk1/pp3ppp/2n1pn2/q1bp4/2P2B2/P1N1P3/1PQN1PPP/R3KB1R b KQ - 0 10"},
+{s:"10... Ne5 11. Be2",e:"الأسود يهاجم الفيل والأبيض يتراجع بهدوء. التحضير لـ e4 يكتمل!",f:"r1b2rk1/pp3ppp/2p1pn2/q1bnP3/2PP4/P1N1P3/1PQNBPPP/R3K2R b KQ - 0 11"}],
+// 5 - Bf4 e4 attack
+[{s:"الموقف",e:"الأبيض جاهز لضربة e4 المركزية - الأقوى في خط Bf4!",f:"r1bq1rk1/ppp1bppp/2np1n2/3p4/2PP1B2/2NBPN2/PP3PPP/R2Q1RK1 b - - 0 8"},
+{s:"Re1",e:"الرخ يدعم e4 من الخلف! هذا التحضير الأساسي.",f:"r1bq1rk1/ppp1bppp/2np1n2/3p4/2PP1B2/2NBPN2/PP3PPP/R2QR1K1 b - - 0 9"},
+{s:"Qe2",e:"الملكة تدعم e4 وتستعد للقفز لـ h5! كل شيء جاهز.",f:"r1bq1rk1/ppp1bppp/2np1n2/3p4/2PP1B2/2NBPN2/PP2QPPP/R3R1K1 b - - 0 10"},
+{s:"e4!!",e:"الضربة الكبرى! e4 يفتح الخطوط لصالح الفيلين القويين.",f:"r1bq1rk1/ppp1bppp/2np1n2/3p4/2PPpB2/2NB1N2/PP2QPPP/R3R1K1 b - - 0 11"},
+{s:"dxe4 Nxe4 Nxe4",e:"سلسلة تبادلات! الحصان على e4 في موقع رائع.",f:"r1bq1rk1/ppp1bppp/2np4/8/2PNpB2/2NB4/PP2QPPP/R3R1K1 b - - 0 12"},
+{s:"Bxe4 Qxd8 Rxd8",e:"الملكتان تتبادلان. الأبيض في نهاية أفضل بفضل الفيلين!",f:"r4rk1/ppp1bppp/2np4/8/2PBB3/8/PP3PPP/R3R1K1 w - - 0 14"},
+{s:"Nc3 Rfd1 Ke2",e:"الملك يتمركز في المركز! الأبيض يطبق الضغط على c6 وd5 الضعيفين.",f:"r4rk1/ppp1bppp/2np4/8/2PBB3/2N5/PP2KPPP/R2R4 b - - 0 15"}],
+// 6 - Bf4 kingside attack
+[{s:"الموقف",e:"خط Bf4 مع الهجوم الملكي - ميزة: الفيل f4 يبقى نشطاً طوال الهجوم!",f:"r1bq1rk1/ppp1bppp/2np1n2/3p4/2PP1BP1/2N1PN2/PP5P/1K1R1B1R b - - 0 10"},
+{s:"Ng3 Nf5",e:"الحصان يذهب لـ g3 ثم f5. القاعدة لا تتغير: g3 قبل h4 دائماً!",f:"r1bq1rk1/ppp1bppp/2np1n2/3p1N2/2PP1BP1/2N1P3/PP5P/1K1R1B1R b - - 0 12"},
+{s:"h4 h5",e:"h4 ثم h5! ملف h ينفتح. الفيل f4 يدعم الهجوم من بعيد - ميزة Bf4!",f:"r1bq1rk1/ppp1bppp/2np1n2/3p1N1P/2PP1BP1/2N1P3/PP6/1K1R1B1R b - - 0 13"},
+{s:"Bxh7+!!",e:"التضحية الكبرى! الفيل f4 يدعم الهجوم - ميزة خط Bf4 على Bg5!",f:"r1bq1rk1/ppp1bppB/2np1n2/3p1N2/2PP1BP1/2N1P3/PP6/1K1R4 b - - 0 14"}],
+// 7 - Tarrasch
+[{s:"الموقف الابتدائي",e:"تفريع Tarrasch - الحصان يذهب لـ d2 بدلاً من c3!",f:"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"},
+{s:"3. Nd2",e:"Tarrasch! لا يحجب c-pawn ويحضر e4 مباشرة بعد Ngf3.",f:"rnbqkbnr/ppp2ppp/4p3/3p4/2PP4/8/PP1NPPPP/R1BQKBNR b KQkq - 0 3"},
+{s:"3... c5",e:"الرد الأقوى! يهاجم المركز فوراً. c5 إلزامي ضد Tarrasch!",f:"rnbqkbnr/pp3ppp/4p3/2pp4/2PP4/8/PP1NPPPP/R1BQKBNR w KQkq - 0 4"},
+{s:"4. cxd5 exd5 5. Ngf3 Nc6",e:"يتبادل ثم يطور. الأسود يستعيد بالبيدق ويحتفظ ببنية مركزية قوية.",f:"r1bqkbnr/pp3ppp/2n5/2pp4/3P4/5N2/PP1NPPPP/R1BQKB1R w KQkq - 0 6"},
+{s:"6. g3 Nf6 7. Bg2",e:"التبييض! الفيل g2 يضغط على d5. الأبيض يحضر هجوماً على القطر الطويل.",f:"r1bqkb1r/pp3ppp/2n2n2/2pp4/3P4/5NP1/PP1NPPBP/R1BQK2R b KQkq - 0 7"},
+{s:"7... Be7 8. O-O O-O",e:"كلا الجانبين يتحصنان. الأسود لديه IQP (بيدق d5 معزول).",f:"r1bq1rk1/pp2bppp/2n2n2/2pp4/3P4/5NP1/PP1NPPBP/R1BQ1RK1 w - - 0 9"},
+{s:"9. dxc5 Bxc5 10. Nb3",e:"الأبيض يأخذ c5 ويطور الحصان لـ b3 ليهاجم d5 والفيل c5!",f:"r1bq1rk1/pp3ppp/2n2n2/2bp4/8/1N3NP1/PP2PPBP/R1BQ1RK1 b - - 0 10"}],
+// 8 - Tarrasch middlegame
+[{s:"الموقف",e:"وسط الدور في Tarrasch. الأبيض يستهدف IQP والأسود يجب أن يهاجم!",f:"r1bq1rk1/pp2bppp/2n2n2/3p4/3P4/5NP1/PP2PPBP/R1BQ1RK1 w - - 0 11"},
+{s:"Ne5",e:"الحصان يتمركز في e5 - أفضل مربع ضد IQP! يضغط على d7 ويمنع c5.",f:"r1bq1rk1/pp2bppp/2n2n2/3pN3/3P4/6P1/PP2PPBP/R1BQ1RK1 b - - 0 11"},
+{s:"Nd3 Nb4",e:"رحلة الحصان! يذهب لـ d3 ثم b4 للوصول لـ c6 لاحقاً.",f:"r1bq1rk1/pp2bppp/2n2n2/3p4/1N1P4/6P1/PP2PPBP/R1BQ1RK1 b - - 0 13"},
+{s:"Nc6",e:"الهدف النهائي! الحصان على c6 يضغط على d8 وe7 في آن واحد.",f:"r1bq1rk1/pp2bppp/2N2n2/3p4/3P4/6P1/PP2PPBP/R1BQ1RK1 b - - 0 14"},
+{s:"Qb3",e:"الملكة تضغط على d5 مباشرة. الأسود يجب أن يهاجم الآن أو يخسر!",f:"r1bq1rk1/pp2bppp/2N2n2/3p4/3P4/1Q4P1/PP2PPBP/R1B2RK1 b - - 0 15"},
+{s:"Rfd1",e:"الرخ يضغط على ملف d! الأسود في ورطة حقيقية إذا لم يهاجم.",f:"r1bq1rk1/pp2bppp/2N2n2/3p4/3P4/1Q4P1/PP2PPBP/R1BR2K1 b - - 0 16"}],
+// 9 - traps
+[{s:"الموقف - خط Bg5",e:"سندرس أخطر الفخاخ. h6 مقبولة، لكن g5 بعدها كارثة!",f:"rnbqkb1r/ppp2ppp/4pn2/3p2B1/2PP4/2N5/PP2PPPP/R2QKBNR b KQkq - 0 4"},
+{s:"4... h6 5. Bh4",e:"h6 مقبولة لطرد الفيل. الفيل يتراجع لـ h4.",f:"rnbqkb1r/ppp2pp1/4pn1p/3p4/2PP3B/2N5/PP2PPPP/R2QKBNR b KQkq - 0 5"},
+{s:"5... g5??",e:"الكارثة! g5 بعد Bh4 خطأ قاتل. الحصان سيأتي بقوة!",f:"rnbqkb1r/ppp2p2/4pn1p/3p2p1/2PP3B/2N5/PP2PPPP/R2QKBNR w KQkq - 0 6"},
+{s:"6. Bg3 Ne4 7. Nxe4 dxe4 8. Nd2",e:"الأبيض يبادل الحصان! البيدق e4 لا يُدافع عنه. الفخ اكتمل.",f:"rnbqkb1r/ppp2p2/4p2p/6p1/2PPp3/6B1/PP1NPPPP/R2QKB1R b KQkq - 0 8"},
+{s:"9. Nxe4",e:"الأسود يأخذ الفيل g3 لكن Nxe4 يسقط البيدق e4. الأبيض أفضل بكثير!",f:"rnbqkb1r/ppp2p2/4p2p/6q1/2PPN3/8/PP2PPPP/R2QKB1R b KQkq - 0 9"},
+{s:"Cambridge Springs!",e:"فخ رائع: 4...Nbd7 5.e3 c6 6.Nf3 Qa5!! الملكة تهاجم Nc3 وتهدد Bb4 معاً!",f:"r1b1kb1r/pppn1ppp/2p1pn2/q3B3/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQkq - 0 7"}]
+];
+
+var CONTENT=[
+// 0
+`<div class="bt">📖 ما هو QGD؟</div>
+<div class="ib b">بعد <strong>1.d4 d5 2.c4</strong>، يرد الأسود بـ <strong>2...e6</strong> رافضاً أخذ البيدق. الفلسفة: يحتفظ بمركز d5 قوي ويطور قطعه بانسجام.</div>
+<div class="bt">⚠️ العيب الوحيد</div>
+<div class="ib r"><strong>الفيل c8 محبوس!</strong> بعد e6 الفيل يقع خلف البيادق. الحل: Bf5 أو Bg4 أو b6 ثم Bb7.</div>
+<div class="bt">🗺️ الخطوط الثلاثة الرئيسية</div>
+<div class="ib g">
+<div class="st"><div class="sn2">1</div><div class="stx"><strong>Bg5 الكلاسيكي:</strong> يثبت Nf6 حارس d5. الأقدم والأشهر.</div></div>
+<div class="st"><div class="sn2">2</div><div class="stx"><strong>Bf4 الحديث:</strong> يسيطر على e5 ولا يُطرد بـ h6. اختيار كارلسن.</div></div>
+<div class="st"><div class="sn2">3</div><div class="stx"><strong>Tarrasch (3.Nd2):</strong> يحضر e4 مباشرة. يؤدي لبيدق d معزول.</div></div>
+</div>`,
+// 1
+`<div class="bt">♗ لماذا Bg5 كلاسيكي؟</div>
+<div class="ib b">الفيل يضغط على Nf6 حارس d5. يهدد تبادله لإضعاف البنية المركزية.</div>
+<div class="bt">🛡️ الدفاع الأرثوذكسي - الأقوى</div>
+<div class="ib p">
+<div class="st"><div class="sn2">1</div><div class="stx"><strong>Be7 + 0-0:</strong> تحصين أولاً قبل أي شيء</div></div>
+<div class="st"><div class="sn2">2</div><div class="stx"><strong>Nbd7 + c6:</strong> يدعم d5 ويفتح Rc8</div></div>
+<div class="st"><div class="sn2">3</div><div class="stx"><strong>dxc4 + Nd5:</strong> يتبادل ويهاجم Bg5</div></div>
+<div class="st"><div class="sn2">4</div><div class="stx"><strong>Nxc3 + e5!!</strong> الضربة المركزية الكبرى</div></div>
+</div>
+<div class="bt">💡 لماذا 7.Rc1 مهمة؟</div>
+<div class="ib g">الرخ يضغط على ملف c مبكراً. عندما يلعب الأسود c6 لاحقاً، الرخ سيكون جاهزاً لاستغلال أي فتح.</div>`,
+// 2
+`<div class="bt">🔥 الهجوم الملكي - أروع ما في QGD!</div>
+<div class="ib b">عند التحصين على جانب الملكة بـ 0-0-0، يطلق الأبيض هجوماً ملكياً شاملاً.</div>
+<div class="bt">🚫 الخطأ القاتل</div>
+<div class="ib r"><strong>h5 قبل Ng3 = كارثة!</strong><br>الأسود يلعب g5!! ويوقف الهجوم تماماً.<br><br><strong>✅ القاعدة: Ng3 دائماً قبل h5!</strong></div>
+<div class="bt">💥 بعد Bxh7+</div>
+<div class="ib p"><strong>Kxh7 Qh5+ Kg8 Rh3!!</strong><br>التهديد: Rg3+ ثم Rg7# لا مفر منه.<br><br><strong>ليلا: +4.0 للأبيض - موقف رابح كامل!</strong></div>`,
+// 3
+`<div class="bt">🎯 ما هي خطة الأقلية؟</div>
+<div class="ib b">الأبيض يستخدم بيدقين لتدمير ثلاثة بيادق للأسود، مخلقاً بيدق c6 ضعيف دائم.</div>
+<div class="bt">💡 لماذا c6 ضعيف جداً؟</div>
+<div class="ib g">• لا يمكنه التقدم - d5 يمنعه<br>• محاصر من Nb4 + Rc1 + Qb3<br>• يشل حركة قطع الأسود<br><br><strong>ليلا: +0.55 للأبيض - ميزة استراتيجية!</strong></div>
+<div class="bt">🔄 أفضل ردود الأسود</div>
+<div class="ib p">
+<div class="st"><div class="sn2">1</div><div class="stx"><strong>a5!! الأقوى:</strong> يمنع b4-b5 نهائياً</div></div>
+<div class="st"><div class="sn2">2</div><div class="stx"><strong>Ne4!!:</strong> يهاجم بدل الانتظار</div></div>
+</div>`,
+// 4
+`<div class="bt">♗ لماذا Bf4 أقوى من Bg5؟</div>
+<div class="ib b"><table style="width:100%;font-size:0.81rem;line-height:2"><tr><td style="color:#4fc3f7;font-weight:800">Bf4 ✅</td><td style="color:#ffc107;font-weight:800">Bg5</td></tr><tr><td>يسيطر على e5</td><td>يثبت Nf6 فقط</td></tr><tr><td>لا يُطرد بـ h6</td><td>يُطرد بـ h6</td></tr><tr><td>ليلا: +0.35</td><td>ليلا: +0.28</td></tr></table></div>
+<div class="bt">📋 الخطة بعد Bf4</div>
+<div class="ib p">
+<div class="st"><div class="sn2">1</div><div class="stx"><strong>c5!!</strong> رد الأسود الأقوى</div></div>
+<div class="st"><div class="sn2">2</div><div class="stx"><strong>Qc2!!</strong> يضغط على c7 ويمنع Bb4</div></div>
+<div class="st"><div class="sn2">3</div><div class="stx"><strong>a3!!</strong> يمنع Bb4 نهائياً</div></div>
+<div class="st"><div class="sn2">4</div><div class="stx"><strong>Nd2!!</strong> يتراجع ليحضر e4</div></div>
+</div>`,
+// 5
+`<div class="bt">💣 ضربة e4 - الأقوى في Bf4</div>
+<div class="ib b">يفتح الخطوط لصالح الفيلين ويحسم اتجاه اللعبة.</div>
+<div class="bt">📋 تسلسل التحضير</div>
+<div class="ib p">
+<div class="st"><div class="sn2">1</div><div class="stx"><strong>Re1!!</strong> يدعم e4 من الخلف</div></div>
+<div class="st"><div class="sn2">2</div><div class="stx"><strong>Qe2!!</strong> تدعم e4 وتستعد لـ h5</div></div>
+<div class="st"><div class="sn2">3</div><div class="stx"><strong>e4!!</strong> الضربة الحاسمة</div></div>
+</div>
+<div class="ib g">بعد تبادل الملكتين: الفيلان القويان + ضغط على c6<br><strong>ليلا: +0.55 للأبيض - نهاية رابحة!</strong></div>`,
+// 6
+`<div class="bt">🔥 الهجوم الملكي في خط Bf4</div>
+<div class="ib b"><strong>الميزة الإضافية:</strong> الفيل f4 يبقى نشطاً طوال الهجوم على عكس Bg5!</div>
+<div class="ib p">
+<div class="st"><div class="sn2">1</div><div class="stx"><strong>Ng3→Nf5!!</strong> القاعدة لا تتغير</div></div>
+<div class="st"><div class="sn2">2</div><div class="stx"><strong>h4-h5!!</strong> فقط بعد Ng3</div></div>
+<div class="st"><div class="sn2">3</div><div class="stx"><strong>Bxh7+!!</strong> الفيل f4 يدعم الهجوم</div></div>
+</div>
+<div class="ib g"><strong>ليلا: الهجوم بعد Bf4 أقوى بـ 0.12 نقطة!</strong></div>`,
+// 7
+`<div class="bt">♞ ما هو تفريع Tarrasch؟</div>
+<div class="ib b"><strong>3.Nd2</strong> بدلاً من Nc3 - لا يحجب c-pawn ويحضر e4 مباشرة.</div>
+<div class="bt">💡 IQP - البيدق المعزول</div>
+<div class="ib g"><strong>مزايا:</strong> نشاط كبير + ملفا c وe مفتوحان<br><strong>عيوب:</strong> هدف سهل في النهاية<br><br><strong>القاعدة: الأسود يجب أن يهاجم وإلا يخسر!</strong></div>
+<div class="ib r">إذا لعب الأسود Nbd7 بدلاً من c5، الأبيض يدفع e4 مجاناً!<br><strong>c5 إلزامي ضد Tarrasch!</strong></div>`,
+// 8
+`<div class="bt">⚙️ وسط الدور في Tarrasch</div>
+<div class="ib b">الأبيض يريد تبادل القطع. الأسود يريد الهجوم!</div>
+<div class="bt">📋 خطة الأبيض ضد IQP</div>
+<div class="ib p">
+<div class="st"><div class="sn2">1</div><div class="stx"><strong>Ne5!!</strong> أفضل مربع ضد IQP</div></div>
+<div class="st"><div class="sn2">2</div><div class="stx"><strong>Nd3→Nb4→Nc6!!</strong> رحلة الحصان الشهيرة</div></div>
+<div class="st"><div class="sn2">3</div><div class="stx"><strong>Qb3!!</strong> يضغط على d5 مباشرة</div></div>
+</div>
+<div class="ib g"><strong>خطة الأسود:</strong> d4!! + Bg4 + Qd6 يهدد تضحيات رهيبة على h2!</div>`,
+// 9
+`<div class="bt">⚠️ الأخطاء القاتلة في QGD</div>
+<div class="ib r"><strong>❌ g5 بعد Bh4:</strong> خطأ قاتل! النتيجة: الأبيض يسقط البيدق e4.<br><br><strong>❌ c5 قبل التحصين:</strong> Qb3!! يهاجم b7 وd5 معاً.<br><br><strong>❌ h5 قبل Ng3:</strong> الأسود يلعب g5!! ويوقف الهجوم.</div>
+<div class="bt">✅ Cambridge Springs - فخ جميل</div>
+<div class="ib g">4...Nbd7 5.e3 c6 6.Nf3 <strong>Qa5!!</strong><br>الملكة تهاجم Nc3 وتهدد Bb4 معاً!<br><br>9.Bxd5?? <strong>Bxc3!!</strong> الأبيض يخسر.</div>
+<div class="bt">🔑 القواعد الذهبية</div>
+<div class="ib p">
+<div class="st"><div class="sn2">1</div><div class="stx"><strong>تحصن أولاً</strong> قبل أي هجوم</div></div>
+<div class="st"><div class="sn2">2</div><div class="stx"><strong>c6 قبل c5</strong> لدعم d5</div></div>
+<div class="st"><div class="sn2">3</div><div class="stx"><strong>Ng3 دائماً قبل h5!</strong></div></div>
+</div>`
+];
+
+var PZ=[
+{n:1,fen:"r1bq1rk1/ppp1bppp/2np1n2/3pp1B1/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQ - 0 8",
+ ans:"g5f6",sol:["Bxf6!!","Bxf6","cxd5"],
+ hint:"تبادل حارس d5! ماذا يحدث للبيدق d5 بعد إزالة Nf6؟",
+ exp:"Bxf6!! Bxf6 cxd5 - الأبيض يكسب بيدقاً مجاناً. الحصان الذي كان يحمي d5 اختفى!"},
+{n:2,fen:"r1b2rk1/pp1nqppp/2p5/4p3/2BP4/2R1PN2/PP3PPP/3Q1RK1 w - - 0 13",
+ ans:"c4d5",sol:["Bxd5+!!","cxd5","Rxc8"],
+ hint:"الفيل يضحي! ما الذي يحدث بعد Bxd5+؟ فكر في ملف c!",
+ exp:"Bxd5+!! cxd5 Rxc8!! - الأبيض يكسب جودة كاملة. تضحية الفيل تفتح ملف c ويأخذ الرخ!"}
+];
+
+function showLesson(id){
+  bMov=MOVES[id]||[];
+  bIdx=0;
+  var prev=id>0?"<button class='nb pv' onclick='go("+(id-1)+")'>← السابق</button>":"";
+  var nx=id<9?"<button class='nb nx' onclick='go("+(id+1)+")'>التالي ←</button>":"<button class='nb nx' onclick='go(10)'>التمارين ←</button>";
+  var html="<div class='lp'>"
+  +"<div class='tag'>🛡️ Queen's Gambit Declined</div>"
+  +"<h1>"+TITLES[id]+"</h1>"
+  +"<div class='vid' onclick='alert(\"سيتم تشغيل الفيديو هنا\")'><div class='vplay'>▶</div><span>شاهد الفيديو</span></div>"
+  +"<div class='bsec'>"
+  +"<div class='bwrap'>"
+  +"<div class='bd' id='bd'></div>"
+  +"<div class='cr'>"+["a","b","c","d","e","f","g","h"].map(function(x){return "<span>"+x+"</span>";}).join("")+"</div>"
+  +"<div class='mctrl' style='margin-top:8px'>"
+  +"<button class='mb f' id='bf' onclick='bF()'>⏮</button>"
+  +"<button class='mb p' id='bp' onclick='bP()'>◀</button>"
+  +"<button class='mb n' id='bn' onclick='bN()'>التالي ▶</button>"
+  +"<button class='mb l' id='bl' onclick='bL()'>⏭</button>"
+  +"</div>"
+  +"<div class='mbar' id='bbar'></div>"
+  +"</div>"
+  +"<div class='binfo'><div class='mc' id='binfo'></div></div>"
+  +"</div>"
+  +"<div class='dv'></div>"
+  +CONTENT[id]
+  +"<div class='nbs'>"+prev+"<button class='nb cm' onclick='markDone("+id+");this.textContent=\"✓ تم\";this.disabled=true'>✓ أكملت الدرس</button>"+nx+"</div>"
+  +"</div>";
+  document.getElementById("main").innerHTML=html;
+  document.getElementById("main").scrollTo(0,0);
+  updBoard();
+}
+
+function markDone(id){
+  done[id]=true;
+  var c=document.getElementById("c"+id);
+  if(c){c.classList.remove("cur");c.classList.add("ok");c.textContent="✓";}
+}
+
+function fromN(s){return[8-parseInt(s[1]),s.charCodeAt(0)-97];}
+function sqN(r,c){return String.fromCharCode(97+c)+(8-r);}
+function pFen(fen){var b={},rows=fen.split(" ")[0].split("/");for(var r=0;r<8;r++){var c=0;for(var i=0;i<rows[r].length;i++){var ch=rows[r][i];if(ch>="1"&&ch<="8"){c+=parseInt(ch);}else{b[r+","+c]=ch;c++;}}}return b;}
+
+function showPuzzle(pi,lid){
+  pCur=pi;pAns=false;pSel=null;
+  var p=PZ[pi];
+  pBs=pFen(p.fen);pIsB=p.fen.split(" ")[1]==="b";
+  var bh="";
+  for(var r=0;r<8;r++){for(var c=0;c<8;c++){var lt=(r+c)%2===0;var sq=sqN(r,c);var pc=pBs[r+","+c]||"";bh+="<div class='psq "+(lt?"l":"d")+"' id='ps"+sq+"' onclick='pClick(\""+sq+"\","+lid+")'>"+(pc?P[pc]||"":"")+"</div>";}}
+  var prev=lid>0?"<button class='nb pv' onclick='go("+(lid-1)+")'>← السابق</button>":"";
+  var html="<div class='pp'>"
+  +"<div class='tag'>🛡️ QGD · ⚡ تمرين</div>"
+  +"<h1>تمرين رقم "+p.n+" <span style='display:inline-block;background:linear-gradient(135deg,#1565c0,#4fc3f7);color:#fff;font-size:0.67rem;font-weight:800;padding:3px 11px;border-radius:20px;margin-right:8px'>"+(pi+1)+" / "+PZ.length+"</span></h1>"
+  +"<div class='st2'>"
+  +"<div class='sc'><div class='sv2 g' id='psg'>"+pC+"</div><div class='sl2'>صحيح</div></div>"
+  +"<div class='sc'><div class='sv2 r' id='psw'>"+pW+"</div><div class='sl2'>خطأ</div></div>"
+  +"<div class='sc'><div class='sv2 b'>"+(PZ.length-pi)+"</div><div class='sl2'>متبقي</div></div>"
+  +"</div>"
+  +"<div class='pla'>"
+  +"<div>"
+  +"<div style='font-size:.67rem;color:rgba(255,255,255,.35);margin-bottom:4px;text-align:center'>"+(pIsB?"⬛ الأسود يلعب":"⬜ الأبيض يلعب")+"</div>"
+  +"<div class='pb2'>"+bh+"</div>"
+  +"<div style='display:flex;margin-top:2px'>"+["a","b","c","d","e","f","g","h"].map(function(x){return "<span style='font-size:.57rem;color:rgba(255,255,255,.22);width:52px;text-align:center'>"+x+"</span>";}).join("")+"</div>"
+  +"</div>"
+  +"<div class='pi'>"
+  +"<div class='tb'><span style='font-size:1.2rem'>"+(pIsB?"⬛":"⬜")+"</span><div><div style='font-weight:900'>"+(pIsB?"الأسود يلعب":"الأبيض يلعب")+"</div><div style='font-size:.69rem;color:rgba(255,255,255,.38)'>ابحث عن أفضل حركة</div></div></div>"
+  +"<div class='fb w' id='pfb'><span>🤔</span><span>انقر على قطعة واختر وجهتها</span></div>"
+  +"<div class='hb'><h4>💡 تلميح</h4><p id='pht' style='filter:blur(5px);cursor:pointer' onclick='this.style.filter=\"none\"'>"+p.hint+"</p></div>"
+  +"<div class='sb' id='psb'><h4>✅ الحل الصحيح</h4><div class='sm'>"+p.sol.map(function(m){return "<span class='sv'>"+m+"</span>";}).join("")+"</div><p>"+p.exp+"</p></div>"
+  +"<div class='pbs'>"
+  +"<button class='pb3 h' onclick='document.getElementById(\"pht\").style.filter=\"none\"'>💡 تلميح</button>"
+  +"<button class='pb3 h' onclick='showPuzzle("+pi+","+lid+")'>↺ إعادة</button>"
+  +"<button class='pb3 s' onclick='pSol("+lid+")'>👁 الحل</button>"
+  +"<button class='pb3 nx' id='pnx' onclick='pNx("+lid+")' disabled>التالي ←</button>"
+  +"</div>"
+  +"</div>"
+  +"</div>"
+  +"<div class='nbs' style='margin-top:12px'>"+prev+"<button class='nb pv' onclick='go(9)'>📚 الدروس</button></div>"
+  +"</div>";
+  document.getElementById("main").innerHTML=html;
+}
+
+function pSol(lid){
+  document.getElementById("psb").classList.add("sh");
+  document.getElementById("pnx").disabled=false;
+  if(!pAns){pAns=true;pW++;markDone(lid);var c=document.getElementById("c"+lid);if(c){c.classList.add("ok");c.style.background="#f85149";c.style.borderColor="#f85149";c.textContent="✗";}document.getElementById("psw").textContent=pW;}
+}
+
+function pNx(lid){markDone(lid);if(lid<11)go(lid+1);}
+
+function pClick(sqId,lid){
+  if(pAns)return;
+  var p=PZ[pCur];
+  var rc=fromN(sqId);var r=rc[0];var c=rc[1];var pc=pBs[r+","+c]||"";
+  if(pSel){
+    var mv=pSel+sqId;
+    document.querySelectorAll(".psq.sl").forEach(function(s){s.classList.remove("sl");});
+    if(mv===p.ans){
+      pAns=true;pC++;
+      var src=fromN(pSel);var mp=pBs[src[0]+","+src[1]]||"";
+      delete pBs[src[0]+","+src[1]];pBs[r+","+c]=mp;
+      document.getElementById("ps"+pSel).classList.add("pf");document.getElementById("ps"+pSel).textContent="";
+      var t=document.getElementById("ps"+sqId);t.classList.add("pt","ri");t.textContent=P[mp]||"";
+      document.getElementById("pfb").className="fb ok";document.getElementById("pfb").innerHTML="<span>✅</span><span>"+p.exp+"</span>";
+      document.getElementById("psb").classList.add("sh");document.getElementById("pnx").disabled=false;
+      markDone(lid);document.getElementById("psg").textContent=pC;
+    } else {
+      var own=pc&&(pIsB?pc===pc.toLowerCase():pc===pc.toUpperCase());
+      if(own){pSel=sqId;document.getElementById("ps"+sqId).classList.add("sl");return;}
+      document.getElementById("ps"+sqId).classList.add("wr");setTimeout(function(){document.getElementById("ps"+sqId).classList.remove("wr");},400);
+      document.getElementById("pfb").className="fb no";document.getElementById("pfb").innerHTML="<span>❌</span><span>"+p.hint+"</span>";
+      pW++;document.getElementById("psw").textContent=pW;
+    }
+    pSel=null;
+  } else {
+    var own2=pc&&(pIsB?pc===pc.toLowerCase():pc===pc.toUpperCase());
+    if(!own2)return;
+    pSel=sqId;document.querySelectorAll(".psq.sl").forEach(function(s){s.classList.remove("sl");});
+    document.getElementById("ps"+sqId).classList.add("sl");
+    document.getElementById("pfb").className="fb w";document.getElementById("pfb").innerHTML="<span>🎯</span><span>اختر وجهة القطعة</span>";
+  }
+}
+
+go(0);
+</script>
+</body>
+</html>

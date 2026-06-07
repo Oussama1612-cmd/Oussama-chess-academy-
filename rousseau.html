@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>♟️ كورس غامبيت روسو</title>
+<style>
+body{
+  margin:0;
+  font-family: system-ui;
+  background: linear-gradient(135deg,#0b1220,#020617);
+  color:#e5e7eb;
+}
+
+.app{
+  max-width:420px;
+  margin:auto;
+  padding:16px;
+}
+
+.header{
+  text-align:center;
+  padding:10px;
+}
+
+.card{
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:16px;
+  padding:14px;
+  margin-top:12px;
+}
+
+.board{
+  display:grid;
+  grid-template-columns:repeat(8,1fr);
+  margin-top:12px;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.square{
+  width:100%;
+  aspect-ratio:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+}
+
+.light{background:#cbd5e1;}
+.dark{background:#334155;}
+
+.controls{
+  display:flex;
+  gap:8px;
+  margin-top:10px;
+}
+
+button{
+  flex:1;
+  padding:10px;
+  border:none;
+  border-radius:10px;
+  font-weight:bold;
+}
+
+.primary{background:#38bdf8;}
+.secondary{background:#1f2937;color:white;}
+
+.nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  display:flex;
+  justify-content:space-around;
+  padding:10px;
+  background:#020617;
+  border-top:1px solid #1f2937;
+  font-size:12px;
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+
+<div class="header">
+<h2>♟️ كورس غامبيت روسو</h2>
+<p>تطبيق تفاعلي لتعلم الشطرنج</p>
+</div>
+
+<div class="card">
+<h3>الفكرة الأساسية</h3>
+<p>1.e4 e5 2.Nf3 Nc6 3.Bc4 f5</p>
+
+<div class="board" id="board"></div>
+
+<div class="controls">
+<button class="secondary" onclick="resetBoard()">إعادة</button>
+<button class="primary" onclick="playMove()">▶ تشغيل</button>
+</div>
+
+<p style="margin-top:10px;font-size:13px;opacity:0.8">
+الهدف: فتح العمود f والهجوم على الملك
+</p>
+</div>
+
+</div>
+
+<div class="nav">
+<div>🏠</div>
+<div>♟️</div>
+<div>📊</div>
+</div>
+
+<script>
+const board = document.getElementById("board");
+
+const initial = () => {
+  board.innerHTML="";
+  for(let r=0;r<8;r++){
+    for(let c=0;c<8;c++){
+      const div=document.createElement("div");
+      div.className="square "+((r+c)%2===0?"light":"dark");
+      div.dataset.r=r;
+      div.dataset.c=c;
+      board.appendChild(div);
+    }
+  }
+};
+
+function resetBoard(){
+  initial();
+}
+
+function playMove(){
+  alert("♟️ تشغيل النقلات: 1.e4 e5 2.Nf3 Nc6 3.Bc4 f5");
+}
+
+initial();
+</script>
+
+</body>
+</html>
