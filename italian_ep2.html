@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>الافتتاح الإيطالي — الحلقة ٢: Greco Gambit (الخط التقليدي)</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0f1117;--bg2:#181c24;--bg3:#1e2330;--brd:#2a3040;
+  --gold:#d4a84b;--gold2:#f0c96a;--gold3:#8a6528;
+  --txt:#e2e8f0;--txt2:#8896a8;--txt3:#4a5568;
+  --bl:#f0d9b5;--bd:#b58863;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;overflow-x:hidden}
+body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;display:flex;flex-direction:column}
+
+.tb{background:var(--bg2);border-bottom:1px solid var(--brd);height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;position:sticky;top:0;z-index:200;flex-shrink:0}
+.tb-brand{display:flex;align-items:center;gap:8px}
+.tb-icon{font-size:22px}
+.tb-name{font-family:'Amiri',serif;font-size:15px;color:var(--gold);font-weight:700}
+.tb-badge{background:linear-gradient(135deg,var(--gold3),var(--gold));color:#0a0c10;font-size:10px;font-weight:800;padding:4px 11px;border-radius:20px;letter-spacing:.4px;white-space:nowrap}
+
+.app{display:flex;flex:1;height:calc(100vh - 54px)}
+
+.sb{width:260px;background:var(--bg2);border-left:1px solid var(--brd);overflow-y:auto;flex-shrink:0;display:flex;flex-direction:column}
+.sb::-webkit-scrollbar{width:3px}.sb::-webkit-scrollbar-thumb{background:var(--brd)}
+.sb-hd{padding:16px 14px 10px;border-bottom:1px solid var(--brd);position:sticky;top:0;background:var(--bg2);z-index:5}
+.sb-hd h3{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
+.sb-hd p{font-size:11px;color:var(--txt3);margin-top:3px}
+
+.grp{border-bottom:1px solid var(--brd)}
+.gtog{width:100%;background:none;border:none;color:var(--txt);font-family:'Cairo',sans-serif;font-size:12px;font-weight:700;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;text-align:right;transition:background .15s}
+.gtog:hover{background:rgba(255,255,255,.03)}
+.gtog .arr{font-size:9px;color:var(--txt3);transition:transform .2s;flex-shrink:0}
+.gtog.open .arr{transform:rotate(180deg)}
+.gnum{background:var(--bg3);border:1px solid var(--brd);color:var(--txt3);font-size:10px;padding:1px 7px;border-radius:10px;font-weight:700}
+.ll{display:none}.ll.open{display:block}
+.li{display:flex;align-items:center;gap:8px;padding:8px 14px 8px 10px;cursor:pointer;transition:background .15s;border-right:3px solid transparent}
+.li:hover{background:rgba(255,255,255,.03)}
+.li.active{background:rgba(212,168,75,.09);border-right-color:var(--gold)}
+.li .ln{font-size:10px;font-weight:800;color:var(--txt3);min-width:18px;text-align:center;flex-shrink:0}
+.li.active .ln{color:var(--gold)}
+.li .lname{font-size:11.5px;color:var(--txt2);flex:1;line-height:1.4}
+.li.active .lname{color:var(--txt);font-weight:600}
+
+.mob-nav{display:none;background:var(--bg2);border-bottom:1px solid var(--brd);padding:10px 12px;gap:8px;overflow-x:auto;scrollbar-width:none;flex-shrink:0}
+.mob-nav::-webkit-scrollbar{display:none}
+.mob-btn{background:var(--bg3);border:1px solid var(--brd);color:var(--txt2);font-family:'Cairo',sans-serif;font-size:11px;font-weight:600;padding:7px 13px;border-radius:8px;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:all .15s}
+.mob-btn.active{background:rgba(212,168,75,.15);border-color:var(--gold);color:var(--gold)}
+
+.main{flex:1;overflow-y:auto;display:flex;flex-direction:column;align-items:center;padding:20px 16px 40px}
+.main::-webkit-scrollbar{width:4px}.main::-webkit-scrollbar-thumb{background:var(--brd)}
+
+.lc{display:none;flex-direction:column;gap:20px;width:100%;max-width:720px}
+.lc.active{display:flex}
+
+.lhd{width:100%}
+.ley{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.ltitle{font-family:'Amiri',serif;font-size:24px;font-weight:700;color:var(--txt);line-height:1.3;margin-bottom:7px}
+.lsub{font-size:13px;color:var(--txt2);line-height:1.75}
+
+.ba{display:flex;gap:18px;width:100%;align-items:flex-start;flex-wrap:wrap}
+.bwrap{display:flex;flex-direction:column;align-items:center;width:100%}
+.bcon{box-shadow:0 0 0 2px var(--bd),0 0 0 5px #000,0 16px 48px rgba(0,0,0,.7);border-radius:3px;overflow:hidden;width:100%;max-width:400px}
+.board{display:grid;grid-template-columns:repeat(8,1fr);aspect-ratio:1;width:100%}
+.sq{aspect-ratio:1;display:flex;align-items:center;justify-content:center;position:relative}
+.sq.lt{background:var(--bl)}.sq.dk{background:var(--bd)}
+.sq.hl{background:rgba(212,168,75,.55)!important}
+.sq .rl{position:absolute;top:1px;right:2px;font-size:7px;font-weight:700;opacity:.55;font-family:'Cairo',sans-serif;line-height:1}
+.sq .fl{position:absolute;bottom:1px;left:2px;font-size:7px;font-weight:700;opacity:.55;font-family:'Cairo',sans-serif;line-height:1}
+.sq.lt .rl,.sq.lt .fl{color:var(--bd)}.sq.dk .rl,.sq.dk .fl{color:var(--bl)}
+
+.pc{font-size:clamp(24px,5.5vw,38px);line-height:1;user-select:none}
+.pc.w{color:#fff;-webkit-text-stroke:1.2px #444;filter:drop-shadow(0 2px 3px rgba(0,0,0,.5))}
+.pc.b{color:#111;-webkit-text-stroke:.5px #000;filter:drop-shadow(0 2px 4px rgba(0,0,0,.65))}
+
+.ctrl{display:flex;align-items:center;gap:5px;margin-top:10px;direction:ltr;width:100%;max-width:400px}
+.cb{background:var(--bg3);border:1px solid var(--brd);color:var(--txt2);width:38px;height:38px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .15s;flex-shrink:0}
+.cb:hover,.cb:active{border-color:var(--gold3);color:var(--gold);background:var(--bg2)}
+.mc{flex:1;text-align:center;font-size:11px;color:var(--txt3);font-weight:600;padding:0 4px;line-height:1.3}
+
+.mb{display:flex;flex-wrap:wrap;gap:3px;margin-top:8px;width:100%;max-width:400px;max-height:68px;overflow-y:auto;direction:ltr}
+.mb::-webkit-scrollbar{height:3px}.mb::-webkit-scrollbar-thumb{background:var(--brd)}
+.mt{padding:3px 9px;border-radius:5px;font-size:11px;font-weight:700;font-family:'Courier New',monospace;background:var(--bg3);border:1px solid var(--brd);color:var(--txt3);cursor:pointer;transition:all .15s}
+.mt:hover,.mt:active{border-color:var(--gold3);color:var(--txt2)}
+.mt.active{background:var(--gold);border-color:var(--gold);color:#0a0c10}
+.mn{padding:3px 4px;font-size:10px;color:var(--txt3);font-family:monospace}
+
+.ip{width:100%;display:flex;flex-direction:column;gap:12px}
+.ic{background:var(--bg3);border:1px solid var(--brd);border-radius:10px;padding:16px}
+.ic h4{font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.ki{display:flex;gap:9px;padding:8px 0;border-bottom:1px solid var(--brd);align-items:flex-start}
+.ki:last-child{border-bottom:none;padding-bottom:0}
+.ki .ico{font-size:16px;flex-shrink:0;margin-top:1px}
+.ki .ktxt{font-size:13px;color:var(--txt2);line-height:1.6}
+.ki .ktxt strong{color:var(--txt)}
+
+.notebox{background:rgba(212,168,75,.07);border:1px solid rgba(212,168,75,.2);border-radius:10px;padding:14px 16px;width:100%}
+.notebox .ntitle{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.notebox p{font-size:13px;color:var(--txt2);line-height:1.75}
+.notebox p strong{color:var(--gold2)}
+
+.varbox{background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:12px 14px;margin-top:8px}
+.varbox-title{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--txt2);margin-bottom:8px}
+.var-item{display:flex;align-items:flex-start;gap:9px;padding:7px 0;border-bottom:1px solid var(--brd)}
+.var-item:last-child{border-bottom:none;padding-bottom:0}
+.var-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:6px}
+.var-txt{font-size:12.5px;color:var(--txt2);line-height:1.6}
+.var-txt strong{color:var(--txt)}
+.var-txt code{font-family:'Courier New',monospace;font-size:11.5px;color:var(--gold2);background:rgba(212,168,75,.1);padding:1px 5px;border-radius:4px}
+
+/* NAV FOOTER */
+.nav-footer{display:flex;justify-content:space-between;align-items:center;width:100%;max-width:720px;margin-top:8px;padding-top:20px;border-top:1px solid var(--brd)}
+.nav-ep{display:flex;align-items:center;gap:8px;text-decoration:none;padding:10px 16px;border-radius:8px;border:1px solid var(--brd);background:var(--bg2);color:var(--txt2);font-family:'Cairo',sans-serif;font-size:12px;font-weight:600;transition:all .15s;cursor:pointer}
+.nav-ep:hover{border-color:var(--gold3);color:var(--gold)}
+.nav-ep.next{background:linear-gradient(135deg,var(--gold3),var(--gold));color:#0a0c10;border-color:transparent;font-weight:700}
+.nav-ep.next:hover{opacity:.9}
+
+@media(min-width:641px){.mob-nav{display:none!important}.sb{display:flex}}
+@media(max-width:640px){
+  .sb{display:none!important}
+  .mob-nav{display:flex!important}
+  .app{flex-direction:column;height:auto;overflow:visible}
+  .main{padding:16px 12px 40px;overflow:visible}
+  .ltitle{font-size:20px}
+}
+</style>
+</head>
+<body>
+
+<div class="tb">
+  <div class="tb-brand">
+    <span class="tb-icon">♟</span>
+    <span class="tb-name">أكاديمية أسامة للشطرنج</span>
+  </div>
+  <span class="tb-badge">الحلقة ٢ من ٢٨</span>
+</div>
+
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <div class="sb">
+    <div class="sb-hd">
+      <h3>الحلقة الثانية</h3>
+      <p>Greco Gambit — الخط التقليدي</p>
+    </div>
+    <div class="grp">
+      <button class="gtog open" onclick="tog(this)">
+        <span>التمهيد</span>
+        <span style="display:flex;gap:7px;align-items:center"><span class="gnum">2</span><span class="arr">▼</span></span>
+      </button>
+      <div class="ll open">
+        <div class="li active" onclick="show(0,this)"><span class="ln">١</span><span class="lname">ما هو Greco Gambit؟</span></div>
+        <div class="li" onclick="show(1,this)"><span class="ln">٢</span><span class="lname">الحركات حتى 6...Bb4+</span></div>
+      </div>
+    </div>
+    <div class="grp">
+      <button class="gtog open" onclick="tog(this)">
+        <span>خيارات الأبيض بعد Bb4+</span>
+        <span style="display:flex;gap:7px;align-items:center"><span class="gnum">2</span><span class="arr">▼</span></span>
+      </button>
+      <div class="ll open">
+        <div class="li" onclick="show(2,this)"><span class="ln">٣</span><span class="lname">7.Bd2 / 7.Nd2 — الخيارات الأخرى</span></div>
+        <div class="li" onclick="show(3,this)"><span class="ln">٤</span><span class="lname">7.Nc3 — Greco Gambit الحقيقي</span></div>
+      </div>
+    </div>
+    <div class="grp">
+      <button class="gtog open" onclick="tog(this)">
+        <span>بعد 7.Nc3 Nxe4 8.0-0</span>
+        <span style="display:flex;gap:7px;align-items:center"><span class="gnum">4</span><span class="arr">▼</span></span>
+      </button>
+      <div class="ll open">
+        <div class="li" onclick="show(4,this)"><span class="ln">٥</span><span class="lname">8...Nxc3 — 10.Qb3</span></div>
+        <div class="li" onclick="show(5,this)"><span class="ln">٦</span><span class="lname">8...Nxc3 — 10.Ba3 (Aitken)</span></div>
+        <div class="li" onclick="show(6,this)"><span class="ln">٧</span><span class="lname">8...Bxc3 — 9.bxc3</span></div>
+        <div class="li" onclick="show(7,this)"><span class="ln">٨</span><span class="lname">8...Bxc3 — 9.d5</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOBILE NAV -->
+  <div class="mob-nav">
+    <button class="mob-btn active" onclick="show(0,null,0)">١ · المقدمة</button>
+    <button class="mob-btn" onclick="show(1,null,1)">٢ · الحركات</button>
+    <button class="mob-btn" onclick="show(2,null,2)">٣ · 7.Bd2</button>
+    <button class="mob-btn" onclick="show(3,null,3)">٤ · 7.Nc3</button>
+    <button class="mob-btn" onclick="show(4,null,4)">٥ · 10.Qb3</button>
+    <button class="mob-btn" onclick="show(5,null,5)">٦ · Aitken</button>
+    <button class="mob-btn" onclick="show(6,null,6)">٧ · 9.bxc3</button>
+    <button class="mob-btn" onclick="show(7,null,7)">٨ · 9.d5</button>
+  </div>
+
+  <div class="main">
+
+    <!-- 0: ما هو Greco Gambit -->
+    <div class="lc active" id="lc0">
+      <div class="lhd">
+        <div class="ley">الحلقة الثانية · الدرس الأول</div>
+        <div class="ltitle">ما هو Greco Gambit؟</div>
+        <div class="lsub">هذا هو الخط التقليدي الكلاسيكي لـ Giuoco Piano — الأبيض يبني مركزًا قويًا بـ c3 و d4 ويفتح اللعبة بشكل حاد.</div>
+      </div>
+      <div class="ba">
+        <div class="bwrap">
+          <div class="bcon"><div class="board" id="b0"></div></div>
+          <div class="ctrl">
+            <button class="cb" onclick="nav(0,-2)">⏮</button>
+            <button class="cb" onclick="nav(0,-1)">◀</button>
+            <span class="mc" id="mc0">الوضع الابتدائي</span>
+            <button class="cb" onclick="nav(0,1)">▶</button>
+            <button class="cb" onclick="nav(0,99)">⏭</button>
+          </div>
+          <div class="mb" id="mb0"></div>
+        </div>
+        <div class="ip">
+          <div class="ic">
+            <h4>فكرة الخط</h4>
+            <div class="ki"><span class="ico">♟</span><span class="ktxt">الأبيض يبني بـ <strong>4.c3</strong> لدعم d4 لاحقًا</span></div>
+            <div class="ki"><span class="ico">⚡</span><span class="ktxt"><strong>5.d4!</strong> — يكسر المركز ويفتح اللعبة بشكل حاد</span></div>
+            <div class="ki"><span class="ico">🎯</span><span class="ktxt">بعد <strong>6.cxd4 Bb4+</strong> — الأسود يكسب وقتًا لكن الأبيض يملك مركزًا قويًا</span></div>
+          </div>
+          <div class="notebox">
+            <div class="ntitle">📌 نقطة مفتاحية</div>
+            <p>هذا الخط <strong>ليس غامبيتًا حقيقيًا</strong> في أغلب الأحيان — الأبيض يستعيد البيدق بسهولة. الميزة الحقيقية هي <strong>المركز القوي والتطوير السريع</strong>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1: الحركات الأساسية -->
+    <div class="lc" id="lc1">
+      <div class="lhd">
+        <div class="ley">الحلقة الثانية · الدرس الثاني</div>
+        <div class="ltitle">الحركات حتى 6...Bb4+</div>
+        <div class="lsub">نتتبع خطوة بخطوة كيف نصل للموقف الرئيسي في Greco Gambit التقليدي.</div>
+      </div>
+      <div class="ba">
+        <div class="bwrap">
+          <div class="bcon"><div class="board" id="b1"></div></div>
+          <div class="ctrl">
+            <button class="cb" onclick="nav(1,-2)">⏮</button>
+            <button class="cb" onclick="nav(1,-1)">◀</button>
+            <span class="mc" id="mc1">الوضع الابتدائي</span>
+            <button class="cb" onclick="nav(1,1)">▶</button>
+            <button class="cb" onclick="nav(1,99)">⏭</button>
+          </div>
+          <div class="mb" id="mb1"></div>
+        </div>
+        <div class="ip">
+          <div class="ic">
+            <h4>شرح الحركات</h4>
+            <div class="ki"><span class="ico">①</span><span class="ktxt"><strong>4.c3</strong> — يستعد لدفع d4 بدعم</span></div>
+            <div class="ki"><span class="ico">②</span><span class="ktxt"><strong>4...Nf6</strong> — يضغط على e4 ويطور</span></div>
+            <div class="ki"><span class="ico">③</span><span class="ktxt"><strong>5.d4!</strong> — الحركة الرئيسية! يكسر المركز</span></div>
+            <div class="ki"><span class="ico">④</span><span class="ktxt"><strong>5...exd4</strong> — الأسود يأخذ</span></div>
+            <div class="ki"><span class="ico">⑤</span><span class="ktxt"><strong>6.cxd4 Bb4+</strong> — الأسود يكسب وقتًا بالكشف</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2: 7.Bd2 / 7.Nd2 -->
+    <div class="lc" id="lc2">
+      <div class="lhd">
+        <div class="ley">الحلقة الثانية · الدرس الثالث</div>
+        <div class="ltitle">7.Bd2 و 7.Nd2 — الخيارات الأخرى</div>
+        <div class="lsub">بعد 6...Bb4+ يملك الأبيض عدة ردود — هنا نرى الخيارات الأقل حدة قبل الدخول في Greco Gambit الحقيقي.</div>
+      </div>
+      <div class="ba">
+        <div class="bwrap">
+          <div class="bcon"><div class="board" id="b2"></div></div>
+          <div class="ctrl">
+            <button class="cb" onclick="nav(2,-2)">⏮</button>
+            <button class="cb" onclick="nav(2,-1)">◀</button>
+            <span class="mc" id="mc2">بعد 6...Bb4+</span>
+            <button class="cb" onclick="nav(2,1)">▶</button>
+            <button class="cb" onclick="nav(2,99)">⏭</button>
+          </div>
+          <div class="mb" id="mb2"></div>
+        </div>
+        <div class="ip">
+          <div class="ic">
+            <h4>7.Bd2 — التبادل الهادئ</h4>
+            <div class="ki"><span class="ico">🔄</span><span class="ktxt">بعد <strong>7.Bd2 Bxd2+ 8.Nbxd2</strong> — الأبيض يتخلص من الضغط ويكمل تطويره</span></div>
+            <div class="ki"><span class="ico">⚖️</span><span class="ktxt">موقف متوازن نسبيًا — الأبيض يملك مركزًا جيدًا بدون مجازفة كبيرة</span></div>
+          </div>
+          <div class="ic">
+            <h4>7.Nd2 — حماية e4</h4>
+            <div class="ki"><span class="ico">♞</span><span class="ktxt"><strong>7.Nd2</strong> — يحمي e4 ويتجنب التبادل على d2</span></div>
+            <div class="ki"><span class="ico">💡</span><span class="ktxt">الفارس على d2 أقل نشاطًا لكن الموقف مستقر</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3: 7.Nc3 Greco Gambit -->
+    <div class="lc" id="lc3">
+      <div class="lhd">
+        <div class="ley">الحلقة الثانية · الدرس الرابع</div>
+        <div class="ltitle">7.Nc3 — Greco Gambit الحقيقي</div>
+        <div class="lsub">هذه هي الحركة الحادة والأكثر إثارة! الأبيض يتجاهل الكشف ويطور فارسه — يدعو لمعركة تكتيكية حقيقية.</div>
+      </div>
+      <div class="ba">
+        <div class="bwrap">
+          <div class="bcon"><div class="board" id="b3"></div></div>
+          <div class="ctrl">
+            <button class="cb" onclick="nav(3,-2)">⏮</button>
+            <button class="cb" onclick="nav(3,-1)">◀</button>
+            <span class="mc" id="mc3">بعد 6...Bb4+</span>
+            <button class="cb" onclick="nav(3,1)">▶</button>
+            <button class="cb" onclick="nav(3,99)">⏭</button>
+          </div>
+          <div class="mb" id="mb3"></div>
+        </div>
+        <div class="ip">
+          <div class="ic">
+            <h4>لماذا 7.Nc3؟</h4>
+            <div class="ki"><span class="ico">⚡</span><span class="ktxt">الأبيض يتجاهل الكشف ويطور — يريد <strong>مبادرة قوية</strong> لا مجرد استعادة البيدق</span></div>
+            <div class="ki"><span class="ico">🎯</span><span class="ktxt">بعد <strong>7...Nxe4 8.0-0!</strong> — الأبيض يضحي ببيدق آخر للحصول على هجوم سريع</span></div>
+            <div class="ki"><span class="ico">⚠️</span><span class="ktxt">الأسود لديه خياران رئيسيان: <strong>8...Nxc3</strong> أو <strong>8...Bxc3</strong></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4: 8...Nxc3 → 10.Qb3 -->
+    <div class="lc" id="lc4">
+      <div class="lhd">
+        <div class="ley">الحلقة الثانية · الدرس الخامس</div>
+        <div class="ltitle">8...Nxc3 — ثم 10.Qb3</div>
+        <div class="lsub">بعد 7.Nc3 Nxe4 8.0-0 Nxc3 9.bxc3 Bxc3 — الأبيض يلعب 10.Qb3! مهاجمًا f7 والفيل في آنٍ واحد.</div>
+      </div>
+      <div class="ba">
+        <div class="bwrap">
+          <div class="bcon"><div class="board" id="b4"></div></div>
+          <div class="ctrl">
+            <button class="cb" onclick="nav(4,-2)">⏮</button>
+            <button class="cb" onclick="nav(4,-1)">◀</button>
+            <span class="mc" id="mc4">الوضع الابتدائي</span>
+            <button class="cb" onclick="nav(4,1)">▶</button>
+            <button class="cb" onclick="nav(4,99)">⏭</button>
+          </div>
+          <div class="mb" id="mb4"></div>
+        </div>
+        <div class="ip">
+          <div class="ic">
+            <h4>فكرة 10.Qb3!</h4>
+            <div class="ki"><span class="ico">♛</span><span class="ktxt"><strong>10.Qb3!</strong> — يهدد f7 والفيل على c3 في نفس الوقت</span></div>
+            <div class="ki"><span class="ico">🔥</span><span class="ktxt">الأسود مجبر على <strong>10...Qe7</strong> للدفاع — ثم يستمر الهجوم</span></div>
+            <div class="ki"><span class="ico">💡</span><span class="ktxt">الأبيض يملك تعويضًا ممتازًا عن البيادق المفقودة بفضل النشاط والضغط</span></div>
+          </div>
+          <div class="varbox">
+            <div class="varbox-title">التسلسل الرئيسي</div>
+            <div class="var-item"><span class="var-dot"></span><span class="var-txt"><code>10...Qe7 11.Re1 d5 12.Rxe7+ Kxe7</code> — الأسود يفقد حق التحصين لكن يستعيد مادة</span></div>
+            <div class="var-item"><span class="var-dot"></span><span class="var-txt"><code>10...Bxa1?!</code> — خطر! الأبيض يحصل على هجوم مدمر بعد Re1+</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5: 8...Nxc3 → 10.Ba3 Aitken -->
+    <div class="lc" id="lc5">
+      <div class="lhd">
+        <div class="ley">الحلقة الثانية · الدرس السادس</div>
+        <div class="ltitle">8...Nxc3 — 10.Ba3 (Aitken Variation)</div>
+        <div class="lsub">بديل لـ 10.Qb3 — الأبيض يلعب 10.Ba3! ويمنع الأسود من التحصين بضغط رهيب على الفيل.</div>
+      </div>
+      <div class="ba">
+        <div class="bwrap">
+          <div class="bcon"><div class="board" id="b5"></div></div>
+          <div class="ctrl">
+            <button class="cb" onclick="nav(5,-2)">⏮</button>
+            <button class="cb" onclick="nav(5,-1)">◀</button>
+            <span class="mc" id="mc5">الوضع الابتدائي</span>
+            <button class="cb" onclick="nav(5,1)">▶</button>
+            <button class="cb" onclick="nav(5,99)">⏭</button>
+          </div>
+          <div class="mb" id="mb5"></div>
+        </div>
+        <div class="ip">
+          <div class="ic">
+            <h4>Aitken Variation — 10.Ba3!</h4>
+            <div class="ki"><span class="ico">♗</span><span class="ktxt"><strong>10.Ba3!</strong> — يمنع التحصين! الأسود لا يستطيع 0-0 طالما الفيل يضغط على e7</span></div>
+            <div class="ki"><span class="ico">⏰</span><span class="ktxt">الأبيض يملك <strong>ضغطًا دائمًا</strong> مقابل البيادق المفقودة</span></div>
+            <div class="ki"><span class="ico">🎯</span><span class="ktxt">فكرة رهيبة وعملية — صعب على الأسود إيجاد دفاع مريح</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6: 8...Bxc3 → 9.bxc3 -->
+    <div class="lc" id="lc6">
+      <div class="lhd">
+        <div class="ley">الحلقة الثانية · الدرس السابع</div>
+        <div class="ltitle">8...Bxc3 — بعد 9.bxc3</div>
+        <div class="lsub">الأسود يختار أخذ الفارس بالفيل بدلًا من الفارس — يحاول الاحتفاظ بهيكل بيادق أفضل.</div>
+      </div>
+      <div class="ba">
+        <div class="bwrap">
+          <div class="bcon"><div class="board" id="b6"></div></div>
+          <div class="ctrl">
+            <button class="cb" onclick="nav(6,-2)">⏮</button>
+            <button class="cb" onclick="nav(6,-1)">◀</button>
+            <span class="mc" id="mc6">الوضع الابتدائي</span>
+            <button class="cb" onclick="nav(6,1)">▶</button>
+            <button class="cb" onclick="nav(6,99)">⏭</button>
+          </div>
+          <div class="mb" id="mb6"></div>
+        </div>
+        <div class="ip">
+          <div class="ic">
+            <h4>بعد 9.bxc3</h4>
+            <div class="ki"><span class="ico">♗</span><span class="ktxt"><strong>8...Bxc3</strong> — الأسود يأخذ بالفيل محاولًا الاحتفاظ بفارسه نشطًا</span></div>
+            <div class="ki"><span class="ico">🏗️</span><span class="ktxt">بعد <strong>9.bxc3</strong> — الأبيض يملك بيادق مضاعفة لكن مركزًا قويًا ومُطوَّرًا</span></div>
+            <div class="ki"><span class="ico">💡</span><span class="ktxt">الأسود لديه خياران: <strong>9...d5</strong> أو <strong>9...0-0</strong> — كلاهما حاد</span></div>
+          </div>
+          <div class="varbox">
+            <div class="varbox-title">الأفكار الرئيسية للأبيض</div>
+            <div class="var-item"><span class="var-dot"></span><span class="var-txt">الفيل على c4 قوي جداً — يضغط على f7 باستمرار</span></div>
+            <div class="var-item"><span class="var-dot"></span><span class="var-txt">البيادق المضاعفة على c مقبولة مقابل المبادرة والنشاط</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7: 8...Bxc3 → 9.d5 -->
+    <div class="lc" id="lc7">
+      <div class="lhd">
+        <div class="ley">الحلقة الثانية · الدرس الثامن</div>
+        <div class="ltitle">8...Bxc3 — بعد 9.d5!</div>
+        <div class="lsub">بديل قوي! بدلًا من 9.bxc3 يلعب الأبيض 9.d5! — يضرب مباشرة ويكسب مساحة مع إبقاء التعقيدات.</div>
+      </div>
+      <div class="ba">
+        <div class="bwrap">
+          <div class="bcon"><div class="board" id="b7"></div></div>
+          <div class="ctrl">
+            <button class="cb" onclick="nav(7,-2)">⏮</button>
+            <button class="cb" onclick="nav(7,-1)">◀</button>
+            <span class="mc" id="mc7">الوضع الابتدائي</span>
+            <button class="cb" onclick="nav(7,1)">▶</button>
+            <button class="cb" onclick="nav(7,99)">⏭</button>
+          </div>
+          <div class="mb" id="mb7"></div>
+        </div>
+        <div class="ip">
+          <div class="ic">
+            <h4>فكرة 9.d5!</h4>
+            <div class="ki"><span class="ico">♟</span><span class="ktxt"><strong>9.d5!</strong> — يكسب مساحة ويهاجم الفارس على c6</span></div>
+            <div class="ki"><span class="ico">⚡</span><span class="ktxt">الأسود لديه خياران: <strong>9...Ne5</strong> (غير مدروس في الفيديو) أو <strong>9...Bf6</strong></span></div>
+            <div class="ki"><span class="ico">🔀</span><span class="ktxt">بعد <strong>9...Bf6</strong> — الأبيض يختار بين <strong>10.dxc6</strong> أو <strong>10.Re1</strong></span></div>
+          </div>
+          <div class="varbox">
+            <div class="varbox-title">الفروع الرئيسية</div>
+            <div class="var-item"><span class="var-dot"></span><span class="var-txt"><code>10.dxc6 bxc6</code> — الأبيض يكسب بيدقًا لكن يفتح ملف b للأسود</span></div>
+            <div class="var-item"><span class="var-dot"></span><span class="var-txt"><code>10.Re1</code> — يبقي التوتر ويضغط على e4 و d5 بشكل أكثر تعقيدًا</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NAV FOOTER -->
+    <div class="nav-footer">
+      <a class="nav-ep" href="italian_ep1_v2.html">
+        ← الحلقة الأولى
+      </a>
+      <span style="font-size:11px;color:var(--txt3)">٢ / ٢٨</span>
+      <a class="nav-ep next" href="italian_ep3.html">
+        الحلقة الثالثة ←
+      </a>
+    </div>
+
+  </div><!-- /main -->
+</div><!-- /app -->
+
+<script>
+const Wp={K:'♔',Q:'♕',R:'♖',B:'♗',N:'♘',P:'♙'};
+const Bp={K:'♚',Q:'♛',R:'♜',B:'♝',N:'♞',P:'♟'};
+
+function parseFen(fen){
+  const rows=fen.split(' ')[0].split('/'),b=[];
+  for(let r=0;r<8;r++){const row=[];for(const c of rows[r]){if(isNaN(c))row.push(c);else for(let i=0;i<+c;i++)row.push(null);}b.push(row);}
+  return b;
+}
+function pHtml(code){
+  if(!code)return'';
+  const w=code===code.toUpperCase();
+  const m={K:Wp.K,Q:Wp.Q,R:Wp.R,B:Wp.B,N:Wp.N,P:Wp.P,k:Bp.K,q:Bp.Q,r:Bp.R,b:Bp.B,n:Bp.N,p:Bp.P};
+  return`<span class="pc ${w?'w':'b'}">${m[code]}</span>`;
+}
+function drawBoard(id,fen){
+  const el=document.getElementById(id);if(!el)return;
+  const bd=parseFen(fen);el.innerHTML='';
+  const fl=['a','b','c','d','e','f','g','h'];
+  for(let r=0;r<8;r++)for(let c=0;c<8;c++){
+    const sq=document.createElement('div');
+    sq.className='sq '+((r+c)%2===0?'lt':'dk');
+    if(c===7)sq.innerHTML+=`<span class="rl">${8-r}</span>`;
+    if(r===7)sq.innerHTML+=`<span class="fl">${fl[c]}</span>`;
+    sq.innerHTML+=pHtml(bd[r][c]);
+    el.appendChild(sq);
+  }
+}
+
+const S='rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
+const ITA='r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 3 3';
+const GP='r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4';
+const GRECO='r1bqk2r/pppp1ppp/2n2n2/8/1bBPP3/2N5/PP3PPP/R1BQK2R b KQkq - 2 7';
+
+const DATA=[
+  // 0: intro - الحركات حتى 5.d4
+  [{f:S,l:'الوضع الابتدائي',n:''},
+   {f:'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1',l:'1.e4',n:''},
+   {f:'rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2',l:'1...e5',n:''},
+   {f:'rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2',l:'2.Nf3',n:''},
+   {f:'r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3',l:'2...Nc6',n:''},
+   {f:ITA,l:'3.Bc4',n:'الافتتاح الإيطالي'},
+   {f:GP,l:'3...Bc5',n:'Giuoco Piano'},
+   {f:'r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/2P2N2/PP1P1PPP/RNBQK2R b KQkq - 0 4',l:'4.c3',n:'يستعد لـ d4'},
+   {f:'r1bqk1nr/pppp1ppp/2n2n2/2b1p3/2B1P3/2P2N2/PP1P1PPP/RNBQK2R w KQkq - 1 5',l:'4...Nf6',n:'يضغط على e4'},
+   {f:'r1bqk1nr/pppp1ppp/2n2n2/2b1p3/2BPP3/2P2N2/PP3PPP/RNBQK2R b KQkq d3 0 5',l:'5.d4!',n:'يكسر المركز!'},
+   {f:'r1bqk1nr/pppp1ppp/2n2n2/2b5/2BpP3/2P2N2/PP3PPP/RNBQK2R w KQkq - 0 6',l:'5...exd4',n:''},
+   {f:'r1bqk1nr/pppp1ppp/2n2n2/2b5/2BPP3/5N2/PP3PPP/RNBQK2R b KQkq - 0 6',l:'6.cxd4',n:''},
+   {f:'r1bqk1nr/pppp1ppp/2n2n2/8/1bBPP3/5N2/PP3PPP/RNBQKB1R w KQkq - 1 7',l:'6...Bb4+',n:'الأسود يكسب وقتاً'}],
+  // 1: move by move
+  [{f:S,l:'الوضع الابتدائي',n:''},
+   {f:'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1',l:'1.e4',n:''},
+   {f:'rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2',l:'1...e5',n:''},
+   {f:'rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2',l:'2.Nf3',n:''},
+   {f:'r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3',l:'2...Nc6',n:''},
+   {f:ITA,l:'3.Bc4',n:''},
+   {f:GP,l:'3...Bc5',n:''},
+   {f:'r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/2P2N2/PP1P1PPP/RNBQK2R b KQkq - 0 4',l:'4.c3',n:'يستعد لـ d4'},
+   {f:'r1bqk1nr/pppp1ppp/2n2n2/2b1p3/2B1P3/2P2N2/PP1P1PPP/RNBQK2R w KQkq - 1 5',l:'4...Nf6',n:'يضغط على e4'},
+   {f:'r1bqk1nr/pppp1ppp/2n2n2/2b1p3/2BPP3/2P2N2/PP3PPP/RNBQK2R b KQkq d3 0 5',l:'5.d4!',n:'يكسر المركز'},
+   {f:'r1bqk1nr/pppp1ppp/2n2n2/2b5/2BpP3/2P2N2/PP3PPP/RNBQK2R w KQkq - 0 6',l:'5...exd4',n:''},
+   {f:'r1bqk1nr/pppp1ppp/2n2n2/2b5/2BPP3/5N2/PP3PPP/RNBQK2R b KQkq - 0 6',l:'6.cxd4',n:''},
+   {f:'r1bqk1nr/pppp1ppp/2n2n2/8/1bBPP3/5N2/PP3PPP/RNBQKB1R w KQkq - 1 7',l:'6...Bb4+',n:'الكشف! يكسب وقتاً'}],
+  // 2: 7.Bd2
+  [{f:'r1bqk1nr/pppp1ppp/2n2n2/8/1bBPP3/5N2/PP3PPP/RNBQKB1R w KQkq - 1 7',l:'بعد 6...Bb4+',n:'الأبيض يختار'},
+   {f:'r1bqk1nr/pppp1ppp/2n2n2/8/1bBPP3/5N2/PP3PPP/RNBQKB1R w KQkq - 1 7',l:'7.Bd2',n:'التبادل الهادئ'},
+   {f:'r1bqk1nr/pppp1ppp/2n2n2/8/2BPP3/5N2/PP1b1PPP/RN1QKB1R w KQkq - 0 8',l:'7...Bxd2+',n:''},
+   {f:'r1bqk1nr/pppp1ppp/2n2n2/8/2BPP3/5N2/PP1N1PPP/R2QKB1R b KQkq - 0 8',l:'8.Nbxd2',n:'موقف متوازن — الأبيض يكمل تطويره'}],
+  // 3: 7.Nc3
+  [{f:'r1bqk1nr/pppp1ppp/2n2n2/8/1bBPP3/5N2/PP3PPP/RNBQKB1R w KQkq - 1 7',l:'بعد 6...Bb4+',n:''},
+   {f:GRECO,l:'7.Nc3!',n:'Greco Gambit الحقيقي — يتجاهل الكشف!'},
+   {f:'r1bqk2r/pppp1ppp/2n2n2/8/1bBPP3/2N5/PP3PPP/R1BQK2R b KQkq - 0 8',l:'7...Nxe4',n:'الأسود يأخذ البيدق'},
+   {f:'r1bqk2r/pppp1ppp/2n2n2/8/1bBPP3/2N5/PP3PPP/R1BQK2R w KQkq - 0 8',l:'8.0-0!',n:'الأبيض يضحي ببيدق آخر للهجوم!'}],
+  // 4: 8...Nxc3 10.Qb3
+  [{f:S,l:'الوضع الابتدائي',n:''},
+   {f:GRECO,l:'7.Nc3',n:''},
+   {f:'r1bqk2r/pppp1ppp/2n2n2/8/1bBPP3/2N5/PP3PPP/R1BQK2R b KQkq - 0 8',l:'7...Nxe4',n:''},
+   {f:'r1bqk2r/pppp1ppp/2n2n2/8/1bBPP3/2N5/PP3PPP/R1BQ1RK1 b kq - 1 8',l:'8.0-0',n:''},
+   {f:'r1bqk2r/pppp1ppp/2n5/8/1bBPP3/2n5/PP3PPP/R1BQ1RK1 w kq - 0 9',l:'8...Nxc3',n:'الأسود يأخذ الفارس'},
+   {f:'r1bqk2r/pppp1ppp/2n5/8/1bBPP3/8/PP1b1PPP/R1BQ1RK1 w kq - 0 10',l:'9.bxc3 Bxc3',n:'الأسود يمتص القوة لكن...'},
+   {f:'r1bqk2r/pppp1ppp/2n5/8/2BPP3/1Q6/PP3PPP/R1B2RK1 b kq - 1 10',l:'10.Qb3!',n:'يهدد f7 والفيل في آنٍ واحد!'}],
+  // 5: Aitken 10.Ba3
+  [{f:S,l:'الوضع الابتدائي',n:''},
+   {f:GRECO,l:'7.Nc3',n:''},
+   {f:'r1bqk2r/pppp1ppp/2n2n2/8/1bBPP3/2N5/PP3PPP/R1BQK2R b KQkq - 0 8',l:'7...Nxe4',n:''},
+   {f:'r1bqk2r/pppp1ppp/2n2n2/8/1bBPP3/2N5/PP3PPP/R1BQ1RK1 b kq - 1 8',l:'8.0-0',n:''},
+   {f:'r1bqk2r/pppp1ppp/2n5/8/1bBPP3/2n5/PP3PPP/R1BQ1RK1 w kq - 0 9',l:'8...Nxc3',n:''},
+   {f:'r1bqk2r/pppp1ppp/2n5/8/1bBPP3/8/PP1b1PPP/R1BQ1RK1 w kq - 0 10',l:'9.bxc3 Bxc3',n:''},
+   {f:'r1bqk2r/pppp1ppp/2n5/8/2BPP3/B7/PP3PPP/R2Q1RK1 b kq - 1 10',l:'10.Ba3!',n:'Aitken! يمنع التحصين تمامًا!'}],
+  // 6: 8...Bxc3 9.bxc3
+  [{f:S,l:'الوضع الابتدائي',n:''},
+   {f:GRECO,l:'7.Nc3',n:''},
+   {f:'r1bqk2r/pppp1ppp/2n2n2/8/1bBPP3/2N5/PP3PPP/R1BQK2R b KQkq - 0 8',l:'7...Nxe4',n:''},
+   {f:'r1bqk2r/pppp1ppp/2n2n2/8/1bBPP3/2N5/PP3PPP/R1BQ1RK1 b kq - 1 8',l:'8.0-0',n:''},
+   {f:'r1bqk2r/pppp1ppp/2n2n2/8/2BPP3/2b5/PP3PPP/R1BQ1RK1 w kq - 0 9',l:'8...Bxc3',n:'الأسود يأخذ بالفيل'},
+   {f:'r1bqk2r/pppp1ppp/2n2n2/8/2BPP3/2P5/P4PPP/R1BQ1RK1 b kq - 0 9',l:'9.bxc3',n:'بيادق مضاعفة — لكن مركز قوي ونشاط عال'}],
+  // 7: 8...Bxc3 9.d5
+  [{f:S,l:'الوضع الابتدائي',n:''},
+   {f:GRECO,l:'7.Nc3',n:''},
+   {f:'r1bqk2r/pppp1ppp/2n2n2/8/1bBPP3/2N5/PP3PPP/R1BQK2R b KQkq - 0 8',l:'7...Nxe4',n:''},
+   {f:'r1bqk2r/pppp1ppp/2n2n2/8/1bBPP3/2N5/PP3PPP/R1BQ1RK1 b kq - 1 8',l:'8.0-0',n:''},
+   {f:'r1bqk2r/pppp1ppp/2n2n2/8/2BPP3/2b5/PP3PPP/R1BQ1RK1 w kq - 0 9',l:'8...Bxc3',n:''},
+   {f:'r1bqk2r/pppp1ppp/2n2n2/3P4/2B1P3/2b5/PP3PPP/R1BQ1RK1 b kq - 0 9',l:'9.d5!',n:'يكسب مساحة ويهاجم الفارس على c6!'}],
+];
+
+const cur=DATA.map(()=>0);
+
+function buildMB(li){
+  const bar=document.getElementById('mb'+li);if(!bar)return;
+  bar.innerHTML='';let mn=1;
+  DATA[li].forEach((m,i)=>{
+    if(i===0)return;
+    if(i%2===1){const ns=document.createElement('span');ns.className='mn';ns.textContent=mn+'.';bar.appendChild(ns);mn++;}
+    const t=document.createElement('span');t.className='mt';t.textContent=m.l;t.dataset.i=i;
+    t.onclick=()=>setM(li,i);bar.appendChild(t);
+  });
+}
+
+function setM(li,idx){
+  const moves=DATA[li];
+  if(idx<0)idx=0;if(idx>=moves.length)idx=moves.length-1;
+  cur[li]=idx;
+  drawBoard('b'+li,moves[idx].f);
+  const mc=document.getElementById('mc'+li);
+  if(mc)mc.textContent=idx===0?moves[0].l:(moves[idx].n||moves[idx].l);
+  const bar=document.getElementById('mb'+li);
+  if(bar)bar.querySelectorAll('.mt').forEach(t=>t.classList.toggle('active',+t.dataset.i===idx));
+}
+
+function nav(li,d){
+  const max=DATA[li].length-1;
+  let nx=d===-2?0:d===99?max:Math.max(0,Math.min(max,cur[li]+d));
+  setM(li,nx);
+}
+
+function show(idx,el,mIdx){
+  document.querySelectorAll('.lc').forEach(l=>l.classList.remove('active'));
+  document.querySelectorAll('.li').forEach(l=>l.classList.remove('active'));
+  document.querySelectorAll('.mob-btn').forEach(b=>b.classList.remove('active'));
+  const lc=document.getElementById('lc'+idx);if(lc)lc.classList.add('active');
+  if(el)el.classList.add('active');
+  if(mIdx!==undefined){const mb=document.querySelectorAll('.mob-btn')[mIdx];if(mb)mb.classList.add('active');}
+  if(DATA[idx])setM(idx,0);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function tog(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open');}
+
+window.addEventListener('DOMContentLoaded',()=>{
+  for(let i=0;i<DATA.length;i++){buildMB(i);setM(i,0);}
+});
+</script>
+</body>
+</html>

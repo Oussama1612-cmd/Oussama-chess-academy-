@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>الافتتاح الإيطالي — الحلقة ٣: Greco Gambit الخط الحديث</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0f1117;--bg2:#181c24;--bg3:#1e2330;--brd:#2a3040;--gold:#d4a84b;--gold2:#f0c96a;--gold3:#8a6528;--txt:#e2e8f0;--txt2:#8896a8;--txt3:#4a5568}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;overflow-x:hidden}
+body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;display:flex;flex-direction:column}
+.tb{background:var(--bg2);border-bottom:1px solid var(--brd);height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;position:sticky;top:0;z-index:200;flex-shrink:0}
+.tb-brand{display:flex;align-items:center;gap:8px}
+.tb-icon{font-size:22px}
+.tb-name{font-family:'Amiri',serif;font-size:15px;color:var(--gold);font-weight:700}
+.tb-badge{background:linear-gradient(135deg,var(--gold3),var(--gold));color:#0a0c10;font-size:10px;font-weight:800;padding:4px 11px;border-radius:20px;white-space:nowrap}
+.app{display:flex;flex:1;height:calc(100vh - 54px)}
+.sb{width:260px;background:var(--bg2);border-left:1px solid var(--brd);overflow-y:auto;flex-shrink:0;display:flex;flex-direction:column}
+.sb::-webkit-scrollbar{width:3px}.sb::-webkit-scrollbar-thumb{background:var(--brd)}
+.sb-hd{padding:16px 14px 10px;border-bottom:1px solid var(--brd);position:sticky;top:0;background:var(--bg2);z-index:5}
+.sb-hd h3{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
+.sb-hd p{font-size:11px;color:var(--txt3);margin-top:3px}
+.grp{border-bottom:1px solid var(--brd)}
+.gtog{width:100%;background:none;border:none;color:var(--txt);font-family:'Cairo',sans-serif;font-size:12px;font-weight:700;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;text-align:right;transition:background .15s}
+.gtog:hover{background:rgba(255,255,255,.03)}
+.gtog .arr{font-size:9px;color:var(--txt3);transition:transform .2s}
+.gtog.open .arr{transform:rotate(180deg)}
+.gnum{background:var(--bg3);border:1px solid var(--brd);color:var(--txt3);font-size:10px;padding:1px 7px;border-radius:10px;font-weight:700}
+.ll{display:none}.ll.open{display:block}
+.li{display:flex;align-items:center;gap:8px;padding:8px 14px 8px 10px;cursor:pointer;transition:background .15s;border-right:3px solid transparent}
+.li:hover{background:rgba(255,255,255,.03)}
+.li.active{background:rgba(212,168,75,.09);border-right-color:var(--gold)}
+.li .ln{font-size:10px;font-weight:800;color:var(--txt3);min-width:18px;text-align:center}
+.li.active .ln{color:var(--gold)}
+.li .lname{font-size:11.5px;color:var(--txt2);flex:1;line-height:1.4}
+.li.active .lname{color:var(--txt);font-weight:600}
+.mob-nav{display:none;background:var(--bg2);border-bottom:1px solid var(--brd);padding:10px 12px;gap:8px;overflow-x:auto;scrollbar-width:none;flex-shrink:0}
+.mob-nav::-webkit-scrollbar{display:none}
+.mob-btn{background:var(--bg3);border:1px solid var(--brd);color:var(--txt2);font-family:'Cairo',sans-serif;font-size:11px;font-weight:600;padding:7px 13px;border-radius:8px;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:all .15s}
+.mob-btn.active{background:rgba(212,168,75,.15);border-color:var(--gold);color:var(--gold)}
+.main{flex:1;overflow-y:auto;display:flex;flex-direction:column;align-items:center;padding:20px 16px 40px}
+.main::-webkit-scrollbar{width:4px}.main::-webkit-scrollbar-thumb{background:var(--brd)}
+.lc{display:none;flex-direction:column;gap:20px;width:100%;max-width:720px}
+.lc.active{display:flex}
+.lhd{width:100%}
+.ley{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.ltitle{font-family:'Amiri',serif;font-size:24px;font-weight:700;color:var(--txt);line-height:1.3;margin-bottom:7px}
+.lsub{font-size:13px;color:var(--txt2);line-height:1.75}
+.ba{display:flex;gap:18px;width:100%;align-items:flex-start;flex-wrap:wrap}
+.bwrap{display:flex;flex-direction:column;align-items:center;width:100%}
+.bcon{box-shadow:0 0 0 3px #8B6914,0 0 0 6px #1a1208,0 20px 60px rgba(0,0,0,.8);border-radius:4px;overflow:hidden;width:100%;max-width:400px}
+.ctrl{display:flex;align-items:center;gap:5px;margin-top:10px;direction:ltr;width:100%;max-width:400px}
+.cb{background:var(--bg3);border:1px solid var(--brd);color:var(--txt2);width:40px;height:40px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;transition:all .15s;flex-shrink:0}
+.cb:hover,.cb:active{border-color:var(--gold3);color:var(--gold);background:var(--bg2)}
+.mc{flex:1;text-align:center;font-size:11px;color:var(--txt3);font-weight:600;padding:0 4px;line-height:1.4}
+.mb{display:flex;flex-wrap:wrap;gap:3px;margin-top:8px;width:100%;max-width:400px;max-height:68px;overflow-y:auto;direction:ltr}
+.mt{padding:4px 10px;border-radius:5px;font-size:11px;font-weight:700;font-family:'Courier New',monospace;background:var(--bg3);border:1px solid var(--brd);color:var(--txt3);cursor:pointer;transition:all .15s}
+.mt:hover,.mt:active{border-color:var(--gold3);color:var(--txt2)}
+.mt.active{background:var(--gold);border-color:var(--gold);color:#0a0c10}
+.mn{padding:3px 4px;font-size:10px;color:var(--txt3);font-family:monospace}
+.ip{width:100%;display:flex;flex-direction:column;gap:12px}
+.ic{background:var(--bg3);border:1px solid var(--brd);border-radius:10px;padding:16px}
+.ic h4{font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.ki{display:flex;gap:9px;padding:8px 0;border-bottom:1px solid var(--brd);align-items:flex-start}
+.ki:last-child{border-bottom:none;padding-bottom:0}
+.ki .ico{font-size:16px;flex-shrink:0;margin-top:1px}
+.ki .ktxt{font-size:13px;color:var(--txt2);line-height:1.6}
+.ki .ktxt strong{color:var(--txt)}
+.notebox{background:rgba(212,168,75,.07);border:1px solid rgba(212,168,75,.2);border-radius:10px;padding:14px 16px;width:100%}
+.notebox .ntitle{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.notebox p{font-size:13px;color:var(--txt2);line-height:1.75}
+.notebox p strong{color:var(--gold2)}
+.varbox{background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:12px 14px;margin-top:8px}
+.varbox-title{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--txt2);margin-bottom:8px}
+.var-item{display:flex;align-items:flex-start;gap:9px;padding:7px 0;border-bottom:1px solid var(--brd)}
+.var-item:last-child{border-bottom:none;padding-bottom:0}
+.var-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:6px}
+.var-txt{font-size:12.5px;color:var(--txt2);line-height:1.6}
+.var-txt code{font-family:'Courier New',monospace;font-size:11px;color:var(--gold2);background:rgba(212,168,75,.1);padding:1px 5px;border-radius:4px}
+.nav-footer{display:flex;justify-content:space-between;align-items:center;width:100%;max-width:720px;margin-top:8px;padding-top:20px;border-top:1px solid var(--brd)}
+.nav-ep{text-decoration:none;padding:10px 16px;border-radius:8px;border:1px solid var(--brd);background:var(--bg2);color:var(--txt2);font-family:'Cairo',sans-serif;font-size:12px;font-weight:600;transition:all .15s}
+.nav-ep:hover{border-color:var(--gold3);color:var(--gold)}
+.nav-ep.next{background:linear-gradient(135deg,var(--gold3),var(--gold));color:#0a0c10;border-color:transparent;font-weight:700}
+@media(min-width:641px){.mob-nav{display:none!important}.sb{display:flex}}
+@media(max-width:640px){.sb{display:none!important}.mob-nav{display:flex!important}.app{flex-direction:column;height:auto;overflow:visible}.main{padding:16px 12px 40px;overflow:visible}.ltitle{font-size:20px}}
+</style>
+</head>
+<body>
+<div class="tb">
+  <div class="tb-brand"><span class="tb-icon">♟</span><span class="tb-name">أكاديمية أسامة للشطرنج</span></div>
+  <span class="tb-badge">الحلقة ٣ من ٢٨</span>
+</div>
+<div class="app">
+  <div class="sb">
+    <div class="sb-hd"><h3>الحلقة الثالثة</h3><p>Greco Gambit — الخط الحديث</p></div>
+    
+<div class="grp">
+  <button class="gtog open" onclick="tog(this)"><span>التمهيد</span><span style="display:flex;gap:7px;align-items:center"><span class="gnum">2</span><span class="arr">▼</span></span></button>
+  <div class="ll open">
+    <div class="li active" onclick="show(0,this)"><span class="ln">١</span><span class="lname">الخط الحديث — مقدمة</span></div>
+    <div class="li" onclick="show(1,this)"><span class="ln">٢</span><span class="lname">الحركات حتى 6.cxd4</span></div>
+  </div>
+</div>
+<div class="grp">
+  <button class="gtog open" onclick="tog(this)"><span>خيارات الأسود</span><span style="display:flex;gap:7px;align-items:center"><span class="gnum">3</span><span class="arr">▼</span></span></button>
+  <div class="ll open">
+    <div class="li" onclick="show(2,this)"><span class="ln">٣</span><span class="lname">6...Ng4 — الهجوم المباشر</span></div>
+    <div class="li" onclick="show(3,this)"><span class="ln">٤</span><span class="lname">6...Ne4 — الضغط على المركز</span></div>
+    <div class="li" onclick="show(4,this)"><span class="ln">٥</span><span class="lname">6...d5 — كسر المركز</span></div>
+  </div>
+</div>
+<div class="grp">
+  <button class="gtog open" onclick="tog(this)"><span>بعد 6...d5</span><span style="display:flex;gap:7px;align-items:center"><span class="gnum">3</span><span class="arr">▼</span></span></button>
+  <div class="ll open">
+    <div class="li" onclick="show(5,this)"><span class="ln">٦</span><span class="lname">7.exf6 — التسلسل الكامل</span></div>
+    <div class="li" onclick="show(6,this)"><span class="ln">٧</span><span class="lname">7.Be2 — التراجع الهادئ</span></div>
+    <div class="li" onclick="show(7,this)"><span class="ln">٨</span><span class="lname">7.Bb5 — الضغط على c6</span></div>
+  </div>
+</div>
+<div class="grp">
+  <button class="gtog open" onclick="tog(this)"><span>بعد 7.exf6 — الخطط</span><span style="display:flex;gap:7px;align-items:center"><span class="gnum">4</span><span class="arr">▼</span></span></button>
+  <div class="ll open">
+    <div class="li" onclick="show(8,this)"><span class="ln">٩</span><span class="lname">10.0-0 — التحصين</span></div>
+    <div class="li" onclick="show(9,this)"><span class="ln">١٠</span><span class="lname">10.Be3 — الضغط على b6</span></div>
+    <div class="li" onclick="show(10,this)"><span class="ln">١١</span><span class="lname">10...f5 — هجوم الأسود</span></div>
+    <div class="li" onclick="show(11,this)"><span class="ln">١٢</span><span class="lname">10...Bg4 — الضغط التكتيكي</span></div>
+  </div>
+</div>
+  </div>
+  <div class="mob-nav"><button class="mob-btn active" onclick="show(0,null,0)">١·مقدمة</button><button class="mob-btn" onclick="show(1,null,1)">٢·الحركات</button><button class="mob-btn" onclick="show(2,null,2)">٣·6...Ng4</button><button class="mob-btn" onclick="show(3,null,3)">٤·6...Ne4</button><button class="mob-btn" onclick="show(4,null,4)">٥·6...d5</button><button class="mob-btn" onclick="show(5,null,5)">٦·7.exf6</button><button class="mob-btn" onclick="show(6,null,6)">٧·7.Be2</button><button class="mob-btn" onclick="show(7,null,7)">٨·7.Bb5</button><button class="mob-btn" onclick="show(8,null,8)">٩·10.0-0</button><button class="mob-btn" onclick="show(9,null,9)">١٠·10.Be3</button><button class="mob-btn" onclick="show(10,null,10)">١١·10...f5</button><button class="mob-btn" onclick="show(11,null,11)">١٢·10...Bg4</button></div>
+  <div class="main">
+    <div class="lc active" id="lc0"><div class="lhd"><div class="ley">الحلقة الثالثة · الدرس الأول</div><div class="ltitle">Greco Gambit — الخط الحديث</div><div class="lsub">الفرق الجوهري: هنا الأسود لا يلعب 6...Bb4+ بل يختار خطاً أكثر حدة وتعقيداً.</div></div><div class="ba"><div class="bwrap"><div class="bcon" id="bc0"></div><div class="ctrl"><button class="cb" onclick="nav(0,-2)">⏮</button><button class="cb" onclick="nav(0,-1)">◀</button><span class="mc" id="mc0">الوضع الابتدائي</span><button class="cb" onclick="nav(0,1)">▶</button><button class="cb" onclick="nav(0,99)">⏭</button></div><div class="mb" id="mb0"></div></div><div class="ip"><div class="ic"><h4>الفرق عن الخط التقليدي</h4><div class="ki"><span class="ico">🔄</span><span class="ktxt">التقليدي: <strong>6...Bb4+</strong> — الأسود يكسب وقتاً بالكشف</span></div><div class="ki"><span class="ico">⚡</span><span class="ktxt">الحديث: الأسود يبقي التوتر ويختار خطاً أكثر حدة</span></div><div class="ki"><span class="ico">🎯</span><span class="ktxt">الخيارات: <strong>6...Ng4</strong> أو <strong>6...Ne4</strong> أو <strong>6...d5</strong></span></div></div><div class="notebox"><div class="ntitle">📌 السياق</div><p>نصل هنا بعد: <strong>1.e4 e5 2.Nf3 Nc6 3.Bc4 Bc5 4.c3 Nf6 5.d4 exd4 6.cxd4</strong></p></div></div></div></div><div class="lc" id="lc1"><div class="lhd"><div class="ley">الحلقة الثالثة · الدرس الثاني</div><div class="ltitle">الحركات حتى 6.cxd4</div><div class="lsub">نتتبع الحركات خطوة بخطوة حتى نصل للموقف الرئيسي حيث يختار الأسود خطه الحديث.</div></div><div class="ba"><div class="bwrap"><div class="bcon" id="bc1"></div><div class="ctrl"><button class="cb" onclick="nav(1,-2)">⏮</button><button class="cb" onclick="nav(1,-1)">◀</button><span class="mc" id="mc1">الوضع الابتدائي</span><button class="cb" onclick="nav(1,1)">▶</button><button class="cb" onclick="nav(1,99)">⏭</button></div><div class="mb" id="mb1"></div></div><div class="ip"><div class="ic"><h4>شرح الحركات</h4><div class="ki"><span class="ico">①</span><span class="ktxt"><strong>4.c3</strong> — يستعد لـ d4</span></div><div class="ki"><span class="ico">②</span><span class="ktxt"><strong>4...Nf6</strong> — يضغط على e4</span></div><div class="ki"><span class="ico">③</span><span class="ktxt"><strong>5.d4!</strong> — يكسر المركز</span></div><div class="ki"><span class="ico">④</span><span class="ktxt"><strong>5...exd4 6.cxd4</strong> — مركز الأبيض قوي جداً</span></div><div class="ki"><span class="ico">⑤</span><span class="ktxt">الأسود في موقف القرار — يختار الخط الحديث</span></div></div></div></div></div><div class="lc" id="lc2"><div class="lhd"><div class="ley">الحلقة الثالثة · الدرس الثالث</div><div class="ltitle">6...Ng4 — الهجوم على f2</div><div class="lsub">الأسود يهاجم f2 مباشرة — تهديد حاد لكن الأبيض يرد بـ 7.d5! بشكل مدمر.</div></div><div class="ba"><div class="bwrap"><div class="bcon" id="bc2"></div><div class="ctrl"><button class="cb" onclick="nav(2,-2)">⏮</button><button class="cb" onclick="nav(2,-1)">◀</button><span class="mc" id="mc2">بعد 6.cxd4</span><button class="cb" onclick="nav(2,1)">▶</button><button class="cb" onclick="nav(2,99)">⏭</button></div><div class="mb" id="mb2"></div></div><div class="ip"><div class="ic"><h4>الرد الصحيح</h4><div class="ki"><span class="ico">♞</span><span class="ktxt"><strong>6...Ng4</strong> — يهدد Nxf2! لكسب الملكة</span></div><div class="ki"><span class="ico">💎</span><span class="ktxt"><strong>7.d5!</strong> — الرد المثالي! يضرب الفارس على c6</span></div><div class="ki"><span class="ico">⚡</span><span class="ktxt">بعد <strong>7...Na5 8.Bxf7+!</strong> — تضحية مدمرة تجبر الملك على الخروج</span></div><div class="ki"><span class="ico">✅</span><span class="ktxt">الأبيض بتعويض ممتاز — الأسود خارج التحصين</span></div></div></div></div></div><div class="lc" id="lc3"><div class="lhd"><div class="ley">الحلقة الثالثة · الدرس الرابع</div><div class="ltitle">6...Ne4 — الضغط على المركز</div><div class="lsub">الأسود يقفز بفارسه إلى e4 ليضغط على الفيل — الأبيض يرد بـ 7.Nxe4!</div></div><div class="ba"><div class="bwrap"><div class="bcon" id="bc3"></div><div class="ctrl"><button class="cb" onclick="nav(3,-2)">⏮</button><button class="cb" onclick="nav(3,-1)">◀</button><span class="mc" id="mc3">بعد 6.cxd4</span><button class="cb" onclick="nav(3,1)">▶</button><button class="cb" onclick="nav(3,99)">⏭</button></div><div class="mb" id="mb3"></div></div><div class="ip"><div class="ic"><h4>الرد الصحيح</h4><div class="ki"><span class="ico">♞</span><span class="ktxt"><strong>6...Ne4</strong> — يهاجم الفيل ويضغط على المركز</span></div><div class="ki"><span class="ico">🔄</span><span class="ktxt"><strong>7.Nxe4!</strong> — الأبيض يأخذ ويحتفظ بميزة واضحة</span></div><div class="ki"><span class="ico">💡</span><span class="ktxt">بعد <strong>7...Bxd4 8.Nxd4 Nxd4</strong> — فيل قوي مقابل فارس معزول</span></div></div></div></div></div><div class="lc" id="lc4"><div class="lhd"><div class="ley">الحلقة الثالثة · الدرس الخامس</div><div class="ltitle">6...d5 — كسر المركز</div><div class="lsub">الأسود يكسر المركز مباشرة — هذا هو الخط الرئيسي للفيديو ويؤدي لمواقف حادة.</div></div><div class="ba"><div class="bwrap"><div class="bcon" id="bc4"></div><div class="ctrl"><button class="cb" onclick="nav(4,-2)">⏮</button><button class="cb" onclick="nav(4,-1)">◀</button><span class="mc" id="mc4">بعد 6.cxd4</span><button class="cb" onclick="nav(4,1)">▶</button><button class="cb" onclick="nav(4,99)">⏭</button></div><div class="mb" id="mb4"></div></div><div class="ip"><div class="ic"><h4>خيارات الأبيض بعد 6...d5</h4><div class="ki"><span class="ico">①</span><span class="ktxt"><strong>7.exf6</strong> — يأخذ الفارس ويفتح ملف e (الخط الرئيسي)</span></div><div class="ki"><span class="ico">②</span><span class="ktxt"><strong>7.Be2</strong> — يتراجع بهدوء ويستمر في التطوير</span></div><div class="ki"><span class="ico">③</span><span class="ktxt"><strong>7.Bb5</strong> — يضغط على c6 ويربط الفارس</span></div></div></div></div></div><div class="lc" id="lc5"><div class="lhd"><div class="ley">الحلقة الثالثة · الدرس السادس</div><div class="ltitle">7.exf6 — التسلسل الكامل</div><div class="lsub">بعد 7.exf6 Nxf6 8.cxd4 Bb6 9.Nc3 0-0 — الأبيض يختار بين 10.0-0 و 10.Be3.</div></div><div class="ba"><div class="bwrap"><div class="bcon" id="bc5"></div><div class="ctrl"><button class="cb" onclick="nav(5,-2)">⏮</button><button class="cb" onclick="nav(5,-1)">◀</button><span class="mc" id="mc5">بعد 6...d5</span><button class="cb" onclick="nav(5,1)">▶</button><button class="cb" onclick="nav(5,99)">⏭</button></div><div class="mb" id="mb5"></div></div><div class="ip"><div class="ic"><h4>الفكرة</h4><div class="ki"><span class="ico">♟</span><span class="ktxt"><strong>7.exf6 Nxf6</strong> — الأسود يستعيد بالفارس</span></div><div class="ki"><span class="ico">🎯</span><span class="ktxt">بعد <strong>8.cxd4 Bb6 9.Nc3 0-0</strong> — الأسود يحصّن</span></div><div class="ki"><span class="ico">✅</span><span class="ktxt">الأبيض يملك مركزاً أقوى — يختار بين 10.0-0 أو 10.Be3</span></div></div></div></div></div><div class="lc" id="lc6"><div class="lhd"><div class="ley">الحلقة الثالثة · الدرس السابع</div><div class="ltitle">7.Be2 — التراجع الهادئ</div><div class="lsub">بعد 6...d5 الأبيض يتراجع بفيله إلى e2 بهدوء ويتجنب التعقيدات.</div></div><div class="ba"><div class="bwrap"><div class="bcon" id="bc6"></div><div class="ctrl"><button class="cb" onclick="nav(6,-2)">⏮</button><button class="cb" onclick="nav(6,-1)">◀</button><span class="mc" id="mc6">بعد 6...d5</span><button class="cb" onclick="nav(6,1)">▶</button><button class="cb" onclick="nav(6,99)">⏭</button></div><div class="mb" id="mb6"></div></div><div class="ip"><div class="ic"><h4>الفكرة</h4><div class="ki"><span class="ico">🐢</span><span class="ktxt"><strong>7.Be2</strong> — يتراجع ويتحضر للتحصين السريع</span></div><div class="ki"><span class="ico">⚖️</span><span class="ktxt">موقف أكثر هدوءاً — الأبيض يحتفظ بالبيدق ويبني منهجياً</span></div><div class="ki"><span class="ico">💡</span><span class="ktxt">بعد <strong>7...dxe4 8.Nxe5!</strong> — الأبيض يستعيد البيدق بميزة موضعية</span></div></div></div></div></div><div class="lc" id="lc7"><div class="lhd"><div class="ley">الحلقة الثالثة · الدرس الثامن</div><div class="ltitle">7.Bb5 — الضغط على c6</div><div class="lsub">بعد 6...d5 الأبيض يلعب 7.Bb5 مثبتاً الفارس على c6 وضاغطاً على بنية الأسود.</div></div><div class="ba"><div class="bwrap"><div class="bcon" id="bc7"></div><div class="ctrl"><button class="cb" onclick="nav(7,-2)">⏮</button><button class="cb" onclick="nav(7,-1)">◀</button><span class="mc" id="mc7">بعد 6...d5</span><button class="cb" onclick="nav(7,1)">▶</button><button class="cb" onclick="nav(7,99)">⏭</button></div><div class="mb" id="mb7"></div></div><div class="ip"><div class="ic"><h4>الفكرة</h4><div class="ki"><span class="ico">♗</span><span class="ktxt"><strong>7.Bb5</strong> — يثبت الفارس على c6 ويضغط على بنية الأسود</span></div><div class="ki"><span class="ico">🎯</span><span class="ktxt">بعد <strong>7...Ne4 8.Nxe5!</strong> — تعقيدات حادة وميزة للأبيض</span></div><div class="ki"><span class="ico">💡</span><span class="ktxt">خيار أقل شيوعاً لكن يفاجئ الأسود غير المستعد</span></div></div></div></div></div><div class="lc" id="lc8"><div class="lhd"><div class="ley">الحلقة الثالثة · الدرس التاسع</div><div class="ltitle">10.0-0 — التحصين</div><div class="lsub">بعد 9...0-0 الأبيض يحصّن ويعد لـ Re1 وضغط مستمر على المركز.</div></div><div class="ba"><div class="bwrap"><div class="bcon" id="bc8"></div><div class="ctrl"><button class="cb" onclick="nav(8,-2)">⏮</button><button class="cb" onclick="nav(8,-1)">◀</button><span class="mc" id="mc8">بعد 9...0-0</span><button class="cb" onclick="nav(8,1)">▶</button><button class="cb" onclick="nav(8,99)">⏭</button></div><div class="mb" id="mb8"></div></div><div class="ip"><div class="ic"><h4>10.0-0</h4><div class="ki"><span class="ico">🏰</span><span class="ktxt"><strong>10.0-0</strong> — يحصّن ثم يلعب Re1 لدعم المركز</span></div><div class="ki"><span class="ico">⚡</span><span class="ktxt">الفكرة: d5 لاحقاً لتثبيت الفارس وكسب مساحة</span></div><div class="ki"><span class="ico">✅</span><span class="ktxt">الأبيض يملك مركزاً أقوى وفيلين نشطين</span></div></div></div></div></div><div class="lc" id="lc9"><div class="lhd"><div class="ley">الحلقة الثالثة · الدرس العاشر</div><div class="ltitle">10.Be3 — الضغط على b6</div><div class="lsub">بديل 10.0-0 — الأبيض يلعب 10.Be3 مهدداً الفيل على b6.</div></div><div class="ba"><div class="bwrap"><div class="bcon" id="bc9"></div><div class="ctrl"><button class="cb" onclick="nav(9,-2)">⏮</button><button class="cb" onclick="nav(9,-1)">◀</button><span class="mc" id="mc9">بعد 9...0-0</span><button class="cb" onclick="nav(9,1)">▶</button><button class="cb" onclick="nav(9,99)">⏭</button></div><div class="mb" id="mb9"></div></div><div class="ip"><div class="ic"><h4>10.Be3!</h4><div class="ki"><span class="ico">♗</span><span class="ktxt"><strong>10.Be3</strong> — يطور ويضغط على b6 في آنٍ واحد</span></div><div class="ki"><span class="ico">🎯</span><span class="ktxt">الهدف: إجبار الفيل على التراجع ثم استغلال المركز</span></div><div class="ki"><span class="ico">⚡</span><span class="ktxt">الأسود لديه ردان: <strong>10...f5</strong> أو <strong>10...Bg4</strong></span></div></div></div></div></div><div class="lc" id="lc10"><div class="lhd"><div class="ley">الحلقة الثالثة · الدرس الحادي عشر</div><div class="ltitle">10...f5 — هجوم الأسود</div><div class="lsub">بعد 10.Be3 يلعب الأسود 10...f5! محاولاً الهجوم من الجناح.</div></div><div class="ba"><div class="bwrap"><div class="bcon" id="bc10"></div><div class="ctrl"><button class="cb" onclick="nav(10,-2)">⏮</button><button class="cb" onclick="nav(10,-1)">◀</button><span class="mc" id="mc10">بعد 10.Be3</span><button class="cb" onclick="nav(10,1)">▶</button><button class="cb" onclick="nav(10,99)">⏭</button></div><div class="mb" id="mb10"></div></div><div class="ip"><div class="ic"><h4>فكرة 10...f5</h4><div class="ki"><span class="ico">⚔️</span><span class="ktxt"><strong>10...f5</strong> — يهاجم e4 ويمنع تقدم الأبيض</span></div><div class="ki"><span class="ico">⚡</span><span class="ktxt"><strong>11.e5!</strong> — الأبيض يقلب الطاولة ويكسب مساحة هائلة!</span></div><div class="ki"><span class="ico">💡</span><span class="ktxt">موقف حاد جداً — كلا الطرفين يهاجمان في نفس الوقت</span></div></div></div></div></div><div class="lc" id="lc11"><div class="lhd"><div class="ley">الحلقة الثالثة · الدرس الثاني عشر</div><div class="ltitle">10...Bg4 — الضغط التكتيكي</div><div class="lsub">10...Bg4 يضغط على الفارس f3 ويخلق تهديدات تكتيكية.</div></div><div class="ba"><div class="bwrap"><div class="bcon" id="bc11"></div><div class="ctrl"><button class="cb" onclick="nav(11,-2)">⏮</button><button class="cb" onclick="nav(11,-1)">◀</button><span class="mc" id="mc11">بعد 10.Be3</span><button class="cb" onclick="nav(11,1)">▶</button><button class="cb" onclick="nav(11,99)">⏭</button></div><div class="mb" id="mb11"></div></div><div class="ip"><div class="ic"><h4>فكرة 10...Bg4</h4><div class="ki"><span class="ico">♗</span><span class="ktxt"><strong>10...Bg4</strong> — يضغط على f3 ويهدد تثبيت الفارس</span></div><div class="ki"><span class="ico">🎯</span><span class="ktxt">الفكرة: Nd4 لاحقاً لتبادل الفيل النشط على e3</span></div><div class="ki"><span class="ico">⚖️</span><span class="ktxt">موقف متوازن — يحتاج لعباً دقيقاً من الطرفين</span></div></div><div class="varbox"><div class="varbox-title">ردود الأبيض</div><div class="var-item"><span class="var-dot"></span><span class="var-txt"><code>11.d5!</code> — يكسب مساحة ويمنع Nd4</span></div><div class="var-item"><span class="var-dot"></span><span class="var-txt"><code>11.h3 Bh5 12.g4!</code> — يطرد الفيل بشكل حاد</span></div></div></div></div></div>
+    <div class="nav-footer">
+      <a class="nav-ep" href="italian_ep2.html">← الحلقة الثانية</a>
+      <span style="font-size:11px;color:var(--txt3)">٣ / ٢٨</span>
+      <a class="nav-ep next" href="italian_ep4.html">الحلقة الرابعة →</a>
+    </div>
+  </div>
+</div>
+<script>
+const PIECES={"wP": "<g><ellipse cx="50" cy="85" rx="20" ry="5" fill="rgba(0,0,0,0.2)"/><rect x="36" y="64" width="28" height="18" rx="4" fill="#f5f5f5" stroke="#ccc" stroke-width="1.5"/><circle cx="50" cy="52" r="14" fill="#fff" stroke="#ccc" stroke-width="1.5"/><ellipse cx="50" cy="81" rx="18" ry="4" fill="#e8e8e8" stroke="#ccc" stroke-width="1"/></g>", "bP": "<g><ellipse cx="50" cy="85" rx="20" ry="5" fill="rgba(0,0,0,0.35)"/><rect x="36" y="64" width="28" height="18" rx="4" fill="#1a1a1a" stroke="#555" stroke-width="1.5"/><circle cx="50" cy="52" r="14" fill="#111" stroke="#555" stroke-width="1.5"/><ellipse cx="50" cy="81" rx="18" ry="4" fill="#282828" stroke="#555" stroke-width="1"/></g>", "wR": "<g><ellipse cx="50" cy="86" rx="22" ry="5" fill="rgba(0,0,0,0.2)"/><rect x="29" y="78" width="42" height="8" rx="3" fill="#e8e8e8" stroke="#ccc" stroke-width="1.5"/><rect x="33" y="42" width="34" height="36" rx="2" fill="#f0f0f0" stroke="#ccc" stroke-width="1.5"/><rect x="28" y="30" width="11" height="15" rx="2" fill="#f0f0f0" stroke="#ccc" stroke-width="1.5"/><rect x="44" y="30" width="12" height="15" rx="2" fill="#f0f0f0" stroke="#ccc" stroke-width="1.5"/><rect x="61" y="30" width="11" height="15" rx="2" fill="#f0f0f0" stroke="#ccc" stroke-width="1.5"/></g>", "bR": "<g><ellipse cx="50" cy="86" rx="22" ry="5" fill="rgba(0,0,0,0.35)"/><rect x="29" y="78" width="42" height="8" rx="3" fill="#282828" stroke="#555" stroke-width="1.5"/><rect x="33" y="42" width="34" height="36" rx="2" fill="#1a1a1a" stroke="#555" stroke-width="1.5"/><rect x="28" y="30" width="11" height="15" rx="2" fill="#1a1a1a" stroke="#555" stroke-width="1.5"/><rect x="44" y="30" width="12" height="15" rx="2" fill="#1a1a1a" stroke="#555" stroke-width="1.5"/><rect x="61" y="30" width="11" height="15" rx="2" fill="#1a1a1a" stroke="#555" stroke-width="1.5"/></g>", "wN": "<g><ellipse cx="50" cy="86" rx="22" ry="5" fill="rgba(0,0,0,0.2)"/><rect x="30" y="77" width="40" height="9" rx="3" fill="#e8e8e8" stroke="#ccc" stroke-width="1.5"/><path d="M36,77 C31,63 30,48 34,38 C37,28 45,20 54,19 C63,18 70,24 71,32 C72,40 66,48 60,53 C56,57 57,63 59,70 C61,74 62,77 62,77 Z" fill="#f5f5f5" stroke="#ccc" stroke-width="1.5"/><circle cx="63" cy="30" r="4" fill="#666"/><ellipse cx="43" cy="48" rx="6" ry="3" fill="#e0e0e0"/></g>", "bN": "<g><ellipse cx="50" cy="86" rx="22" ry="5" fill="rgba(0,0,0,0.35)"/><rect x="30" y="77" width="40" height="9" rx="3" fill="#282828" stroke="#555" stroke-width="1.5"/><path d="M36,77 C31,63 30,48 34,38 C37,28 45,20 54,19 C63,18 70,24 71,32 C72,40 66,48 60,53 C56,57 57,63 59,70 C61,74 62,77 62,77 Z" fill="#1a1a1a" stroke="#555" stroke-width="1.5"/><circle cx="63" cy="30" r="4" fill="#aaa"/><ellipse cx="43" cy="48" rx="6" ry="3" fill="#282828"/></g>", "wB": "<g><ellipse cx="50" cy="86" rx="22" ry="5" fill="rgba(0,0,0,0.2)"/><rect x="30" y="77" width="40" height="9" rx="3" fill="#e8e8e8" stroke="#ccc" stroke-width="1.5"/><ellipse cx="50" cy="67" rx="17" ry="10" fill="#f0f0f0" stroke="#ccc" stroke-width="1.5"/><ellipse cx="50" cy="50" rx="9" ry="17" fill="#f5f5f5" stroke="#ccc" stroke-width="1.5"/><circle cx="50" cy="33" r="8" fill="#fff" stroke="#ccc" stroke-width="1.5"/><circle cx="50" cy="24" r="3" fill="#d4a84b" stroke="#b8902a" stroke-width="1"/></g>", "bB": "<g><ellipse cx="50" cy="86" rx="22" ry="5" fill="rgba(0,0,0,0.35)"/><rect x="30" y="77" width="40" height="9" rx="3" fill="#282828" stroke="#555" stroke-width="1.5"/><ellipse cx="50" cy="67" rx="17" ry="10" fill="#1a1a1a" stroke="#555" stroke-width="1.5"/><ellipse cx="50" cy="50" rx="9" ry="17" fill="#111" stroke="#555" stroke-width="1.5"/><circle cx="50" cy="33" r="8" fill="#111" stroke="#555" stroke-width="1.5"/><circle cx="50" cy="24" r="3" fill="#d4a84b" stroke="#b8902a" stroke-width="1"/></g>", "wQ": "<g><ellipse cx="50" cy="86" rx="24" ry="5" fill="rgba(0,0,0,0.2)"/><rect x="27" y="76" width="46" height="10" rx="3" fill="#e8e8e8" stroke="#ccc" stroke-width="1.5"/><path d="M32,76 C32,68 36,62 50,60 C64,62 68,68 68,76 Z" fill="#f0f0f0" stroke="#ccc" stroke-width="1"/><path d="M50,60 L35,38 M50,60 L50,34 M50,60 L65,38" stroke="#ccc" stroke-width="1.5" fill="none"/><circle cx="50" cy="31" r="7" fill="#fff" stroke="#ccc" stroke-width="1.5"/><circle cx="32" cy="35" r="6" fill="#fff" stroke="#ccc" stroke-width="1.5"/><circle cx="68" cy="35" r="6" fill="#fff" stroke="#ccc" stroke-width="1.5"/><circle cx="39" cy="26" r="5" fill="#fff" stroke="#ccc" stroke-width="1.5"/><circle cx="61" cy="26" r="5" fill="#fff" stroke="#ccc" stroke-width="1.5"/></g>", "bQ": "<g><ellipse cx="50" cy="86" rx="24" ry="5" fill="rgba(0,0,0,0.35)"/><rect x="27" y="76" width="46" height="10" rx="3" fill="#282828" stroke="#555" stroke-width="1.5"/><path d="M32,76 C32,68 36,62 50,60 C64,62 68,68 68,76 Z" fill="#1a1a1a" stroke="#555" stroke-width="1"/><path d="M50,60 L35,38 M50,60 L50,34 M50,60 L65,38" stroke="#555" stroke-width="1.5" fill="none"/><circle cx="50" cy="31" r="7" fill="#111" stroke="#555" stroke-width="1.5"/><circle cx="32" cy="35" r="6" fill="#111" stroke="#555" stroke-width="1.5"/><circle cx="68" cy="35" r="6" fill="#111" stroke="#555" stroke-width="1.5"/><circle cx="39" cy="26" r="5" fill="#111" stroke="#555" stroke-width="1.5"/><circle cx="61" cy="26" r="5" fill="#111" stroke="#555" stroke-width="1.5"/></g>", "wK": "<g><ellipse cx="50" cy="86" rx="24" ry="5" fill="rgba(0,0,0,0.2)"/><rect x="27" y="76" width="46" height="10" rx="3" fill="#e8e8e8" stroke="#ccc" stroke-width="1.5"/><rect x="33" y="56" width="34" height="20" rx="2" fill="#f0f0f0" stroke="#ccc" stroke-width="1.5"/><rect x="37" y="43" width="26" height="16" rx="2" fill="#f5f5f5" stroke="#ccc" stroke-width="1.5"/><rect x="46" y="20" width="8" height="26" rx="3" fill="#fff" stroke="#ccc" stroke-width="1.5"/><rect x="36" y="27" width="28" height="8" rx="3" fill="#fff" stroke="#ccc" stroke-width="1.5"/></g>", "bK": "<g><ellipse cx="50" cy="86" rx="24" ry="5" fill="rgba(0,0,0,0.35)"/><rect x="27" y="76" width="46" height="10" rx="3" fill="#282828" stroke="#555" stroke-width="1.5"/><rect x="33" y="56" width="34" height="20" rx="2" fill="#1a1a1a" stroke="#555" stroke-width="1.5"/><rect x="37" y="43" width="26" height="16" rx="2" fill="#111" stroke="#555" stroke-width="1.5"/><rect x="46" y="20" width="8" height="26" rx="3" fill="#111" stroke="#555" stroke-width="1.5"/><rect x="36" y="27" width="28" height="8" rx="3" fill="#111" stroke="#555" stroke-width="1.5"/></g>"};
+const PMAP={K:"wK",Q:"wQ",R:"wR",B:"wB",N:"wN",P:"wP",k:"bK",q:"bQ",r:"bR",b:"bB",n:"bN",p:"bP"};
+
+function parseFen(fen){
+  const rows=fen.split(' ')[0].split('/'),b=[];
+  for(let r=0;r<8;r++){const row=[];for(const c of rows[r]){if(isNaN(c))row.push(c);else for(let i=0;i<+c;i++)row.push(null);}b.push(row);}
+  return b;
+}
+
+function drawBoard(containerId, fen){
+  const el=document.getElementById(containerId); if(!el) return;
+  const board=parseFen(fen);
+  const SQ=60, files=['a','b','c','d','e','f','g','h'];
+  const light='#f0d9b5', dark='#b58863';
+  let svg=`<svg viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:auto">`;
+  for(let r=0;r<8;r++) for(let c=0;c<8;c++){
+    const x=c*SQ, y=r*SQ, col=(r+c)%2===0?light:dark;
+    svg+=`<rect x="${x}" y="${y}" width="${SQ}" height="${SQ}" fill="${col}"/>`;
+    const lc=(r+c)%2===0?dark:light;
+    if(c===7) svg+=`<text x="${x+SQ-2}" y="${y+11}" font-size="11" fill="${lc}" text-anchor="end" font-family="Arial" font-weight="bold">${8-r}</text>`;
+    if(r===7) svg+=`<text x="${x+2}" y="${y+SQ-3}" font-size="11" fill="${lc}" font-family="Arial" font-weight="bold">${files[c]}</text>`;
+    const p=board[r][c];
+    if(p && PMAP[p] && PIECES[PMAP[p]]){
+      const m=4;
+      svg+=`<g transform="translate(${x+m},${y+m}) scale(${(SQ-2*m)/100})">${PIECES[PMAP[p]]}</g>`;
+    }
+  }
+  svg+=`<rect x="0" y="0" width="480" height="480" fill="none" stroke="#8B6914" stroke-width="3"/>`;
+  svg+='</svg>';
+  el.innerHTML=svg;
+}
+
+const DATA=[[{f:"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",l:"الوضع الابتدائي",n:""},{f:"rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",l:"1.e4",n:""},{f:"r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 0 1",l:"3.Bc4",n:"الافتتاح الإيطالي"},{f:"r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/2P2N2/PP1P1PPP/RNBQK2R w KQkq - 0 1",l:"4.c3",n:""},{f:"r1bqk1nr/pppp1ppp/2n2n2/2b1p3/2BPP3/2P2N2/PP3PPP/RNBQK2R w KQkq - 0 1",l:"5.d4!",n:"يكسر المركز"},{f:"r1bqk1nr/pppp1ppp/2n2n2/2b5/2BPP3/5N2/PP3PPP/RNBQK2R w KQkq - 0 1",l:"6.cxd4",n:"الأسود يختار — الخط الحديث: ليس 6...Bb4+!"}],[{f:"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",l:"الوضع الابتدائي",n:""},{f:"rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",l:"1.e4",n:""},{f:"rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 0 1",l:"2.Nf3",n:""},{f:"r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 0 1",l:"2...Nc6",n:""},{f:"r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 0 1",l:"3.Bc4",n:""},{f:"r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 0 1",l:"3...Bc5",n:""},{f:"r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/2P2N2/PP1P1PPP/RNBQK2R w KQkq - 0 1",l:"4.c3",n:""},{f:"r1bqk1nr/pppp1ppp/2n2n2/2b1p3/2B1P3/2P2N2/PP1P1PPP/RNBQK2R w KQkq - 0 1",l:"4...Nf6",n:"يضغط على e4"},{f:"r1bqk1nr/pppp1ppp/2n2n2/2b1p3/2BPP3/2P2N2/PP3PPP/RNBQK2R w KQkq - 0 1",l:"5.d4!",n:""},{f:"r1bqk1nr/pppp1ppp/2n2n2/2b5/2BpP3/2P2N2/PP3PPP/RNBQK2R w KQkq - 0 1",l:"5...exd4",n:""},{f:"r1bqk1nr/pppp1ppp/2n2n2/2b5/2BPP3/5N2/PP3PPP/RNBQK2R w KQkq - 0 1",l:"6.cxd4",n:"موقف القرار!"}],[{f:"r1bqk1nr/pppp1ppp/2n2n2/2b5/2BPP3/5N2/PP3PPP/RNBQK2R w KQkq - 0 1",l:"بعد 6.cxd4",n:""},{f:"r1bqk1r1/pppp1ppp/2n5/2b5/2BPP1n1/5N2/PP3PPP/RNBQK2R w KQkq - 0 1",l:"6...Ng4!?",n:"يهاجم f2!"},{f:"r1bqk1r1/pppp1ppp/2n5/2bP4/2B1P1n1/5N2/PP3PPP/RNBQK2R w KQkq - 0 1",l:"7.d5!",n:"الرد المثالي — يضرب الفارس!"},{f:"r1bqk1r1/pppp1ppp/8/n1bP4/2B1P1n1/5N2/PP3PPP/RNBQK2R w KQkq - 0 1",l:"7...Na5",n:"الفارس يتراجع"},{f:"r1bqk1r1/pppp1Bpp/8/n2P4/2B1P1n1/5N2/PP3PPP/RNBQK2R w KQkq - 0 1",l:"8.Bxf7+!",n:"تضحية مدمرة — الملك مجبر على الخروج!"}],[{f:"r1bqk1nr/pppp1ppp/2n2n2/2b5/2BPP3/5N2/PP3PPP/RNBQK2R w KQkq - 0 1",l:"بعد 6.cxd4",n:""},{f:"r1bqk1nr/pppp1ppp/2n5/2b5/2BPn3/5N2/PP3PPP/RNBQK2R w KQkq - 0 1",l:"6...Ne4",n:"يضغط على الفيل والمركز"},{f:"r1bqk1nr/pppp1ppp/2n5/2b5/2BPN3/8/PP3PPP/RNBQK2R w KQkq - 0 1",l:"7.Nxe4!",n:"يأخذ ويحتفظ بميزة"},{f:"r1bqk1nr/pppp1ppp/2n5/8/2BPb3/8/PP3PPP/RNBQK2R w KQkq - 0 1",l:"7...Bxd4",n:""},{f:"r1bqk1nr/pppp1ppp/2n5/8/2BNb3/8/PP3PPP/RNBQK2R w KQkq - 0 1",l:"8.Nxd4 Nxd4",n:"الأبيض بفيل قوي مقابل فارس معزول"}],[{f:"r1bqk1nr/pppp1ppp/2n2n2/2b5/2BPP3/5N2/PP3PPP/RNBQK2R w KQkq - 0 1",l:"بعد 6.cxd4",n:""},{f:"r1bqk1nr/ppp2ppp/2n2n2/2b1p3/2BPP3/5N2/PP3PPP/RNBQK2R w KQkq - 0 1",l:"6...d5!",n:"يكسر المركز مباشرة — الخط الرئيسي للفيديو"},{f:"r1bqk1nr/ppp2Ppp/2n2n2/2b1p3/2BPP3/8/PP3PPP/RNBQK2R w KQkq - 0 1",l:"7.exf6 ←",n:"الأبيض يأخذ فوراً"},{f:"r1bqk1nr/ppp2ppp/2n2n2/2b1p3/2BPP3/4B3/PP3PPP/RN1QK2R w KQkq - 0 1",l:"7.Be2 ←",n:"التراجع الهادئ"},{f:"r1bqk1nr/ppp2ppp/2n2n2/1Pb1p3/3PP3/5N2/PP3PPP/RNBQK2R w KQkq - 0 1",l:"7.Bb5 ←",n:"يثبت الفارس على c6"}],[{f:"r1bqk1nr/ppp2ppp/2n2n2/2b1p3/2BPP3/5N2/PP3PPP/RNBQK2R w KQkq - 0 1",l:"بعد 6...d5",n:""},{f:"r1bqk1nr/ppp2Ppp/2n2n2/2b1p3/2BPP3/8/PP3PPP/RNBQK2R w KQkq - 0 1",l:"7.exf6",n:"يأخذ الفارس ويفتح ملف e"},{f:"r1bqk1nr/ppp3pp/2n2n2/2b1p3/2BPP3/8/PP3PPP/RNBQK2R w KQkq - 0 1",l:"7...Nxf6",n:""},{f:"r1bqk1nr/ppp3pp/2n2n2/2b1p3/2BPP3/5N2/PP3PPP/RNBQK2R w KQkq - 0 1",l:"8.cxd4",n:""},{f:"r1bqk1nr/ppp3pp/2n2n2/1bb1p3/3PP3/5N2/PP3PPP/RNBQK2R w KQkq - 0 1",l:"8...Bb6",n:"الفيل يتراجع لمكان آمن"},{f:"r1bqk1nr/ppp3pp/1bn2n2/8/3PP3/2N2N2/PP3PPP/R1BQKB1R w KQkq - 0 1",l:"9.Nc3 0-0",n:"الأسود يحصّن — الأبيض يختار 10.0-0 أو 10.Be3"}],[{f:"r1bqk1nr/ppp2ppp/2n2n2/2b1p3/2BPP3/5N2/PP3PPP/RNBQK2R w KQkq - 0 1",l:"بعد 6...d5",n:""},{f:"r1bqk1nr/ppp2ppp/2n2n2/2b1p3/2BPP3/4B3/PP3PPP/RN1QK2R w KQkq - 0 1",l:"7.Be2",n:"التراجع الهادئ"},{f:"r1bqk1nr/ppp2ppp/2n2n2/2b5/2BpP3/4B3/PP3PPP/RN1QK2R w KQkq - 0 1",l:"7...dxe4",n:""},{f:"r1bqk1nr/ppp2ppp/2n5/2b5/2B1P3/4BN2/PP3PPP/RN1QK2R w KQkq - 0 1",l:"8.Nxe5!",n:"الأبيض يستعيد البيدق بميزة موضعية"}],[{f:"r1bqk1nr/ppp2ppp/2n2n2/2b1p3/2BPP3/5N2/PP3PPP/RNBQK2R w KQkq - 0 1",l:"بعد 6...d5",n:""},{f:"r1bqk1nr/ppp2ppp/2n2n2/1Pb1p3/3PP3/5N2/PP3PPP/RNBQK2R w KQkq - 0 1",l:"7.Bb5",n:"يثبت الفارس على c6"},{f:"r1bqk1nr/ppp2ppp/2n5/1Pb1p3/3Pn3/5N2/PP3PPP/RNBQK2R w KQkq - 0 1",l:"7...Ne4",n:"الفارس يقفز للمركز"},{f:"r1bqk1nr/ppp2ppp/2n5/1Pb1N3/3Pn3/8/PP3PPP/RNBQK2R w KQkq - 0 1",l:"8.Nxe5!",n:"تعقيدات حادة وميزة للأبيض"}],[{f:"r1bq1rk1/ppp2ppp/1bn2n2/8/3PP3/2N1BN2/PP3PPP/R2QK2R w KQkq - 0 1",l:"بعد 9...0-0",n:""},{f:"r1bq1rk1/ppp2ppp/1bn2n2/8/3PP3/2N1BN2/PP3PPP/R2Q1RK1 w KQkq - 0 1",l:"10.0-0",n:"يحصّن ثم يلعب Re1"},{f:"r1bq1rk1/ppp2ppp/1bn2n2/3P4/4P3/2N1BN2/PP3PPP/R2Q1RK1 w KQkq - 0 1",l:"11.d5!",n:"يكسب مساحة ويثبت الفارس — ميزة واضحة!"}],[{f:"r1bq1rk1/ppp2ppp/1bn2n2/8/3PP3/2N1BN2/PP3PPP/R2QK2R w KQkq - 0 1",l:"بعد 9...0-0",n:""},{f:"r1bq1rk1/ppp2ppp/1bn2n2/8/3PP3/2N1BN2/PP3PPP/R2QKB1R w KQkq - 0 1",l:"10.Be3!",n:"يطور ويضغط على b6 في آنٍ واحد"},{f:"r1bq1rk1/ppp3pp/1bn2n2/5p2/3PP3/2N1BN2/PP3PPP/R2QKB1R w KQkq - 0 1",l:"الأسود يختار...",n:"10...f5 أو 10...Bg4"}],[{f:"r1bq1rk1/ppp2ppp/1bn2n2/8/3PP3/2N1BN2/PP3PPP/R2QKB1R w KQkq - 0 1",l:"بعد 10.Be3",n:""},{f:"r1bq1rk1/ppp3pp/1bn2n2/5p2/3PP3/2N1BN2/PP3PPP/R2QKB1R w KQkq - 0 1",l:"10...f5!",n:"يهاجم e4 من الجناح"},{f:"r1bq1rk1/ppp3pp/1bn2n2/4Pp2/3P4/2N1BN2/PP3PPP/R2QKB1R w KQkq - 0 1",l:"11.e5!",n:"الأبيض يقلب الطاولة ويكسب مساحة!"},{f:"r1bq1rk1/ppp1n1pp/1b4n1/4Pp2/3P4/2N1BN2/PP3PPP/R2QKB1R w KQkq - 0 1",l:"11...Ne4",n:"المعركة تشتعل — كلا الطرفين يهاجمان!"}],[{f:"r1bq1rk1/ppp2ppp/1bn2n2/8/3PP3/2N1BN2/PP3PPP/R2QKB1R w KQkq - 0 1",l:"بعد 10.Be3",n:""},{f:"r2q1rk1/ppp2ppp/1bn2n2/8/3PPb2/2N1BN2/PP3PPP/R2QKB1R w KQkq - 0 1",l:"10...Bg4",n:"يضغط على f3 ويبحث عن نشاط"},{f:"r2q1rk1/ppp2ppp/1bn2n2/3P4/4Pb2/2N1BN2/PP3PPP/R2QKB1R w KQkq - 0 1",l:"11.d5!",n:"يكسب مساحة ويمنع Nd4 — الرد الأفضل"},{f:"r2q1rk1/ppp2ppp/1bn2n2/3P4/4Pb1P/2N1BN2/PP3PP1/R2QKB1R w KQkq - 0 1",l:"أو 11.h3 Bh5 12.g4!",n:"يطرد الفيل بشكل حاد وجريء!"}]];
+const cur=DATA.map(()=>0);
+
+function buildMB(li){
+  const bar=document.getElementById('mb'+li); if(!bar) return;
+  bar.innerHTML=''; let mn=1;
+  DATA[li].forEach((m,i)=>{
+    if(i===0) return;
+    if(i%2===1){const ns=document.createElement('span');ns.className='mn';ns.textContent=mn+'.';bar.appendChild(ns);mn++;}
+    const t=document.createElement('span');t.className='mt';t.textContent=m.l;t.dataset.i=i;
+    t.onclick=()=>setM(li,i); bar.appendChild(t);
+  });
+}
+
+function setM(li,idx){
+  const moves=DATA[li];
+  if(idx<0)idx=0; if(idx>=moves.length)idx=moves.length-1;
+  cur[li]=idx;
+  drawBoard('bc'+li, moves[idx].f);
+  const mc=document.getElementById('mc'+li);
+  if(mc) mc.textContent=idx===0?moves[0].l:(moves[idx].n||moves[idx].l);
+  const bar=document.getElementById('mb'+li);
+  if(bar) bar.querySelectorAll('.mt').forEach(t=>t.classList.toggle('active',+t.dataset.i===idx));
+}
+
+function nav(li,d){
+  const max=DATA[li].length-1;
+  const nx=d===-2?0:d===99?max:Math.max(0,Math.min(max,cur[li]+d));
+  setM(li,nx);
+}
+
+function show(idx,el,mIdx){
+  document.querySelectorAll('.lc').forEach(l=>l.classList.remove('active'));
+  document.querySelectorAll('.li').forEach(l=>l.classList.remove('active'));
+  document.querySelectorAll('.mob-btn').forEach(b=>b.classList.remove('active'));
+  const lc=document.getElementById('lc'+idx); if(lc) lc.classList.add('active');
+  if(el) el.classList.add('active');
+  if(mIdx!==undefined){const mb=document.querySelectorAll('.mob-btn')[mIdx];if(mb)mb.classList.add('active');}
+  if(DATA[idx]) setM(idx,0);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function tog(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open');}
+
+window.addEventListener('DOMContentLoaded',()=>{
+  for(let i=0;i<DATA.length;i++){buildMB(i);setM(i,0);}
+});
+</script>
+</body>
+</html>
