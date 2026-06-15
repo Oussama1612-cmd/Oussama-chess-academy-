@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>الافتتاح الإيطالي — الحلقة ٧: Giuoco Pianissimo</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0f1117;--bg2:#181c24;--bg3:#1e2330;--brd:#2a3040;--gold:#d4a84b;--gold2:#f0c96a;--gold3:#8a6528;--txt:#e2e8f0;--txt2:#8896a8;--txt3:#4a5568;--bl:#f0d9b5;--bd:#b58863}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;overflow-x:hidden}
+body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;display:flex;flex-direction:column}
+.tb{background:var(--bg2);border-bottom:1px solid var(--brd);height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;position:sticky;top:0;z-index:200;flex-shrink:0}
+.tb-brand{display:flex;align-items:center;gap:8px}
+.tb-icon{font-size:22px}
+.tb-name{font-family:'Amiri',serif;font-size:15px;color:var(--gold);font-weight:700}
+.tb-badge{background:linear-gradient(135deg,var(--gold3),var(--gold));color:#0a0c10;font-size:10px;font-weight:800;padding:4px 11px;border-radius:20px;white-space:nowrap}
+.app{display:flex;flex:1;height:calc(100vh - 54px)}
+.sb{width:260px;background:var(--bg2);border-left:1px solid var(--brd);overflow-y:auto;flex-shrink:0;display:flex;flex-direction:column}
+.sb::-webkit-scrollbar{width:3px}.sb::-webkit-scrollbar-thumb{background:var(--brd)}
+.sb-hd{padding:16px 14px 10px;border-bottom:1px solid var(--brd);position:sticky;top:0;background:var(--bg2);z-index:5}
+.sb-hd h3{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
+.sb-hd p{font-size:11px;color:var(--txt3);margin-top:3px}
+.grp{border-bottom:1px solid var(--brd)}
+.gtog{width:100%;background:none;border:none;color:var(--txt);font-family:'Cairo',sans-serif;font-size:12px;font-weight:700;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;text-align:right;transition:background .15s}
+.gtog:hover{background:rgba(255,255,255,.03)}
+.gtog .arr{font-size:9px;color:var(--txt3);transition:transform .2s}
+.gtog.open .arr{transform:rotate(180deg)}
+.gnum{background:var(--bg3);border:1px solid var(--brd);color:var(--txt3);font-size:10px;padding:1px 7px;border-radius:10px;font-weight:700}
+.ll{display:none}.ll.open{display:block}
+.li{display:flex;align-items:center;gap:8px;padding:8px 14px 8px 10px;cursor:pointer;transition:background .15s;border-right:3px solid transparent}
+.li:hover{background:rgba(255,255,255,.03)}
+.li.active{background:rgba(212,168,75,.09);border-right-color:var(--gold)}
+.li .ln{font-size:10px;font-weight:800;color:var(--txt3);min-width:18px;text-align:center}
+.li.active .ln{color:var(--gold)}
+.li .lname{font-size:11.5px;color:var(--txt2);flex:1;line-height:1.4}
+.li.active .lname{color:var(--txt);font-weight:600}
+.mob-nav{display:none;background:var(--bg2);border-bottom:1px solid var(--brd);padding:10px 12px;gap:8px;overflow-x:auto;scrollbar-width:none;flex-shrink:0}
+.mob-nav::-webkit-scrollbar{display:none}
+.mob-btn{background:var(--bg3);border:1px solid var(--brd);color:var(--txt2);font-family:'Cairo',sans-serif;font-size:11px;font-weight:600;padding:7px 13px;border-radius:8px;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:all .15s}
+.mob-btn.active{background:rgba(212,168,75,.15);border-color:var(--gold);color:var(--gold)}
+.main{flex:1;overflow-y:auto;display:flex;flex-direction:column;align-items:center;padding:20px 16px 40px}
+.lc{display:none;flex-direction:column;gap:20px;width:100%;max-width:720px}
+.lc.active{display:flex}
+.lhd{width:100%}
+.ley{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.ltitle{font-family:'Amiri',serif;font-size:24px;font-weight:700;color:var(--txt);line-height:1.3;margin-bottom:7px}
+.lsub{font-size:13px;color:var(--txt2);line-height:1.75}
+.ba{display:flex;gap:18px;width:100%;align-items:flex-start;flex-wrap:wrap}
+.bwrap{display:flex;flex-direction:column;align-items:center;width:100%}
+.bcon{box-shadow:0 0 0 2px var(--bd),0 0 0 5px #000,0 16px 48px rgba(0,0,0,.7);border-radius:3px;overflow:hidden;width:100%;max-width:400px}
+.board{display:grid;grid-template-columns:repeat(8,1fr);aspect-ratio:1;width:100%}
+.sq{aspect-ratio:1;display:flex;align-items:center;justify-content:center;position:relative}
+.sq.lt{background:var(--bl)}.sq.dk{background:var(--bd)}
+.sq .rl{position:absolute;top:1px;right:2px;font-size:7px;font-weight:700;opacity:.55;font-family:'Cairo',sans-serif;line-height:1}
+.sq .fl{position:absolute;bottom:1px;left:2px;font-size:7px;font-weight:700;opacity:.55;font-family:'Cairo',sans-serif;line-height:1}
+.sq.lt .rl,.sq.lt .fl{color:var(--bd)}.sq.dk .rl,.sq.dk .fl{color:var(--bl)}
+.pc{font-size:clamp(24px,5.5vw,38px);line-height:1;user-select:none}
+.pc.w{color:#fff;-webkit-text-stroke:1.2px #444;filter:drop-shadow(0 2px 3px rgba(0,0,0,.5))}
+.pc.b{color:#111;-webkit-text-stroke:.5px #000;filter:drop-shadow(0 2px 4px rgba(0,0,0,.65))}
+.ctrl{display:flex;align-items:center;gap:5px;margin-top:10px;direction:ltr;width:100%;max-width:400px}
+.cb{background:var(--bg3);border:1px solid var(--brd);color:var(--txt2);width:38px;height:38px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .15s;flex-shrink:0}
+.cb:hover,.cb:active{border-color:var(--gold3);color:var(--gold);background:var(--bg2)}
+.mc{flex:1;text-align:center;font-size:11px;color:var(--txt3);font-weight:600;padding:0 4px;line-height:1.3}
+.mb{display:flex;flex-wrap:wrap;gap:3px;margin-top:8px;width:100%;max-width:400px;max-height:68px;overflow-y:auto;direction:ltr}
+.mt{padding:3px 9px;border-radius:5px;font-size:11px;font-weight:700;font-family:'Courier New',monospace;background:var(--bg3);border:1px solid var(--brd);color:var(--txt3);cursor:pointer;transition:all .15s}
+.mt:hover{border-color:var(--gold3);color:var(--txt2)}
+.mt.active{background:var(--gold);border-color:var(--gold);color:#0a0c10}
+.mn{padding:3px 4px;font-size:10px;color:var(--txt3);font-family:monospace}
+.ip{width:100%;display:flex;flex-direction:column;gap:12px}
+.ic{background:var(--bg3);border:1px solid var(--brd);border-radius:10px;padding:16px}
+.ic h4{font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.ki{display:flex;gap:9px;padding:8px 0;border-bottom:1px solid var(--brd);align-items:flex-start}
+.ki:last-child{border-bottom:none;padding-bottom:0}
+.ki .ico{font-size:16px;flex-shrink:0;margin-top:1px}
+.ki .ktxt{font-size:13px;color:var(--txt2);line-height:1.6}
+.ki .ktxt strong{color:var(--txt)}
+.notebox{background:rgba(212,168,75,.07);border:1px solid rgba(212,168,75,.2);border-radius:10px;padding:14px 16px;width:100%}
+.notebox .ntitle{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.notebox p{font-size:13px;color:var(--txt2);line-height:1.75}
+.notebox p strong{color:var(--gold2)}
+.varbox{background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:12px 14px;margin-top:8px}
+.varbox-title{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--txt2);margin-bottom:8px}
+.var-item{display:flex;align-items:flex-start;gap:9px;padding:7px 0;border-bottom:1px solid var(--brd)}
+.var-item:last-child{border-bottom:none;padding-bottom:0}
+.var-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:6px}
+.var-txt{font-size:12.5px;color:var(--txt2);line-height:1.6}
+.var-txt code{font-family:'Courier New',monospace;font-size:11.5px;color:var(--gold2);background:rgba(212,168,75,.1);padding:1px 5px;border-radius:4px}
+.nav-footer{display:flex;justify-content:space-between;align-items:center;width:100%;max-width:720px;margin-top:8px;padding-top:20px;border-top:1px solid var(--brd)}
+.nav-ep{text-decoration:none;padding:10px 16px;border-radius:8px;border:1px solid var(--brd);background:var(--bg2);color:var(--txt2);font-family:'Cairo',sans-serif;font-size:12px;font-weight:600;transition:all .15s}
+.nav-ep:hover{border-color:var(--gold3);color:var(--gold)}
+.nav-ep.next{background:linear-gradient(135deg,var(--gold3),var(--gold));color:#0a0c10;border-color:transparent;font-weight:700}
+@media(min-width:641px){.mob-nav{display:none!important}.sb{display:flex}}
+@media(max-width:640px){.sb{display:none!important}.mob-nav{display:flex!important}.app{flex-direction:column;height:auto;overflow:visible}.main{padding:16px 12px 40px;overflow:visible}.ltitle{font-size:20px}}
+</style>
+</head>
+<body>
+<div class="tb">
+  <div class="tb-brand"><span class="tb-icon">♟</span><span class="tb-name">أكاديمية أسامة للشطرنج</span></div>
+  <span class="tb-badge">الحلقة ٧ من ٢٨</span>
+</div>
+<div class="app">
+  <div class="sb">
+    <div class="sb-hd"><h3>الحلقة السابعة</h3><p>Giuoco Pianissimo — اللعب الهادئ جداً</p></div>
+    <div class="grp">
+      <button class="gtog open" onclick="tog(this)"><span>المقدمة</span><span style="display:flex;gap:7px;align-items:center"><span class="gnum">2</span><span class="arr">▼</span></span></button>
+      <div class="ll open">
+        <div class="li active" onclick="show(0,this)"><span class="ln">١</span><span class="lname">ما هو Giuoco Pianissimo؟</span></div>
+        <div class="li" onclick="show(1,this)"><span class="ln">٢</span><span class="lname">4.c3 Nf6 5.d3 — الحركات الأساسية</span></div>
+      </div>
+    </div>
+    <div class="grp">
+      <button class="gtog open" onclick="tog(this)"><span>الخطط الرئيسية</span><span style="display:flex;gap:7px;align-items:center"><span class="gnum">4</span><span class="arr">▼</span></span></button>
+      <div class="ll open">
+        <div class="li" onclick="show(2,this)"><span class="ln">٣</span><span class="lname">خطة Re1 و Nbd2</span></div>
+        <div class="li" onclick="show(3,this)"><span class="ln">٤</span><span class="lname">خطة a4 والهجوم على الجناح</span></div>
+        <div class="li" onclick="show(4,this)"><span class="ln">٥</span><span class="lname">خطة Bb3 — تحضير d4</span></div>
+        <div class="li" onclick="show(5,this)"><span class="ln">٦</span><span class="lname">دفع d4 في الوقت المناسب</span></div>
+      </div>
+    </div>
+    <div class="grp">
+      <button class="gtog open" onclick="tog(this)"><span>ردود الأسود</span><span style="display:flex;gap:7px;align-items:center"><span class="gnum">2</span><span class="arr">▼</span></span></button>
+      <div class="ll open">
+        <div class="li" onclick="show(6,this)"><span class="ln">٧</span><span class="lname">6...d6 — الدفاع المتين</span></div>
+        <div class="li" onclick="show(7,this)"><span class="ln">٨</span><span class="lname">6...d5 — الضربة المركزية</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mob-nav">
+    <button class="mob-btn active" onclick="show(0,null,0)">١·المقدمة</button>
+    <button class="mob-btn" onclick="show(1,null,1)">٢·الحركات</button>
+    <button class="mob-btn" onclick="show(2,null,2)">٣·Re1+Nbd2</button>
+    <button class="mob-btn" onclick="show(3,null,3)">٤·a4</button>
+    <button class="mob-btn" onclick="show(4,null,4)">٥·Bb3</button>
+    <button class="mob-btn" onclick="show(5,null,5)">٦·d4</button>
+    <button class="mob-btn" onclick="show(6,null,6)">٧·d6</button>
+    <button class="mob-btn" onclick="show(7,null,7)">٨·d5</button>
+  </div>
+
+  <div class="main">
+
+    <div class="lc active" id="lc0">
+      <div class="lhd"><div class="ley">الحلقة السابعة · الدرس الأول</div><div class="ltitle">ما هو Giuoco Pianissimo؟</div><div class="lsub">Giuoco Pianissimo تعني بالإيطالية "اللعب الهادئ جداً" — نظام بناء تدريجي وصبور مفضّل عند كبار اللاعبين.</div></div>
+      <div class="ba">
+        <div class="bwrap"><div class="bcon"><div class="board" id="b0"></div></div>
+          <div class="ctrl"><button class="cb" onclick="nav(0,-2)">⏮</button><button class="cb" onclick="nav(0,-1)">◀</button><span class="mc" id="mc0">الوضع الابتدائي</span><button class="cb" onclick="nav(0,1)">▶</button><button class="cb" onclick="nav(0,99)">⏭</button></div>
+          <div class="mb" id="mb0"></div></div>
+        <div class="ip">
+          <div class="ic"><h4>لماذا Giuoco Pianissimo؟</h4>
+            <div class="ki"><span class="ico">🐢</span><span class="ktxt">يتجنب التعقيدات الحادة في Greco Gambit و Evans Gambit</span></div>
+            <div class="ki"><span class="ico">👑</span><span class="ktxt">لعبه <strong>Magnus Carlsen</strong> في بطولات العالم — نظام موثوق وفعال</span></div>
+            <div class="ki"><span class="ico">🎯</span><span class="ktxt">الأبيض يبني ببطء ثم يضرب بقوة بـ <strong>d4</strong> في الوقت المناسب</span></div>
+          </div>
+          <div class="notebox"><div class="ntitle">📌 الفرق عن Greco Gambit</div>
+            <p>Greco Gambit: <strong>5.d4</strong> — يفتح المركز فوراً بشكل حاد<br>Giuoco Pianissimo: <strong>5.d3</strong> — يبني ببطء ويؤجل d4 لوقت مناسب</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lc" id="lc1">
+      <div class="lhd"><div class="ley">الحلقة السابعة · الدرس الثاني</div><div class="ltitle">4.c3 Nf6 5.d3 — الحركات الأساسية</div><div class="lsub">نتتبع الحركات خطوة بخطوة للوصول لموقف Giuoco Pianissimo الرئيسي.</div></div>
+      <div class="ba">
+        <div class="bwrap"><div class="bcon"><div class="board" id="b1"></div></div>
+          <div class="ctrl"><button class="cb" onclick="nav(1,-2)">⏮</button><button class="cb" onclick="nav(1,-1)">◀</button><span class="mc" id="mc1">الوضع الابتدائي</span><button class="cb" onclick="nav(1,1)">▶</button><button class="cb" onclick="nav(1,99)">⏭</button></div>
+          <div class="mb" id="mb1"></div></div>
+        <div class="ip">
+          <div class="ic"><h4>شرح الحركات</h4>
+            <div class="ki"><span class="ico">①</span><span class="ktxt"><strong>4.c3</strong> — يستعد لـ d4 لاحقاً ويدعم المركز</span></div>
+            <div class="ki"><span class="ico">②</span><span class="ktxt"><strong>4...Nf6</strong> — يطور ويضغط على e4</span></div>
+            <div class="ki"><span class="ico">③</span><span class="ktxt"><strong>5.d3</strong> — الفرق الجوهري! يبني ببطء بدل d4 الحاد</span></div>
+            <div class="ki"><span class="ico">④</span><span class="ktxt"><strong>5...0-0</strong> — الأسود يتحصن ويريح ملكه</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lc" id="lc2">
+      <div class="lhd"><div class="ley">الحلقة السابعة · الدرس الثالث</div><div class="ltitle">خطة Re1 و Nbd2 — التطوير المثالي</div><div class="lsub">بعد التحصين، الأبيض يطور قطعه بشكل مثالي: Re1 لدعم e4 و Nbd2 للوصول لـ f1 ثم g3 أو e3.</div></div>
+      <div class="ba">
+        <div class="bwrap"><div class="bcon"><div class="board" id="b2"></div></div>
+          <div class="ctrl"><button class="cb" onclick="nav(2,-2)">⏮</button><button class="cb" onclick="nav(2,-1)">◀</button><span class="mc" id="mc2">بعد 5.d3 0-0</span><button class="cb" onclick="nav(2,1)">▶</button><button class="cb" onclick="nav(2,99)">⏭</button></div>
+          <div class="mb" id="mb2"></div></div>
+        <div class="ip">
+          <div class="ic"><h4>الخطة الكاملة</h4>
+            <div class="ki"><span class="ico">①</span><span class="ktxt"><strong>6.0-0</strong> — التحصين أولاً دائماً</span></div>
+            <div class="ki"><span class="ico">②</span><span class="ktxt"><strong>Re1</strong> — يدعم e4 ويستعد لـ Bf1 إذا لزم</span></div>
+            <div class="ki"><span class="ico">③</span><span class="ktxt"><strong>Nbd2</strong> — رحلة الحصان: d2 ← f1 ← g3 أو e3</span></div>
+            <div class="ki"><span class="ico">④</span><span class="ktxt"><strong>Nf1-g3</strong> — الحصان يصل لمربع مثالي يضغط على h5 وf5</span></div>
+          </div>
+          <div class="notebox"><div class="ntitle">💡 سر رحلة الحصان</div>
+            <p>Nbd2-f1-g3 هي خطة كلاسيكية في Giuoco Pianissimo — الحصان على g3 يضغط على الجناح الملكي ويدعم هجوم h4-h5.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lc" id="lc3">
+      <div class="lhd"><div class="ley">الحلقة السابعة · الدرس الرابع</div><div class="ltitle">خطة a4 — الهجوم على الجناح</div><div class="lsub">a4 هو سلاح استراتيجي في Giuoco Pianissimo — يمنع b5 ويفتح خيارات هجومية على جانب الملكة.</div></div>
+      <div class="ba">
+        <div class="bwrap"><div class="bcon"><div class="board" id="b3"></div></div>
+          <div class="ctrl"><button class="cb" onclick="nav(3,-2)">⏮</button><button class="cb" onclick="nav(3,-1)">◀</button><span class="mc" id="mc3">بعد 6.0-0</span><button class="cb" onclick="nav(3,1)">▶</button><button class="cb" onclick="nav(3,99)">⏭</button></div>
+          <div class="mb" id="mb3"></div></div>
+        <div class="ip">
+          <div class="ic"><h4>فكرة a4</h4>
+            <div class="ki"><span class="ico">♟</span><span class="ktxt"><strong>a4</strong> — يمنع b5 ويفرض على الأسود البقاء في موقع سلبي</span></div>
+            <div class="ki"><span class="ico">🎯</span><span class="ktxt">بعد a4 يمكن اللعب <strong>a5</strong> لاحقاً لإحكام القبضة على الجناح</span></div>
+            <div class="ki"><span class="ico">⚖️</span><span class="ktxt">يمنح الأبيض <strong>مساحة على جانب الملكة</strong> مع الاستمرار في بناء الجناح الملكي</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lc" id="lc4">
+      <div class="lhd"><div class="ley">الحلقة السابعة · الدرس الخامس</div><div class="ltitle">خطة Bb3 — تحضير d4</div><div class="lsub">Bb3 خطوة تحضيرية مهمة — تبعد الفيل عن خطر التبادل وتستعد لدفع d4 بقوة.</div></div>
+      <div class="ba">
+        <div class="bwrap"><div class="bcon"><div class="board" id="b4"></div></div>
+          <div class="ctrl"><button class="cb" onclick="nav(4,-2)">⏮</button><button class="cb" onclick="nav(4,-1)">◀</button><span class="mc" id="mc4">بعد 6.0-0 Re1</span><button class="cb" onclick="nav(4,1)">▶</button><button class="cb" onclick="nav(4,99)">⏭</button></div>
+          <div class="mb" id="mb4"></div></div>
+        <div class="ip">
+          <div class="ic"><h4>لماذا Bb3 مهمة؟</h4>
+            <div class="ki"><span class="ico">♗</span><span class="ktxt"><strong>Bb3</strong> — يحمي الفيل من التبادل بـ Ba5 أو Bxc4</span></div>
+            <div class="ki"><span class="ico">🎯</span><span class="ktxt">الفيل على b3 يستهدف f7 ويدعم d4 في نفس الوقت</span></div>
+            <div class="ki"><span class="ico">⚡</span><span class="ktxt">بعد Bb3 يصبح d4 أقوى لأن <strong>cxd4 cxd4</strong> يفتح ملف c للفيل</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lc" id="lc5">
+      <div class="lhd"><div class="ley">الحلقة السابعة · الدرس السادس</div><div class="ltitle">دفع d4 في الوقت المناسب</div><div class="lsub">بعد كل هذا التحضير، الأبيض يضرب بـ d4 في الوقت المناسب — وهذا هو قلب Giuoco Pianissimo.</div></div>
+      <div class="ba">
+        <div class="bwrap"><div class="bcon"><div class="board" id="b5"></div></div>
+          <div class="ctrl"><button class="cb" onclick="nav(5,-2)">⏮</button><button class="cb" onclick="nav(5,-1)">◀</button><span class="mc" id="mc5">الموقف المثالي</span><button class="cb" onclick="nav(5,1)">▶</button><button class="cb" onclick="nav(5,99)">⏭</button></div>
+          <div class="mb" id="mb5"></div></div>
+        <div class="ip">
+          <div class="ic"><h4>متى يدفع الأبيض d4؟</h4>
+            <div class="ki"><span class="ico">①</span><span class="ktxt">بعد <strong>0-0، Re1، Nbd2، Bb3</strong> — كل القطع في أماكنها</span></div>
+            <div class="ki"><span class="ico">②</span><span class="ktxt"><strong>d4!</strong> — الضربة الكبرى التي كان ينتظرها</span></div>
+            <div class="ki"><span class="ico">③</span><span class="ktxt">بعد <strong>exd4 cxd4</strong> — الأبيض يحصل على مركز قوي ونشاط كبير</span></div>
+          </div>
+          <div class="varbox"><div class="varbox-title">خيارات الأسود بعد d4</div>
+            <div class="var-item"><span class="var-dot"></span><span class="var-txt"><code>exd4 cxd4</code> — يفتح المركز لصالح الأبيض</span></div>
+            <div class="var-item"><span class="var-dot"></span><span class="var-txt"><code>d6</code> — يدعم e5 ويرفض الفتح</span></div>
+            <div class="var-item"><span class="var-dot"></span><span class="var-txt"><code>d5!?</code> — يحاول المضاد لكن الأبيض مستعد</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lc" id="lc6">
+      <div class="lhd"><div class="ley">الحلقة السابعة · الدرس السابع</div><div class="ltitle">6...d6 — الدفاع المتين للأسود</div><div class="lsub">6...d6 هو رد الأسود الأكثر شيوعاً — يدعم e5 ويبني موقفاً صلباً.</div></div>
+      <div class="ba">
+        <div class="bwrap"><div class="bcon"><div class="board" id="b6"></div></div>
+          <div class="ctrl"><button class="cb" onclick="nav(6,-2)">⏮</button><button class="cb" onclick="nav(6,-1)">◀</button><span class="mc" id="mc6">بعد 5.d3 0-0 6.0-0</span><button class="cb" onclick="nav(6,1)">▶</button><button class="cb" onclick="nav(6,99)">⏭</button></div>
+          <div class="mb" id="mb6"></div></div>
+        <div class="ip">
+          <div class="ic"><h4>ماذا يريد الأسود من d6؟</h4>
+            <div class="ki"><span class="ico">🛡️</span><span class="ktxt"><strong>6...d6</strong> — يدعم e5 ويحافظ على هيكل بيادق متين</span></div>
+            <div class="ki"><span class="ico">♞</span><span class="ktxt">بعد d6 يلعب الأسود <strong>Ne7-g6</strong> لتطوير الحصان وتدعيم الجناح الملكي</span></div>
+            <div class="ki"><span class="ico">⚖️</span><span class="ktxt">موقف هادئ ومتوازن — <strong>لعب استراتيجي طويل الأمد</strong></span></div>
+          </div>
+          <div class="varbox"><div class="varbox-title">الخطة المثلى للأسود</div>
+            <div class="var-item"><span class="var-dot"></span><span class="var-txt"><code>6...d6 7.Nbd2 Ne7</code> — يستعد لـ Ng6 أو c6</span></div>
+            <div class="var-item"><span class="var-dot"></span><span class="var-txt"><code>8.Nf1 Ng6 9.Ng3</code> — كلاهما يتنافس على نفس المربعات!</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lc" id="lc7">
+      <div class="lhd"><div class="ley">الحلقة السابعة · الدرس الثامن</div><div class="ltitle">6...d5 — الضربة المركزية للأسود</div><div class="lsub">6...d5 هو الرد الأكثر جرأة للأسود — يكسر المركز فوراً بدل الانتظار.</div></div>
+      <div class="ba">
+        <div class="bwrap"><div class="bcon"><div class="board" id="b7"></div></div>
+          <div class="ctrl"><button class="cb" onclick="nav(7,-2)">⏮</button><button class="cb" onclick="nav(7,-1)">◀</button><span class="mc" id="mc7">بعد 5.d3 0-0 6.0-0</span><button class="cb" onclick="nav(7,1)">▶</button><button class="cb" onclick="nav(7,99)">⏭</button></div>
+          <div class="mb" id="mb7"></div></div>
+        <div class="ip">
+          <div class="ic"><h4>بعد 6...d5</h4>
+            <div class="ki"><span class="ico">⚡</span><span class="ktxt"><strong>6...d5!?</strong> — يكسر المركز ويهاجم الفيل c4 مباشرة</span></div>
+            <div class="ki"><span class="ico">🔄</span><span class="ktxt"><strong>7.exd5 Nxd5 8.Re1</strong> — الأبيض يستعيد النشاط ويضغط على e5</span></div>
+            <div class="ki"><span class="ico">⚖️</span><span class="ktxt">موقف حاد نسبياً — <strong>الأبيض أفضل موضعياً</strong> بفضل تطوره الأفضل</span></div>
+          </div>
+          <div class="varbox"><div class="varbox-title">التسلسل الرئيسي</div>
+            <div class="var-item"><span class="var-dot"></span><span class="var-txt"><code>7.exd5 Nxd5 8.Re1 Bg4</code> — الأسود يضغط على f3</span></div>
+            <div class="var-item"><span class="var-dot"></span><span class="var-txt"><code>9.h3 Bh5 10.Nbd2</code> — الأبيض يواصل التطوير بهدوء</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-footer">
+      <a class="nav-ep" href="italian_ep6.html">← الحلقة السادسة</a>
+      <span style="font-size:11px;color:var(--txt3)">٧ / ٢٨</span>
+      <a class="nav-ep next" href="italian_ep8.html">الحلقة الثامنة ←</a>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const Wp={K:'♔',Q:'♕',R:'♖',B:'♗',N:'♘',P:'♙'};
+const Bp={K:'♚',Q:'♛',R:'♜',B:'♝',N:'♞',P:'♟'};
+function parseFen(fen){const rows=fen.split(' ')[0].split('/'),b=[];for(let r=0;r<8;r++){const row=[];for(const c of rows[r]){if(isNaN(c))row.push(c);else for(let i=0;i<+c;i++)row.push(null);}b.push(row);}return b;}
+function pHtml(code){if(!code)return'';const w=code===code.toUpperCase();const m={K:Wp.K,Q:Wp.Q,R:Wp.R,B:Wp.B,N:Wp.N,P:Wp.P,k:Bp.K,q:Bp.Q,r:Bp.R,b:Bp.B,n:Bp.N,p:Bp.P};return`<span class="pc ${w?'w':'b'}">${m[code]}</span>`;}
+function drawBoard(id,fen){const el=document.getElementById(id);if(!el)return;const bd=parseFen(fen);el.innerHTML='';const fl=['a','b','c','d','e','f','g','h'];for(let r=0;r<8;r++)for(let c=0;c<8;c++){const sq=document.createElement('div');sq.className='sq '+((r+c)%2===0?'lt':'dk');if(c===7)sq.innerHTML+=`<span class="rl">${8-r}</span>`;if(r===7)sq.innerHTML+=`<span class="fl">${fl[c]}</span>`;sq.innerHTML+=pHtml(bd[r][c]);el.appendChild(sq);}}
+const S='rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR';
+const ITA='r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R';
+const GP_C3='r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/2P2N2/PP1P1PPP/RNBQK2R';
+const GP_D3='r1bqk1nr/pppp1ppp/2n2n2/2b1p3/2B1P3/2PP1N2/PP3PPP/RNBQK2R';
+const CASTLE='r1bq1rk1/pppp1ppp/2n2n2/2b1p3/2B1P3/2PP1N2/PP3PPP/RNBQ1RK1';
+
+const DATA=[
+  [{f:S,l:'الوضع الابتدائي',n:''},{f:ITA,l:'3.Bc4 Bc5',n:'الافتتاح الإيطالي'},{f:GP_C3,l:'4.c3',n:'يستعد لـ d4'},{f:'r1bqk1nr/pppp1ppp/2n2n2/2b1p3/2B1P3/2P2N2/PP1P1PPP/RNBQK2R',l:'4...Nf6',n:''},{f:GP_D3,l:'5.d3!',n:'Giuoco Pianissimo — اللعب الهادئ جداً!'}],
+  [{f:S,l:'الوضع الابتدائي',n:''},{f:ITA,l:'3.Bc4 Bc5',n:''},{f:GP_C3,l:'4.c3 Nf6',n:''},{f:GP_D3,l:'5.d3',n:'بدل d4 الحاد — بناء تدريجي'},{f:CASTLE,l:'5...0-0 6.0-0',n:'كلاهما يتحصن — اللعبة تبدأ الآن!'}],
+  [{f:CASTLE,l:'بعد 6.0-0',n:''},{f:'r1bq1rk1/pppp1ppp/2n2n2/2b1p3/2B1P3/2PP1N2/PP1N1PPP/R1BQ1RK1',l:'Nbd2',n:'رحلة الحصان تبدأ — d2 أولاً'},{f:'r1bq1rk1/pppp1ppp/2n2n2/2b1p3/2B1P3/2PP1N2/PP3PPP/R1BQR1K1',l:'Re1',n:'يدعم e4 ويستعد للضغط'},{f:'r1bq1rk1/pppp1ppp/2n2n2/2b1p3/2B1P3/2PP1NN1/PP3PPP/R1BQR1K1',l:'Ng3',n:'الحصان يصل لمربعه المثالي!'}],
+  [{f:CASTLE,l:'بعد 6.0-0',n:''},{f:'r1bq1rk1/pppp1ppp/2n2n2/2b1p3/P1B1P3/2PP1N2/1P3PPP/RNBQ1RK1',l:'a4!',n:'يمنع b5 ويفتح خيارات هجومية'},{f:'r1bq1rk1/1ppp1ppp/2n2n2/p1b1p3/P1B1P3/2PP1N2/1P3PPP/RNBQ1RK1',l:'a4 a5',n:'الأبيض يحكم قبضته على الجناح'}],
+  [{f:'r1bq1rk1/pppp1ppp/2n2n2/2b1p3/2B1P3/2PP1N2/PP3PPP/R1BQR1K1',l:'بعد Re1',n:''},{f:'r1bq1rk1/pppp1ppp/2n2n2/2b1p3/4P3/1BPP1N2/PP3PPP/R1BQR1K1',l:'Bb3!',n:'الفيل ينسحب وينتظر الوقت المناسب'},{f:'r1bq1rk1/pppp1ppp/2n2n2/4p3/1b2P3/1BPP1N2/PP3PPP/R1BQR1K1',l:'...Bxb3?!',n:'لو تبادل الفيلين — الأبيض أفضل بكثير'}],
+  [{f:'r1bq1rk1/pppp1ppp/2n2n2/2b1p3/4P3/1BPP1N2/PP1N1PPP/R1BQR1K1',l:'الموقف المثالي للأبيض',n:''},{f:'r1bq1rk1/pppp1ppp/2n2n2/2b1p3/3PP3/1BP2N2/PP1N1PPP/R1BQR1K1',l:'d4!',n:'الضربة الكبرى — كل شيء كان تحضيراً لهذه اللحظة!'},{f:'r1bq1rk1/pppp1ppp/2n2n2/2b5/3pP3/1BP2N2/PP1N1PPP/R1BQR1K1',l:'exd4',n:''},{f:'r1bq1rk1/pppp1ppp/2n2n2/2b5/3PP3/1B3N2/PP1N1PPP/R1BQR1K1',l:'cxd4',n:'الأبيض يحصل على مركز قوي ونشاط كبير!'}],
+  [{f:CASTLE,l:'بعد 6.0-0',n:''},{f:'r1bq1rk1/ppp2ppp/2np1n2/2b1p3/2B1P3/2PP1N2/PP3PPP/RNBQ1RK1',l:'6...d6',n:'يدعم e5 — الدفاع المتين'},{f:'r1bq1rk1/ppp2ppp/2np1n2/2b1p3/2B1P3/2PP1N2/PP1N1PPP/R1BQ1RK1',l:'7.Nbd2',n:''},{f:'r1bq1rk1/ppp2ppp/2np4/2b1p1n1/2B1P3/2PP1N2/PP1N1PPP/R1BQ1RK1',l:'7...Ne7→Ng6',n:'الأسود يتنافس على نفس المربعات'}],
+  [{f:CASTLE,l:'بعد 6.0-0',n:''},{f:'r1bq1rk1/ppp2ppp/2n2n2/2b1pp2/2B1P3/2PP1N2/PP3PPP/RNBQ1RK1',l:'6...d5!?',n:'الضربة المركزية الجريئة'},{f:'r1bq1rk1/ppp2ppp/2n2n2/2b1pP2/2B5/2PP1N2/PP3PPP/RNBQ1RK1',l:'7.exd5 Nxd5',n:''},{f:'r1bq1rk1/ppp2ppp/2n2n2/2b1pP2/2B5/2PP1N2/PP3PPP/RNBQ1RK1',l:'8.Re1',n:'الأبيض يضغط على e5 — موضعياً أفضل'}],
+];
+
+const cur=DATA.map(()=>0);
+function buildMB(i){const b=document.getElementById('mb'+i);if(!b)return;b.innerHTML='';let n=1;DATA[i].forEach((m,j)=>{if(j===0)return;if(j%2===1){const s=document.createElement('span');s.className='mn';s.textContent=n+'.';b.appendChild(s);n++;}const t=document.createElement('span');t.className='mt';t.textContent=m.l;t.dataset.j=j;t.onclick=()=>setM(i,j);b.appendChild(t);});}
+function setM(i,idx){if(idx<0)idx=0;if(idx>=DATA[i].length)idx=DATA[i].length-1;cur[i]=idx;const fen=DATA[i][idx].f;drawBoard('b'+i,fen.includes(' ')?fen:fen+' w KQkq - 0 1');const mc=document.getElementById('mc'+i);if(mc)mc.textContent=idx===0?DATA[i][0].l:(DATA[i][idx].n||DATA[i][idx].l);document.querySelectorAll('#mb'+i+' .mt').forEach(t=>t.classList.toggle('active',+t.dataset.j===idx));}
+function nav(i,d){const max=DATA[i].length-1;setM(i,d===-2?0:d===99?max:Math.max(0,Math.min(max,cur[i]+d)));}
+function show(idx,el,mIdx){document.querySelectorAll('.lc').forEach(l=>l.classList.remove('active'));document.querySelectorAll('.li').forEach(l=>l.classList.remove('active'));document.querySelectorAll('.mob-btn').forEach(b=>b.classList.remove('active'));document.getElementById('lc'+idx).classList.add('active');if(el)el.classList.add('active');if(mIdx!==undefined)document.querySelectorAll('.mob-btn')[mIdx]?.classList.add('active');setM(idx,0);window.scrollTo({top:0,behavior:'smooth'});}
+function tog(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open');}
+window.addEventListener('DOMContentLoaded',()=>{for(let i=0;i<DATA.length;i++){buildMB(i);setM(i,0);}});
+</script>
+</body>
+</html>

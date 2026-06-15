@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>الافتتاح الإيطالي — الحلقة ٦: Deutz Gambit</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0f1117;--bg2:#181c24;--bg3:#1e2330;--brd:#2a3040;--gold:#d4a84b;--gold2:#f0c96a;--gold3:#8a6528;--txt:#e2e8f0;--txt2:#8896a8;--txt3:#4a5568;--bl:#f0d9b5;--bd:#b58863}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;overflow-x:hidden}
+body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;display:flex;flex-direction:column}
+.tb{background:var(--bg2);border-bottom:1px solid var(--brd);height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;position:sticky;top:0;z-index:200;flex-shrink:0}
+.tb-brand{display:flex;align-items:center;gap:8px}
+.tb-icon{font-size:22px}
+.tb-name{font-family:'Amiri',serif;font-size:15px;color:var(--gold);font-weight:700}
+.tb-badge{background:linear-gradient(135deg,var(--gold3),var(--gold));color:#0a0c10;font-size:10px;font-weight:800;padding:4px 11px;border-radius:20px;white-space:nowrap}
+.app{display:flex;flex:1;height:calc(100vh - 54px)}
+.sb{width:260px;background:var(--bg2);border-left:1px solid var(--brd);overflow-y:auto;flex-shrink:0;display:flex;flex-direction:column}
+.sb::-webkit-scrollbar{width:3px}.sb::-webkit-scrollbar-thumb{background:var(--brd)}
+.sb-hd{padding:16px 14px 10px;border-bottom:1px solid var(--brd);position:sticky;top:0;background:var(--bg2);z-index:5}
+.sb-hd h3{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
+.sb-hd p{font-size:11px;color:var(--txt3);margin-top:3px}
+.grp{border-bottom:1px solid var(--brd)}
+.gtog{width:100%;background:none;border:none;color:var(--txt);font-family:'Cairo',sans-serif;font-size:12px;font-weight:700;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;text-align:right;transition:background .15s}
+.gtog:hover{background:rgba(255,255,255,.03)}
+.gtog .arr{font-size:9px;color:var(--txt3);transition:transform .2s}
+.gtog.open .arr{transform:rotate(180deg)}
+.gnum{background:var(--bg3);border:1px solid var(--brd);color:var(--txt3);font-size:10px;padding:1px 7px;border-radius:10px;font-weight:700}
+.ll{display:none}.ll.open{display:block}
+.li{display:flex;align-items:center;gap:8px;padding:8px 14px 8px 10px;cursor:pointer;transition:background .15s;border-right:3px solid transparent}
+.li:hover{background:rgba(255,255,255,.03)}
+.li.active{background:rgba(212,168,75,.09);border-right-color:var(--gold)}
+.li .ln{font-size:10px;font-weight:800;color:var(--txt3);min-width:18px;text-align:center}
+.li.active .ln{color:var(--gold)}
+.li .lname{font-size:11.5px;color:var(--txt2);flex:1;line-height:1.4}
+.li.active .lname{color:var(--txt);font-weight:600}
+.mob-nav{display:none;background:var(--bg2);border-bottom:1px solid var(--brd);padding:10px 12px;gap:8px;overflow-x:auto;scrollbar-width:none;flex-shrink:0}
+.mob-nav::-webkit-scrollbar{display:none}
+.mob-btn{background:var(--bg3);border:1px solid var(--brd);color:var(--txt2);font-family:'Cairo',sans-serif;font-size:11px;font-weight:600;padding:7px 13px;border-radius:8px;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:all .15s}
+.mob-btn.active{background:rgba(212,168,75,.15);border-color:var(--gold);color:var(--gold)}
+.main{flex:1;overflow-y:auto;display:flex;flex-direction:column;align-items:center;padding:20px 16px 40px}
+.lc{display:none;flex-direction:column;gap:20px;width:100%;max-width:720px}
+.lc.active{display:flex}
+.lhd{width:100%}
+.ley{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.ltitle{font-family:'Amiri',serif;font-size:24px;font-weight:700;color:var(--txt);line-height:1.3;margin-bottom:7px}
+.lsub{font-size:13px;color:var(--txt2);line-height:1.75}
+.ba{display:flex;gap:18px;width:100%;align-items:flex-start;flex-wrap:wrap}
+.bwrap{display:flex;flex-direction:column;align-items:center;width:100%}
+.bcon{box-shadow:0 0 0 2px var(--bd),0 0 0 5px #000,0 16px 48px rgba(0,0,0,.7);border-radius:3px;overflow:hidden;width:100%;max-width:400px}
+.board{display:grid;grid-template-columns:repeat(8,1fr);aspect-ratio:1;width:100%}
+.sq{aspect-ratio:1;display:flex;align-items:center;justify-content:center;position:relative}
+.sq.lt{background:var(--bl)}.sq.dk{background:var(--bd)}
+.sq .rl{position:absolute;top:1px;right:2px;font-size:7px;font-weight:700;opacity:.55;font-family:'Cairo',sans-serif;line-height:1}
+.sq .fl{position:absolute;bottom:1px;left:2px;font-size:7px;font-weight:700;opacity:.55;font-family:'Cairo',sans-serif;line-height:1}
+.sq.lt .rl,.sq.lt .fl{color:var(--bd)}.sq.dk .rl,.sq.dk .fl{color:var(--bl)}
+.pc{font-size:clamp(24px,5.5vw,38px);line-height:1;user-select:none}
+.pc.w{color:#fff;-webkit-text-stroke:1.2px #444;filter:drop-shadow(0 2px 3px rgba(0,0,0,.5))}
+.pc.b{color:#111;-webkit-text-stroke:.5px #000;filter:drop-shadow(0 2px 4px rgba(0,0,0,.65))}
+.ctrl{display:flex;align-items:center;gap:5px;margin-top:10px;direction:ltr;width:100%;max-width:400px}
+.cb{background:var(--bg3);border:1px solid var(--brd);color:var(--txt2);width:38px;height:38px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .15s;flex-shrink:0}
+.cb:hover,.cb:active{border-color:var(--gold3);color:var(--gold);background:var(--bg2)}
+.mc{flex:1;text-align:center;font-size:11px;color:var(--txt3);font-weight:600;padding:0 4px;line-height:1.3}
+.mb{display:flex;flex-wrap:wrap;gap:3px;margin-top:8px;width:100%;max-width:400px;max-height:68px;overflow-y:auto;direction:ltr}
+.mt{padding:3px 9px;border-radius:5px;font-size:11px;font-weight:700;font-family:'Courier New',monospace;background:var(--bg3);border:1px solid var(--brd);color:var(--txt3);cursor:pointer;transition:all .15s}
+.mt:hover{border-color:var(--gold3);color:var(--txt2)}
+.mt.active{background:var(--gold);border-color:var(--gold);color:#0a0c10}
+.mn{padding:3px 4px;font-size:10px;color:var(--txt3);font-family:monospace}
+.ip{width:100%;display:flex;flex-direction:column;gap:12px}
+.ic{background:var(--bg3);border:1px solid var(--brd);border-radius:10px;padding:16px}
+.ic h4{font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.ki{display:flex;gap:9px;padding:8px 0;border-bottom:1px solid var(--brd);align-items:flex-start}
+.ki:last-child{border-bottom:none;padding-bottom:0}
+.ki .ico{font-size:16px;flex-shrink:0;margin-top:1px}
+.ki .ktxt{font-size:13px;color:var(--txt2);line-height:1.6}
+.ki .ktxt strong{color:var(--txt)}
+.notebox{background:rgba(212,168,75,.07);border:1px solid rgba(212,168,75,.2);border-radius:10px;padding:14px 16px;width:100%}
+.notebox .ntitle{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.notebox p{font-size:13px;color:var(--txt2);line-height:1.75}
+.notebox p strong{color:var(--gold2)}
+.varbox{background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:12px 14px;margin-top:8px}
+.varbox-title{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--txt2);margin-bottom:8px}
+.var-item{display:flex;align-items:flex-start;gap:9px;padding:7px 0;border-bottom:1px solid var(--brd)}
+.var-item:last-child{border-bottom:none;padding-bottom:0}
+.var-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:6px}
+.var-txt{font-size:12.5px;color:var(--txt2);line-height:1.6}
+.var-txt code{font-family:'Courier New',monospace;font-size:11.5px;color:var(--gold2);background:rgba(212,168,75,.1);padding:1px 5px;border-radius:4px}
+.nav-footer{display:flex;justify-content:space-between;align-items:center;width:100%;max-width:720px;margin-top:8px;padding-top:20px;border-top:1px solid var(--brd)}
+.nav-ep{text-decoration:none;padding:10px 16px;border-radius:8px;border:1px solid var(--brd);background:var(--bg2);color:var(--txt2);font-family:'Cairo',sans-serif;font-size:12px;font-weight:600;transition:all .15s}
+.nav-ep:hover{border-color:var(--gold3);color:var(--gold)}
+.nav-ep.next{background:linear-gradient(135deg,var(--gold3),var(--gold));color:#0a0c10;border-color:transparent;font-weight:700}
+@media(min-width:641px){.mob-nav{display:none!important}.sb{display:flex}}
+@media(max-width:640px){.sb{display:none!important}.mob-nav{display:flex!important}.app{flex-direction:column;height:auto;overflow:visible}.main{padding:16px 12px 40px;overflow:visible}.ltitle{font-size:20px}}
+</style>
+</head>
+<body>
+
+<div class="tb">
+  <div class="tb-brand"><span class="tb-icon">♟</span><span class="tb-name">أكاديمية أسامة للشطرنج</span></div>
+  <span class="tb-badge">الحلقة ٦ من ٢٨</span>
+</div>
+
+<div class="app">
+  <div class="sb">
+    <div class="sb-hd"><h3>الحلقة السادسة</h3><p>Deutz Gambit — غامبيط حاد</p></div>
+    <div class="grp">
+      <button class="gtog open" onclick="tog(this)"><span>المقدمة</span><span style="display:flex;gap:7px;align-items:center"><span class="gnum">2</span><span class="arr">▼</span></span></button>
+      <div class="ll open">
+        <div class="li active" onclick="show(0,this)"><span class="ln">١</span><span class="lname">ما هو Deutz Gambit؟</span></div>
+        <div class="li" onclick="show(1,this)"><span class="ln">٢</span><span class="lname">4.Nc3 Nf6 5.d4!? — الغامبيط</span></div>
+      </div>
+    </div>
+    <div class="grp">
+      <button class="gtog open" onclick="tog(this)"><span>بعد 5...exd4</span><span style="display:flex;gap:7px;align-items:center"><span class="gnum">3</span><span class="arr">▼</span></span></button>
+      <div class="ll open">
+        <div class="li" onclick="show(2,this)"><span class="ln">٣</span><span class="lname">6.Ng5 — Rosentreter Gambit</span></div>
+        <div class="li" onclick="show(3,this)"><span class="ln">٤</span><span class="lname">6.e5 — الهجوم على الفارس</span></div>
+        <div class="li" onclick="show(4,this)"><span class="ln">٥</span><span class="lname">6.0-0 — التحصين أولاً</span></div>
+      </div>
+    </div>
+    <div class="grp">
+      <button class="gtog open" onclick="tog(this)"><span>ردود الأسود الرئيسية</span><span style="display:flex;gap:7px;align-items:center"><span class="gnum">3</span><span class="arr">▼</span></span></button>
+      <div class="ll open">
+        <div class="li" onclick="show(5,this)"><span class="ln">٦</span><span class="lname">5...d5 — الرد الأقوى</span></div>
+        <div class="li" onclick="show(6,this)"><span class="ln">٧</span><span class="lname">5...Nxe4 — يأخذ البيدق</span></div>
+        <div class="li" onclick="show(7,this)"><span class="ln">٨</span><span class="lname">الخلاصة — هل Deutz جيد؟</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mob-nav">
+    <button class="mob-btn active" onclick="show(0,null,0)">١·المقدمة</button>
+    <button class="mob-btn" onclick="show(1,null,1)">٢·5.d4</button>
+    <button class="mob-btn" onclick="show(2,null,2)">٣·Rosentreter</button>
+    <button class="mob-btn" onclick="show(3,null,3)">٤·6.e5</button>
+    <button class="mob-btn" onclick="show(4,null,4)">٥·6.0-0</button>
+    <button class="mob-btn" onclick="show(5,null,5)">٦·5...d5</button>
+    <button class="mob-btn" onclick="show(6,null,6)">٧·5...Nxe4</button>
+    <button class="mob-btn" onclick="show(7,null,7)">٨·الخلاصة</button>
+  </div>
+
+  <div class="main">
+
+    <div class="lc active" id="lc0">
+      <div class="lhd"><div class="ley">الحلقة السادسة · الدرس الأول</div><div class="ltitle">ما هو Deutz Gambit؟</div><div class="lsub">Deutz Gambit هو غامبيط حاد وأقل شهرة في الافتتاح الإيطالي — يضحي ببيدق لفتح المركز بسرعة.</div></div>
+      <div class="ba">
+        <div class="bwrap"><div class="bcon"><div class="board" id="b0"></div></div>
+          <div class="ctrl"><button class="cb" onclick="nav(0,-2)">⏮</button><button class="cb" onclick="nav(0,-1)">◀</button><span class="mc" id="mc0">الوضع الابتدائي</span><button class="cb" onclick="nav(0,1)">▶</button><button class="cb" onclick="nav(0,99)">⏭</button></div>
+          <div class="mb" id="mb0"></div></div>
+        <div class="ip">
+          <div class="ic"><h4>معلومات عن Deutz Gambit</h4>
+            <div class="ki"><span class="ico">📜</span><span class="ktxt">سُمّي بعد اللاعب الألماني <strong>Johann Deutz</strong> من القرن التاسع عشر</span></div>
+            <div class="ki"><span class="ico">⚡</span><span class="ktxt">يضحي ببيدق d4 لفتح المركز <strong>بسرعة كبيرة</strong> قبل أن يتحصن الأسود</span></div>
+            <div class="ki"><span class="ico">🎯</span><span class="ktxt">أقل شيوعاً من Evans Gambit لكن <strong>خطير جداً</strong> ضد الأسود غير المستعد</span></div>
+          </div>
+          <div class="notebox"><div class="ntitle">📌 الفرق عن Evans Gambit</div>
+            <p>Evans Gambit يضحي ببيدق b4 في الحركة الرابعة. Deutz Gambit يضحي ببيدق d4 في الحركة <strong>الخامسة</strong> بعد تطوير حصان c3.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lc" id="lc1">
+      <div class="lhd"><div class="ley">الحلقة السادسة · الدرس الثاني</div><div class="ltitle">4.Nc3 Nf6 5.d4!? — الغامبيط</div><div class="lsub">بعد تطوير طبيعي بـ 4.Nc3، يفاجئ الأبيض بـ 5.d4!? — غامبيط يفتح المركز فوراً.</div></div>
+      <div class="ba">
+        <div class="bwrap"><div class="bcon"><div class="board" id="b1"></div></div>
+          <div class="ctrl"><button class="cb" onclick="nav(1,-2)">⏮</button><button class="cb" onclick="nav(1,-1)">◀</button><span class="mc" id="mc1">الوضع الابتدائي</span><button class="cb" onclick="nav(1,1)">▶</button><button class="cb" onclick="nav(1,99)">⏭</button></div>
+          <div class="mb" id="mb1"></div></div>
+        <div class="ip">
+          <div class="ic"><h4>ماذا يريد الأبيض؟</h4>
+            <div class="ki"><span class="ico">①</span><span class="ktxt"><strong>5.d4!?</strong> — يضحي ببيدق لكسر مركز الأسود</span></div>
+            <div class="ki"><span class="ico">②</span><span class="ktxt">بعد <strong>5...exd4</strong> — يفتح الأبيض ملفات وقطرات لصالحه</span></div>
+            <div class="ki"><span class="ico">③</span><span class="ktxt">الهدف: <strong>هجوم سريع</strong> قبل أن يتمكن الأسود من التحصين</span></div>
+          </div>
+          <div class="varbox"><div class="varbox-title">خيارات الأسود</div>
+            <div class="var-item"><span class="var-dot"></span><span class="var-txt"><code>5...exd4</code> — يقبل البيدق (الأكثر شيوعاً)</span></div>
+            <div class="var-item"><span class="var-dot"></span><span class="var-txt"><code>5...d5!</code> — الرد الأقوى نظرياً</span></div>
+            <div class="var-item"><span class="var-dot"></span><span class="var-txt"><code>5...Nxe4</code> — يأخذ بيدق e4 بدل d4</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lc" id="lc2">
+      <div class="lhd"><div class="ley">الحلقة السادسة · الدرس الثالث</div><div class="ltitle">6.Ng5 — Rosentreter Gambit</div><div class="lsub">Rosentreter Gambit هو أحد أخطر ردود الأبيض بعد 5...exd4 — يهاجم f7 مباشرة!</div></div>
+      <div class="ba">
+        <div class="bwrap"><div class="bcon"><div class="board" id="b2"></div></div>
+          <div class="ctrl"><button class="cb" onclick="nav(2,-2)">⏮</button><button class="cb" onclick="nav(2,-1)">◀</button><span class="mc" id="mc2">بعد 5...exd4</span><button class="cb" onclick="nav(2,1)">▶</button><button class="cb" onclick="nav(2,99)">⏭</button></div>
+          <div class="mb" id="mb2"></div></div>
+        <div class="ip">
+          <div class="ic"><h4>Rosentreter Gambit — 6.Ng5!</h4>
+            <div class="ki"><span class="ico">♞</span><span class="ktxt"><strong>6.Ng5!</strong> — الفارس يهاجم f7 مباشرة! تهديد فوري على أضعف نقطة</span></div>
+            <div class="ki"><span class="ico">🛡️</span><span class="ktxt"><strong>6...d5!</strong> — الرد الصحيح! يهاجم الفيل c4 ويطرد الفارس</span></div>
+            <div class="ki"><span class="ico">⚡</span><span class="ktxt">بعد <strong>7.exd5 Nxd5</strong> — الأسود يسترد ويحصل على موقف متوازن</span></div>
+          </div>
+          <div class="varbox"><div class="varbox-title">ماذا لو لم يلعب الأسود d5؟</div>
+            <div class="var-item"><span class="var-dot"></span><span class="var-txt"><code>6...Ne5? 7.Nxf7!</code> — تضحية الفارس المدمرة على f7!</span></div>
+            <div class="var-item"><span class="var-dot"></span><span class="var-txt"><code>7...Nxf7 8.Bxf7+ Kxf7 9.Qh5+</code> — هجوم لا يُوقف</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lc" id="lc3">
+      <div class="lhd"><div class="ley">الحلقة السادسة · الدرس الرابع</div><div class="ltitle">6.e5 — الهجوم على الفارس</div><div class="lsub">6.e5 يهاجم الفارس f6 ويكسب مساحة — بديل لـ Rosentreter أكثر استراتيجية.</div></div>
+      <div class="ba">
+        <div class="bwrap"><div class="bcon"><div class="board" id="b3"></div></div>
+          <div class="ctrl"><button class="cb" onclick="nav(3,-2)">⏮</button><button class="cb" onclick="nav(3,-1)">◀</button><span class="mc" id="mc3">بعد 5...exd4</span><button class="cb" onclick="nav(3,1)">▶</button><button class="cb" onclick="nav(3,99)">⏭</button></div>
+          <div class="mb" id="mb3"></div></div>
+        <div class="ip">
+          <div class="ic"><h4>فكرة 6.e5</h4>
+            <div class="ki"><span class="ico">♟</span><span class="ktxt"><strong>6.e5</strong> — يطرد الفارس f6 ويكسب مساحة في المركز</span></div>
+            <div class="ki"><span class="ico">♞</span><span class="ktxt"><strong>6...d5!</strong> — الرد الأفضل: يهاجم الفيل ويكسر المركز</span></div>
+            <div class="ki"><span class="ico">⚖️</span><span class="ktxt">بعد <strong>7.Bb3</strong> — الأبيض يحتفظ بالفيل والضغط لكن الأسود أفضل نظرياً</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lc" id="lc4">
+      <div class="lhd"><div class="ley">الحلقة السادسة · الدرس الخامس</div><div class="ltitle">6.0-0 — التحصين أولاً</div><div class="lsub">6.0-0 هو الرد الأهدأ — الأبيض يتحصن ويستمر في بناء موقفه بهدوء.</div></div>
+      <div class="ba">
+        <div class="bwrap"><div class="bcon"><div class="board" id="b4"></div></div>
+          <div class="ctrl"><button class="cb" onclick="nav(4,-2)">⏮</button><button class="cb" onclick="nav(4,-1)">◀</button><span class="mc" id="mc4">بعد 5...exd4</span><button class="cb" onclick="nav(4,1)">▶</button><button class="cb" onclick="nav(4,99)">⏭</button></div>
+          <div class="mb" id="mb4"></div></div>
+        <div class="ip">
+          <div class="ic"><h4>فكرة 6.0-0</h4>
+            <div class="ki"><span class="ico">🏰</span><span class="ktxt"><strong>6.0-0</strong> — يتحصن ويستعد للضغط بـ e5 أو Bg5</span></div>
+            <div class="ki"><span class="ico">♟</span><span class="ktxt"><strong>6...d6</strong> — يدعم المركز ويستعد لتطوير هادئ</span></div>
+            <div class="ki"><span class="ico">⚡</span><span class="ktxt">بعد <strong>7.e5!</strong> — الأبيض يكسب مساحة ويضغط على الأسود</span></div>
+          </div>
+          <div class="varbox"><div class="varbox-title">خيار آخر للأسود</div>
+            <div class="var-item"><span class="var-dot"></span><span class="var-txt"><code>6...Bc5</code> — يطور الفيل ويدافع عن d4</span></div>
+            <div class="var-item"><span class="var-dot"></span><span class="var-txt"><code>7.Nxd4 Nxd4 8.Qxd4</code> — تبادلات تؤدي لموقف متوازن</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lc" id="lc5">
+      <div class="lhd"><div class="ley">الحلقة السادسة · الدرس السادس</div><div class="ltitle">5...d5! — الرد الأقوى للأسود</div><div class="lsub">5...d5! هو أفضل رد للأسود ضد Deutz Gambit — يهاجم الفيل ويكسر المركز فوراً.</div></div>
+      <div class="ba">
+        <div class="bwrap"><div class="bcon"><div class="board" id="b5"></div></div>
+          <div class="ctrl"><button class="cb" onclick="nav(5,-2)">⏮</button><button class="cb" onclick="nav(5,-1)">◀</button><span class="mc" id="mc5">بعد 5.d4</span><button class="cb" onclick="nav(5,1)">▶</button><button class="cb" onclick="nav(5,99)">⏭</button></div>
+          <div class="mb" id="mb5"></div></div>
+        <div class="ip">
+          <div class="ic"><h4>لماذا d5! هو الأقوى؟</h4>
+            <div class="ki"><span class="ico">⚡</span><span class="ktxt"><strong>5...d5!</strong> — يهاجم الفيل c4 والبيدق e4 في آن واحد!</span></div>
+            <div class="ki"><span class="ico">🔄</span><span class="ktxt">بعد <strong>6.exd5 Nxd5</strong> — الأسود يسترد البيدق بموقف ممتاز</span></div>
+            <div class="ki"><span class="ico">✅</span><span class="ktxt">الأسود يحصل على <strong>مساواة كاملة أو أفضل</strong> — أفضل رد نظرياً</span></div>
+          </div>
+          <div class="varbox"><div class="varbox-title">الخطوط الرئيسية بعد 5...d5</div>
+            <div class="var-item"><span class="var-dot"></span><span class="var-txt"><code>6.exd5 Nxd5 7.Nxd5 Qxd5</code> — موقف جيد للأسود</span></div>
+            <div class="var-item"><span class="var-dot"></span><span class="var-txt"><code>6.dxe5 dxc4 7.exf6</code> — تعقيدات لكن الأسود أفضل</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lc" id="lc6">
+      <div class="lhd"><div class="ley">الحلقة السادسة · الدرس السابع</div><div class="ltitle">5...Nxe4 — يأخذ بيدق e4</div><div class="lsub">5...Nxe4 بديل جريء — الأسود يأخذ بيدق e4 بدل d4 ويحصل على بيدقين إضافيين.</div></div>
+      <div class="ba">
+        <div class="bwrap"><div class="bcon"><div class="board" id="b6"></div></div>
+          <div class="ctrl"><button class="cb" onclick="nav(6,-2)">⏮</button><button class="cb" onclick="nav(6,-1)">◀</button><span class="mc" id="mc6">بعد 5.d4</span><button class="cb" onclick="nav(6,1)">▶</button><button class="cb" onclick="nav(6,99)">⏭</button></div>
+          <div class="mb" id="mb6"></div></div>
+        <div class="ip">
+          <div class="ic"><h4>بعد 5...Nxe4</h4>
+            <div class="ki"><span class="ico">♞</span><span class="ktxt"><strong>5...Nxe4</strong> — يأخذ e4 ويتجاهل d4</span></div>
+            <div class="ki"><span class="ico">⚡</span><span class="ktxt"><strong>6.dxe5!</strong> — الأبيض يدفع e5 ويهاجم الحصان e4</span></div>
+            <div class="ki"><span class="ico">🎯</span><span class="ktxt">بعد <strong>6...Nxc3 7.bxc3</strong> — البيادق المضاعفة مقبولة مقابل النشاط</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lc" id="lc7">
+      <div class="lhd"><div class="ley">الحلقة السادسة · الدرس الثامن</div><div class="ltitle">الخلاصة — هل Deutz Gambit جيد؟</div><div class="lsub">بعد دراسة كل الخطوط، ما هو الحكم النهائي على Deutz Gambit؟</div></div>
+      <div class="ba">
+        <div class="bwrap"><div class="bcon"><div class="board" id="b7"></div></div>
+          <div class="ctrl"><button class="cb" onclick="nav(7,-2)">⏮</button><button class="cb" onclick="nav(7,-1)">◀</button><span class="mc" id="mc7">الموقف الرئيسي</span><button class="cb" onclick="nav(7,1)">▶</button><button class="cb" onclick="nav(7,99)">⏭</button></div>
+          <div class="mb" id="mb7"></div></div>
+        <div class="ip">
+          <div class="ic"><h4>الحكم النهائي</h4>
+            <div class="ki"><span class="ico">⚡</span><span class="ktxt">Deutz Gambit <strong>خطير جداً</strong> ضد الأسود غير المستعد — مفاجأة قوية</span></div>
+            <div class="ki"><span class="ico">⚖️</span><span class="ktxt">نظرياً الأسود يحصل على <strong>مساواة أو ميزة</strong> بـ 5...d5!</span></div>
+            <div class="ki"><span class="ico">🎯</span><span class="ktxt">أفضل استخدام له: <strong>سلاح مفاجأة</strong> في بطولات أو حين تريد اللعب بشكل حاد</span></div>
+          </div>
+          <div class="notebox"><div class="ntitle">💡 التوصية</div>
+            <p>إذا كنت تلعب بالأبيض وتريد إضافة <strong>سلاح مفاجأة</strong> إلى مستودعك، Deutz Gambit خيار ممتاز. لكن تعلّم Rosentreter Gambit جيداً لأنه الأخطر!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-footer">
+      <a class="nav-ep" href="italian_ep5.html">← الحلقة الخامسة</a>
+      <span style="font-size:11px;color:var(--txt3)">٦ / ٢٨</span>
+      <a class="nav-ep next" href="italian_ep7.html">الحلقة السابعة ←</a>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const Wp={K:'♔',Q:'♕',R:'♖',B:'♗',N:'♘',P:'♙'};
+const Bp={K:'♚',Q:'♛',R:'♜',B:'♝',N:'♞',P:'♟'};
+function parseFen(fen){const rows=fen.split(' ')[0].split('/'),b=[];for(let r=0;r<8;r++){const row=[];for(const c of rows[r]){if(isNaN(c))row.push(c);else for(let i=0;i<+c;i++)row.push(null);}b.push(row);}return b;}
+function pHtml(code){if(!code)return'';const w=code===code.toUpperCase();const m={K:Wp.K,Q:Wp.Q,R:Wp.R,B:Wp.B,N:Wp.N,P:Wp.P,k:Bp.K,q:Bp.Q,r:Bp.R,b:Bp.B,n:Bp.N,p:Bp.P};return`<span class="pc ${w?'w':'b'}">${m[code]}</span>`;}
+function drawBoard(id,fen){const el=document.getElementById(id);if(!el)return;const bd=parseFen(fen);el.innerHTML='';const fl=['a','b','c','d','e','f','g','h'];for(let r=0;r<8;r++)for(let c=0;c<8;c++){const sq=document.createElement('div');sq.className='sq '+((r+c)%2===0?'lt':'dk');if(c===7)sq.innerHTML+=`<span class="rl">${8-r}</span>`;if(r===7)sq.innerHTML+=`<span class="fl">${fl[c]}</span>`;sq.innerHTML+=pHtml(bd[r][c]);el.appendChild(sq);}}
+const S='rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR';
+const ITA='r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R';
+const DATA=[
+  [{f:S,l:'الوضع الابتدائي',n:''},{f:ITA,l:'3.Bc4 Bc5',n:'الافتتاح الإيطالي'},{f:'r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/2N2N2/PPPP1PPP/R1BQK2R',l:'4.Nc3',n:'تطوير طبيعي'},{f:'r1bqk1nr/pppp1ppp/2n2n2/2b1p3/2B1P3/2N2N2/PPPP1PPP/R1BQK2R',l:'4...Nf6',n:''},{f:'r1bqk1nr/pppp1ppp/2n2n2/2b1p3/2BPP3/2N2N2/PPP2PPP/R1BQK2R',l:'5.d4!?',n:'Deutz Gambit!'}],
+  [{f:S,l:'الوضع الابتدائي',n:''},{f:ITA,l:'3.Bc4 Bc5',n:''},{f:'r1bqk1nr/pppp1ppp/2n2n2/2b1p3/2B1P3/2N2N2/PPPP1PPP/R1BQK2R',l:'4.Nc3 Nf6',n:''},{f:'r1bqk1nr/pppp1ppp/2n2n2/2b1p3/2BPP3/2N2N2/PPP2PPP/R1BQK2R',l:'5.d4!?',n:'Deutz Gambit — يضحي ببيدق لفتح المركز'}],
+  [{f:'r1bqk1nr/pppp1ppp/2n2n2/2b5/2BpP3/2N2N2/PPP2PPP/R1BQK2R',l:'بعد 5...exd4',n:''},{f:'r1bqk1nr/pppp1ppp/2n2n2/2b5/2BpP1N1/2N5/PPP2PPP/R1BQK2R',l:'6.Ng5!',n:'Rosentreter Gambit — يهاجم f7!'},{f:'r1bqk1nr/ppp2ppp/2n2n2/2bpp1N1/2BpP3/2N5/PPP2PPP/R1BQK2R',l:'6...d5!',n:'الرد الصحيح — يهاجم الفيل'},{f:'r1bqk1nr/ppp2ppp/2n2n2/2bPp1N1/3pP3/2N5/PPP2PPP/R1BQK2R',l:'7.exd5',n:''},{f:'r1bqk1nr/ppp2ppp/2n5/2bPn1N1/3pP3/2N5/PPP2PPP/R1BQK2R',l:'7...Nxd5',n:'الأسود يسترد — موقف متوازن'}],
+  [{f:'r1bqk1nr/pppp1ppp/2n2n2/2b5/2BpP3/2N2N2/PPP2PPP/R1BQK2R',l:'بعد 5...exd4',n:''},{f:'r1bqk1nr/pppp1ppp/2n2n2/2b1P3/2Bp4/2N2N2/PPP2PPP/R1BQK2R',l:'6.e5',n:'يطرد الفارس f6 ويكسب مساحة'},{f:'r1bqk1nr/ppp2ppp/2n2n2/2b1Pp2/2Bp4/2N2N2/PPP2PPP/R1BQK2R',l:'6...d5!',n:'الرد الأفضل'},{f:'r1bqk1nr/ppp2ppp/2n2n2/2b1Pp2/3p4/1BN2N2/PPP2PPP/R1BQK2R',l:'7.Bb3',n:'الفيل يتراجع ويبقى في اللعبة'}],
+  [{f:'r1bqk1nr/pppp1ppp/2n2n2/2b5/2BpP3/2N2N2/PPP2PPP/R1BQK2R',l:'بعد 5...exd4',n:''},{f:'r1bqk1nr/pppp1ppp/2n2n2/2b5/2BpP3/2N2N2/PPP2PPP/R1BQ1RK1',l:'6.0-0',n:'التحصين — الأهدأ والأكثر أماناً'},{f:'r1bqk1nr/ppp2ppp/2n2n2/2b1p3/2BpP3/2N2N2/PPP2PPP/R1BQ1RK1',l:'6...d6',n:'يدعم المركز'},{f:'r1bqk1nr/ppp2ppp/2n2n2/2b1P3/2Bp4/2N2N2/PPP2PPP/R1BQ1RK1',l:'7.e5!',n:'يكسب مساحة ويضغط على الأسود'}],
+  [{f:'r1bqk1nr/pppp1ppp/2n2n2/2b1p3/2BPP3/2N2N2/PPP2PPP/R1BQK2R',l:'بعد 5.d4',n:''},{f:'r1bqk1nr/ppp2ppp/2n2n2/2bpp3/2BPP3/2N2N2/PPP2PPP/R1BQK2R',l:'5...d5!',n:'الرد الأقوى — يهاجم الفيل وe4'},{f:'r1bqk1nr/ppp2ppp/2n2n2/2bPp3/3PP3/2N2N2/PPP2PPP/R1BQK2R',l:'6.exd5',n:''},{f:'r1bqk1nr/ppp2ppp/2n5/2bPn3/3PP3/2N2N2/PPP2PPP/R1BQK2R',l:'6...Nxd5',n:'الأسود يسترد — موقف ممتاز!'}],
+  [{f:'r1bqk1nr/pppp1ppp/2n2n2/2b1p3/2BPP3/2N2N2/PPP2PPP/R1BQK2R',l:'بعد 5.d4',n:''},{f:'r1bqk1nr/pppp1ppp/2n5/2b1p3/2BPn3/2N2N2/PPP2PPP/R1BQK2R',l:'5...Nxe4',n:'يأخذ e4 ويتجاهل d4'},{f:'r1bqk1nr/pppp1ppp/2n5/2b5/2BPn3/2N2N2/PPP2PPP/R1BQK2R',l:'6.dxe5!',n:'يدفع e5 ويهاجم الحصان'},{f:'r1bqk1nr/pppp1ppp/8/2b5/2Bnn3/2N2N2/PPP2PPP/R1BQK2R',l:'6...Nxc3',n:''},{f:'r1bqk1nr/pppp1ppp/8/2b5/2Bnn3/5N2/PPP1PPPP/R1BQK2R',l:'7.bxc3',n:'بيادق مضاعفة مقبولة مقابل النشاط'}],
+  [{f:ITA,l:'الافتتاح الإيطالي',n:''},{f:'r1bqk1nr/pppp1ppp/2n2n2/2b1p3/2BPP3/2N2N2/PPP2PPP/R1BQK2R',l:'5.d4!? — Deutz',n:'سلاح مفاجأة خطير'},{f:'r1bqk1nr/ppp2ppp/2n2n2/2bpp3/2BPP3/2N2N2/PPP2PPP/R1BQK2R',l:'5...d5! — الرد الأقوى',n:'الأسود يحصل على مساواة أو أفضل'}],
+];
+const cur=DATA.map(()=>0);
+function buildMB(i){const b=document.getElementById('mb'+i);if(!b)return;b.innerHTML='';let n=1;DATA[i].forEach((m,j)=>{if(j===0)return;if(j%2===1){const s=document.createElement('span');s.className='mn';s.textContent=n+'.';b.appendChild(s);n++;}const t=document.createElement('span');t.className='mt';t.textContent=m.l;t.dataset.j=j;t.onclick=()=>setM(i,j);b.appendChild(t);});}
+function setM(i,idx){if(idx<0)idx=0;if(idx>=DATA[i].length)idx=DATA[i].length-1;cur[i]=idx;const fen=DATA[i][idx].f;drawBoard('b'+i,fen.includes(' ')?fen:fen+' w KQkq - 0 1');const mc=document.getElementById('mc'+i);if(mc)mc.textContent=idx===0?DATA[i][0].l:(DATA[i][idx].n||DATA[i][idx].l);document.querySelectorAll('#mb'+i+' .mt').forEach(t=>t.classList.toggle('active',+t.dataset.j===idx));}
+function nav(i,d){const max=DATA[i].length-1;setM(i,d===-2?0:d===99?max:Math.max(0,Math.min(max,cur[i]+d)));}
+function show(idx,el,mIdx){document.querySelectorAll('.lc').forEach(l=>l.classList.remove('active'));document.querySelectorAll('.li').forEach(l=>l.classList.remove('active'));document.querySelectorAll('.mob-btn').forEach(b=>b.classList.remove('active'));document.getElementById('lc'+idx).classList.add('active');if(el)el.classList.add('active');if(mIdx!==undefined)document.querySelectorAll('.mob-btn')[mIdx]?.classList.add('active');setM(idx,0);window.scrollTo({top:0,behavior:'smooth'});}
+function tog(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open');}
+window.addEventListener('DOMContentLoaded',()=>{for(let i=0;i<DATA.length;i++){buildMB(i);setM(i,0);}});
+</script>
+</body>
+</html>

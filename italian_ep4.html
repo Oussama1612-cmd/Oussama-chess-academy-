@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>الافتتاح الإيطالي — الحلقة ٤: Evans Gambit Accepted</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0f1117;--bg2:#181c24;--bg3:#1e2330;--brd:#2a3040;
+  --gold:#d4a84b;--gold2:#f0c96a;--gold3:#8a6528;
+  --txt:#e2e8f0;--txt2:#8896a8;--txt3:#4a5568;
+  --bl:#f0d9b5;--bd:#b58863;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;overflow-x:hidden}
+body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;display:flex;flex-direction:column}
+.tb{background:var(--bg2);border-bottom:1px solid var(--brd);height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;position:sticky;top:0;z-index:200;flex-shrink:0}
+.tb-brand{display:flex;align-items:center;gap:8px}
+.tb-icon{font-size:22px}
+.tb-name{font-family:'Amiri',serif;font-size:15px;color:var(--gold);font-weight:700}
+.tb-badge{background:linear-gradient(135deg,var(--gold3),var(--gold));color:#0a0c10;font-size:10px;font-weight:800;padding:4px 11px;border-radius:20px;letter-spacing:.4px;white-space:nowrap}
+.app{display:flex;flex:1;height:calc(100vh - 54px)}
+.sb{width:260px;background:var(--bg2);border-left:1px solid var(--brd);overflow-y:auto;flex-shrink:0;display:flex;flex-direction:column}
+.sb::-webkit-scrollbar{width:3px}.sb::-webkit-scrollbar-thumb{background:var(--brd)}
+.sb-hd{padding:16px 14px 10px;border-bottom:1px solid var(--brd);position:sticky;top:0;background:var(--bg2);z-index:5}
+.sb-hd h3{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
+.sb-hd p{font-size:11px;color:var(--txt3);margin-top:3px}
+.grp{border-bottom:1px solid var(--brd)}
+.gtog{width:100%;background:none;border:none;color:var(--txt);font-family:'Cairo',sans-serif;font-size:12px;font-weight:700;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;text-align:right;transition:background .15s}
+.gtog:hover{background:rgba(255,255,255,.03)}
+.gtog .arr{font-size:9px;color:var(--txt3);transition:transform .2s;flex-shrink:0}
+.gtog.open .arr{transform:rotate(180deg)}
+.gnum{background:var(--bg3);border:1px solid var(--brd);color:var(--txt3);font-size:10px;padding:1px 7px;border-radius:10px;font-weight:700}
+.ll{display:none}.ll.open{display:block}
+.li{display:flex;align-items:center;gap:8px;padding:8px 14px 8px 10px;cursor:pointer;transition:background .15s;border-right:3px solid transparent}
+.li:hover{background:rgba(255,255,255,.03)}
+.li.active{background:rgba(212,168,75,.09);border-right-color:var(--gold)}
+.li .ln{font-size:10px;font-weight:800;color:var(--txt3);min-width:18px;text-align:center;flex-shrink:0}
+.li.active .ln{color:var(--gold)}
+.li .lname{font-size:11.5px;color:var(--txt2);flex:1;line-height:1.4}
+.li.active .lname{color:var(--txt);font-weight:600}
+.mob-nav{display:none;background:var(--bg2);border-bottom:1px solid var(--brd);padding:10px 12px;gap:8px;overflow-x:auto;scrollbar-width:none;flex-shrink:0}
+.mob-nav::-webkit-scrollbar{display:none}
+.mob-btn{background:var(--bg3);border:1px solid var(--brd);color:var(--txt2);font-family:'Cairo',sans-serif;font-size:11px;font-weight:600;padding:7px 13px;border-radius:8px;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:all .15s}
+.mob-btn.active{background:rgba(212,168,75,.15);border-color:var(--gold);color:var(--gold)}
+.main{flex:1;overflow-y:auto;display:flex;flex-direction:column;align-items:center;padding:20px 16px 40px}
+.lc{display:none;flex-direction:column;gap:20px;width:100%;max-width:720px}
+.lc.active{display:flex}
+.lhd{width:100%}
+.ley{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.ltitle{font-family:'Amiri',serif;font-size:24px;font-weight:700;color:var(--txt);line-height:1.3;margin-bottom:7px}
+.lsub{font-size:13px;color:var(--txt2);line-height:1.75}
+.ba{display:flex;gap:18px;width:100%;align-items:flex-start;flex-wrap:wrap}
+.bwrap{display:flex;flex-direction:column;align-items:center;width:100%}
+.bcon{box-shadow:0 0 0 2px var(--bd),0 0 0 5px #000,0 16px 48px rgba(0,0,0,.7);border-radius:3px;overflow:hidden;width:100%;max-width:400px}
+.board{display:grid;grid-template-columns:repeat(8,1fr);aspect-ratio:1;width:100%}
+.sq{aspect-ratio:1;display:flex;align-items:center;justify-content:center;position:relative}
+.sq.lt{background:var(--bl)}.sq.dk{background:var(--bd)}
+.sq.hl{background:rgba(212,168,75,.55)!important}
+.sq .rl{position:absolute;top:1px;right:2px;font-size:7px;font-weight:700;opacity:.55;font-family:'Cairo',sans-serif;line-height:1}
+.sq .fl{position:absolute;bottom:1px;left:2px;font-size:7px;font-weight:700;opacity:.55;font-family:'Cairo',sans-serif;line-height:1}
+.sq.lt .rl,.sq.lt .fl{color:var(--bd)}.sq.dk .rl,.sq.dk .fl{color:var(--bl)}
+.pc{font-size:clamp(24px,5.5vw,38px);line-height:1;user-select:none}
+.pc.w{color:#fff;-webkit-text-stroke:1.2px #444;filter:drop-shadow(0 2px 3px rgba(0,0,0,.5))}
+.pc.b{color:#111;-webkit-text-stroke:.5px #000;filter:drop-shadow(0 2px 4px rgba(0,0,0,.65))}
+.ctrl{display:flex;align-items:center;gap:5px;margin-top:10px;direction:ltr;width:100%;max-width:400px}
+.cb{background:var(--bg3);border:1px solid var(--brd);color:var(--txt2);width:38px;height:38px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .15s;flex-shrink:0}
+.cb:hover,.cb:active{border-color:var(--gold3);color:var(--gold);background:var(--bg2)}
+.mc{flex:1;text-align:center;font-size:11px;color:var(--txt3);font-weight:600;padding:0 4px;line-height:1.3}
+.mb{display:flex;flex-wrap:wrap;gap:3px;margin-top:8px;width:100%;max-width:400px;max-height:68px;overflow-y:auto;direction:ltr}
+.mt{padding:3px 9px;border-radius:5px;font-size:11px;font-weight:700;font-family:'Courier New',monospace;background:var(--bg3);border:1px solid var(--brd);color:var(--txt3);cursor:pointer;transition:all .15s}
+.mt:hover{border-color:var(--gold3);color:var(--txt2)}
+.mt.active{background:var(--gold);border-color:var(--gold);color:#0a0c10}
+.mn{padding:3px 4px;font-size:10px;color:var(--txt3);font-family:monospace}
+.ip{width:100%;display:flex;flex-direction:column;gap:12px}
+.ic{background:var(--bg3);border:1px solid var(--brd);border-radius:10px;padding:16px}
+.ic h4{font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.ki{display:flex;gap:9px;padding:8px 0;border-bottom:1px solid var(--brd);align-items:flex-start}
+.ki:last-child{border-bottom:none;padding-bottom:0}
+.ki .ico{font-size:16px;flex-shrink:0;margin-top:1px}
+.ki .ktxt{font-size:13px;color:var(--txt2);line-height:1.6}
+.ki .ktxt strong{color:var(--txt)}
+.notebox{background:rgba(212,168,75,.07);border:1px solid rgba(212,168,75,.2);border-radius:10px;padding:14px 16px;width:100%}
+.notebox .ntitle{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.notebox p{font-size:13px;color:var(--txt2);line-height:1.75}
+.notebox p strong{color:var(--gold2)}
+.varbox{background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:12px 14px;margin-top:8px}
+.varbox-title{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--txt2);margin-bottom:8px}
+.var-item{display:flex;align-items:flex-start;gap:9px;padding:7px 0;border-bottom:1px solid var(--brd)}
+.var-item:last-child{border-bottom:none;padding-bottom:0}
+.var-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:6px}
+.var-txt{font-size:12.5px;color:var(--txt2);line-height:1.6}
+.var-txt strong{color:var(--txt)}
+.var-txt code{font-family:'Courier New',monospace;font-size:11.5px;color:var(--gold2);background:rgba(212,168,75,.1);padding:1px 5px;border-radius:4px}
+.nav-footer{display:flex;justify-content:space-between;align-items:center;width:100%;max-width:720px;margin-top:8px;padding-top:20px;border-top:1px solid var(--brd)}
+.nav-ep{display:flex;align-items:center;gap:8px;text-decoration:none;padding:10px 16px;border-radius:8px;border:1px solid var(--brd);background:var(--bg2);color:var(--txt2);font-family:'Cairo',sans-serif;font-size:12px;font-weight:600;transition:all .15s;cursor:pointer}
+.nav-ep:hover{border-color:var(--gold3);color:var(--gold)}
+.nav-ep.next{background:linear-gradient(135deg,var(--gold3),var(--gold));color:#0a0c10;border-color:transparent;font-weight:700}
+.nav-ep.next:hover{opacity:.9}
+@media(min-width:641px){.mob-nav{display:none!important}.sb{display:flex}}
+@media(max-width:640px){
+  .sb{display:none!important}
+  .mob-nav{display:flex!important}
+  .app{flex-direction:column;height:auto;overflow:visible}
+  .main{padding:16px 12px 40px;overflow:visible}
+  .ltitle{font-size:20px}
+}
+</style>
+</head>
+<body>
+
+<div class="tb">
+  <div class="tb-brand">
+    <span class="tb-icon">♟</span>
+    <span class="tb-name">أكاديمية أسامة للشطرنج</span>
+  </div>
+  <span class="tb-badge">الحلقة ٤ من ٢٨</span>
+</div>
+
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <div class="sb">
+    <div class="sb-hd">
+      <h3>الحلقة الرابعة</h3>
+      <p>Evans Gambit — قبول الغامبيط</p>
+    </div>
+    <div class="grp">
+      <button class="gtog open" onclick="tog(this)">
+        <span>المقدمة</span>
+        <span style="display:flex;gap:7px;align-items:center"><span class="gnum">2</span><span class="arr">▼</span></span>
+      </button>
+      <div class="ll open">
+        <div class="li active" onclick="show(0,this)"><span class="ln">١</span><span class="lname">ما هو Evans Gambit؟</span></div>
+        <div class="li" onclick="show(1,this)"><span class="ln">٢</span><span class="lname">4.b4 — الحركة الجريئة</span></div>
+      </div>
+    </div>
+    <div class="grp">
+      <button class="gtog open" onclick="tog(this)">
+        <span>قبول الغامبيط</span>
+        <span style="display:flex;gap:7px;align-items:center"><span class="gnum">4</span><span class="arr">▼</span></span>
+      </button>
+      <div class="ll open">
+        <div class="li" onclick="show(2,this)"><span class="ln">٣</span><span class="lname">4...Bxb4 — الأسود يقبل</span></div>
+        <div class="li" onclick="show(3,this)"><span class="ln">٤</span><span class="lname">5.c3 Ba5 — الخط الرئيسي</span></div>
+        <div class="li" onclick="show(4,this)"><span class="ln">٥</span><span class="lname">6.d4 — فتح المركز</span></div>
+        <div class="li" onclick="show(5,this)"><span class="ln">٦</span><span class="lname">الخطة الاستراتيجية للأبيض</span></div>
+      </div>
+    </div>
+    <div class="grp">
+      <button class="gtog open" onclick="tog(this)">
+        <span>الردود الرئيسية للأسود</span>
+        <span style="display:flex;gap:7px;align-items:center"><span class="gnum">3</span><span class="arr">▼</span></span>
+      </button>
+      <div class="ll open">
+        <div class="li" onclick="show(6,this)"><span class="ln">٧</span><span class="lname">6...d6 — الدفاع المتين</span></div>
+        <div class="li" onclick="show(7,this)"><span class="ln">٨</span><span class="lname">6...exd4 — قبول البيدق</span></div>
+        <div class="li" onclick="show(8,this)"><span class="ln">٩</span><span class="lname">7.0-0 — التضحية بالبيدق</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOBILE NAV -->
+  <div class="mob-nav">
+    <button class="mob-btn active" onclick="show(0,null,0)">١·المقدمة</button>
+    <button class="mob-btn" onclick="show(1,null,1)">٢·4.b4</button>
+    <button class="mob-btn" onclick="show(2,null,2)">٣·القبول</button>
+    <button class="mob-btn" onclick="show(3,null,3)">٤·5.c3</button>
+    <button class="mob-btn" onclick="show(4,null,4)">٥·6.d4</button>
+    <button class="mob-btn" onclick="show(5,null,5)">٦·الخطة</button>
+    <button class="mob-btn" onclick="show(6,null,6)">٧·6...d6</button>
+    <button class="mob-btn" onclick="show(7,null,7)">٨·6...exd4</button>
+    <button class="mob-btn" onclick="show(8,null,8)">٩·7.0-0</button>
+  </div>
+
+  <div class="main">
+
+    <!-- 0: ما هو Evans Gambit -->
+    <div class="lc active" id="lc0">
+      <div class="lhd">
+        <div class="ley">الحلقة الرابعة · الدرس الأول</div>
+        <div class="ltitle">ما هو Evans Gambit؟</div>
+        <div class="lsub">Evans Gambit واحد من أشهر وأقدم الغامبيطات في الشطرنج — يعود لعام 1827 واخترعه البحار الويلزي William Davies Evans.</div>
+      </div>
+      <div class="ba">
+        <div class="bwrap">
+          <div class="bcon"><div class="board" id="b0"></div></div>
+          <div class="ctrl">
+            <button class="cb" onclick="nav(0,-2)">⏮</button>
+            <button class="cb" onclick="nav(0,-1)">◀</button>
+            <span class="mc" id="mc0">الوضع الابتدائي</span>
+            <button class="cb" onclick="nav(0,1)">▶</button>
+            <button class="cb" onclick="nav(0,99)">⏭</button>
+          </div>
+          <div class="mb" id="mb0"></div>
+        </div>
+        <div class="ip">
+          <div class="ic">
+            <h4>لماذا Evans Gambit؟</h4>
+            <div class="ki"><span class="ico">📜</span><span class="ktxt">اخترعه William Davies Evans عام <strong>1827</strong> — بحار بريطاني عبقري!</span></div>
+            <div class="ki"><span class="ico">⚡</span><span class="ktxt">يضحي ببيدق b4 لإبعاد الفيل ثم يبني <strong>مركزاً هائلاً</strong> بـ c3 وd4</span></div>
+            <div class="ki"><span class="ico">👑</span><span class="ktxt">لعبه <strong>Kasparov</strong> في بطولات رسمية وأحيا موضته في القرن الحادي والعشرين</span></div>
+          </div>
+          <div class="notebox">
+            <div class="ntitle">📌 الفكرة الرئيسية</div>
+            <p>بعد <strong>1.e4 e5 2.Nf3 Nc6 3.Bc4 Bc5 4.b4!?</strong> — الأبيض يضحي ببيدق b4 ليربح <strong>وقتاً وضغطاً</strong> هائلاً على المركز.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1: 4.b4 -->
+    <div class="lc" id="lc1">
+      <div class="lhd">
+        <div class="ley">الحلقة الرابعة · الدرس الثاني</div>
+        <div class="ltitle">4.b4!? — الحركة الجريئة</div>
+        <div class="lsub">بعد الافتتاح الإيطالي الطبيعي، يفاجئ الأبيض بـ 4.b4! — غامبيط جريء يغير طبيعة اللعبة تماماً.</div>
+      </div>
+      <div class="ba">
+        <div class="bwrap">
+          <div class="bcon"><div class="board" id="b1"></div></div>
+          <div class="ctrl">
+            <button class="cb" onclick="nav(1,-2)">⏮</button>
+            <button class="cb" onclick="nav(1,-1)">◀</button>
+            <span class="mc" id="mc1">الوضع الابتدائي</span>
+            <button class="cb" onclick="nav(1,1)">▶</button>
+            <button class="cb" onclick="nav(1,99)">⏭</button>
+          </div>
+          <div class="mb" id="mb1"></div>
+        </div>
+        <div class="ip">
+          <div class="ic">
+            <h4>ماذا يريد الأبيض من b4؟</h4>
+            <div class="ki"><span class="ico">①</span><span class="ktxt">يُبعد الفيل من c5 — يكسب وقتاً ثميناً</span></div>
+            <div class="ki"><span class="ico">②</span><span class="ktxt">بعد c3 وd4 يبني <strong>مركزاً من بيدقين</strong> هائلاً</span></div>
+            <div class="ki"><span class="ico">③</span><span class="ktxt">يفتح خطوط الهجوم للفيل على a3 أو الملكة على b3</span></div>
+          </div>
+          <div class="ic">
+            <h4>خيارات الأسود</h4>
+            <div class="ki"><span class="ico">✅</span><span class="ktxt"><strong>4...Bxb4</strong> — يقبل الغامبيط (الحلقة الحالية)</span></div>
+            <div class="ki"><span class="ico">🛡️</span><span class="ktxt"><strong>4...Bb6</strong> — يرفض الغامبيط (الحلقة القادمة)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2: 4...Bxb4 -->
+    <div class="lc" id="lc2">
+      <div class="lhd">
+        <div class="ley">الحلقة الرابعة · الدرس الثالث</div>
+        <div class="ltitle">4...Bxb4 — الأسود يقبل الغامبيط</div>
+        <div class="lsub">الأسود يأخذ البيدق بالفيل — يكسب بيدقاً لكن الأبيض سيحصل على تعويض هائل.</div>
+      </div>
+      <div class="ba">
+        <div class="bwrap">
+          <div class="bcon"><div class="board" id="b2"></div></div>
+          <div class="ctrl">
+            <button class="cb" onclick="nav(2,-2)">⏮</button>
+            <button class="cb" onclick="nav(2,-1)">◀</button>
+            <span class="mc" id="mc2">بعد 4.b4</span>
+            <button class="cb" onclick="nav(2,1)">▶</button>
+            <button class="cb" onclick="nav(2,99)">⏭</button>
+          </div>
+          <div class="mb" id="mb2"></div>
+        </div>
+        <div class="ip">
+          <div class="ic">
+            <h4>بعد 4...Bxb4</h4>
+            <div class="ki"><span class="ico">♗</span><span class="ktxt">الفيل أخذ البيدق — <strong>الأسود بيدق أكثر</strong> لكن وقته ضائع</span></div>
+            <div class="ki"><span class="ico">⚡</span><span class="ktxt">الأبيض يلعب <strong>5.c3!</strong> فوراً — يطرد الفيل ويستعد لـ d4</span></div>
+            <div class="ki"><span class="ico">🎯</span><span class="ktxt">التعويض: <strong>مركز قوي + تطوير سريع + ضغط دائم</strong></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3: 5.c3 Ba5 -->
+    <div class="lc" id="lc3">
+      <div class="lhd">
+        <div class="ley">الحلقة الرابعة · الدرس الرابع</div>
+        <div class="ltitle">5.c3 Ba5 — الخط الرئيسي</div>
+        <div class="lsub">5.c3 هي الحركة الأساسية في Evans Gambit — تطرد الفيل وتستعد لبناء مركز هائل بـ d4.</div>
+      </div>
+      <div class="ba">
+        <div class="bwrap">
+          <div class="bcon"><div class="board" id="b3"></div></div>
+          <div class="ctrl">
+            <button class="cb" onclick="nav(3,-2)">⏮</button>
+            <button class="cb" onclick="nav(3,-1)">◀</button>
+            <span class="mc" id="mc3">بعد 4...Bxb4</span>
+            <button class="cb" onclick="nav(3,1)">▶</button>
+            <button class="cb" onclick="nav(3,99)">⏭</button>
+          </div>
+          <div class="mb" id="mb3"></div>
+        </div>
+        <div class="ip">
+          <div class="ic">
+            <h4>لماذا Ba5 هي الأفضل؟</h4>
+            <div class="ki"><span class="ico">①</span><span class="ktxt"><strong>5...Ba5</strong> — الفيل يتراجع لـ a5 ويبقى على القطر الهجومي</span></div>
+            <div class="ki"><span class="ico">②</span><span class="ktxt"><strong>5...Bc5?!</strong> — أضعف: الأبيض يلعب d4 ويكسر المركز مباشرة</span></div>
+            <div class="ki"><span class="ico">③</span><span class="ktxt"><strong>5...Be7?!</strong> — سلبي جداً: الفيل يفقد نشاطه كلياً</span></div>
+          </div>
+          <div class="varbox">
+            <div class="varbox-title">الخطوط الرئيسية بعد 5...Ba5</div>
+            <div class="var-item"><span class="var-dot"></span><span class="var-txt"><code>6.d4</code> — الأكثر شيوعاً وحدة (الخط الرئيسي)</span></div>
+            <div class="var-item"><span class="var-dot"></span><span class="var-txt"><code>6.d3</code> — أهدأ وأكثر أماناً للأبيض</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4: 6.d4 -->
+    <div class="lc" id="lc4">
+      <div class="lhd">
+        <div class="ley">الحلقة الرابعة · الدرس الخامس</div>
+        <div class="ltitle">6.d4! — فتح المركز</div>
+        <div class="lsub">6.d4 هي الضربة الكبرى في Evans Gambit — يفتح المركز ويُطلق قوة قطع الأبيض المتطورة.</div>
+      </div>
+      <div class="ba">
+        <div class="bwrap">
+          <div class="bcon"><div class="board" id="b4"></div></div>
+          <div class="ctrl">
+            <button class="cb" onclick="nav(4,-2)">⏮</button>
+            <button class="cb" onclick="nav(4,-1)">◀</button>
+            <span class="mc" id="mc4">بعد 5...Ba5</span>
+            <button class="cb" onclick="nav(4,1)">▶</button>
+            <button class="cb" onclick="nav(4,99)">⏭</button>
+          </div>
+          <div class="mb" id="mb4"></div>
+        </div>
+        <div class="ip">
+          <div class="ic">
+            <h4>ماذا يحدث بعد 6.d4?</h4>
+            <div class="ki"><span class="ico">♟</span><span class="ktxt">الأبيض يدفع d4 مع <strong>تهديدان في وقت واحد</strong>: يأخذ e5 أو يدفع d5</span></div>
+            <div class="ki"><span class="ico">⚡</span><span class="ktxt">الأسود مجبر على الاختيار — <strong>6...exd4</strong> أو <strong>6...d6</strong></span></div>
+            <div class="ki"><span class="ico">🎯</span><span class="ktxt">كلا الردين يعطي الأبيض <strong>مبادرة قوية وتطويراً أسرع</strong></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5: الخطة الاستراتيجية -->
+    <div class="lc" id="lc5">
+      <div class="lhd">
+        <div class="ley">الحلقة الرابعة · الدرس السادس</div>
+        <div class="ltitle">الخطة الاستراتيجية للأبيض</div>
+        <div class="lsub">Evans Gambit ليس مجرد هجوم عشوائي — له خطة استراتيجية واضحة يجب فهمها جيداً.</div>
+      </div>
+      <div class="ba">
+        <div class="bwrap">
+          <div class="bcon"><div class="board" id="b5"></div></div>
+          <div class="ctrl">
+            <button class="cb" onclick="nav(5,-2)">⏮</button>
+            <button class="cb" onclick="nav(5,-1)">◀</button>
+            <span class="mc" id="mc5">الموقف الرئيسي</span>
+            <button class="cb" onclick="nav(5,1)">▶</button>
+            <button class="cb" onclick="nav(5,99)">⏭</button>
+          </div>
+          <div class="mb" id="mb5"></div>
+        </div>
+        <div class="ip">
+          <div class="ic">
+            <h4>الخطة الكاملة للأبيض</h4>
+            <div class="ki"><span class="ico">①</span><span class="ktxt"><strong>التحصين السريع</strong> — الملك يجب أن يكون آمناً قبل الهجوم</span></div>
+            <div class="ki"><span class="ico">②</span><span class="ktxt"><strong>Ba3!</strong> — يمنع الأسود من التحصين أو يضغط على e7</span></div>
+            <div class="ki"><span class="ico">③</span><span class="ktxt"><strong>Qb3!</strong> — يضغط على f7 وb7 في نفس الوقت</span></div>
+            <div class="ki"><span class="ico">④</span><span class="ktxt"><strong>الرخ على d1</strong> — يدعم البيدق d4 ويضغط على ملف d المفتوح</span></div>
+          </div>
+          <div class="notebox">
+            <div class="ntitle">💡 قاعدة Evans Gambit</div>
+            <p>التعويض ليس مادياً بل <strong>موضعياً</strong> — الأبيض يستعيد البيدق لاحقاً بفضل <strong>Ba3 أو Qb3</strong> التي تمنع التحصين.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6: 6...d6 -->
+    <div class="lc" id="lc6">
+      <div class="lhd">
+        <div class="ley">الحلقة الرابعة · الدرس السابع</div>
+        <div class="ltitle">6...d6 — الدفاع المتين</div>
+        <div class="lsub">6...d6 هو الرد الأكثر صلابة — الأسود يدعم e5 ويحاول الاحتفاظ ببيدق الغامبيط.</div>
+      </div>
+      <div class="ba">
+        <div class="bwrap">
+          <div class="bcon"><div class="board" id="b6"></div></div>
+          <div class="ctrl">
+            <button class="cb" onclick="nav(6,-2)">⏮</button>
+            <button class="cb" onclick="nav(6,-1)">◀</button>
+            <span class="mc" id="mc6">بعد 6.d4</span>
+            <button class="cb" onclick="nav(6,1)">▶</button>
+            <button class="cb" onclick="nav(6,99)">⏭</button>
+          </div>
+          <div class="mb" id="mb6"></div>
+        </div>
+        <div class="ip">
+          <div class="ic">
+            <h4>ماذا بعد 6...d6?</h4>
+            <div class="ki"><span class="ico">🛡️</span><span class="ktxt"><strong>6...d6</strong> — يدعم e5 ويحاول الاحتفاظ بالبيدق الإضافي</span></div>
+            <div class="ki"><span class="ico">⚡</span><span class="ktxt">الأبيض يلعب <strong>7.Qb3!</strong> — يضغط على f7 وb7 معاً</span></div>
+            <div class="ki"><span class="ico">🎯</span><span class="ktxt">بعد <strong>7...Qd7 8.dxe5 dxe5 9.Ba3</strong> — الأبيض يمنع التحصين ويملك مبادرة قوية</span></div>
+          </div>
+          <div class="varbox">
+            <div class="varbox-title">التسلسل الرئيسي</div>
+            <div class="var-item"><span class="var-dot"></span><span class="var-txt"><code>7.Qb3 Qd7 8.dxe5 dxe5 9.Ba3</code> — الأبيض يمنع التحصين</span></div>
+            <div class="var-item"><span class="var-dot"></span><span class="var-txt"><code>9...Bb6 10.Nxe5!</code> — تضحية جميلة تفوز بمادة</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7: 6...exd4 -->
+    <div class="lc" id="lc7">
+      <div class="lhd">
+        <div class="ley">الحلقة الرابعة · الدرس الثامن</div>
+        <div class="ltitle">6...exd4 — قبول البيدق الثاني</div>
+        <div class="lsub">الأسود يأخذ بيدق d4 أيضاً — يصبح بيدقين أكثر لكن الأبيض يحصل على هجوم لا يُوقف.</div>
+      </div>
+      <div class="ba">
+        <div class="bwrap">
+          <div class="bcon"><div class="board" id="b7"></div></div>
+          <div class="ctrl">
+            <button class="cb" onclick="nav(7,-2)">⏮</button>
+            <button class="cb" onclick="nav(7,-1)">◀</button>
+            <span class="mc" id="mc7">بعد 6.d4</span>
+            <button class="cb" onclick="nav(7,1)">▶</button>
+            <button class="cb" onclick="nav(7,99)">⏭</button>
+          </div>
+          <div class="mb" id="mb7"></div>
+        </div>
+        <div class="ip">
+          <div class="ic">
+            <h4>بعد 6...exd4 7.0-0!</h4>
+            <div class="ki"><span class="ico">♟</span><span class="ktxt"><strong>6...exd4</strong> — الأسود يأخذ بيدقاً ثانياً ليصبح بيدقين أكثر</span></div>
+            <div class="ki"><span class="ico">🏰</span><span class="ktxt"><strong>7.0-0!</strong> — الأبيض يتحصن ويضحي ببيدق ثالث! الهجوم أولاً!</span></div>
+            <div class="ki"><span class="ico">⚡</span><span class="ktxt">بعد <strong>7...dxc3</strong> يلعب <strong>8.Qb3!</strong> — تهديد f7 وb7 لا يمكن الدفاع عنهما</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8: 7.0-0 التضحية -->
+    <div class="lc" id="lc8">
+      <div class="lhd">
+        <div class="ley">الحلقة الرابعة · الدرس التاسع</div>
+        <div class="ltitle">7.0-0! — التضحية بالبيدق الثالث</div>
+        <div class="lsub">أجمل ما في Evans Gambit هو أن الأبيض يضحي بثلاثة بيادق أحياناً! الهجوم يستحق كل شيء.</div>
+      </div>
+      <div class="ba">
+        <div class="bwrap">
+          <div class="bcon"><div class="board" id="b8"></div></div>
+          <div class="ctrl">
+            <button class="cb" onclick="nav(8,-2)">⏮</button>
+            <button class="cb" onclick="nav(8,-1)">◀</button>
+            <span class="mc" id="mc8">بعد 6...exd4</span>
+            <button class="cb" onclick="nav(8,1)">▶</button>
+            <button class="cb" onclick="nav(8,99)">⏭</button>
+          </div>
+          <div class="mb" id="mb8"></div>
+        </div>
+        <div class="ip">
+          <div class="ic">
+            <h4>الهجوم الكامل بعد 7.0-0</h4>
+            <div class="ki"><span class="ico">🔥</span><span class="ktxt"><strong>8.Qb3!</strong> — يهدد f7 مباشرة ويضغط على b7</span></div>
+            <div class="ki"><span class="ico">⚡</span><span class="ktxt"><strong>8...Qf6?</strong> — خطأ شائع! <strong>9.e5!</strong> يطرد الملكة بقوة</span></div>
+            <div class="ki"><span class="ico">✅</span><span class="ktxt"><strong>8...Qe7</strong> — الأفضل: يدافع عن f7 ويستعد لـ Nf6</span></div>
+          </div>
+          <div class="varbox">
+            <div class="varbox-title">لماذا الأبيض بتعويض كافٍ؟</div>
+            <div class="var-item"><span class="var-dot"></span><span class="var-txt">الأسود لم يُطوّر أي قطعة بعد بينما الأبيض حصّن وطوّر</span></div>
+            <div class="var-item"><span class="var-dot"></span><span class="var-txt">Ba3 يمنع التحصين — الملك الأسود في المركز تحت الخطر</span></div>
+            <div class="var-item"><span class="var-dot"></span><span class="var-txt">الأبيض يسترد البيادق لاحقاً مع هجوم جاهز</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NAV FOOTER -->
+    <div class="nav-footer">
+      <a class="nav-ep" href="italian_ep3.html">← الحلقة الثالثة</a>
+      <span style="font-size:11px;color:var(--txt3)">٤ / ٢٨</span>
+      <a class="nav-ep next" href="italian_ep5.html">الحلقة الخامسة ←</a>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const Wp={K:'♔',Q:'♕',R:'♖',B:'♗',N:'♘',P:'♙'};
+const Bp={K:'♚',Q:'♛',R:'♜',B:'♝',N:'♞',P:'♟'};
+
+function parseFen(fen){
+  const rows=fen.split(' ')[0].split('/'),b=[];
+  for(let r=0;r<8;r++){const row=[];for(const c of rows[r]){if(isNaN(c))row.push(c);else for(let i=0;i<+c;i++)row.push(null);}b.push(row);}
+  return b;
+}
+function pHtml(code){
+  if(!code)return'';
+  const w=code===code.toUpperCase();
+  const m={K:Wp.K,Q:Wp.Q,R:Wp.R,B:Wp.B,N:Wp.N,P:Wp.P,k:Bp.K,q:Bp.Q,r:Bp.R,b:Bp.B,n:Bp.N,p:Bp.P};
+  return`<span class="pc ${w?'w':'b'}">${m[code]}</span>`;
+}
+function drawBoard(id,fen){
+  const el=document.getElementById(id);if(!el)return;
+  const bd=parseFen(fen);el.innerHTML='';
+  const fl=['a','b','c','d','e','f','g','h'];
+  for(let r=0;r<8;r++)for(let c=0;c<8;c++){
+    const sq=document.createElement('div');
+    sq.className='sq '+((r+c)%2===0?'lt':'dk');
+    if(c===7)sq.innerHTML+=`<span class="rl">${8-r}</span>`;
+    if(r===7)sq.innerHTML+=`<span class="fl">${fl[c]}</span>`;
+    sq.innerHTML+=pHtml(bd[r][c]);
+    el.appendChild(sq);
+  }
+}
+
+const S='rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
+
+const DATA=[
+  // 0: intro
+  [{f:S,l:'الوضع الابتدائي',n:''},
+   {f:'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR',l:'1.e4',n:''},
+   {f:'rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR',l:'1...e5',n:''},
+   {f:'rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R',l:'2.Nf3',n:''},
+   {f:'r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R',l:'2...Nc6',n:''},
+   {f:'r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R',l:'3.Bc4',n:'الافتتاح الإيطالي'},
+   {f:'r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R',l:'3...Bc5',n:'Giuoco Piano'},
+   {f:'r1bqk1nr/pppp1ppp/2n5/2b1p3/1PB1P3/5N2/P1PP1PPP/RNBQK2R',l:'4.b4!!',n:'Evans Gambit! الغامبيط الجريء'}],
+  // 1: 4.b4
+  [{f:S,l:'الوضع الابتدائي',n:''},
+   {f:'r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R',l:'3.Bc4 Bc5',n:'الافتتاح الإيطالي'},
+   {f:'r1bqk1nr/pppp1ppp/2n5/2b1p3/1PB1P3/5N2/P1PP1PPP/RNBQK2R',l:'4.b4!',n:'يضحي ببيدق لربح الوقت والمركز'}],
+  // 2: Bxb4
+  [{f:'r1bqk1nr/pppp1ppp/2n5/2b1p3/1PB1P3/5N2/P1PP1PPP/RNBQK2R',l:'بعد 4.b4',n:'الأسود يختار'},
+   {f:'r1bqk1nr/pppp1ppp/2n5/4p3/1bB1P3/5N2/P1PP1PPP/RNBQK2R',l:'4...Bxb4',n:'يقبل الغامبيط — يكسب بيدقاً'},
+   {f:'r1bqk1nr/pppp1ppp/2n5/4p3/1bB1P3/2P2N2/P2P1PPP/RNBQK2R',l:'5.c3!',n:'يطرد الفيل ويستعد لـ d4'}],
+  // 3: 5.c3 Ba5
+  [{f:'r1bqk1nr/pppp1ppp/2n5/4p3/1bB1P3/2P2N2/P2P1PPP/RNBQK2R',l:'بعد 5.c3',n:''},
+   {f:'r1bqk1nr/pppp1ppp/2n5/b3p3/2B1P3/2P2N2/P2P1PPP/RNBQK2R',l:'5...Ba5',n:'الأفضل! يبقى على القطر الهجومي'},
+   {f:'r1bqk1nr/pppp1ppp/2n5/b3p3/2BPP3/2P2N2/P4PPP/RNBQK2R',l:'6.d4!',n:'يفتح المركز بقوة!'}],
+  // 4: 6.d4
+  [{f:'r1bqk1nr/pppp1ppp/2n5/b3p3/2B1P3/2P2N2/P2P1PPP/RNBQK2R',l:'بعد 5...Ba5',n:''},
+   {f:'r1bqk1nr/pppp1ppp/2n5/b3p3/2BPP3/2P2N2/P4PPP/RNBQK2R',l:'6.d4!',n:'التهديد: dxe5 أو d5'},
+   {f:'r1bqk1nr/pppp1ppp/2n5/b7/2BpP3/2P2N2/P4PPP/RNBQK2R',l:'6...exd4',n:'الأسود يأخذ البيدق الثاني'},
+   {f:'r1bqk1nr/pppp1ppp/2n5/b3p3/2BPP3/2P2N2/P4PPP/RNBQK2R',l:'أو 6...d6',n:'الدفاع المتين — يدعم e5'}],
+  // 5: الخطة الاستراتيجية
+  [{f:'r1bqk1nr/pppp1ppp/2n5/b7/2BpP3/2P2N2/P4PPP/RNBQ1RK1',l:'بعد 7.0-0',n:'الأبيض حصّن — الهجوم جاهز'},
+   {f:'r1bqk1nr/pppp1ppp/2n5/b7/2BpP3/1QP2N2/P4PPP/RNB2RK1',l:'8.Qb3!',n:'يهدد f7 وb7 معاً'},
+   {f:'r1bqk1nr/pppp1ppp/2n5/b7/2B1P3/BQP2N2/P4PPP/RN3RK1',l:'Ba3!',n:'يمنع التحصين — الملك الأسود في خطر!'}],
+  // 6: 6...d6
+  [{f:'r1bqk1nr/pppp1ppp/2n5/b3p3/2BPP3/2P2N2/P4PPP/RNBQK2R',l:'بعد 6.d4',n:''},
+   {f:'r1bqk1nr/ppp2ppp/2np4/b3p3/2BPP3/2P2N2/P4PPP/RNBQK2R',l:'6...d6',n:'الدفاع المتين — يدعم e5'},
+   {f:'r1bqk1nr/ppp2ppp/2np4/b3p3/2BPP3/1QP2N2/P4PPP/RNB1K2R',l:'7.Qb3!',n:'يضغط على f7 وb7 في آن واحد!'},
+   {f:'r1b1k1nr/pppq1ppp/2np4/b3p3/2BPP3/1QP2N2/P4PPP/RNB1K2R',l:'7...Qd7',n:'يدافع عن b7'},
+   {f:'r1b1k1nr/pppq1ppp/2np4/b6P/2B1P3/1QP2N2/P4PPP/RNB1K2R',l:'8.dxe5 dxe5',n:''},
+   {f:'r1b1k1nr/pppq1ppp/2n5/bB5p/4P3/1QP2N2/P4PPP/RNB1K2R',l:'9.Ba3!',n:'يمنع التحصين تماماً — الملك في المركز'}],
+  // 7: 6...exd4
+  [{f:'r1bqk1nr/pppp1ppp/2n5/b3p3/2BPP3/2P2N2/P4PPP/RNBQK2R',l:'بعد 6.d4',n:''},
+   {f:'r1bqk1nr/pppp1ppp/2n5/b7/2Bpp3/2P2N2/P4PPP/RNBQK2R',l:'6...exd4',n:'يأخذ البيدق الثاني — بيدقان أكثر!'},
+   {f:'r1bqk1nr/pppp1ppp/2n5/b7/2Bpp3/2P2N2/P4PPP/RNBQ1RK1',l:'7.0-0!',n:'يتحصن ويضحي ببيدق ثالث! الهجوم أولاً!'}],
+  // 8: 7.0-0 الهجوم
+  [{f:'r1bqk1nr/pppp1ppp/2n5/b7/2Bpp3/2P2N2/P4PPP/RNBQ1RK1',l:'بعد 7.0-0',n:''},
+   {f:'r1bqk1nr/pppp1ppp/2n5/b7/2Bpp3/2p2N2/P4PPP/RNBQ1RK1',l:'7...dxc3',n:'الأسود يأخذ بيدقاً ثالثاً'},
+   {f:'r1bqk1nr/pppp1ppp/2n5/b7/2B1p3/2p2N2/P2Q1PPP/RNB2RK1',l:'8.Qb3!',n:'الملكة تهاجم f7 وb7 — لا دفاع!'},
+   {f:'r1b1k1nr/ppppqppp/2n5/b7/2B1p3/1Qp2N2/P4PPP/RNB2RK1',l:'8...Qe7',n:'الرد الأفضل — يدافع عن f7'},
+   {f:'r1b1k1nr/ppppqppp/2n5/b7/2B1p3/BQp2N2/P4PPP/RN3RK1',l:'9.Ba3!',n:'يمنع التحصين — الملك الأسود محاصر في المركز!'}],
+];
+
+const cur=DATA.map(()=>0);
+
+function buildMB(i){
+  const b=document.getElementById('mb'+i);if(!b)return;
+  b.innerHTML='';let n=1;
+  DATA[i].forEach((m,j)=>{
+    if(j===0)return;
+    if(j%2===1){const s=document.createElement('span');s.className='mn';s.textContent=n+'.';b.appendChild(s);n++;}
+    const t=document.createElement('span');t.className='mt';t.textContent=m.l;t.dataset.j=j;
+    t.onclick=()=>setM(i,j);b.appendChild(t);
+  });
+}
+
+function setM(i,idx){
+  if(idx<0)idx=0;if(idx>=DATA[i].length)idx=DATA[i].length-1;
+  cur[i]=idx;
+  const fen=DATA[i][idx].f;
+  drawBoard('b'+i, fen.includes(' ')?fen:fen+' w KQkq - 0 1');
+  const mc=document.getElementById('mc'+i);
+  if(mc)mc.textContent=idx===0?DATA[i][0].l:(DATA[i][idx].n||DATA[i][idx].l);
+  document.querySelectorAll('#mb'+i+' .mt').forEach(t=>t.classList.toggle('active',+t.dataset.j===idx));
+}
+
+function nav(i,d){
+  const max=DATA[i].length-1;
+  setM(i, d===-2?0:d===99?max:Math.max(0,Math.min(max,cur[i]+d)));
+}
+
+function show(idx,el,mIdx){
+  document.querySelectorAll('.lc').forEach(l=>l.classList.remove('active'));
+  document.querySelectorAll('.li').forEach(l=>l.classList.remove('active'));
+  document.querySelectorAll('.mob-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('lc'+idx).classList.add('active');
+  if(el)el.classList.add('active');
+  if(mIdx!==undefined)document.querySelectorAll('.mob-btn')[mIdx]?.classList.add('active');
+  setM(idx,0);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function tog(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open');}
+
+window.addEventListener('DOMContentLoaded',()=>{
+  for(let i=0;i<DATA.length;i++){buildMB(i);setM(i,0);}
+});
+</script>
+</body>
+</html>
