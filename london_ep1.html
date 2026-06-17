@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>How to Beat the London System — الحلقة ١</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0f1117;--bg2:#181c24;--bg3:#1e2330;--brd:#2a3040;
+  --gold:#d4a84b;--gold2:#f0c96a;--gold3:#8a6528;
+  --txt:#e2e8f0;--txt2:#8896a8;--txt3:#4a5568;
+  --bl:#f0d9b5;--bd:#b58863;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;overflow-x:hidden}
+body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;display:flex;flex-direction:column}
+.tb{background:var(--bg2);border-bottom:1px solid var(--brd);height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;position:sticky;top:0;z-index:200;flex-shrink:0}
+.tb-brand{display:flex;align-items:center;gap:8px}
+.tb-icon{font-size:22px}
+.tb-name{font-family:'Amiri',serif;font-size:15px;color:var(--gold);font-weight:700}
+.tb-badge{background:linear-gradient(135deg,var(--gold3),var(--gold));color:#0a0c10;font-size:10px;font-weight:800;padding:4px 11px;border-radius:20px;letter-spacing:.4px;white-space:nowrap}
+.app{display:flex;flex:1;height:calc(100vh - 54px)}
+.sb{width:260px;background:var(--bg2);border-left:1px solid var(--brd);overflow-y:auto;flex-shrink:0;display:flex;flex-direction:column}
+.sb::-webkit-scrollbar{width:3px}.sb::-webkit-scrollbar-thumb{background:var(--brd)}
+.sb-hd{padding:16px 14px 10px;border-bottom:1px solid var(--brd);position:sticky;top:0;background:var(--bg2);z-index:5}
+.sb-hd h3{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
+.sb-hd p{font-size:11px;color:var(--txt3);margin-top:3px}
+.grp{border-bottom:1px solid var(--brd)}
+.gtog{width:100%;background:none;border:none;color:var(--txt);font-family:'Cairo',sans-serif;font-size:12px;font-weight:700;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;text-align:right;transition:background .15s}
+.gtog:hover{background:rgba(255,255,255,.03)}
+.gtog .arr{font-size:9px;color:var(--txt3);transition:transform .2s;flex-shrink:0}
+.gtog.open .arr{transform:rotate(180deg)}
+.gnum{background:var(--bg3);border:1px solid var(--brd);color:var(--txt3);font-size:10px;padding:1px 7px;border-radius:10px;font-weight:700}
+.ll{display:none}.ll.open{display:block}
+.li{display:flex;align-items:center;gap:8px;padding:8px 14px 8px 10px;cursor:pointer;transition:background .15s;border-right:3px solid transparent}
+.li:hover{background:rgba(255,255,255,.03)}
+.li.active{background:rgba(212,168,75,.09);border-right-color:var(--gold)}
+.li .ln{font-size:10px;font-weight:800;color:var(--txt3);min-width:18px;text-align:center;flex-shrink:0}
+.li.active .ln{color:var(--gold)}
+.li .lname{font-size:11.5px;color:var(--txt2);flex:1;line-height:1.4}
+.li.active .lname{color:var(--txt);font-weight:600}
+.mob-nav{display:none;background:var(--bg2);border-bottom:1px solid var(--brd);padding:10px 12px;gap:8px;overflow-x:auto;scrollbar-width:none;flex-shrink:0}
+.mob-nav::-webkit-scrollbar{display:none}
+.mob-btn{background:var(--bg3);border:1px solid var(--brd);color:var(--txt2);font-family:'Cairo',sans-serif;font-size:11px;font-weight:600;padding:7px 13px;border-radius:8px;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:all .15s}
+.mob-btn.active{background:rgba(212,168,75,.15);border-color:var(--gold);color:var(--gold)}
+.main{flex:1;overflow-y:auto;display:flex;flex-direction:column;align-items:center;padding:20px 16px 40px}
+.lc{display:none;flex-direction:column;gap:20px;width:100%;max-width:720px}
+.lc.active{display:flex}
+.lhd{width:100%}
+.ley{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.ltitle{font-family:'Amiri',serif;font-size:24px;font-weight:700;color:var(--txt);line-height:1.3;margin-bottom:7px}
+.lsub{font-size:13px;color:var(--txt2);line-height:1.75}
+.ba{display:flex;gap:18px;width:100%;align-items:flex-start;flex-wrap:wrap}
+.bwrap{display:flex;flex-direction:column;align-items:center;width:100%}
+.bcon{box-shadow:0 0 0 2px var(--bd),0 0 0 5px #000,0 16px 48px rgba(0,0,0,.7);border-radius:3px;overflow:hidden;width:100%;max-width:400px}
+.board{display:grid;grid-template-columns:repeat(8,1fr);aspect-ratio:1;width:100%}
+.sq{aspect-ratio:1;display:flex;align-items:center;justify-content:center;position:relative}
+.sq.lt{background:var(--bl)}.sq.dk{background:var(--bd)}
+.sq .rl{position:absolute;top:1px;right:2px;font-size:7px;font-weight:700;opacity:.55;font-family:'Cairo',sans-serif;line-height:1}
+.sq .fl{position:absolute;bottom:1px;left:2px;font-size:7px;font-weight:700;opacity:.55;font-family:'Cairo',sans-serif;line-height:1}
+.sq.lt .rl,.sq.lt .fl{color:var(--bd)}.sq.dk .rl,.sq.dk .fl{color:var(--bl)}
+.pc{font-size:clamp(24px,5.5vw,38px);line-height:1;user-select:none}
+.pc.w{color:#fff;-webkit-text-stroke:1.2px #444;filter:drop-shadow(0 2px 3px rgba(0,0,0,.5))}
+.pc.b{color:#111;-webkit-text-stroke:.5px #000;filter:drop-shadow(0 2px 4px rgba(0,0,0,.65))}
+.ctrl{display:flex;align-items:center;gap:5px;margin-top:10px;direction:ltr;width:100%;max-width:400px}
+.cb{background:var(--bg3);border:1px solid var(--brd);color:var(--txt2);width:38px;height:38px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .15s;flex-shrink:0}
+.cb:hover,.cb:active{border-color:var(--gold3);color:var(--gold);background:var(--bg2)}
+.mc{flex:1;text-align:center;font-size:11px;color:var(--txt3);font-weight:600;padding:0 4px;line-height:1.3}
+.mb{display:flex;flex-wrap:wrap;gap:3px;margin-top:8px;width:100%;max-width:400px;max-height:68px;overflow-y:auto;direction:ltr}
+.mt{padding:3px 9px;border-radius:5px;font-size:11px;font-weight:700;font-family:'Courier New',monospace;background:var(--bg3);border:1px solid var(--brd);color:var(--txt3);cursor:pointer;transition:all .15s}
+.mt:hover{border-color:var(--gold3);color:var(--txt2)}
+.mt.active{background:var(--gold);border-color:var(--gold);color:#0a0c10}
+.mn{padding:3px 4px;font-size:10px;color:var(--txt3);font-family:monospace}
+.ip{width:100%;display:flex;flex-direction:column;gap:12px}
+.ic{background:var(--bg3);border:1px solid var(--brd);border-radius:10px;padding:16px}
+.ic h4{font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.ki{display:flex;gap:9px;padding:8px 0;border-bottom:1px solid var(--brd);align-items:flex-start}
+.ki:last-child{border-bottom:none;padding-bottom:0}
+.ki .ico{font-size:16px;flex-shrink:0;margin-top:1px}
+.ki .ktxt{font-size:13px;color:var(--txt2);line-height:1.6}
+.ki .ktxt strong{color:var(--txt)}
+.notebox{background:rgba(212,168,75,.07);border:1px solid rgba(212,168,75,.2);border-radius:10px;padding:14px 16px;width:100%}
+.notebox .ntitle{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.notebox p{font-size:13px;color:var(--txt2);line-height:1.75}
+.notebox p strong{color:var(--gold2)}
+.varbox{background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:12px 14px;margin-top:8px}
+.varbox-title{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--txt2);margin-bottom:8px}
+.var-item{display:flex;align-items:flex-start;gap:9px;padding:7px 0;border-bottom:1px solid var(--brd)}
+.var-item:last-child{border-bottom:none;padding-bottom:0}
+.var-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:6px}
+.var-txt{font-size:12.5px;color:var(--txt2);line-height:1.6}
+.var-txt strong{color:var(--txt)}
+.var-txt code{font-family:'Courier New',monospace;font-size:11.5px;color:var(--gold2);background:rgba(212,168,75,.1);padding:1px 5px;border-radius:4px}
+.nav-footer{display:flex;justify-content:space-between;align-items:center;width:100%;max-width:720px;margin-top:8px;padding-top:20px;border-top:1px solid var(--brd)}
+.nav-ep{display:flex;align-items:center;gap:8px;text-decoration:none;padding:10px 16px;border-radius:8px;border:1px solid var(--brd);background:var(--bg2);color:var(--txt2);font-family:'Cairo',sans-serif;font-size:12px;font-weight:600;transition:all .15s;cursor:pointer}
+.nav-ep:hover{border-color:var(--gold3);color:var(--gold)}
+.nav-ep.next{background:linear-gradient(135deg,var(--gold3),var(--gold));color:#0a0c10;border-color:transparent;font-weight:700}
+.nav-ep.next:hover{opacity:.9}
+@media(min-width:641px){.mob-nav{display:none!important}.sb{display:flex}}
+@media(max-width:640px){
+  .sb{display:none!important}
+  .mob-nav{display:flex!important}
+  .app{flex-direction:column;height:auto!important;overflow:visible}
+  .main{padding:16px 12px 40px;overflow:visible;flex:none;width:100%}
+  .ltitle{font-size:20px}
+}
+</style>
+</head>
+<body>
+<div class="tb">
+  <div class="tb-brand"><span class="tb-icon">♟</span><span class="tb-name">أكاديمية أسامة للشطرنج</span></div>
+  <span class="tb-badge">How to Beat the London System — الحلقة ١</span>
+</div>
+<div class="app">
+  <div class="sb">
+    <div class="sb-hd"><h3>الحلقة الأولى</h3><p>خط b3 — الرد الرئيسي على Qb6</p></div>
+    <div class="grp">
+      <button class="gtog open" onclick="tog(this)"><span>المقدمة</span><span style="display:flex;gap:7px;align-items:center"><span class="gnum">2</span><span class="arr">▼</span></span></button>
+      <div class="ll open">
+        <div class="li active" onclick="show(0,this)"><span class="ln">١</span><span class="lname">التركيب الأساسي — Qb6!</span></div>
+        <div class="li" onclick="show(1,this)"><span class="ln">٢</span><span class="lname">5.b3 — الأبيض يحمي b2 بالبيدق</span></div>
+      </div>
+    </div>
+    <div class="grp">
+      <button class="gtog open" onclick="tog(this)"><span>التطوير والفيانكيتو</span><span style="display:flex;gap:7px;align-items:center"><span class="gnum">2</span><span class="arr">▼</span></span></button>
+      <div class="ll open">
+        <div class="li" onclick="show(2,this)"><span class="ln">٣</span><span class="lname">Nf6 ثم g6! — الفيانكيتو الصحيح</span></div>
+        <div class="li" onclick="show(3,this)"><span class="ln">٤</span><span class="lname">Nd2 Bg7 ثم Nh5! — هجوم الفيل</span></div>
+      </div>
+    </div>
+    <div class="grp">
+      <button class="gtog open" onclick="tog(this)"><span>الخط الرئيسي — Bf4</span><span style="display:flex;gap:7px;align-items:center"><span class="gnum">3</span><span class="arr">▼</span></span></button>
+      <div class="ll open">
+        <div class="li" onclick="show(4,this)"><span class="ln">٥</span><span class="lname">O-O ثم h6! — إجبار الفيل مجدداً</span></div>
+        <div class="li" onclick="show(5,this)"><span class="ln">٦</span><span class="lname">Bg4! — إزالة المدافعين عن المركز</span></div>
+        <div class="li" onclick="show(6,this)"><span class="ln">٧</span><span class="lname">ثلاث طرق للأخذ — كل خيارات الأبيض تخسر</span></div>
+      </div>
+    </div>
+    <div class="grp">
+      <button class="gtog open" onclick="tog(this)"><span>التفرع — Bh4</span><span style="display:flex;gap:7px;align-items:center"><span class="gnum">2</span><span class="arr">▼</span></span></button>
+      <div class="ll open">
+        <div class="li" onclick="show(7,this)"><span class="ln">٨</span><span class="lname">9.Bh4 e5! — الضغط المركزي البديل</span></div>
+        <div class="li" onclick="show(8,this)"><span class="ln">٩</span><span class="lname">الخلاصة — لماذا Qb6 وb3 يقودان لتفوق أسود</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="mob-nav">
+    <button class="mob-btn active" onclick="show(0,null,0)">١·Qb6</button>
+    <button class="mob-btn" onclick="show(1,null,1)">٢·b3</button>
+    <button class="mob-btn" onclick="show(2,null,2)">٣·g6!</button>
+    <button class="mob-btn" onclick="show(3,null,3)">٤·Nh5!</button>
+    <button class="mob-btn" onclick="show(4,null,4)">٥·h6!</button>
+    <button class="mob-btn" onclick="show(5,null,5)">٦·Bg4!</button>
+    <button class="mob-btn" onclick="show(6,null,6)">٧·الأخذ</button>
+    <button class="mob-btn" onclick="show(7,null,7)">٨·Bh4 e5</button>
+    <button class="mob-btn" onclick="show(8,null,8)">٩·الخلاصة</button>
+  </div>
+  <div class="main">
+
+    <!-- 0 -->
+    <div class="lc active" id="lc0">
+      <div class="lhd"><div class="ley">الحلقة الأولى · الدرس الأول</div><div class="ltitle">التركيب الأساسي — Qb6!</div><div class="lsub">بعد 1.d4 d5 2.Bf4 c5 3.e3 Nc6 4.c3 يصل الأبيض إلى التركيب الأساسي لـ London System. الأسود يلعب Qb6! — الوزيرة تستهدف b2 مباشرة وتكشف أن الفيل على f4 بلا حماية كافية.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b0"></div></div><div class="ctrl"><button class="cb" onclick="nav(0,-2)">⏮</button><button class="cb" onclick="nav(0,-1)">◀</button><span class="mc" id="mc0">الوضع الابتدائي</span><button class="cb" onclick="nav(0,1)">▶</button><button class="cb" onclick="nav(0,99)">⏭</button></div><div class="mb" id="mb0"></div></div>
+      <div class="ip"><div class="ic"><h4>لماذا Qb6 هي الحركة الصحيحة؟</h4><div class="ki"><span class="ico">🎯</span><span class="ktxt"><strong>تضغط على b2</strong> — مباشرة وبلا تأخير</span></div><div class="ki"><span class="ico">⚡</span><span class="ktxt"><strong>تهدد الفيل f4</strong> — غير محمي بشكل كافٍ في هذا التركيب</span></div><div class="ki"><span class="ico">🔒</span><span class="ktxt">إذا تحرك <strong>الفارس c6</strong> لأي سبب، تسقط الوزيرة في b2 وتهدد الرخ a1</span></div></div><div class="notebox"><div class="ntitle">📌 خيارات الأبيض المتاحة</div><p>الأبيض لديه عدة ردود ممكنة على Qb6. في هذه الحلقة سنتابع الرد الأكثر شيوعاً: <strong>5.b3</strong> — دفع البيدق لحماية b2 مباشرة بدلاً من تحريك الوزيرة.</p></div></div></div>
+    </div>
+
+    <!-- 1 -->
+    <div class="lc" id="lc1">
+      <div class="lhd"><div class="ley">الحلقة الأولى · الدرس الثاني</div><div class="ltitle">5.b3 — الأبيض يحمي b2 بالبيدق</div><div class="lsub">الأبيض يلعب b3 — يدفع البيدق لحماية b2 مباشرة، بدلاً من تحريك الوزيرة إلى b3. هذه حركة متينة لكنها تستهلك وقتاً من التطوير.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b1"></div></div><div class="ctrl"><button class="cb" onclick="nav(1,-2)">⏮</button><button class="cb" onclick="nav(1,-1)">◀</button><span class="mc" id="mc1">بعد 4...Qb6</span><button class="cb" onclick="nav(1,1)">▶</button><button class="cb" onclick="nav(1,99)">⏭</button></div><div class="mb" id="mb1"></div></div>
+      <div class="ip"><div class="ic"><h4>ملاحظات على b3</h4><div class="ki"><span class="ico">🛡️</span><span class="ktxt"><strong>يحمي b2</strong> بثبات تام عبر البيدق نفسه</span></div><div class="ki"><span class="ico">⏳</span><span class="ktxt">يُكلّف الأبيض <strong>وقتاً من التطوير</strong> — حركة بيدق لا قطعة</span></div><div class="ki"><span class="ico">➡️</span><span class="ktxt">لا يوجد ضغط فوري يُجبر الأسود على تبادل أي قطعة — <strong>الأسود يستمر بخطته الطبيعية</strong></span></div></div><div class="varbox"><div class="varbox-title">رد الأسود</div><div class="var-item"><span class="var-dot"></span><span class="var-txt">الأسود يستمر بالتطوير الطبيعي: <code>5...Nf6</code></span></div></div></div></div>
+    </div>
+
+    <!-- 2 -->
+    <div class="lc" id="lc2">
+      <div class="lhd"><div class="ley">الحلقة الأولى · الدرس الثالث</div><div class="ltitle">Nf6 ثم g6! — الفيانكيتو الصحيح</div><div class="lsub">الأبيض يطور Bd3. الأسود يجيب بـ g6! — وهذا الخيار صحيح هنا تحديداً لسبب دقيق: الفيانكيتو التقليدي عبر e6 وd6 يتطلب أن تكون الوزيرة على d8 لحماية الفيل، وهذا غير متاح لأن الوزيرة انتقلت إلى b6.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b2"></div></div><div class="ctrl"><button class="cb" onclick="nav(2,-2)">⏮</button><button class="cb" onclick="nav(2,-1)">◀</button><span class="mc" id="mc2">بعد 5...Nf6</span><button class="cb" onclick="nav(2,1)">▶</button><button class="cb" onclick="nav(2,99)">⏭</button></div><div class="mb" id="mb2"></div></div>
+      <div class="ip"><div class="ic"><h4>لماذا g6 لا e6؟</h4><div class="ki"><span class="ico">①</span><span class="ktxt">الفيل سيذهب من <strong>g7</strong> إلى مربعات داكنة قوية تتحكم بالمحور الكبير</span></div><div class="ki"><span class="ico">②</span><span class="ktxt">الفيانكيتو التقليدي <strong>e6 وd6</strong> يحتاج الوزيرة على d8 لحماية الفيل — غير ممكن هنا</span></div><div class="ki"><span class="ico">③</span><span class="ktxt">ميزة إضافية: <strong>الفيل والرخ الأبيض لن يهددا h7</strong> بسهولة بعد هذا الفيانكيتو</span></div></div><div class="notebox"><div class="ntitle">💡 ملاحظة دقيقة</div><p>هذا الفرق سببه <strong>موضع الوزيرة على b6</strong> بدلاً من d8 — تفصيل صغير يُغيّر الخطة الصحيحة للأسود بالكامل في هذا الخط بالتحديد.</p></div></div></div>
+    </div>
+
+    <!-- 3 -->
+    <div class="lc" id="lc3">
+      <div class="lhd"><div class="ley">الحلقة الأولى · الدرس الرابع</div><div class="ltitle">Nd2 Bg7 ثم Nh5! — هجوم الفيل</div><div class="lsub">الأبيض يطور Nd2، الأسود يستمر بـ Bg7. ثم يأتي الهجوم الرئيسي: Nh5! يهاجم الفيل على f4 مباشرة ويضغط بقوة على مربع d4.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b3"></div></div><div class="ctrl"><button class="cb" onclick="nav(3,-2)">⏮</button><button class="cb" onclick="nav(3,-1)">◀</button><span class="mc" id="mc3">بعد 7.Nd2 Bg7</span><button class="cb" onclick="nav(3,1)">▶</button><button class="cb" onclick="nav(3,99)">⏭</button></div><div class="mb" id="mb3"></div></div>
+      <div class="ip"><div class="ic"><h4>تهديدات Nh5</h4><div class="ki"><span class="ico">⚔️</span><span class="ktxt">يهاجم الفيل ويهدد <strong>بكسر بنية الأبيض</strong> عند أخذه</span></div><div class="ki"><span class="ico">🎯</span><span class="ktxt">يضغط بقوة على مربع <strong>d4</strong> ويهدد بربح بيدق</span></div><div class="ki"><span class="ico">⏰</span><span class="ktxt">يجبر الأبيض على <strong>إضاعة وقت</strong> للدفاع عن الفيل</span></div></div><div class="varbox"><div class="varbox-title">خيارات الفيل الأبيض</div><div class="var-item"><span class="var-dot"></span><span class="var-txt">التراجع إلى <code>Bf4</code> — الخط الرئيسي (الدرس القادم)</span></div><div class="var-item"><span class="var-dot"></span><span class="var-txt">التراجع إلى <code>Bh4</code> — تفرع بديل (انظر مجموعة التفرع أدناه)</span></div></div></div></div>
+    </div>
+
+    <!-- 4 -->
+    <div class="lc" id="lc4">
+      <div class="lhd"><div class="ley">الحلقة الأولى · الدرس الخامس</div><div class="ltitle">O-O ثم h6! — إجبار الفيل مجدداً</div><div class="lsub">الفيل يحافظ على نفسه بالتراجع إلى f4. الأسود يقصّر ثم يلعب h6! ليجبر الفيل على التحرك للمرة الثالثة — كل تراجع جديد يستهلك وقتاً إضافياً من الأبيض.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b4"></div></div><div class="ctrl"><button class="cb" onclick="nav(4,-2)">⏮</button><button class="cb" onclick="nav(4,-1)">◀</button><span class="mc" id="mc4">بعد 9.Bf4</span><button class="cb" onclick="nav(4,1)">▶</button><button class="cb" onclick="nav(4,99)">⏭</button></div><div class="mb" id="mb4"></div></div>
+      <div class="ip"><div class="ic"><h4>الخطة الكاملة من هنا</h4><div class="ki"><span class="ico">١</span><span class="ktxt"><strong>O-O</strong> — تقصير آمن من الطرفين</span></div><div class="ki"><span class="ico">٢</span><span class="ktxt"><strong>h6!</strong> — يجبر الفيل على التراجع مجدداً، لا مكان آمن حقيقي له</span></div><div class="ki"><span class="ico">٣</span><span class="ktxt"><strong>Bg4!</strong> — الهدف النهائي: إزالة مدافع المركز (الدرس القادم)</span></div></div><div class="notebox"><div class="ntitle">📌 جوهر الخطة</div><p>الفيل الأبيض <strong>ليس له مكان آمن حقيقي</strong> — كل تراجع جديد يزيد الفارق في التطوير لصالح الأسود دون أي مجازفة.</p></div></div></div>
+    </div>
+
+    <!-- 5 -->
+    <div class="lc" id="lc5">
+      <div class="lhd"><div class="ley">الحلقة الأولى · الدرس السادس</div><div class="ltitle">Bg4! — إزالة المدافعين عن المركز</div><div class="lsub">Bg4! هي الفكرة المحورية في هذا الخط بالكامل. البيدق والفارس والوزيرة والفيل الأبيض جميعهم يستهدفون المربع الذي يطمح الفارس الأسود للوصول إليه، فالأسود يبدأ بإزالة هذه القطع المدافعة واحدة تلو الأخرى.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b5"></div></div><div class="ctrl"><button class="cb" onclick="nav(5,-2)">⏮</button><button class="cb" onclick="nav(5,-1)">◀</button><span class="mc" id="mc5">بعد 10...h6</span><button class="cb" onclick="nav(5,1)">▶</button><button class="cb" onclick="nav(5,99)">⏭</button></div><div class="mb" id="mb5"></div></div>
+      <div class="ip"><div class="ic"><h4>ماذا يحدث بعد Bg4؟</h4><div class="ki"><span class="ico">⚠️</span><span class="ktxt">إذا هاجم الأبيض الفيل: الأسود <strong>يأخذ ويأخذ</strong>، ثم البيدق يأخذ — موقف الأبيض يصبح أسوأ بكثير</span></div><div class="ki"><span class="ico">⚠️</span><span class="ktxt">إذا حاول الأبيض الحفاظ على الفارس المدافع بلعب <strong>f3</strong>: ضعف d4 يصبح أوضح أكثر</span></div><div class="ki"><span class="ico">✅</span><span class="ktxt">في كل الحالات <strong>الأسود يربح السيطرة الكاملة</strong> على المركز</span></div></div></div></div>
+    </div>
+
+    <!-- 6 -->
+    <div class="lc" id="lc6">
+      <div class="lhd"><div class="ley">الحلقة الأولى · الدرس السابع</div><div class="ltitle">ثلاث طرق للأخذ — كل خيارات الأبيض تخسر</div><div class="lsub">عند نقطة الأخذ في المركز، الأبيض أمام ثلاثة خيارات مختلفة — وكلها تقود لتفوق أسود واضح، سواء أخذ بالبيدق أو بالفارس أو بالرخ.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b6"></div></div><div class="ctrl"><button class="cb" onclick="nav(6,-2)">⏮</button><button class="cb" onclick="nav(6,-1)">◀</button><span class="mc" id="mc6">نقطة القرار</span><button class="cb" onclick="nav(6,1)">▶</button><button class="cb" onclick="nav(6,99)">⏭</button></div><div class="mb" id="mb6"></div></div>
+      <div class="ip"><div class="ic"><h4>السيناريو الأول — الأخذ بالبيدق</h4><div class="ki"><span class="ico">⚡</span><span class="ktxt">الأخذ يأتي مع <strong>كش</strong>، والأبيض متقدم مادياً مؤقتاً</span></div><div class="ki"><span class="ico">🎯</span><span class="ktxt">لكن بعدها: <strong>هجوم على الرخ + بيدق عابر</strong> للأسود</span></div><div class="ki"><span class="ico">♛</span><span class="ktxt">الوزيرة على d3 <strong>تدافع وتهاجم الفيل</strong> في آنٍ واحد</span></div></div>
+      <div class="ic"><h4>السيناريو الثاني — الأخذ بالفارس</h4><div class="ki"><span class="ico">⚡</span><span class="ktxt">البيدقات الأسود <strong>تهاجم الفارس</strong> مباشرة</span></div><div class="ki"><span class="ico">🎯</span><span class="ktxt">البيدق العابر <strong>يهاجم الوزيرة</strong> في الحركة القادمة</span></div><div class="ki"><span class="ico">♗</span><span class="ktxt">الفيل الأسود <strong>يربح التبادل (الجودة)</strong></span></div></div>
+      <div class="ic"><h4>السيناريو الثالث — الأخذ بالرخ</h4><div class="ki"><span class="ico">🏃</span><span class="ktxt">الرخ <strong>لا مكان آمن</strong> له سوى التراجع الكامل</span></div><div class="ki"><span class="ico">🔱</span><span class="ktxt">إذا صعد: <strong>شوكات متتالية</strong> (Rf2 ثم Rf1) تنتظره</span></div><div class="ki"><span class="ico">♕</span><span class="ktxt">إذا تراجع الفارس بالأخذ: <strong>Qd3+ شوكة</strong> مع الفيل يهاجم الرخ</span></div></div>
+      <div class="notebox"><div class="ntitle">🎯 الخلاصة</div><p>في <strong>كل السيناريوهات الثلاثة</strong>، الأسود يحقق نفس النتيجة: سيطرة مركزية كاملة، تفوق تطويري واضح، وإما مادة إضافية أو هجوم كاسح.</p></div></div>
+    </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="lc" id="lc7">
+      <div class="lhd"><div class="ley">الحلقة الأولى · الدرس الثامن</div><div class="ltitle">9.Bh4 e5! — الضغط المركزي البديل</div><div class="lsub">بدلاً من التراجع إلى f4، يمكن للفيل التراجع إلى h4 بعد أن هاجمه h6. الأسود يستمر بـ e5! ليزيد الضغط أكثر فأكثر على مربع d4، مهدداً بربح مادي مباشر.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b7"></div></div><div class="ctrl"><button class="cb" onclick="nav(7,-2)">⏮</button><button class="cb" onclick="nav(7,-1)">◀</button><span class="mc" id="mc7">بعد 9.Bh4</span><button class="cb" onclick="nav(7,1)">▶</button><button class="cb" onclick="nav(7,99)">⏭</button></div><div class="mb" id="mb7"></div></div>
+      <div class="ip"><div class="ic"><h4>فكرة e5!</h4><div class="ki"><span class="ico">💥</span><span class="ktxt">الأسود <strong>يهدد بأخذ البيدق</strong> مع ربح مادي مباشر</span></div><div class="ki"><span class="ico">⏳</span><span class="ktxt">لتجنب خسارة المادة، الأبيض <strong>مجبر على الأخذ</strong> في e5</span></div><div class="ki"><span class="ico">🔓</span><span class="ktxt">هذا <strong>يفتح خطوطاً جديدة</strong> لقطع الأسود</span></div></div><div class="notebox"><div class="ntitle">⚙️ ملاحظة على هذا التفرع</div><p>الاستمرار الدقيق لهذا الخط بعد الأخذ في e5 يحتاج مراجعة أعمق من النص الأصلي للفيديو. الفكرة العامة (الضغط على d4 واستهداف الفيل المعزول) تبقى نفسها المتبعة في باقي الحلقة.</p></div></div></div>
+    </div>
+
+    <!-- 8 -->
+    <div class="lc" id="lc8">
+      <div class="lhd"><div class="ley">الحلقة الأولى · الدرس التاسع</div><div class="ltitle">الخلاصة — لماذا Qb6 وb3 يقودان لتفوق أسود</div><div class="lsub">ملخص الحلقة الأولى: من Qb6 الأولى وحتى السيطرة الكاملة على المركز، الأسود يستثمر كل حركة لزيادة الضغط دون أي تسرع في تبادل القطع.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b8"></div></div><div class="ctrl"><button class="cb" onclick="nav(8,-2)">⏮</button><button class="cb" onclick="nav(8,-1)">◀</button><span class="mc" id="mc8">الموقف الرئيسي</span><button class="cb" onclick="nav(8,1)">▶</button><button class="cb" onclick="nav(8,99)">⏭</button></div><div class="mb" id="mb8"></div></div>
+      <div class="ip"><div class="ic"><h4>ملخص الحلقة</h4><div class="ki"><span class="ico">🎯</span><span class="ktxt"><strong>Qb6!</strong> — يضغط على b2 ويكشف ضعف الفيل f4 منذ البداية</span></div><div class="ki"><span class="ico">✅</span><span class="ktxt"><strong>5.b3</strong> — الرد الأكثر شيوعاً، يحمي b2 بالبيدق مباشرة</span></div><div class="ki"><span class="ico">♟️</span><span class="ktxt"><strong>g6! ثم Nh5!</strong> — فيانكيتو دقيق متبوع بهجوم مباشر على الفيل</span></div><div class="ki"><span class="ico">🔑</span><span class="ktxt"><strong>h6! ثم Bg4!</strong> — إجبار الفيل على التراجع المستمر وإزالة مدافعي المركز</span></div></div><div class="notebox"><div class="ntitle">🎯 الدرس الرئيسي</div><p>الأسود لا يتسرع في تبادل القطع، بل <strong>يستثمر كل حركة لزيادة الضغط</strong> على نقطتي d4 وe3، مستهدفاً الفيل البيضاوي الذي يضطر للتراجع مراراً حتى يصبح عبئاً بدلاً من أن يكون قطعة نشطة. هذا هو جوهر اللعب الصحيح ضد London System!</p></div></div></div>
+    </div>
+
+    <div class="nav-footer">
+      <span style="font-size:11px;color:var(--txt3)">الحلقة الأولى</span>
+      <span style="font-size:11px;color:var(--txt3)">١ / ؟</span>
+      <a class="nav-ep next" href="london_ep2.html">الحلقة الثانية →</a>
+    </div>
+  </div>
+</div>
+
+<script>
+const Wp={K:'♔',Q:'♕',R:'♖',B:'♗',N:'♘',P:'♙'};
+const Bp={K:'♚',Q:'♛',R:'♜',B:'♝',N:'♞',P:'♟'};
+function parseFen(fen){const rows=fen.split(' ')[0].split('/'),b=[];for(let r=0;r<8;r++){const row=[];for(const c of rows[r]){if(isNaN(c))row.push(c);else for(let i=0;i<+c;i++)row.push(null);}b.push(row);}return b;}
+function pHtml(code){if(!code)return'';const w=code===code.toUpperCase();const m={K:Wp.K,Q:Wp.Q,R:Wp.R,B:Wp.B,N:Wp.N,P:Wp.P,k:Bp.K,q:Bp.Q,r:Bp.R,b:Bp.B,n:Bp.N,p:Bp.P};return`<span class="pc ${w?'w':'b'}">${m[code]}</span>`;}
+function drawBoard(id,fen){const el=document.getElementById(id);if(!el)return;const bd=parseFen(fen);el.innerHTML='';const fl=['a','b','c','d','e','f','g','h'];for(let r=0;r<8;r++)for(let c=0;c<8;c++){const sq=document.createElement('div');sq.className='sq '+((r+c)%2===0?'lt':'dk');if(c===7)sq.innerHTML+=`<span class="rl">${8-r}</span>`;if(r===7)sq.innerHTML+=`<span class="fl">${fl[c]}</span>`;sq.innerHTML+=pHtml(bd[r][c]);el.appendChild(sq);}}
+
+const S='rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR';
+
+const DATA=[
+  // 0 — Qb6! intro
+  [
+    {f:S,l:'الوضع الابتدائي',n:''},
+    {f:'rnbqkbnr/ppp2ppp/8/3p4/8/8/PPPPPPPP/RNBQKBNR',l:'1.d4 d5',n:''},
+    {f:'rnbqkbnr/ppp2ppp/8/3p1B2/8/8/PPPPPPPP/RN1QKBNR',l:'2.Bf4',n:''},
+    {f:'rnbqkbnr/pp3ppp/8/2pp1B2/8/8/PPPPPPPP/RN1QKBNR',l:'2...c5',n:''},
+    {f:'rnbqkbnr/pp3ppp/8/2pp1B2/8/4P3/PPP2PPP/RN1QKBNR',l:'3.e3',n:''},
+    {f:'r1bqkbnr/pp3ppp/2n5/2pp1B2/8/4P3/PPP2PPP/RN1QKBNR',l:'3...Nc6',n:''},
+    {f:'r1bqkbnr/pp3ppp/2n5/2pp1B2/8/2P1P3/PP3PPP/RN1QKBNR',l:'4.c3',n:''},
+    {f:'r1b1kbnr/pp3ppp/1qn5/2pp1B2/8/2P1P3/PP3PPP/RN1QKBNR',l:'4...Qb6!',n:'تضغط على b2 وتكشف ضعف الفيل f4'}
+  ],
+  // 1 — 5.b3
+  [
+    {f:'r1b1kbnr/pp3ppp/1qn5/2pp1B2/8/2P1P3/PP3PPP/RN1QKBNR',l:'بعد 4...Qb6',n:''},
+    {f:'r1b1kbnr/pp3ppp/1qn5/2pp1B2/8/1PP1P3/P4PPP/RN1QKBNR',l:'5.b3',n:'الأبيض يحمي b2 بالبيدق مباشرة'}
+  ],
+  // 2 — Nf6, Bd3, g6!
+  [
+    {f:'r1b1kbnr/pp3ppp/1qn5/2pp1B2/8/1PP1P3/P4PPP/RN1QKBNR',l:'بعد 5.b3',n:''},
+    {f:'r1b1kb1r/pp3ppp/1qn2n2/2pp1B2/8/1PP1P3/P4PPP/RN1QKBNR',l:'5...Nf6',n:''},
+    {f:'r1b1kb1r/pp3ppp/1qn2n2/2pp1B2/3P4/1PPB4/P4PPP/RN1QK1NR',l:'6.Bd3',n:''},
+    {f:'r1b1kb1r/pp3p1p/1qn2np1/2pp1B2/3P4/1PPB4/P4PPP/RN1QK1NR',l:'6...g6!',n:'الفيانكيتو الصحيح — e6/d6 يحتاج وزيرة على d8'}
+  ],
+  // 3 — Nd2, Bg7, Nh5!
+  [
+    {f:'r1b1kb1r/pp3p1p/1qn2np1/2pp1B2/3P4/1PPB4/P4PPP/RN1QK1NR',l:'بعد 6...g6',n:''},
+    {f:'r1b1kb1r/pp3p1p/1qn2np1/2pp1B2/3P4/1PPB4/P2N1PPP/R2QK1NR',l:'7.Nd2',n:''},
+    {f:'r1b1k2r/pp3pbp/1qn2np1/2pp1B2/3P4/1PPB4/P2N1PPP/R2QK1NR',l:'7...Bg7',n:''},
+    {f:'r1b1k2r/pp3pbp/1qn3p1/2pp1B1n/3P4/1PPB4/P2N1PPP/R2QK1NR',l:'8...Nh5!',n:'يهاجم الفيل ويضغط على d4'}
+  ],
+  // 4 — Bf4 retreat, O-O, h6!
+  [
+    {f:'r1b1k2r/pp3pbp/1qn3p1/2pp1B1n/3P4/1PPB4/P2N1PPP/R2QK1NR',l:'بعد 8...Nh5',n:''},
+    {f:'r1b1k2r/pp3pbp/1qn3p1/2pp3n/3P1B2/1PPB4/P2N1PPP/R2QK1NR',l:'9.Bf4',n:'الفيل يحافظ على نفسه بالتراجع'},
+    {f:'r1b2rk1/pp3pbp/1qn3p1/2pp3n/3P1B2/1PPB4/P2N1PPP/R2QK1NR',l:'9...O-O',n:''},
+    {f:'r1b2rk1/pp3pbp/1qn3p1/2pp3n/3P1B2/1PPB4/P2N1PPP/R2Q1RK1',l:'10.O-O',n:''},
+    {f:'r1b2rk1/pp3p1p/1qn3pp/2pp3n/3P1B2/1PPB4/P2N1PPP/R2Q1RK1',l:'10...h6!',n:'يجبر الفيل للمرة الثالثة'}
+  ],
+  // 5 — Bg4!
+  [
+    {f:'r1b2rk1/pp3p1p/1qn3pp/2pp3n/3P1B2/1PPB4/P2N1PPP/R2Q1RK1',l:'بعد 10...h6',n:''},
+    {f:'r1b2rk1/pp3p2/1qn3pp/2pp3n/3P1Bb1/1PPB4/P2N1PPP/R2Q1RK1',l:'11...Bg4!',n:'إزالة المدافعين عن المركز'}
+  ],
+  // 6 — three ways to capture
+  [
+    {f:'r1b2rk1/pp3p2/1qn3pp/2pp3n/3P1Bb1/1PPB4/P2N1PPP/R2Q1RK1',l:'نقطة القرار',n:''},
+    {f:'r1b2rk1/pp3p2/1qn3pp/2pP3n/3P1Bb1/1PPB4/P2N1PPP/R2Q1RK1',l:'سيناريو: أخذ بالبيدق',n:'كش، ثم هجوم على الرخ والبيدق العابر'},
+    {f:'r1b2rk1/pp3p2/1qn3pp/2pp3n/3P1Nb1/1PPB4/P3RPPP/R2Q2K1',l:'سيناريو: أخذ بالفارس',n:'بيدقات تهاجم، الفيل يربح التبادل'},
+    {f:'r1b2rk1/pp3p2/1qn3pp/2pp3n/3P1Rb1/1PPB4/P2N1PPP/R2Q2K1',l:'سيناريو: أخذ بالرخ',n:'شوكات متتالية تنتظر الرخ المتراجع'}
+  ],
+  // 7 — Bh4 e5!
+  [
+    {f:'r1b1k2r/pp3pbp/1qn3p1/2pp3n/3P1B2/1PPB4/P2N1PPP/R2QK1NR',l:'بعد 8...Nh5',n:''},
+    {f:'r1b1k2r/pp3pbp/1qn3p1/2pp3n/3P3B/1PPB4/P2N1PPP/R2QK1NR',l:'9.Bh4',n:'بديل عن Bf4'},
+    {f:'r1b1k2r/pp3pbp/1qn3p1/2ppp2n/3P3B/1PPB4/P2N1PPP/R2QK1NR',l:'9...e5!',n:'ضغط مركزي إضافي، يهدد بربح مادي'}
+  ],
+  // 8 — summary
+  [
+    {f:'r1b1kbnr/pp3ppp/1qn5/2pp1B2/8/2P1P3/PP3PPP/RN1QKBNR',l:'البداية — Qb6!',n:'نقطة الانطلاق'},
+    {f:'r1b2rk1/pp3p2/1qn3pp/2pp3n/3P1Bb1/1PPB4/P2N1PPP/R2Q1RK1',l:'Bg4! — نقطة الذروة',n:'إزالة المدافعين عن المركز'}
+  ]
+];
+
+const cur=DATA.map(()=>0);
+function buildMB(i){const b=document.getElementById('mb'+i);if(!b)return;b.innerHTML='';let n=1;DATA[i].forEach((m,j)=>{if(j===0)return;if(j%2===1){const s=document.createElement('span');s.className='mn';s.textContent=n+'.';b.appendChild(s);n++;}const t=document.createElement('span');t.className='mt';t.textContent=m.l;t.dataset.j=j;t.onclick=()=>setM(i,j);b.appendChild(t);});}
+function setM(i,idx){if(idx<0)idx=0;if(idx>=DATA[i].length)idx=DATA[i].length-1;cur[i]=idx;const fen=DATA[i][idx].f;drawBoard('b'+i,fen.includes(' ')?fen:fen+' w KQkq - 0 1');const mc=document.getElementById('mc'+i);if(mc)mc.textContent=idx===0?DATA[i][0].l:(DATA[i][idx].n||DATA[i][idx].l);document.querySelectorAll('#mb'+i+' .mt').forEach(t=>t.classList.toggle('active',+t.dataset.j===idx));}
+function nav(i,d){const max=DATA[i].length-1;setM(i,d===-2?0:d===99?max:Math.max(0,Math.min(max,cur[i]+d)));}
+function show(idx,el,mIdx){document.querySelectorAll('.lc').forEach(l=>l.classList.remove('active'));document.querySelectorAll('.li').forEach(l=>l.classList.remove('active'));document.querySelectorAll('.mob-btn').forEach(b=>b.classList.remove('active'));document.getElementById('lc'+idx).classList.add('active');if(el)el.classList.add('active');if(mIdx!==undefined)document.querySelectorAll('.mob-btn')[mIdx]?.classList.add('active');setM(idx,0);window.scrollTo({top:0,behavior:'smooth'});}
+function tog(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open');}
+window.addEventListener('DOMContentLoaded',()=>{for(let i=0;i<DATA.length;i++){buildMB(i);setM(i,0);}});
+</script>
+</body>
+</html>
