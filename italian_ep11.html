@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>الافتتاح الإيطالي — الحلقة ١١: The Polerio Defense</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0f1117;--bg2:#181c24;--bg3:#1e2330;--brd:#2a3040;
+  --gold:#d4a84b;--gold2:#f0c96a;--gold3:#8a6528;
+  --txt:#e2e8f0;--txt2:#8896a8;--txt3:#4a5568;
+  --bl:#f0d9b5;--bd:#b58863;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;overflow-x:hidden}
+body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;display:flex;flex-direction:column}
+.tb{background:var(--bg2);border-bottom:1px solid var(--brd);height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;position:sticky;top:0;z-index:200;flex-shrink:0}
+.tb-brand{display:flex;align-items:center;gap:8px}
+.tb-icon{font-size:22px}
+.tb-name{font-family:'Amiri',serif;font-size:15px;color:var(--gold);font-weight:700}
+.tb-badge{background:linear-gradient(135deg,var(--gold3),var(--gold));color:#0a0c10;font-size:10px;font-weight:800;padding:4px 11px;border-radius:20px;letter-spacing:.4px;white-space:nowrap}
+.app{display:flex;flex:1;height:calc(100vh - 54px)}
+.sb{width:260px;background:var(--bg2);border-left:1px solid var(--brd);overflow-y:auto;flex-shrink:0;display:flex;flex-direction:column}
+.sb::-webkit-scrollbar{width:3px}.sb::-webkit-scrollbar-thumb{background:var(--brd)}
+.sb-hd{padding:16px 14px 10px;border-bottom:1px solid var(--brd);position:sticky;top:0;background:var(--bg2);z-index:5}
+.sb-hd h3{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
+.sb-hd p{font-size:11px;color:var(--txt3);margin-top:3px}
+.grp{border-bottom:1px solid var(--brd)}
+.gtog{width:100%;background:none;border:none;color:var(--txt);font-family:'Cairo',sans-serif;font-size:12px;font-weight:700;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;text-align:right;transition:background .15s}
+.gtog:hover{background:rgba(255,255,255,.03)}
+.gtog .arr{font-size:9px;color:var(--txt3);transition:transform .2s;flex-shrink:0}
+.gtog.open .arr{transform:rotate(180deg)}
+.gnum{background:var(--bg3);border:1px solid var(--brd);color:var(--txt3);font-size:10px;padding:1px 7px;border-radius:10px;font-weight:700}
+.ll{display:none}.ll.open{display:block}
+.li{display:flex;align-items:center;gap:8px;padding:8px 14px 8px 10px;cursor:pointer;transition:background .15s;border-right:3px solid transparent}
+.li:hover{background:rgba(255,255,255,.03)}
+.li.active{background:rgba(212,168,75,.09);border-right-color:var(--gold)}
+.li .ln{font-size:10px;font-weight:800;color:var(--txt3);min-width:18px;text-align:center;flex-shrink:0}
+.li.active .ln{color:var(--gold)}
+.li .lname{font-size:11.5px;color:var(--txt2);flex:1;line-height:1.4}
+.li.active .lname{color:var(--txt);font-weight:600}
+.mob-nav{display:none;background:var(--bg2);border-bottom:1px solid var(--brd);padding:10px 12px;gap:8px;overflow-x:auto;scrollbar-width:none;flex-shrink:0}
+.mob-nav::-webkit-scrollbar{display:none}
+.mob-btn{background:var(--bg3);border:1px solid var(--brd);color:var(--txt2);font-family:'Cairo',sans-serif;font-size:11px;font-weight:600;padding:7px 13px;border-radius:8px;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:all .15s}
+.mob-btn.active{background:rgba(212,168,75,.15);border-color:var(--gold);color:var(--gold)}
+.main{flex:1;overflow-y:auto;display:flex;flex-direction:column;align-items:center;padding:20px 16px 40px}
+.lc{display:none;flex-direction:column;gap:20px;width:100%;max-width:720px}
+.lc.active{display:flex}
+.lhd{width:100%}
+.ley{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.ltitle{font-family:'Amiri',serif;font-size:24px;font-weight:700;color:var(--txt);line-height:1.3;margin-bottom:7px}
+.lsub{font-size:13px;color:var(--txt2);line-height:1.75}
+.ba{display:flex;gap:18px;width:100%;align-items:flex-start;flex-wrap:wrap}
+.bwrap{display:flex;flex-direction:column;align-items:center;width:100%}
+.bcon{box-shadow:0 0 0 2px var(--bd),0 0 0 5px #000,0 16px 48px rgba(0,0,0,.7);border-radius:3px;overflow:hidden;width:100%;max-width:400px}
+.board{display:grid;grid-template-columns:repeat(8,1fr);aspect-ratio:1;width:100%}
+.sq{aspect-ratio:1;display:flex;align-items:center;justify-content:center;position:relative}
+.sq.lt{background:var(--bl)}.sq.dk{background:var(--bd)}
+.sq .rl{position:absolute;top:1px;right:2px;font-size:7px;font-weight:700;opacity:.55;font-family:'Cairo',sans-serif;line-height:1}
+.sq .fl{position:absolute;bottom:1px;left:2px;font-size:7px;font-weight:700;opacity:.55;font-family:'Cairo',sans-serif;line-height:1}
+.sq.lt .rl,.sq.lt .fl{color:var(--bd)}.sq.dk .rl,.sq.dk .fl{color:var(--bl)}
+.pc{font-size:clamp(24px,5.5vw,38px);line-height:1;user-select:none}
+.pc.w{color:#fff;-webkit-text-stroke:1.2px #444;filter:drop-shadow(0 2px 3px rgba(0,0,0,.5))}
+.pc.b{color:#111;-webkit-text-stroke:.5px #000;filter:drop-shadow(0 2px 4px rgba(0,0,0,.65))}
+.ctrl{display:flex;align-items:center;gap:5px;margin-top:10px;direction:ltr;width:100%;max-width:400px}
+.cb{background:var(--bg3);border:1px solid var(--brd);color:var(--txt2);width:38px;height:38px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .15s;flex-shrink:0}
+.cb:hover,.cb:active{border-color:var(--gold3);color:var(--gold);background:var(--bg2)}
+.mc{flex:1;text-align:center;font-size:11px;color:var(--txt3);font-weight:600;padding:0 4px;line-height:1.3}
+.mb{display:flex;flex-wrap:wrap;gap:3px;margin-top:8px;width:100%;max-width:400px;max-height:68px;overflow-y:auto;direction:ltr}
+.mt{padding:3px 9px;border-radius:5px;font-size:11px;font-weight:700;font-family:'Courier New',monospace;background:var(--bg3);border:1px solid var(--brd);color:var(--txt3);cursor:pointer;transition:all .15s}
+.mt:hover{border-color:var(--gold3);color:var(--txt2)}
+.mt.active{background:var(--gold);border-color:var(--gold);color:#0a0c10}
+.mn{padding:3px 4px;font-size:10px;color:var(--txt3);font-family:monospace}
+.ip{width:100%;display:flex;flex-direction:column;gap:12px}
+.ic{background:var(--bg3);border:1px solid var(--brd);border-radius:10px;padding:16px}
+.ic h4{font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.ki{display:flex;gap:9px;padding:8px 0;border-bottom:1px solid var(--brd);align-items:flex-start}
+.ki:last-child{border-bottom:none;padding-bottom:0}
+.ki .ico{font-size:16px;flex-shrink:0;margin-top:1px}
+.ki .ktxt{font-size:13px;color:var(--txt2);line-height:1.6}
+.ki .ktxt strong{color:var(--txt)}
+.notebox{background:rgba(212,168,75,.07);border:1px solid rgba(212,168,75,.2);border-radius:10px;padding:14px 16px;width:100%}
+.notebox .ntitle{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.notebox p{font-size:13px;color:var(--txt2);line-height:1.75}
+.notebox p strong{color:var(--gold2)}
+.varbox{background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:12px 14px;margin-top:8px}
+.varbox-title{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--txt2);margin-bottom:8px}
+.var-item{display:flex;align-items:flex-start;gap:9px;padding:7px 0;border-bottom:1px solid var(--brd)}
+.var-item:last-child{border-bottom:none;padding-bottom:0}
+.var-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:6px}
+.var-txt{font-size:12.5px;color:var(--txt2);line-height:1.6}
+.var-txt strong{color:var(--txt)}
+.var-txt code{font-family:'Courier New',monospace;font-size:11.5px;color:var(--gold2);background:rgba(212,168,75,.1);padding:1px 5px;border-radius:4px}
+.nav-footer{display:flex;justify-content:space-between;align-items:center;width:100%;max-width:720px;margin-top:8px;padding-top:20px;border-top:1px solid var(--brd)}
+.nav-ep{display:flex;align-items:center;gap:8px;text-decoration:none;padding:10px 16px;border-radius:8px;border:1px solid var(--brd);background:var(--bg2);color:var(--txt2);font-family:'Cairo',sans-serif;font-size:12px;font-weight:600;transition:all .15s;cursor:pointer}
+.nav-ep:hover{border-color:var(--gold3);color:var(--gold)}
+.nav-ep.next{background:linear-gradient(135deg,var(--gold3),var(--gold));color:#0a0c10;border-color:transparent;font-weight:700}
+.nav-ep.next:hover{opacity:.9}
+@media(min-width:641px){.mob-nav{display:none!important}.sb{display:flex}}
+@media(max-width:640px){
+  .sb{display:none!important}
+  .mob-nav{display:flex!important}
+  .app{flex-direction:column;height:auto;overflow:visible}
+  .main{padding:16px 12px 40px;overflow:visible}
+  .ltitle{font-size:20px}
+}
+</style>
+</head>
+<body>
+<div class="tb">
+  <div class="tb-brand"><span class="tb-icon">♟</span><span class="tb-name">أكاديمية أسامة للشطرنج</span></div>
+  <span class="tb-badge">الحلقة ١١ من ٢٨</span>
+</div>
+<div class="app">
+  <div class="sb">
+    <div class="sb-hd"><h3>الحلقة الحادية عشرة</h3><p>The Polerio Defense — أهم سلاح للأسود</p></div>
+    <div class="grp">
+      <button class="gtog open" onclick="tog(this)"><span>المقدمة</span><span style="display:flex;gap:7px;align-items:center"><span class="gnum">3</span><span class="arr">▼</span></span></button>
+      <div class="ll open">
+        <div class="li active" onclick="show(0,this)"><span class="ln">١</span><span class="lname">ما هو Polerio Defense؟</span></div>
+        <div class="li" onclick="show(1,this)"><span class="ln">٢</span><span class="lname">5...Na5! حتى 7...bxc6</span></div>
+        <div class="li" onclick="show(2,this)"><span class="ln">٣</span><span class="lname">الموقف بعد 7...bxc6 — ثلاثة طرق</span></div>
+      </div>
+    </div>
+    <div class="grp">
+      <button class="gtog open" onclick="tog(this)"><span>8.Qf3 — الخط الكلاسيكي</span><span style="display:flex;gap:7px;align-items:center"><span class="gnum">2</span><span class="arr">▼</span></span></button>
+      <div class="ll open">
+        <div class="li" onclick="show(3,this)"><span class="ln">٤</span><span class="lname">8.Qf3 cxb5! 9.Qxa8 — التضحية بالرخ</span></div>
+        <div class="li" onclick="show(4,this)"><span class="ln">٥</span><span class="lname">9...Qc7! 10.Qf3 Nc6 — استعادة المبادرة</span></div>
+      </div>
+    </div>
+    <div class="grp">
+      <button class="gtog open" onclick="tog(this)"><span>8.Bd3 — الخط الحديث</span><span style="display:flex;gap:7px;align-items:center"><span class="gnum">2</span><span class="arr">▼</span></span></button>
+      <div class="ll open">
+        <div class="li" onclick="show(5,this)"><span class="ln">٦</span><span class="lname">8.Bd3 Nd5! 9.Nf3 Bd6 — الخط المفضل اليوم</span></div>
+        <div class="li" onclick="show(6,this)"><span class="ln">٧</span><span class="lname">10.0-0 Nf4 — تبادل الفيلة</span></div>
+      </div>
+    </div>
+    <div class="grp">
+      <button class="gtog open" onclick="tog(this)"><span>8.Be2 — الخط التقليدي</span><span style="display:flex;gap:7px;align-items:center"><span class="gnum">2</span><span class="arr">▼</span></span></button>
+      <div class="ll open">
+        <div class="li" onclick="show(7,this)"><span class="ln">٨</span><span class="lname">8.Be2 h6! 9.Nf3 e4 10.Ne5 — Knorre</span></div>
+        <div class="li" onclick="show(8,this)"><span class="ln">٩</span><span class="lname">الخلاصة الكاملة لكل الخطوط الثلاثة</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="mob-nav">
+    <button class="mob-btn active" onclick="show(0,null,0)">١·مقدمة</button>
+    <button class="mob-btn" onclick="show(1,null,1)">٢·Na5!</button>
+    <button class="mob-btn" onclick="show(2,null,2)">٣·bxc6</button>
+    <button class="mob-btn" onclick="show(3,null,3)">٤·Qf3 cxb5!</button>
+    <button class="mob-btn" onclick="show(4,null,4)">٥·Qc7!</button>
+    <button class="mob-btn" onclick="show(5,null,5)">٦·Bd3 Nd5!</button>
+    <button class="mob-btn" onclick="show(6,null,6)">٧·Nf4</button>
+    <button class="mob-btn" onclick="show(7,null,7)">٨·Be2 h6!</button>
+    <button class="mob-btn" onclick="show(8,null,8)">٩·الخلاصة</button>
+  </div>
+  <div class="main">
+
+    <div class="lc active" id="lc0">
+      <div class="lhd"><div class="ley">الحلقة الحادية عشرة · الدرس الأول</div><div class="ltitle">ما هو Polerio Defense؟</div><div class="lsub">Polerio Defense هو الرد الأكثر دقة على 4.Ng5 في Two Knights Defense — سُمّي نسبة إلى جوليو تشيزاري بوليريو (Giulio Cesare Polerio) الذي سجّله حوالي عام 1580! هذا الخط يتجنب تماماً Fried Liver وLolli الخطيرَين، ويُعتبر اليوم السلاح الرئيسي للأسود في كل المستويات.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b0"></div></div><div class="ctrl"><button class="cb" onclick="nav(0,-2)">⏮</button><button class="cb" onclick="nav(0,-1)">◀</button><span class="mc" id="mc0">الوضع الابتدائي</span><button class="cb" onclick="nav(0,1)">▶</button><button class="cb" onclick="nav(0,99)">⏭</button></div><div class="mb" id="mb0"></div></div>
+      <div class="ip"><div class="ic"><h4>القاعدة الذهبية في Two Knights</h4><div class="ki"><span class="ico">⚠️</span><span class="ktxt">القاعدة الأهم: <strong>لا تلعب أبداً 5...Nxd5!</strong> — Lawrence Trent يصفها بـ "الحركة السيئة المعروفة"، تفتح الباب لـ Fried Liver أو Lolli</span></div><div class="ki"><span class="ico">✅</span><span class="ktxt">الرد الصحيح الوحيد: <strong>5...Na5!</strong> — يهاجم الفيل c4 مباشرة ويُحافظ على التوازن</span></div><div class="ki"><span class="ico">👑</span><span class="ktxt">استخدمته بطلة العالم <strong>Ju Wenjun</strong> ضد Praggnanandhaa في Tata Steel Masters 2024 لتجنب التعقيدات الخطيرة</span></div></div><div class="notebox"><div class="ntitle">📌 لماذا Polerio أهم حلقة في السلسلة؟</div><p>كل لاعب يختار Two Knights Defense <strong>يجب</strong> أن يعرف هذا الخط. David Bronstein اقترح تسمية السلسلة كاملة "<strong>Chigorin Counterattack</strong>" بدلاً من "دفاع" — لأن الأسود لا يدافع بل يُهاجم مباشرة!</p></div></div></div>
+    </div>
+
+    <div class="lc" id="lc1">
+      <div class="lhd"><div class="ley">الحلقة الحادية عشرة · الدرس الثاني</div><div class="ltitle">5...Na5! حتى 7...bxc6 — الخط الإلزامي الكامل</div><div class="lsub">من 5...Na5 إلى 7...bxc6 — هذا التسلسل إلزامي ومحفوظ تماماً لكل لاعبي Polerio. كل حركة هنا منطقية ومُجبرة تقريباً، ويجب حفظها حرفياً قبل الانتقال لخيارات الأبيض الثلاثة.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b1"></div></div><div class="ctrl"><button class="cb" onclick="nav(1,-2)">⏮</button><button class="cb" onclick="nav(1,-1)">◀</button><span class="mc" id="mc1">الوضع الابتدائي</span><button class="cb" onclick="nav(1,1)">▶</button><button class="cb" onclick="nav(1,99)">⏭</button></div><div class="mb" id="mb1"></div></div>
+      <div class="ip"><div class="ic"><h4>شرح كل حركة في التسلسل</h4><div class="ki"><span class="ico">①</span><span class="ktxt"><strong>5...Na5!</strong> يُهاجم الفيل c4، الأبيض مجبر على التحرك</span></div><div class="ki"><span class="ico">②</span><span class="ktxt"><strong>6.Bb5+!</strong> الحركة الوحيدة المنطقية — الفيل يهرب بكشف على الملك</span></div><div class="ki"><span class="ico">③</span><span class="ktxt"><strong>6...c6!</strong> يحجب الكشف ويُهدد الفيل ثانية — لا بديل أفضل</span></div><div class="ki"><span class="ico">④</span><span class="ktxt"><strong>7.dxc6 bxc6</strong> — الأبيض يأخذ بيدقاً إضافياً، الأسود يستعيد المركز بنشاط</span></div></div><div class="varbox"><div class="varbox-title">لماذا هذا التسلسل محفوظ بالكامل؟</div><div class="var-item"><span class="var-dot"></span><span class="var-txt">كل حركة هنا <strong>إلزامية تقريباً</strong> — لا يوجد بدائل قوية لأي طرف</span></div><div class="var-item"><span class="var-dot"></span><span class="var-txt">من النادر أن تجد افتتاحاً بهذا القدر من الحتمية في أول 7 حركات</span></div><div class="var-item"><span class="var-dot"></span><span class="var-txt">من هنا تبدأ المعركة الحقيقية — الأبيض أمام 3 خيارات استراتيجية مختلفة تماماً</span></div></div></div></div>
+    </div>
+
+    <div class="lc" id="lc2">
+      <div class="lhd"><div class="ley">الحلقة الحادية عشرة · الدرس الثالث</div><div class="ltitle">الموقف بعد 7...bxc6 — ثلاثة طرق مختلفة للأبيض</div><div class="lsub">هنا تنقسم النظرية إلى ثلاثة مسارات رئيسية تماماً كما يُغطّيها الفيديو الأصلي بالتوقيت: 8.Qf3 (الكلاسيكي، أُحييَ بواسطة Bogoljubow)، 8.Bd3 (الحديث والأكثر شيوعاً منذ أواخر 2010)، و8.Be2 (التقليدي القديم). سنُغطّي كل واحد بعمق كامل.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b2"></div></div><div class="ctrl"><button class="cb" onclick="nav(2,-2)">⏮</button><button class="cb" onclick="nav(2,-1)">◀</button><span class="mc" id="mc2">بعد 7...bxc6</span><button class="cb" onclick="nav(2,1)">▶</button><button class="cb" onclick="nav(2,99)">⏭</button></div><div class="mb" id="mb2"></div></div>
+      <div class="ip"><div class="ic"><h4>تقييم الموقف الأساسي</h4><div class="ki"><span class="ico">⚖️</span><span class="ktxt">الأسود <strong>بيدقَين أقل</strong> لكن مع بنية بيادق متضررة لدى الأبيض وزوج فيلة كامل</span></div><div class="ki"><span class="ico">🎯</span><span class="ktxt">الفارس على g5 لا يزال <strong>بعيداً عن اللعب</strong> ويحتاج الأبيض لإيجاد بيت آمن له</span></div><div class="ki"><span class="ico">🏰</span><span class="ktxt">ملف b المفتوح يُتيح للأسود <strong>Rb8</strong> بضغط مباشر على بيدق b2</span></div></div><div class="varbox"><div class="varbox-title">الخطوط الثلاثة لهذه الحلقة بالتفصيل</div><div class="var-item"><span class="var-dot"></span><span class="var-txt"><code>8.Qf3</code> — شائع في القرن 19، أُحييَ بواسطة Bogoljubow في القرن 20، يُتيح للأسود اختيار التضحية بالرخ أو حركات أهدأ</span></div><div class="var-item"><span class="var-dot"></span><span class="var-txt"><code>8.Bd3</code> — الأكثر شيوعاً على مستوى الأساتذة منذ أواخر العقد الماضي، يُسهّل هروب الفارس إلى e4</span></div><div class="var-item"><span class="var-dot"></span><span class="var-txt"><code>8.Be2</code> — الخط التقليدي الأقدم، يؤدي إلى Knorre Variation المعروفة باسم الخط الرئيسي التاريخي</span></div></div></div></div>
+    </div>
+
+    <div class="lc" id="lc3">
+      <div class="lhd"><div class="ley">الحلقة الحادية عشرة · الدرس الرابع</div><div class="ltitle">8.Qf3 cxb5! 9.Qxa8 — التضحية الجريئة بالرخ</div><div class="lsub">8.Qf3 يُهدد الفارس a5 والرخ a8 معاً بفضل قطر الفيل المفتوح! الأسود يرد بضربة جريئة جداً: 8...cxb5! يتجاهل الرخ تماماً ويستمر بالضرب — الوزيرة الأبيضة تأخذ الرخ لكنها ستُحاصَر بعد ذلك.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b3"></div></div><div class="ctrl"><button class="cb" onclick="nav(3,-2)">⏮</button><button class="cb" onclick="nav(3,-1)">◀</button><span class="mc" id="mc3">بعد 7...bxc6</span><button class="cb" onclick="nav(3,1)">▶</button><button class="cb" onclick="nav(3,99)">⏭</button></div><div class="mb" id="mb3"></div></div>
+      <div class="ip"><div class="ic"><h4>لماذا cxb5 أقوى من حماية الرخ؟</h4><div class="ki"><span class="ico">①</span><span class="ktxt"><strong>8...cxb5!</strong> — الأسود يأخذ الفيل ويتجاهل تهديد الرخ تماماً، يُفضّل التطوير على المادة</span></div><div class="ki"><span class="ico">②</span><span class="ktxt"><strong>9.Qxa8</strong> الوزيرة الأبيضة تأخذ الرخ طمعاً، لكنها أصبحت بعيدة جداً عن اللعب</span></div><div class="ki"><span class="ico">③</span><span class="ktxt">الأسود يحصل على <strong>تطوير سريع وزوج فيلة وهجوم مستقبلي</strong> على الوزيرة المحاصرة</span></div></div><div class="notebox"><div class="ntitle">💡 الفكرة الإستراتيجية الكاملة</div><p>هذا مثال كلاسيكي على <strong>عدم التمسك بالمادة بشكل حرفي</strong> — الأسود يُضحي بالرخ مقابل تطوير هائل وفرصة لمحاصرة الوزيرة الأبيضة في زاوية الرقعة البعيدة لاحقاً.</p></div></div></div>
+    </div>
+
+    <div class="lc" id="lc4">
+      <div class="lhd"><div class="ley">الحلقة الحادية عشرة · الدرس الخامس</div><div class="ltitle">9...Qc7! 10.Qf3 Nc6 — استعادة المبادرة بالكامل</div><div class="lsub">الأسود يلعب 9...Qc7! ليُهدد الوزيرة الأبيضة المحاصرة على a8 ويُجبرها على الهروب. بعد 10.Qf3 الأسود يُكمل التطوير بـ Nc6 ويحصل على موقف نشط جداً يُعوّض الرخ المفقود بالكامل.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b4"></div></div><div class="ctrl"><button class="cb" onclick="nav(4,-2)">⏮</button><button class="cb" onclick="nav(4,-1)">◀</button><span class="mc" id="mc4">بعد 9.Qxa8</span><button class="cb" onclick="nav(4,1)">▶</button><button class="cb" onclick="nav(4,99)">⏭</button></div><div class="mb" id="mb4"></div></div>
+      <div class="ip"><div class="ic"><h4>كيف يُهدد الأسود الوزيرة المحاصرة؟</h4><div class="ki"><span class="ico">⚡</span><span class="ktxt"><strong>9...Qc7!</strong> — يُهدد الوزيرة مباشرة على a8، لا مهرب آمن واضح فورياً</span></div><div class="ki"><span class="ico">🏃</span><span class="ktxt"><strong>10.Qf3</strong> — الوزيرة تهرب بأمان نسبي، تعود للمشاركة في اللعبة</span></div><div class="ki"><span class="ico">♞</span><span class="ktxt"><strong>10...Nc6!</strong> — الأسود يُكمل التطوير الطبيعي، فارس a5 يعود للمشاركة الفعّالة</span></div></div><div class="varbox"><div class="varbox-title">التقييم النهائي للخط</div><div class="var-item"><span class="var-dot"></span><span class="var-txt">المحركات الحديثة تُقيّم الموقف بحوالي <strong>0.1 فقط</strong> لصالح الأبيض رغم خسارة الرخ!</span></div><div class="var-item"><span class="var-dot"></span><span class="var-txt">هذا يُثبت أن خط <strong>8.Qf3</strong> ليس قوياً كما يبدو — التطوير والنشاط يُعوّضان المادة تماماً</span></div></div></div></div>
+    </div>
+
+    <div class="lc" id="lc5">
+      <div class="lhd"><div class="ley">الحلقة الحادية عشرة · الدرس السادس</div><div class="ltitle">8.Bd3 Nd5! 9.Nf3 Bd6 — الخط الحديث المفضل اليوم</div><div class="lsub">8.Bd3 أصبح الخط الأكثر شيوعاً على مستوى الأساتذة منذ أواخر العقد الماضي. يحجب طريق بيدق d لكنه يُسهّل هروب الفارس g5 إلى e4! الأسود يرد بـ 8...Nd5! الحركة الحديثة الصحيحة بدلاً من الخطأ الشائع h6.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b5"></div></div><div class="ctrl"><button class="cb" onclick="nav(5,-2)">⏮</button><button class="cb" onclick="nav(5,-1)">◀</button><span class="mc" id="mc5">بعد 7...bxc6</span><button class="cb" onclick="nav(5,1)">▶</button><button class="cb" onclick="nav(5,99)">⏭</button></div><div class="mb" id="mb5"></div></div>
+      <div class="ip"><div class="ic"><h4>لماذا Nd5 أفضل من h6 هنا؟</h4><div class="ki"><span class="ico">❌</span><span class="ktxt">الخطأ الشائع: <strong>8...h6؟!</strong> فوراً — يُتيح <strong>9.Ne4!</strong> هروباً مثالياً وآمناً تماماً للفارس</span></div><div class="ki"><span class="ico">✅</span><span class="ktxt"><strong>8...Nd5!</strong> — الحركة الحديثة الصحيحة، الفارس الأسود يحتل مركزاً قوياً قبل أن يهرب فارس الأبيض</span></div><div class="ki"><span class="ico">⚡</span><span class="ktxt">بعد <strong>9.Nf3 Bd6!</strong> — الأسود يحمي بيدق e5 أولاً قبل التفكير بمهاجمة أي قطعة أخرى</span></div></div><div class="notebox"><div class="ntitle">⚠️ الفكرة الجوهرية لكامل هذا الخط</div><p>إذا حاول الأسود طرد الفارس g5 مباشرة بدلاً من التطوير الذكي، فإن الأبيض يُسهّل لعبه عبر <strong>9.Ne4 Nxe4 10.Bxe4!</strong> ويُصبح اللعب أسهل بكثير للأبيض. لهذا يجب على الأسود التخطيط لمهاجمة الفيل d3 أو الجناح الملكي، وليس الفارس g5 مباشرة.</p></div></div></div>
+    </div>
+
+    <div class="lc" id="lc6">
+      <div class="lhd"><div class="ley">الحلقة الحادية عشرة · الدرس السابع</div><div class="ltitle">10.0-0 Nf4! — تبادل الفيلة وتعويض كامل</div><div class="lsub">بعد التحصين، الأسود يُكمل الخطة بـ 10...Nf4! يُهدد بمبادلة الفيل d3 ضمن خطة "تبادل الفيلة، ثم استهداف e5 لاحقاً". هذا الخط يُعطي الأسود تعويضاً كاملاً عن البيدقَين المفقودَين.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b6"></div></div><div class="ctrl"><button class="cb" onclick="nav(6,-2)">⏮</button><button class="cb" onclick="nav(6,-1)">◀</button><span class="mc" id="mc6">بعد 9...Bd6</span><button class="cb" onclick="nav(6,1)">▶</button><button class="cb" onclick="nav(6,99)">⏭</button></div><div class="mb" id="mb6"></div></div>
+      <div class="ip"><div class="ic"><h4>تتابع الخطة الكاملة للأسود</h4><div class="ki"><span class="ico">🏰</span><span class="ktxt"><strong>10.0-0</strong> — الأبيض يتحصّن بأمان أخيراً بعد تأخير طويل</span></div><div class="ki"><span class="ico">♞</span><span class="ktxt"><strong>10...Nf4!</strong> — يُهدد الفيل d3 مباشرة، خطوة محورية في خطة الأسود</span></div><div class="ki"><span class="ico">⚡</span><span class="ktxt">بعد <strong>11.Re1 Nxd3 12.cxd3</strong> — الأبيض يخسر زوج الفيلة ويحصل على بيدق d مضاعف منعزل</span></div></div><div class="varbox"><div class="varbox-title">التقييم النهائي لخط 8.Bd3</div><div class="var-item"><span class="var-dot"></span><span class="var-txt">بعد تبادل الفيلة، الأبيض يستخدم خطة <strong>Re1, Nc3-Ne4, Qc2, b3-Bb2</strong> لمهاجمة بيدق e5</span></div><div class="var-item"><span class="var-dot"></span><span class="var-txt">الأسود يحتفظ بنشاط جيد لكن الفارس a5 يبقى في موقع جانبي محدود الفعالية</span></div><div class="var-item"><span class="var-dot"></span><span class="var-txt">التقييم: <strong>متوازن تماماً</strong> بحسب المحركات ونسب فوز الأساتذة على حد سواء</span></div></div></div></div>
+    </div>
+
+    <div class="lc" id="lc7">
+      <div class="lhd"><div class="ley">الحلقة الحادية عشرة · الدرس الثامن</div><div class="ltitle">8.Be2 h6! 9.Nf3 e4 10.Ne5 Bd6 — Knorre Variation</div><div class="lsub">8.Be2 هو الخط التقليدي الأقدم. هنا (بخلاف Bd3) طرد الفارس فوراً بـ h6 هو الصحيح تماماً، لأن الفيل على e2 لا يُمكنه دعم الفارس على e4 بسهولة. هذا يقود إلى Knorre Variation التي تُعتبر تاريخياً الخط الرئيسي الكامل لكل Two Knights Defense.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b7"></div></div><div class="ctrl"><button class="cb" onclick="nav(7,-2)">⏮</button><button class="cb" onclick="nav(7,-1)">◀</button><span class="mc" id="mc7">بعد 7...bxc6</span><button class="cb" onclick="nav(7,1)">▶</button><button class="cb" onclick="nav(7,99)">⏭</button></div><div class="mb" id="mb7"></div></div>
+      <div class="ip"><div class="ic"><h4>التسلسل الكامل لـ Knorre Variation</h4><div class="ki"><span class="ico">①</span><span class="ktxt"><strong>8.Be2 h6!</strong> — هنا الطرد الفوري صحيح تماماً، بخلاف خط Bd3</span></div><div class="ki"><span class="ico">②</span><span class="ktxt"><strong>9.Nf3 e4!</strong> — الأسود يطرد الفارس مجدداً بضربة مركزية قوية، يكتسب مساحة ووقتاً</span></div><div class="ki"><span class="ico">③</span><span class="ktxt"><strong>10.Ne5 Bd6!</strong> — الحركة الوحيدة التي لا تضع الأبيض في موقف سيء، الأسود يُطوّر بنشاط حول الفارس المتقدّم</span></div></div><div class="varbox"><div class="varbox-title">البدائل التاريخية لحركة 9</div><div class="var-item"><span class="var-dot"></span><span class="var-txt"><strong>Steinitz</strong> فضّل <code>9.Nh3</code> بدلاً من Nf3 — لم تُجدِ نفعاً في مباراته الشهيرة عام 1891 ضد Chigorin</span></div><div class="var-item"><span class="var-dot"></span><span class="var-txt">أحيا <strong>Bobby Fischer</strong> خط Nh3 في الستينيات، وأعاد <strong>Nigel Short</strong> إحياءه في التسعينيات</span></div><div class="var-item"><span class="var-dot"></span><span class="var-txt">اليوم: <code>9.Nh3</code> و<code>9.Nf3</code> يُعتبران متعادلَين تقريباً في القوة بحسب التحليل الحديث</span></div></div></div></div>
+    </div>
+
+    <div class="lc" id="lc8">
+      <div class="lhd"><div class="ley">الحلقة الحادية عشرة · الدرس التاسع</div><div class="ltitle">الخلاصة الكاملة — مقارنة الخطوط الثلاثة</div><div class="lsub">بعد تغطية 8.Qf3 و8.Bd3 و8.Be2 بعمق، نُقارن بين الخطوط الثلاثة ونُحدّد الأنسب لكل لاعب بحسب أسلوبه وما يُفضّل أن يتعامل معه على الرقعة.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b8"></div></div><div class="ctrl"><button class="cb" onclick="nav(8,-2)">⏮</button><button class="cb" onclick="nav(8,-1)">◀</button><span class="mc" id="mc8">الموقف الرئيسي بعد 7...bxc6</span><button class="cb" onclick="nav(8,1)">▶</button><button class="cb" onclick="nav(8,99)">⏭</button></div><div class="mb" id="mb8"></div></div>
+      <div class="ip"><div class="ic"><h4>مقارنة شاملة بين الخطوط الثلاثة</h4><div class="ki"><span class="ico">①</span><span class="ktxt"><strong>8.Qf3</strong> — الأكثر حدة وتعقيداً، يفتح موقفاً غير واضح المعالم؛ نسب الأسود ضد أوضاع كهذه عالية تاريخياً</span></div><div class="ki"><span class="ico">②</span><span class="ktxt"><strong>8.Bd3</strong> — الخيار الأكثر "عصرية" بين الأساتذة، يحافظ على البيدقَين الإضافيَين بأبسط طريقة عملية</span></div><div class="ki"><span class="ico">③</span><span class="ktxt"><strong>8.Be2</strong> — الخط الكلاسيكي الأقدم، يقود إلى Knorre Variation المُحلَّلة بعمق منذ القرن التاسع عشر</span></div></div><div class="notebox"><div class="ntitle">🎯 الدرس الرئيسي لكل الحلقة</div><p>في كل الخطوط الثلاثة، الأبيض يحتفظ بأفضلية مادية صغيرة (بيدقَين) لكن الأسود يُعوّض بـ <strong>التطوير السريع، خط b المفتوح، وزوج الفيلة</strong>. إحصائيات قواعد البيانات وتقييم Stockfish يُظهران توازناً تقريبياً يُفسّر سبب كون Polerio السلاح المفضّل للمحترفين، بما فيهم بطلة العالم <strong>Ju Wenjun</strong>، حتى اليوم!</p></div></div></div>
+    </div>
+
+    <div class="nav-footer">
+      <a class="nav-ep" href="italian_ep10.html">← الحلقة العاشرة</a>
+      <span style="font-size:11px;color:var(--txt3)">١١ / ٢٨</span>
+      <a class="nav-ep next" href="italian_ep12.html">الحلقة الثانية عشرة →</a>
+    </div>
+  </div>
+</div>
+
+<script>
+const Wp={K:'♔',Q:'♕',R:'♖',B:'♗',N:'♘',P:'♙'};
+const Bp={K:'♚',Q:'♛',R:'♜',B:'♝',N:'♞',P:'♟'};
+function parseFen(fen){const rows=fen.split(' ')[0].split('/'),b=[];for(let r=0;r<8;r++){const row=[];for(const c of rows[r]){if(isNaN(c))row.push(c);else for(let i=0;i<+c;i++)row.push(null);}b.push(row);}return b;}
+function pHtml(code){if(!code)return'';const w=code===code.toUpperCase();const m={K:Wp.K,Q:Wp.Q,R:Wp.R,B:Wp.B,N:Wp.N,P:Wp.P,k:Bp.K,q:Bp.Q,r:Bp.R,b:Bp.B,n:Bp.N,p:Bp.P};return`<span class="pc ${w?'w':'b'}">${m[code]}</span>`;}
+function drawBoard(id,fen){const el=document.getElementById(id);if(!el)return;const bd=parseFen(fen);el.innerHTML='';const fl=['a','b','c','d','e','f','g','h'];for(let r=0;r<8;r++)for(let c=0;c<8;c++){const sq=document.createElement('div');sq.className='sq '+((r+c)%2===0?'lt':'dk');if(c===7)sq.innerHTML+=`<span class="rl">${8-r}</span>`;if(r===7)sq.innerHTML+=`<span class="fl">${fl[c]}</span>`;sq.innerHTML+=pHtml(bd[r][c]);el.appendChild(sq);}}
+const S='rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
+const DATA=[
+  [{f:S,l:'الوضع الابتدائي',n:''},{f:'rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR',l:'1.e4 e5',n:''},{f:'r1bqkb1r/pppp1ppp/2n2n2/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R',l:'2.Nf3 Nc6 3.Bc4 Nf6',n:'Two Knights Defense'},{f:'r1bqkb1r/pppp1ppp/2n2n2/4p1N1/2B1P3/8/PPPP1PPP/RNBQK2R',l:'4.Ng5',n:'الهجوم المباشر على f7'},{f:'r1bqkb1r/ppp2ppp/2n2n2/3pp1N1/2B1P3/8/PPPP1PPP/RNBQK2R',l:'4...d5',n:'الرد الوحيد الجيد'},{f:'r1bqkb1r/ppp2ppp/2n2n2/3Pp1N1/2B5/8/PPPP1PPP/RNBQK2R',l:'5.exd5',n:'الأسود أمام خيار حاسم!'}],
+  [{f:'r1bqkb1r/ppp2ppp/2n2n2/3Pp1N1/2B5/8/PPPP1PPP/RNBQK2R',l:'بعد 5.exd5',n:''},{f:'r1bqkb1r/ppp2ppp/2n5/n2Pp1N1/2B5/8/PPPP1PPP/RNBQK2R',l:'5...Na5!',n:'Polerio Defense! يهاجم الفيل c4 مباشرة'},{f:'r1bqkb1r/ppp2ppp/2n5/nB1Pp1N1/8/8/PPPP1PPP/RNBQK2R',l:'6.Bb5+!',n:'الحركة الوحيدة المنطقية — الفيل يهرب بكشف'},{f:'r1bqkb1r/pp3ppp/2p2n2/nB1Pp1N1/8/8/PPPP1PPP/RNBQK2R',l:'6...c6!',n:'يحجب الكشف ويُهدد الفيل مجدداً'},{f:'r1bqkb1r/pp3ppp/2P2n2/n3p1N1/8/8/PPPP1PPP/RNBQK2R',l:'7.dxc6',n:'الأبيض يأخذ بيدقاً إضافياً'},{f:'r1bqkb1r/p4ppp/2p2n2/n3p1N1/8/8/PPPP1PPP/RNBQK2R',l:'7...bxc6',n:'الأسود يستعيد المركز بنشاط — التسلسل الإلزامي ينتهي هنا'}],
+  [{f:'r1bqkb1r/p4ppp/2p2n2/n3p1N1/8/8/PPPP1PPP/RNBQK2R',l:'الموقف الأساسي بعد 7...bxc6',n:'من هنا تنقسم النظرية لثلاثة مسارات'}],
+  [{f:'r1bqkb1r/p4ppp/2p2n2/n3p1N1/8/8/PPPP1PPP/RNBQK2R',l:'بعد 7...bxc6',n:''},{f:'r1bqkb1r/p4ppp/2p2n2/n3p1N1/8/5Q2/PPPP1PPP/RNB1K2R',l:'8.Qf3!',n:'يُهدد الفارس a5 والرخ a8 معاً عبر القطر'},{f:'r1bqkb1r/p4ppp/2p2n2/4p1N1/1p6/5Q2/PPPP1PPP/RNB1K2R',l:'8...cxb5!',n:'الأسود يتجاهل الرخ ويأخذ الفيل بجرأة!'},{f:'Q2qkb1r/p4ppp/4pn2/4p1N1/1p6/5Q2/PPPP1PPP/RNB1K2R',l:'9.Qxa8',l:'9.Qxa8',n:'الوزيرة تأخذ الرخ — لكنها أصبحت بعيدة جداً عن اللعب'}],
+  [{f:'Q2qkb1r/p4ppp/4pn2/4p1N1/1p6/5Q2/PPPP1PPP/RNB1K2R',l:'بعد 9.Qxa8',n:''},{f:'Q3kb1r/p1q2ppp/4pn2/4p1N1/1p6/5Q2/PPPP1PPP/RNB1K2R',l:'9...Qc7!',n:'يُهدد الوزيرة المحاصرة على a8 مباشرة'},{f:'4kb1r/p1q2ppp/4pn2/4p1N1/1p3Q2/8/PPPP1PPP/RNB1K2R',l:'10.Qf3',n:'الوزيرة تهرب بأمان نسبي وتعود للمشاركة'},{f:'4kb1r/p1q2ppp/2n1pn2/4p1N1/1p3Q2/8/PPPP1PPP/RNB1K2R',l:'10...Nc6!',n:'الأسود يُكمل التطوير — تعويض كامل عن الرخ المفقود!'}],
+  [{f:'r1bqkb1r/p4ppp/2p2n2/n3p1N1/8/8/PPPP1PPP/RNBQK2R',l:'بعد 7...bxc6',n:''},{f:'r1bqkb1r/p4ppp/2p2n2/n3p1N1/8/3B4/PPPP1PPP/RNBQK2R',l:'8.Bd3!',n:'الخط الحديث الأكثر شيوعاً — يُسهّل هروب الفارس إلى e4'},{f:'r1bqkb1r/p4ppp/2p5/n2np1N1/8/3B4/PPPP1PPP/RNBQK2R',l:'8...Nd5!',n:'الحركة الحديثة الصحيحة بدلاً من الخطأ الشائع h6'},{f:'r1bqkb1r/p4ppp/2p5/n2np1N1/8/3B1N2/PPPP1PPP/RNBQK2R',l:'9.Nf3',n:'الفارس يتراجع بأمان إلى f3'},{f:'r1bq1b1r/p4ppp/2pb4/n2np3/8/3B1N2/PPPP1PPP/RNBQK2R',l:'9...Bd6!',n:'يحمي e5 أولاً قبل التفكير بأي مهاجمة أخرى'}],
+  [{f:'r1bq1b1r/p4ppp/2pb4/n2np3/8/3B1N2/PPPP1PPP/RNBQK2R',l:'بعد 9...Bd6',n:''},{f:'r1bq1b1r/p4ppp/2pb4/n2np3/8/3B1N2/PPPP1PPP/RNBQ1RK1',l:'10.0-0',n:'الأبيض يتحصّن أخيراً بأمان'},{f:'r1bq1b1r/p4ppp/2pb4/n3p3/5n2/3B1N2/PPPP1PPP/RNBQ1RK1',l:'10...Nf4!',n:'يُهدد الفيل d3 مباشرة'},{f:'r1bq1b1r/p4ppp/2pb4/n3p3/5n2/3B1N2/PPPP1PPP/RNBQR1K1',l:'11.Re1',n:'الأبيض يستعد للدفاع عن المركز'},{f:'r1bq1b1r/p4ppp/2pb4/n3p3/8/3n4/PPPP1PPP/RNBQR1K1',l:'11...Nxd3',n:'تبادل الفيلة — الأبيض يفقد الفيل القيّم'},{f:'r1bq1b1r/p4ppp/2pb4/n3p3/8/3P4/PPP2PPP/RNBQR1K1',l:'12.cxd3',n:'بيدق d مضاعف ومنعزل للأبيض — موقف متوازن تماماً'}],
+  [{f:'r1bqkb1r/p4ppp/2p2n2/n3p1N1/8/8/PPPP1PPP/RNBQK2R',l:'بعد 7...bxc6',n:''},{f:'r1bqkb1r/p4ppp/2p2n2/n3p1N1/8/8/PPPP1PPP/RNBQK1NR',l:'8.Be2',l:'8.Be2',n:'الخط التقليدي الأقدم'},{f:'r1bqkb1r/p5pp/2p2n1p/n3p1N1/8/8/PPPP1PPP/RNBQK1NR',l:'8...h6!',n:'هنا الطرد الفوري صحيح تماماً (بخلاف خط Bd3)'},{f:'r1bqkb1r/p5pp/2p2n1p/n3p3/8/5N2/PPPP1PPP/RNBQK2R',l:'9.Nf3',n:'الفارس يتراجع إلى f3'},{f:'r1bqkb1r/p5pp/2p2n1p/n7/4p3/5N2/PPPP1PPP/RNBQK2R',l:'9...e4!',n:'يطرد الفارس مجدداً بضربة مركزية قوية'},{f:'r1bqkb1r/p5pp/2p2n1p/n3N3/8/8/PPPP1PPP/RNBQK2R',l:'10.Ne5',n:'الفارس يجد بيتاً آمناً نسبياً في المركز'},{f:'r1bqk2r/p5pp/2pb1n1p/n3N3/8/8/PPPP1PPP/RNBQK2R',l:'10...Bd6!',n:'Knorre Variation! الحركة الوحيدة الصحيحة هنا'}],
+  [{f:'r1bqkb1r/p4ppp/2p2n2/n3p1N1/8/8/PPPP1PPP/RNBQK2R',l:'الموقف الرئيسي',n:'بعد 7...bxc6 — نقطة الانطلاق لثلاثة خطوط'},{f:'r1bqkb1r/ppp2ppp/2n5/n2Pp1N1/2B5/8/PPPP1PPP/RNBQK2R',l:'5...Na5! — البداية',n:'الحركة التي تُجنّب كل الكوارث'},{f:'r1bqk2r/p5pp/2pb1n1p/n3N3/8/8/PPPP1PPP/RNBQK2R',l:'Knorre Variation — الخط التاريخي',n:'الخط الرئيسي الكلاسيكي لكل Two Knights'}],
+];
+const cur=DATA.map(()=>0);
+function buildMB(i){const b=document.getElementById('mb'+i);if(!b)return;b.innerHTML='';let n=1;DATA[i].forEach((m,j)=>{if(j===0)return;if(j%2===1){const s=document.createElement('span');s.className='mn';s.textContent=n+'.';b.appendChild(s);n++;}const t=document.createElement('span');t.className='mt';t.textContent=m.l;t.dataset.j=j;t.onclick=()=>setM(i,j);b.appendChild(t);});}
+function setM(i,idx){if(idx<0)idx=0;if(idx>=DATA[i].length)idx=DATA[i].length-1;cur[i]=idx;const fen=DATA[i][idx].f;drawBoard('b'+i,fen.includes(' ')?fen:fen+' w KQkq - 0 1');const mc=document.getElementById('mc'+i);if(mc)mc.textContent=idx===0?DATA[i][0].l:(DATA[i][idx].n||DATA[i][idx].l);document.querySelectorAll('#mb'+i+' .mt').forEach(t=>t.classList.toggle('active',+t.dataset.j===idx));}
+function nav(i,d){const max=DATA[i].length-1;setM(i,d===-2?0:d===99?max:Math.max(0,Math.min(max,cur[i]+d)));}
+function show(idx,el,mIdx){document.querySelectorAll('.lc').forEach(l=>l.classList.remove('active'));document.querySelectorAll('.li').forEach(l=>l.classList.remove('active'));document.querySelectorAll('.mob-btn').forEach(b=>b.classList.remove('active'));document.getElementById('lc'+idx).classList.add('active');if(el)el.classList.add('active');if(mIdx!==undefined)document.querySelectorAll('.mob-btn')[mIdx]?.classList.add('active');setM(idx,0);window.scrollTo({top:0,behavior:'smooth'});}
+function tog(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open');}
+window.addEventListener('DOMContentLoaded',()=>{for(let i=0;i<DATA.length;i++){buildMB(i);setM(i,0);}});
+</script>
+</body>
+</html>
