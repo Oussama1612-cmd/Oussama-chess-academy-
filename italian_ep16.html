@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>الافتتاح الإيطالي — الحلقة ١٦: Blackburne-Shilling Gambit</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0f1117;--bg2:#181c24;--bg3:#1e2330;--brd:#2a3040;
+  --gold:#d4a84b;--gold2:#f0c96a;--gold3:#8a6528;
+  --txt:#e2e8f0;--txt2:#8896a8;--txt3:#4a5568;
+  --bl:#f0d9b5;--bd:#b58863;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;overflow-x:hidden}
+body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;display:flex;flex-direction:column}
+.tb{background:var(--bg2);border-bottom:1px solid var(--brd);height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;position:sticky;top:0;z-index:200;flex-shrink:0}
+.tb-brand{display:flex;align-items:center;gap:8px}
+.tb-icon{font-size:22px}
+.tb-name{font-family:'Amiri',serif;font-size:15px;color:var(--gold);font-weight:700}
+.tb-badge{background:linear-gradient(135deg,var(--gold3),var(--gold));color:#0a0c10;font-size:10px;font-weight:800;padding:4px 11px;border-radius:20px;letter-spacing:.4px;white-space:nowrap}
+.app{display:flex;flex:1;height:calc(100vh - 54px)}
+.sb{width:260px;background:var(--bg2);border-left:1px solid var(--brd);overflow-y:auto;flex-shrink:0;display:flex;flex-direction:column}
+.sb::-webkit-scrollbar{width:3px}.sb::-webkit-scrollbar-thumb{background:var(--brd)}
+.sb-hd{padding:16px 14px 10px;border-bottom:1px solid var(--brd);position:sticky;top:0;background:var(--bg2);z-index:5}
+.sb-hd h3{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
+.sb-hd p{font-size:11px;color:var(--txt3);margin-top:3px}
+.grp{border-bottom:1px solid var(--brd)}
+.gtog{width:100%;background:none;border:none;color:var(--txt);font-family:'Cairo',sans-serif;font-size:12px;font-weight:700;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;text-align:right;transition:background .15s}
+.gtog:hover{background:rgba(255,255,255,.03)}
+.gtog .arr{font-size:9px;color:var(--txt3);transition:transform .2s;flex-shrink:0}
+.gtog.open .arr{transform:rotate(180deg)}
+.gnum{background:var(--bg3);border:1px solid var(--brd);color:var(--txt3);font-size:10px;padding:1px 7px;border-radius:10px;font-weight:700}
+.ll{display:none}.ll.open{display:block}
+.li{display:flex;align-items:center;gap:8px;padding:8px 14px 8px 10px;cursor:pointer;transition:background .15s;border-right:3px solid transparent}
+.li:hover{background:rgba(255,255,255,.03)}
+.li.active{background:rgba(212,168,75,.09);border-right-color:var(--gold)}
+.li .ln{font-size:10px;font-weight:800;color:var(--txt3);min-width:18px;text-align:center;flex-shrink:0}
+.li.active .ln{color:var(--gold)}
+.li .lname{font-size:11.5px;color:var(--txt2);flex:1;line-height:1.4}
+.li.active .lname{color:var(--txt);font-weight:600}
+.mob-nav{display:none;background:var(--bg2);border-bottom:1px solid var(--brd);padding:10px 12px;gap:8px;overflow-x:auto;scrollbar-width:none;flex-shrink:0}
+.mob-nav::-webkit-scrollbar{display:none}
+.mob-btn{background:var(--bg3);border:1px solid var(--brd);color:var(--txt2);font-family:'Cairo',sans-serif;font-size:11px;font-weight:600;padding:7px 13px;border-radius:8px;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:all .15s}
+.mob-btn.active{background:rgba(212,168,75,.15);border-color:var(--gold);color:var(--gold)}
+.main{flex:1;overflow-y:auto;display:flex;flex-direction:column;align-items:center;padding:20px 16px 40px}
+.lc{display:none;flex-direction:column;gap:20px;width:100%;max-width:720px}
+.lc.active{display:flex}
+.lhd{width:100%}
+.ley{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.ltitle{font-family:'Amiri',serif;font-size:24px;font-weight:700;color:var(--txt);line-height:1.3;margin-bottom:7px}
+.lsub{font-size:13px;color:var(--txt2);line-height:1.75}
+.ba{display:flex;gap:18px;width:100%;align-items:flex-start;flex-wrap:wrap}
+.bwrap{display:flex;flex-direction:column;align-items:center;width:100%}
+
+/* ═══ BOARD — FORCED LTR TO PREVENT RTL MIRRORING ═══ */
+.bcon{box-shadow:0 0 0 2px var(--bd),0 0 0 5px #000,0 16px 48px rgba(0,0,0,.7);border-radius:3px;overflow:hidden;width:100%;max-width:400px;direction:ltr}
+.board{display:grid;grid-template-columns:repeat(8,1fr);aspect-ratio:1;width:100%;direction:ltr}
+.sq{aspect-ratio:1;display:flex;align-items:center;justify-content:center;position:relative;direction:ltr}
+.sq.lt{background:var(--bl)}.sq.dk{background:var(--bd)}
+.sq .rl{position:absolute;top:1px;right:2px;font-size:7px;font-weight:700;opacity:.55;font-family:'Cairo',sans-serif;line-height:1}
+.sq .fl{position:absolute;bottom:1px;left:2px;font-size:7px;font-weight:700;opacity:.55;font-family:'Cairo',sans-serif;line-height:1}
+.sq.lt .rl,.sq.lt .fl{color:var(--bd)}.sq.dk .rl,.sq.dk .fl{color:var(--bl)}
+.pc{font-size:clamp(24px,5.5vw,38px);line-height:1;user-select:none}
+.pc.w{color:#fff;-webkit-text-stroke:1.2px #444;filter:drop-shadow(0 2px 3px rgba(0,0,0,.5))}
+.pc.b{color:#111;-webkit-text-stroke:.5px #000;filter:drop-shadow(0 2px 4px rgba(0,0,0,.65))}
+
+.ctrl{display:flex;align-items:center;gap:5px;margin-top:10px;direction:ltr;width:100%;max-width:400px}
+.cb{background:var(--bg3);border:1px solid var(--brd);color:var(--txt2);width:38px;height:38px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .15s;flex-shrink:0}
+.cb:hover,.cb:active{border-color:var(--gold3);color:var(--gold);background:var(--bg2)}
+.mc{flex:1;text-align:center;font-size:11px;color:var(--txt3);font-weight:600;padding:0 4px;line-height:1.3}
+.mb{display:flex;flex-wrap:wrap;gap:3px;margin-top:8px;width:100%;max-width:400px;max-height:68px;overflow-y:auto;direction:ltr}
+.mt{padding:3px 9px;border-radius:5px;font-size:11px;font-weight:700;font-family:'Courier New',monospace;background:var(--bg3);border:1px solid var(--brd);color:var(--txt3);cursor:pointer;transition:all .15s}
+.mt:hover{border-color:var(--gold3);color:var(--txt2)}
+.mt.active{background:var(--gold);border-color:var(--gold);color:#0a0c10}
+.mn{padding:3px 4px;font-size:10px;color:var(--txt3);font-family:monospace}
+.ip{width:100%;display:flex;flex-direction:column;gap:12px}
+.ic{background:var(--bg3);border:1px solid var(--brd);border-radius:10px;padding:16px}
+.ic h4{font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.ki{display:flex;gap:9px;padding:8px 0;border-bottom:1px solid var(--brd);align-items:flex-start}
+.ki:last-child{border-bottom:none;padding-bottom:0}
+.ki .ico{font-size:16px;flex-shrink:0;margin-top:1px}
+.ki .ktxt{font-size:13px;color:var(--txt2);line-height:1.6}
+.ki .ktxt strong{color:var(--txt)}
+.notebox{background:rgba(212,168,75,.07);border:1px solid rgba(212,168,75,.2);border-radius:10px;padding:14px 16px;width:100%}
+.notebox .ntitle{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.notebox p{font-size:13px;color:var(--txt2);line-height:1.75}
+.notebox p strong{color:var(--gold2)}
+.varbox{background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:12px 14px;margin-top:8px}
+.varbox-title{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--txt2);margin-bottom:8px}
+.var-item{display:flex;align-items:flex-start;gap:9px;padding:7px 0;border-bottom:1px solid var(--brd)}
+.var-item:last-child{border-bottom:none;padding-bottom:0}
+.var-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:6px}
+.var-txt{font-size:12.5px;color:var(--txt2);line-height:1.6}
+.var-txt strong{color:var(--txt)}
+.var-txt code{font-family:'Courier New',monospace;font-size:11.5px;color:var(--gold2);background:rgba(212,168,75,.1);padding:1px 5px;border-radius:4px}
+.nav-footer{display:flex;justify-content:space-between;align-items:center;width:100%;max-width:720px;margin-top:8px;padding-top:20px;border-top:1px solid var(--brd)}
+.nav-ep{display:flex;align-items:center;gap:8px;text-decoration:none;padding:10px 16px;border-radius:8px;border:1px solid var(--brd);background:var(--bg2);color:var(--txt2);font-family:'Cairo',sans-serif;font-size:12px;font-weight:600;transition:all .15s;cursor:pointer}
+.nav-ep:hover{border-color:var(--gold3);color:var(--gold)}
+.nav-ep.next{background:linear-gradient(135deg,var(--gold3),var(--gold));color:#0a0c10;border-color:transparent;font-weight:700}
+.nav-ep.next:hover{opacity:.9}
+@media(min-width:641px){.mob-nav{display:none!important}.sb{display:flex}}
+@media(max-width:640px){
+  .sb{display:none!important}
+  .mob-nav{display:flex!important}
+  .app{flex-direction:column;height:auto;overflow:visible}
+  .main{padding:16px 12px 40px;overflow:visible}
+  .ltitle{font-size:20px}
+}
+</style>
+</head>
+<body>
+<div class="tb">
+  <div class="tb-brand"><span class="tb-icon">♟</span><span class="tb-name">أكاديمية أسامة للشطرنج</span></div>
+  <span class="tb-badge">الحلقة ١٦ من ٢٨</span>
+</div>
+<div class="app">
+  <div class="sb">
+    <div class="sb-hd"><h3>الحلقة السادسة عشرة</h3><p>Blackburne-Shilling Gambit — أشهر فخ في الإيطالية</p></div>
+    <div class="grp">
+      <button class="gtog open" onclick="tog(this)"><span>المقدمة</span><span style="display:flex;gap:7px;align-items:center"><span class="gnum">2</span><span class="arr">▼</span></span></button>
+      <div class="ll open">
+        <div class="li active" onclick="show(0,this)"><span class="ln">١</span><span class="lname">ما هو Blackburne-Shilling Gambit؟</span></div>
+        <div class="li" onclick="show(1,this)"><span class="ln">٢</span><span class="lname">3...Nd4؟! — حركة ضعيفة بهدف الفخ</span></div>
+      </div>
+    </div>
+    <div class="grp">
+      <button class="gtog open" onclick="tog(this)"><span>فخ المات الشهير</span><span style="display:flex;gap:7px;align-items:center"><span class="gnum">3</span><span class="arr">▼</span></span></button>
+      <div class="ll open">
+        <div class="li" onclick="show(2,this)"><span class="ln">٣</span><span class="lname">4.Nxe5؟! Qg5! — الشوكة المزدوجة</span></div>
+        <div class="li" onclick="show(3,this)"><span class="ln">٤</span><span class="lname">5.Nxf7؟؟ Qxg2! — الطمع القاتل</span></div>
+        <div class="li" onclick="show(4,this)"><span class="ln">٥</span><span class="lname">المات المكتوم الكامل! 7...Nf3#</span></div>
+      </div>
+    </div>
+    <div class="grp">
+      <button class="gtog open" onclick="tog(this)"><span>ردود الأبيض الصحيحة</span><span style="display:flex;gap:7px;align-items:center"><span class="gnum">4</span><span class="arr">▼</span></span></button>
+      <div class="ll open">
+        <div class="li" onclick="show(5,this)"><span class="ln">٦</span><span class="lname">5.Bxf7+! — أفضل محاولة بعد القبول</span></div>
+        <div class="li" onclick="show(6,this)"><span class="ln">٧</span><span class="lname">فخ آخر! 5.Ng4؟ d5!</span></div>
+        <div class="li" onclick="show(7,this)"><span class="ln">٨</span><span class="lname">4.Nxd4! — الرفض الصحيح الأقوى</span></div>
+        <div class="li" onclick="show(8,this)"><span class="ln">٩</span><span class="lname">الخلاصة — حكم الفخ الشامل</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="mob-nav">
+    <button class="mob-btn active" onclick="show(0,null,0)">١·مقدمة</button>
+    <button class="mob-btn" onclick="show(1,null,1)">٢·Nd4؟!</button>
+    <button class="mob-btn" onclick="show(2,null,2)">٣·Nxe5 Qg5!</button>
+    <button class="mob-btn" onclick="show(3,null,3)">٤·Qxg2!</button>
+    <button class="mob-btn" onclick="show(4,null,4)">٥·المات!</button>
+    <button class="mob-btn" onclick="show(5,null,5)">٦·Bxf7+!</button>
+    <button class="mob-btn" onclick="show(6,null,6)">٧·Ng4؟ d5!</button>
+    <button class="mob-btn" onclick="show(7,null,7)">٨·Nxd4!</button>
+    <button class="mob-btn" onclick="show(8,null,8)">٩·الخلاصة</button>
+  </div>
+  <div class="main">
+
+    <div class="lc active" id="lc0">
+      <div class="lhd"><div class="ley">الحلقة السادسة عشرة · الدرس الأول</div><div class="ltitle">ما هو Blackburne-Shilling Gambit؟</div><div class="lsub">واحد من أشهر الفخاخ في تاريخ الشطرنج بأكمله! سُمّي نسبة إلى الأستاذ الإنجليزي Joseph Henry Blackburne الذي يُقال إنه كان يفوز بقطعة "شيلينج" واحدة من كل لاعب هاوٍ يقع في هذا الفخ في مقاهي لندن في القرن التاسع عشر.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b0"></div></div><div class="ctrl"><button class="cb" onclick="nav(0,-2)">⏮</button><button class="cb" onclick="nav(0,-1)">◀</button><span class="mc" id="mc0">الوضع الابتدائي</span><button class="cb" onclick="nav(0,1)">▶</button><button class="cb" onclick="nav(0,99)">⏭</button></div><div class="mb" id="mb0"></div></div>
+      <div class="ip"><div class="ic"><h4>الخلفية التاريخية والتسمية</h4><div class="ki"><span class="ico">📜</span><span class="ktxt">يُعرف أيضاً باسم <strong>Kostić Gambit</strong> نسبة إلى الأستاذ الكبير الصربي Borislav Kostić الذي لعبه أوائل القرن العشرين</span></div><div class="ki"><span class="ico">⚠️</span><span class="ktxt">حسب الباحث Bill Wall: <strong>لا توجد مباريات مُسجّلة فعلياً لبلاكبيرن</strong> بهذا الخط — التسمية ربما أسطورية أكثر من تاريخية</span></div><div class="ki"><span class="ico">😄</span><span class="ktxt">يُلقّب أيضاً بفخ <strong>"يا الله!"</strong> (Oh my God) — إذ يتوقع من الأسود التذرع بالصدمة لخداع الخصم بأنه أخطأ بترك بيدق e5!</span></div></div><div class="notebox"><div class="ntitle">📊 إحصائية مذهلة من Lichess</div><p>على مستوى الهواة، يُسجّل الأسود نسبة فوز تصل إلى <strong>49%</strong> بعد هذا الخط بفضل قوة الفخ، رغم أن 3...Nd4 يُعتبر بحسب كل التحليلات النظرية حركة <strong>ضعيفة جداً موضعياً</strong>!</p></div></div></div>
+    </div>
+
+    <div class="lc" id="lc1">
+      <div class="lhd"><div class="ley">الحلقة السادسة عشرة · الدرس الثاني</div><div class="ltitle">3...Nd4؟! — حركة ضعيفة بهدف الفخ المحض</div><div class="lsub">بدلاً من Bc5 أو Nf6 أو حتى Be7 التي درسناها في حلقات سابقة، الأسود يلعب 3...Nd4؟! — فارس يهاجم الفارس f3 لكنه لا يُساهم في السيطرة على المركز، وهي حركة تُضيّع الوقت بحسب كل المحللين الكلاسيكيين.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b1"></div></div><div class="ctrl"><button class="cb" onclick="nav(1,-2)">⏮</button><button class="cb" onclick="nav(1,-1)">◀</button><span class="mc" id="mc1">الوضع الابتدائي</span><button class="cb" onclick="nav(1,1)">▶</button><button class="cb" onclick="nav(1,99)">⏭</button></div><div class="mb" id="mb1"></div></div>
+      <div class="ip"><div class="ic"><h4>لماذا Nd4 ضعيفة موضعياً؟</h4><div class="ki"><span class="ico">①</span><span class="ktxt"><strong>يُهاجم Nf3</strong> لكنه يترك مركز الأسود بدون أي حماية حقيقية</span></div><div class="ki"><span class="ico">②</span><span class="ktxt">Wilhelm Steinitz أوصى منذ 1895 بـ <strong>4.0-0</strong> أو <strong>4.Nxd4</strong> كأفضل ردّين للأبيض</span></div><div class="ki"><span class="ico">③</span><span class="ktxt">IM Jeremy Silman يُؤكّد أن الأبيض يحصل على أفضلية واضحة بعد <strong>4.0-0، 4.c3، أو 4.Nc3</strong></span></div></div><div class="varbox"><div class="varbox-title">الفكرة الخفية وراء الفخ</div><div class="var-item"><span class="var-dot"></span><span class="var-txt">الأسود يُغري الأبيض بأخذ بيدق e5 "المجاني" — يبدو هدية بريئة جداً</span></div><div class="var-item"><span class="var-dot"></span><span class="var-txt">لكن أخذ هذا البيدق بالفارس يقود مباشرة <strong>لكارثة تكتيكية</strong> سنراها في الدرس القادم!</span></div></div></div></div>
+    </div>
+
+    <div class="lc" id="lc2">
+      <div class="lhd"><div class="ley">الحلقة السادسة عشرة · الدرس الثالث</div><div class="ltitle">4.Nxe5؟! Qg5! — الشوكة المزدوجة القاتلة</div><div class="lsub">الأبيض يأخذ الطعم! بيدق e5 يبدو مجانياً تماماً — لكن الأسود يرد فوراً بـ Qg5! ضربة مزدوجة تُهدد الفارس على e5 وبيدق g2 في آنٍ واحد، تماماً كما صُمم الفخ منذ البداية.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b2"></div></div><div class="ctrl"><button class="cb" onclick="nav(2,-2)">⏮</button><button class="cb" onclick="nav(2,-1)">◀</button><span class="mc" id="mc2">بعد 3...Nd4</span><button class="cb" onclick="nav(2,1)">▶</button><button class="cb" onclick="nav(2,99)">⏭</button></div><div class="mb" id="mb2"></div></div>
+      <div class="ip"><div class="ic"><h4>تحليل الشوكة المزدوجة</h4><div class="ki"><span class="ico">❌</span><span class="ktxt"><strong>4.Nxe5؟!</strong> — يبدو هدية مجانية، لكنه يفتح الباب لكارثة الأبيض الكاملة</span></div><div class="ki"><span class="ico">⚡</span><span class="ktxt"><strong>4...Qg5!</strong> — الوزيرة تهدد الفارس e5 <strong>وبيدق g2</strong> في نفس الوقت — شوكة مزدوجة حقيقية!</span></div><div class="ki"><span class="ico">🎯</span><span class="ktxt">الأبيض الآن أمام قرار حاسم: <strong>الدفاع عن الفارس</strong> أم محاولة هجوم مقابل بـ Nxf7؟</span></div></div><div class="notebox"><div class="ntitle">⚠️ تحذير حاسم — لا تأخذ بالوزيرة!</div><p>إذا حاول الأسود <strong>4...Qxe5؟؟</strong> بدلاً من Qg5، يخسر الوزيرة فوراً لـ <strong>5.d4!</strong> لأنها غير محمية ومهددة بالفارس f3 ذاته! الترتيب الدقيق للحركات هنا حاسم تماماً.</p></div></div></div>
+    </div>
+
+    <div class="lc" id="lc3">
+      <div class="lhd"><div class="ley">الحلقة السادسة عشرة · الدرس الرابع</div><div class="ltitle">5.Nxf7؟؟ Qxg2! — الطمع القاتل بالرخ</div><div class="lsub">الأبيض يرى فرصة أخرى لكسب مادة: الفارس يقفز إلى f7 مُهدداً الرخ h8! لكن هذا هو الخطأ الفادح الذي يُفجّر الفخ بأكمله — الأسود يرد فوراً بضرب بيدق g2 ويبدأ سلسلة هجومية لا تتوقف.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b3"></div></div><div class="ctrl"><button class="cb" onclick="nav(3,-2)">⏮</button><button class="cb" onclick="nav(3,-1)">◀</button><span class="mc" id="mc3">بعد 4...Qg5</span><button class="cb" onclick="nav(3,1)">▶</button><button class="cb" onclick="nav(3,99)">⏭</button></div><div class="mb" id="mb3"></div></div>
+      <div class="ip"><div class="ic"><h4>تحليل الخطأ الفادح بالتفصيل</h4><div class="ki"><span class="ico">❌</span><span class="ktxt"><strong>5.Nxf7؟؟</strong> — يبدو ربحاً لمادة إضافية، لكنه يتجاهل تهديد الوزيرة على g2 بالكامل!</span></div><div class="ki"><span class="ico">⚡</span><span class="ktxt"><strong>5...Qxg2!</strong> — الوزيرة تأخذ البيدق وتفتح خط الهجوم القاتل على الرخ h1 مباشرة</span></div><div class="ki"><span class="ico">🎯</span><span class="ktxt">الأبيض مجبر على <strong>6.Rf1</strong> للدفاع عن الرخ، لكن الأسود يستمر بالضربات الحاسمة فوراً</span></div></div><div class="varbox"><div class="varbox-title">لماذا هذه التضحية تستحق كل المخاطرة؟</div><div class="var-item"><span class="var-dot"></span><span class="var-txt">الأسود يُضحي بالرخ h8 (الذي لا يزال مُهدداً من الفارس f7) مقابل <strong>هجوم سريع وحاسم</strong></span></div><div class="var-item"><span class="var-dot"></span><span class="var-txt">المادة لا تعني شيئاً هنا — الهدف الوحيد هو <strong>الملك الأبيض المكشوف تماماً</strong></span></div></div></div></div>
+    </div>
+
+    <div class="lc" id="lc4">
+      <div class="lhd"><div class="ley">الحلقة السادسة عشرة · الدرس الخامس</div><div class="ltitle">المات المكتوم الكامل! 6.Rf1 Qxe4+ 7.Be2 Nf3#</div><div class="lsub">الخاتمة الجميلة لهذا الفخ التاريخي — مات مكتوم (Smothered Mate) كلاسيكي! الملك الأبيض يُصبح محاصراً بقطعه الخاصة بحيث لا يستطيع التحرك أبداً، والفارس الأسود يُسلّم الضربة القاتلة الأخيرة.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b4"></div></div><div class="ctrl"><button class="cb" onclick="nav(4,-2)">⏮</button><button class="cb" onclick="nav(4,-1)">◀</button><span class="mc" id="mc4">بعد 5...Qxg2</span><button class="cb" onclick="nav(4,1)">▶</button><button class="cb" onclick="nav(4,99)">⏭</button></div><div class="mb" id="mb4"></div></div>
+      <div class="ip"><div class="ic"><h4>السلسلة الأخيرة خطوة بخطوة</h4><div class="ki"><span class="ico">①</span><span class="ktxt"><strong>6.Rf1!</strong> — الأبيض يدافع عن الرخ h1، الحركة الإلزامية الوحيدة هنا</span></div><div class="ki"><span class="ico">②</span><span class="ktxt"><strong>6...Qxe4+!</strong> — كشف فوري على الملك، يُجبره على إيجاد دفاع سريع</span></div><div class="ki"><span class="ico">③</span><span class="ktxt"><strong>7.Be2 Nf3#!</strong> — مات مكتوم! الفيل والرخ يحاصران الملك بقطعه الخاصة بلا أي مهرب ممكن</span></div></div><div class="notebox"><div class="ntitle">💀 ما هو "المات المكتوم"؟</div><p>المات المكتوم يحدث عندما يكون الملك <strong>محاصراً بالكامل بقطعه الخاصة</strong> (هنا: الفيل e2 والرخ f1 وبيدقَي f2 وd2) بحيث لا يستطيع التحرك لأي مربع، فيموت بالشاه من الفارس وحده دون إمكانية أي دفاع! هذا أحد أجمل أنماط المات في الشطرنج بأكمله.</p></div></div></div>
+    </div>
+
+    <div class="lc" id="lc5">
+      <div class="lhd"><div class="ley">الحلقة السادسة عشرة · الدرس السادس</div><div class="ltitle">5.Bxf7+! — أفضل محاولة للأبيض بعد قبول الفخ</div><div class="lsub">بعد 4.Nxe5 Qg5، إذا تجنّب الأبيض الفخ القاتل ولعب 5.Bxf7+! بدلاً من Nxf7، يحصل على لعب قابل للاستمرار رغم خسارة قطعة كاملة — Steinitz وصف هذا الخط بأنه "أفضل فرصة للأبيض" في هذا الموقف الصعب.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b5"></div></div><div class="ctrl"><button class="cb" onclick="nav(5,-2)">⏮</button><button class="cb" onclick="nav(5,-1)">◀</button><span class="mc" id="mc5">بعد 4...Qg5</span><button class="cb" onclick="nav(5,1)">▶</button><button class="cb" onclick="nav(5,99)">⏭</button></div><div class="mb" id="mb5"></div></div>
+      <div class="ip"><div class="ic"><h4>لماذا Bxf7+ أفضل بكثير من Nxf7؟</h4><div class="ki"><span class="ico">①</span><span class="ktxt"><strong>5.Bxf7+!</strong> — كشف فوري على الملك، يكسب بيدقاً إضافياً ووقتاً للتحصين السريع</span></div><div class="ki"><span class="ico">②</span><span class="ktxt"><strong>5...Kd8!</strong> (أفضل من Ke7) — الملك يتراجع بأمان أكبر بكثير</span></div><div class="ki"><span class="ico">③</span><span class="ktxt"><strong>6.0-0 Qxe5</strong> — الأبيض يتحصّن بسرعة، الأسود يستعيد الفارس المفقود</span></div></div><div class="varbox"><div class="varbox-title">تقييم Steinitz التاريخي لهذا الخط</div><div class="var-item"><span class="var-dot"></span><span class="var-txt">Steinitz كتب: هذا الخط <strong>"يُتبع بالتحصين، وهو الآن أفضل فرصة للأبيض، وواعد إلى حد ما"</strong></span></div><div class="var-item"><span class="var-dot"></span><span class="var-txt">الأبيض يحصل على <strong>بيدقين والهجوم مقابل قطعة</strong> — تعويض معقول رغم الخسارة المادية</span></div></div></div></div>
+    </div>
+
+    <div class="lc" id="lc6">
+      <div class="lhd"><div class="ley">الحلقة السادسة عشرة · الدرس السابع</div><div class="ltitle">فخ آخر مخفي! 5.Ng4؟ d5!</div><div class="lsub">إذا حاول الأبيض الدفاع عن الفارس وبيدق g2 معاً بحركة وسطية 5.Ng4؟، يقع في فخ ثانٍ أقل شهرة لكنه فعّال جداً! الأسود يضرب بـ d5! ويربح قطعة كاملة بضربة مزدوجة بسيطة.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b6"></div></div><div class="ctrl"><button class="cb" onclick="nav(6,-2)">⏮</button><button class="cb" onclick="nav(6,-1)">◀</button><span class="mc" id="mc6">بعد 4...Qg5</span><button class="cb" onclick="nav(6,1)">▶</button><button class="cb" onclick="nav(6,99)">⏭</button></div><div class="mb" id="mb6"></div></div>
+      <div class="ip"><div class="ic"><h4>كيف يربح d5 قطعة كاملة؟</h4><div class="ki"><span class="ico">①</span><span class="ktxt"><strong>5.Ng4؟</strong> — يبدو ذكياً (يحمي g2 ويتراجع من تهديد الوزيرة) لكنه يتجاهل تهديداً آخر</span></div><div class="ki"><span class="ico">②</span><span class="ktxt"><strong>5...d5!</strong> — ضربة مزدوجة! تُهاجم الفيل c4 <strong>والفارس g4</strong> في آنٍ واحد تماماً</span></div><div class="ki"><span class="ico">③</span><span class="ktxt">الأبيض لا يستطيع حماية كلتا القطعتين في حركة واحدة — <strong>الأسود يربح قطعة كاملة</strong> بلا أي تعويض</span></div></div><div class="notebox"><div class="ntitle">📌 الدرس الاستراتيجي العميق</div><p>هذا يُثبت أن الفخ الأساسي في Blackburne-Shilling <strong>ليس مجرد حركة واحدة</strong> بل سلسلة كاملة من الفخاخ المتداخلة — أي حركة دفاعية "ذكية" غير محسوبة بدقة قد تقود لكارثة جديدة!</p></div></div></div>
+    </div>
+
+    <div class="lc" id="lc7">
+      <div class="lhd"><div class="ley">الحلقة السادسة عشرة · الدرس الثامن</div><div class="ltitle">4.Nxd4! — الرفض الصحيح والأقوى للأبيض</div><div class="lsub">الرد النظري الأقوى والأكثر أماناً تماماً: الأبيض يأخذ الفارس مباشرة بدلاً من بيدق e5 المسموم! هذا يُجنّب كل الفخاخ السابقة بالكامل ويُعطي الأبيض أفضلية موضعية واضحة ومستقرة.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b7"></div></div><div class="ctrl"><button class="cb" onclick="nav(7,-2)">⏮</button><button class="cb" onclick="nav(7,-1)">◀</button><span class="mc" id="mc7">بعد 3...Nd4</span><button class="cb" onclick="nav(7,1)">▶</button><button class="cb" onclick="nav(7,99)">⏭</button></div><div class="mb" id="mb7"></div></div>
+      <div class="ip"><div class="ic"><h4>لماذا Nxd4 يحلّ كل المشكلة فوراً؟</h4><div class="ki"><span class="ico">①</span><span class="ktxt"><strong>4.Nxd4!</strong> — يأخذ الفارس مباشرة، يتجنّب بيدق e5 المسموم بالكامل</span></div><div class="ki"><span class="ico">②</span><span class="ktxt"><strong>4...exd4 5.0-0 c6 6.Re1 d6 7.c3!</strong> — الأبيض يبني ضغطاً تدريجياً على البيدق d4 الضعيف</span></div><div class="ki"><span class="ico">③</span><span class="ktxt">الأسود يحصل على بنية بيدقية <strong>ضعيفة منذ البداية</strong> — أفضلية واضحة ومستمرة للأبيض طوال اللعبة</span></div></div><div class="varbox"><div class="varbox-title">توصيات الخبراء التاريخية والحديثة</div><div class="var-item"><span class="var-dot"></span><span class="var-txt"><strong>Wilhelm Steinitz</strong> (1895): أوصى بـ 4.0-0 أو 4.Nxd4 منذ القرن التاسع عشر</span></div><div class="var-item"><span class="var-dot"></span><span class="var-txt"><strong>IM Jeremy Silman</strong> (حديثاً): يُؤكّد أن 4.Nxd4 هو الأفضل من بين كل البدائل المتاحة</span></div></div></div></div>
+    </div>
+
+    <div class="lc" id="lc8">
+      <div class="lhd"><div class="ley">الحلقة السادسة عشرة · الدرس التاسع</div><div class="ltitle">الخلاصة — حكم شامل على هذا الفخ التاريخي</div><div class="lsub">بعد تغطية كل المسارات الرئيسية، نُلخّص بشكل شامل لماذا يبقى Blackburne-Shilling Gambit أحد أشهر الفخاخ على الإطلاق رغم ضعفه النظري الواضح، ولماذا يجب على كل لاعب أبيض معرفة الرد الصحيح بإحكام.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b8"></div></div><div class="ctrl"><button class="cb" onclick="nav(8,-2)">⏮</button><button class="cb" onclick="nav(8,-1)">◀</button><span class="mc" id="mc8">الموقف الرئيسي بعد 3...Nd4</span><button class="cb" onclick="nav(8,1)">▶</button><button class="cb" onclick="nav(8,99)">⏭</button></div><div class="mb" id="mb8"></div></div>
+      <div class="ip"><div class="ic"><h4>ملخص شامل لكل الحلقة</h4><div class="ki"><span class="ico">✅</span><span class="ktxt"><strong>4.Nxd4!</strong> أقوى الردود وأكثرها أماناً — يُجنّب كل الفخاخ تماماً ويُحافظ على أفضلية موضعية</span></div><div class="ki"><span class="ico">⚠️</span><span class="ktxt"><strong>4.Nxe5؟!</strong> يفتح الباب لشوكة Qg5! المزدوجة على الفارس وبيدق g2</span></div><div class="ki"><span class="ico">💀</span><span class="ktxt"><strong>5.Nxf7؟؟</strong> هو الخطأ الفادح الذي يقود مباشرة لمات مكتوم في 3 حركات فقط!</span></div><div class="ki"><span class="ico">🛡️</span><span class="ktxt"><strong>5.Bxf7+!</strong> هو أفضل "نجاة" متاحة للأبيض إذا وقع بالفعل في الفخ الأولي</span></div></div><div class="notebox"><div class="ntitle">🎯 الدرس الرئيسي لكل الحلقة</div><p>هذا الفخ يُسجّل <strong>75% نسبة فوز للأسود</strong> في حال نجاح المات المكتوم الكامل، و<strong>49% فوز عام</strong> على مستوى Lichess بعد 4...Qg5 — رغم أن 3...Nd4 حركة ضعيفة جداً نظرياً! الدرس الأهم لكل لاعب أبيض: <strong>لا تأخذ أي بيدق "مجاني" بدون التحقق من كل التهديدات المحتملة أولاً</strong> — أحياناً أبسط الأخطاء تقود لأقسى الهزائم!</p></div></div></div>
+    </div>
+
+    <div class="nav-footer">
+      <a class="nav-ep" href="italian_ep15.html">← الحلقة الخامسة عشرة</a>
+      <span style="font-size:11px;color:var(--txt3)">١٦ / ٢٨</span>
+      <a class="nav-ep next" href="italian_ep17.html">الحلقة السابعة عشرة →</a>
+    </div>
+  </div>
+</div>
+
+<script>
+const Wp={K:'♔',Q:'♕',R:'♖',B:'♗',N:'♘',P:'♙'};
+const Bp={K:'♚',Q:'♛',R:'♜',B:'♝',N:'♞',P:'♟'};
+function parseFen(fen){const rows=fen.split(' ')[0].split('/'),b=[];for(let r=0;r<8;r++){const row=[];for(const c of rows[r]){if(isNaN(c))row.push(c);else for(let i=0;i<+c;i++)row.push(null);}b.push(row);}return b;}
+function pHtml(code){if(!code)return'';const w=code===code.toUpperCase();const m={K:Wp.K,Q:Wp.Q,R:Wp.R,B:Wp.B,N:Wp.N,P:Wp.P,k:Bp.K,q:Bp.Q,r:Bp.R,b:Bp.B,n:Bp.N,p:Bp.P};return`<span class="pc ${w?'w':'b'}">${m[code]}</span>`;}
+
+/* ═══════════════════════════════════════════════════
+   BOARD RENDERING — CORRECTED ORIENTATION
+   FEN row 0 = rank 8 (top), row 7 = rank 1 (bottom)
+   FEN col 0 = file a (LEFT visually), col 7 = file h (RIGHT visually)
+   a1 (bottom-left) MUST be a DARK square — verified below.
+   Square (r,c): r=7 is rank1, c=0 is file a.
+   classic rule: square is light if (rank+file) is even, using rank=8-r, file=c(0-indexed a=0)
+   a1: rank=1,file=0(a) -> (1+0)=1 odd -> DARK. We must match this exactly.
+   ═══════════════════════════════════════════════════ */
+function drawBoard(id,fen){
+  const el=document.getElementById(id);if(!el)return;
+  const bd=parseFen(fen);el.innerHTML='';
+  const fl=['a','b','c','d','e','f','g','h'];
+  for(let r=0;r<8;r++){
+    for(let c=0;c<8;c++){
+      const sq=document.createElement('div');
+      const rank = 8-r;       // r=0 -> rank8 (top), r=7 -> rank1 (bottom)
+      const file = c;          // c=0 -> file a (left), c=7 -> file h (right)
+      // a1 must be dark: file=0,rank=1 -> (0+1)=1 odd -> dark. So: light when (file+rank) is even.
+      const isLight = (file + rank) % 2 === 0;
+      sq.className='sq '+(isLight?'lt':'dk');
+      if(c===7) sq.innerHTML += `<span class="rl">${rank}</span>`;       // rank number on right edge (file h)
+      if(r===7) sq.innerHTML += `<span class="fl">${fl[c]}</span>`;      // file letter on bottom edge
+      sq.innerHTML += pHtml(bd[r][c]);
+      el.appendChild(sq);
+    }
+  }
+}
+
+const S='rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
+const DATA=[
+  [{f:'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR',l:'الوضع الابتدائي',n:''},{f:'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR',l:'1.e4',n:''},{f:'rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR',l:'1...e5',n:''},{f:'rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R',l:'2.Nf3',n:''},{f:'r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R',l:'2...Nc6',n:''},{f:'r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R',l:'3.Bc4',n:''},{f:'r1bqkbnr/pppp1ppp/8/4p3/2BnP3/5N2/PPPP1PPP/RNBQK2R',l:'3...Nd4؟!',n:'Blackburne-Shilling Gambit! حركة ضعيفة بهدف الفخ'}],
+  [{f:'r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R',l:'بعد 2...Nc6',n:''},{f:'r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R',l:'3.Bc4',n:''},{f:'r1bqkbnr/pppp1ppp/8/4p3/2BnP3/5N2/PPPP1PPP/RNBQK2R',l:'3...Nd4؟!',n:'يهاجم Nf3 لكن لا يساهم في المركز — حركة ضعيفة بحسب كل النظرية'}],
+  [{f:'r1bqkbnr/pppp1ppp/8/4p3/2BnP3/5N2/PPPP1PPP/RNBQK2R',l:'بعد 3...Nd4',n:''},{f:'r1bqkbnr/pppp1ppp/8/4N3/2BnP3/8/PPPP1PPP/RNBQK2R',l:'4.Nxe5؟!',n:'يبدو هدية مجانية — كارثة في الانتظار!'},{f:'r1b1kbnr/pppp1ppp/8/4N1q1/2BnP3/8/PPPP1PPP/RNBQK2R',l:'4...Qg5!',n:'شوكة مزدوجة! تُهدد الفارس وبيدق g2 معاً'}],
+  [{f:'r1b1kbnr/pppp1ppp/8/4N1q1/2BnP3/8/PPPP1PPP/RNBQK2R',l:'بعد 4...Qg5',n:''},{f:'r1b1kbnr/pppp1Npp/8/6q1/2BnP3/8/PPPP1PPP/RNBQK2R',l:'5.Nxf7؟؟',n:'الخطأ الفادح! يطمع بالرخ ويتجاهل خطر g2'},{f:'r1b1kbnr/pppp1Npp/8/8/2BnP3/8/PPPP1PqP/RNBQK2R',l:'5...Qxg2!',n:'يفتح خط الهجوم القاتل على الرخ h1'}],
+  [{f:'r1b1kbnr/pppp1Npp/8/8/2BnP3/8/PPPP1PqP/RNBQK2R',l:'بعد 5...Qxg2',n:''},{f:'r1b1kbnr/pppp1Npp/8/8/2BnP3/8/PPPP1PqP/RNBQKR2',l:'6.Rf1',n:'الحركة الإلزامية للدفاع عن h1'},{f:'r1b1kbnr/pppp1Npp/8/8/2Bnq3/8/PPPP1P1P/RNBQKR2',l:'6...Qxe4+!',n:'كشف فوري على الملك'},{f:'r1b1kbnr/pppp1Npp/8/8/3nq3/8/PPPPBP1P/RNBQKR2',l:'7.Be2',n:'الحركة الإلزامية الوحيدة'},{f:'r1b1kbnr/pppp1Npp/8/8/4q3/5n2/PPPPBP1P/RNBQKR2',l:'7...Nf3#!',n:'مات مكتوم! لا مهرب للملك على الإطلاق'}],
+  [{f:'r1b1kbnr/pppp1ppp/8/4N1q1/2BnP3/8/PPPP1PPP/RNBQK2R',l:'بعد 4...Qg5',n:''},{f:'r1b1kbnr/pppp1Bpp/8/4N1q1/3nP3/8/PPPP1PPP/RNBQK2R',l:'5.Bxf7+!',n:'الأفضل! كشف فوري يكسب بيدقاً ووقتاً'},{f:'r1bk1bnr/pppp1Bpp/8/4N1q1/3nP3/8/PPPP1PPP/RNBQK2R',l:'5...Kd8!',n:'أفضل من Ke7 — تراجع أكثر أماناً'},{f:'r1bk1bnr/pppp1Bpp/8/4N1q1/3nP3/8/PPPP1PPP/RNBQ1RK1',l:'6.0-0',n:'التحصين السريع'},{f:'r1bk1bnr/pppp1Bpp/8/4q3/3nP3/8/PPPP1PPP/RNBQ1RK1',l:'6...Qxe5',n:'الأسود يستعيد الفارس — تعويض الأبيض: بيدقان والهجوم'}],
+  [{f:'r1b1kbnr/pppp1ppp/8/4N1q1/2BnP3/8/PPPP1PPP/RNBQK2R',l:'بعد 4...Qg5',n:''},{f:'r1b1kbnr/pppp1ppp/8/6q1/2BnP1N1/8/PPPP1PPP/RNBQK2R',l:'5.Ng4؟',n:'يبدو ذكياً لكنه يفتح فخاً ثانياً!'},{f:'r1b1kbnr/ppp2ppp/8/3p2q1/2BnP1N1/8/PPPP1PPP/RNBQK2R',l:'5...d5!',n:'ضربة مزدوجة! يُهاجم الفيل c4 والفارس g4 معاً'}],
+  [{f:'r1bqkbnr/pppp1ppp/8/4p3/2BnP3/5N2/PPPP1PPP/RNBQK2R',l:'بعد 3...Nd4',n:''},{f:'r1bqkbnr/pppp1ppp/8/4p3/2BNP3/8/PPPP1PPP/RNBQK2R',l:'4.Nxd4!',n:'الأقوى — يأخذ الفارس مباشرة، يتجنب كل الفخاخ'},{f:'r1bqkbnr/pppp1ppp/8/8/2BpP3/8/PPPP1PPP/RNBQK2R',l:'4...exd4',n:''},{f:'r1bqkbnr/pppp1ppp/8/8/2BpP3/8/PPPP1PPP/RNBQ1RK1',l:'5.O-O',n:''},{f:'r1bqkbnr/pp1p1ppp/2p5/8/2BpP3/8/PPPP1PPP/RNBQ1RK1',l:'5...c6',n:''},{f:'r1bqkbnr/pp1p1ppp/2p5/8/2BpP3/8/PPPP1PPP/RNBQR1K1',l:'6.Re1',n:''},{f:'r1bqkbnr/pp3ppp/2pp4/8/2BpP3/8/PPPP1PPP/RNBQR1K1',l:'6...d6',n:''},{f:'r1bqkbnr/pp3ppp/2pp4/8/2BpP3/2P5/PP1P1PPP/RNBQR1K1',l:'7.c3!',n:'ضغط تدريجي على بيدق d4 الضعيف — أفضلية مستمرة'}],
+  [{f:'r1bqkbnr/pppp1ppp/8/4p3/2BnP3/5N2/PPPP1PPP/RNBQK2R',l:'الموقف الرئيسي بعد 3...Nd4',n:'نقطة انطلاق كل المسارات والفخاخ'}],
+];
+const cur=DATA.map(()=>0);
+function buildMB(i){const b=document.getElementById('mb'+i);if(!b)return;b.innerHTML='';let n=1;DATA[i].forEach((m,j)=>{if(j===0)return;if(j%2===1){const s=document.createElement('span');s.className='mn';s.textContent=n+'.';b.appendChild(s);n++;}const t=document.createElement('span');t.className='mt';t.textContent=m.l;t.dataset.j=j;t.onclick=()=>setM(i,j);b.appendChild(t);});}
+function setM(i,idx){if(idx<0)idx=0;if(idx>=DATA[i].length)idx=DATA[i].length-1;cur[i]=idx;const fen=DATA[i][idx].f;drawBoard('b'+i,fen.includes(' ')?fen:fen+' w KQkq - 0 1');const mc=document.getElementById('mc'+i);if(mc)mc.textContent=idx===0?DATA[i][0].l:(DATA[i][idx].n||DATA[i][idx].l);document.querySelectorAll('#mb'+i+' .mt').forEach(t=>t.classList.toggle('active',+t.dataset.j===idx));}
+function nav(i,d){const max=DATA[i].length-1;setM(i,d===-2?0:d===99?max:Math.max(0,Math.min(max,cur[i]+d)));}
+function show(idx,el,mIdx){document.querySelectorAll('.lc').forEach(l=>l.classList.remove('active'));document.querySelectorAll('.li').forEach(l=>l.classList.remove('active'));document.querySelectorAll('.mob-btn').forEach(b=>b.classList.remove('active'));document.getElementById('lc'+idx).classList.add('active');if(el)el.classList.add('active');if(mIdx!==undefined)document.querySelectorAll('.mob-btn')[mIdx]?.classList.add('active');setM(idx,0);window.scrollTo({top:0,behavior:'smooth'});}
+function tog(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open');}
+window.addEventListener('DOMContentLoaded',()=>{for(let i=0;i<DATA.length;i++){buildMB(i);setM(i,0);}});
+</script>
+</body>
+</html>
