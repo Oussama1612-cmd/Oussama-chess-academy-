@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>الافتتاح الإيطالي — الحلقة ١٨: The Scotch Gambit</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0f1117;--bg2:#181c24;--bg3:#1e2330;--brd:#2a3040;
+  --gold:#d4a84b;--gold2:#f0c96a;--gold3:#8a6528;
+  --txt:#e2e8f0;--txt2:#8896a8;--txt3:#4a5568;
+  --bl:#f0d9b5;--bd:#b58863;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;overflow-x:hidden}
+body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;display:flex;flex-direction:column}
+.tb{background:var(--bg2);border-bottom:1px solid var(--brd);height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;position:sticky;top:0;z-index:200;flex-shrink:0}
+.tb-brand{display:flex;align-items:center;gap:8px}
+.tb-icon{font-size:22px}
+.tb-name{font-family:'Amiri',serif;font-size:15px;color:var(--gold);font-weight:700}
+.tb-badge{background:linear-gradient(135deg,var(--gold3),var(--gold));color:#0a0c10;font-size:10px;font-weight:800;padding:4px 11px;border-radius:20px;letter-spacing:.4px;white-space:nowrap}
+.app{display:flex;flex:1;height:calc(100vh - 54px)}
+.sb{width:260px;background:var(--bg2);border-left:1px solid var(--brd);overflow-y:auto;flex-shrink:0;display:flex;flex-direction:column}
+.sb::-webkit-scrollbar{width:3px}.sb::-webkit-scrollbar-thumb{background:var(--brd)}
+.sb-hd{padding:16px 14px 10px;border-bottom:1px solid var(--brd);position:sticky;top:0;background:var(--bg2);z-index:5}
+.sb-hd h3{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
+.sb-hd p{font-size:11px;color:var(--txt3);margin-top:3px}
+.grp{border-bottom:1px solid var(--brd)}
+.gtog{width:100%;background:none;border:none;color:var(--txt);font-family:'Cairo',sans-serif;font-size:12px;font-weight:700;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;text-align:right;transition:background .15s}
+.gtog:hover{background:rgba(255,255,255,.03)}
+.gtog .arr{font-size:9px;color:var(--txt3);transition:transform .2s;flex-shrink:0}
+.gtog.open .arr{transform:rotate(180deg)}
+.gnum{background:var(--bg3);border:1px solid var(--brd);color:var(--txt3);font-size:10px;padding:1px 7px;border-radius:10px;font-weight:700}
+.ll{display:none}.ll.open{display:block}
+.li{display:flex;align-items:center;gap:8px;padding:8px 14px 8px 10px;cursor:pointer;transition:background .15s;border-right:3px solid transparent}
+.li:hover{background:rgba(255,255,255,.03)}
+.li.active{background:rgba(212,168,75,.09);border-right-color:var(--gold)}
+.li .ln{font-size:10px;font-weight:800;color:var(--txt3);min-width:18px;text-align:center;flex-shrink:0}
+.li.active .ln{color:var(--gold)}
+.li .lname{font-size:11.5px;color:var(--txt2);flex:1;line-height:1.4}
+.li.active .lname{color:var(--txt);font-weight:600}
+.mob-nav{display:none;background:var(--bg2);border-bottom:1px solid var(--brd);padding:10px 12px;gap:8px;overflow-x:auto;scrollbar-width:none;flex-shrink:0}
+.mob-nav::-webkit-scrollbar{display:none}
+.mob-btn{background:var(--bg3);border:1px solid var(--brd);color:var(--txt2);font-family:'Cairo',sans-serif;font-size:11px;font-weight:600;padding:7px 13px;border-radius:8px;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:all .15s}
+.mob-btn.active{background:rgba(212,168,75,.15);border-color:var(--gold);color:var(--gold)}
+.main{flex:1;overflow-y:auto;display:flex;flex-direction:column;align-items:center;padding:20px 16px 40px}
+.lc{display:none;flex-direction:column;gap:20px;width:100%;max-width:720px}
+.lc.active{display:flex}
+.lhd{width:100%}
+.ley{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.ltitle{font-family:'Amiri',serif;font-size:24px;font-weight:700;color:var(--txt);line-height:1.3;margin-bottom:7px}
+.lsub{font-size:13px;color:var(--txt2);line-height:1.75}
+.ba{display:flex;gap:18px;width:100%;align-items:flex-start;flex-wrap:wrap}
+.bwrap{display:flex;flex-direction:column;align-items:center;width:100%}
+.bcon{box-shadow:0 0 0 2px var(--bd),0 0 0 5px #000,0 16px 48px rgba(0,0,0,.7);border-radius:3px;overflow:hidden;width:100%;max-width:400px;direction:ltr}
+.board{display:grid;grid-template-columns:repeat(8,1fr);aspect-ratio:1;width:100%;direction:ltr}
+.sq{aspect-ratio:1;display:flex;align-items:center;justify-content:center;position:relative;direction:ltr}
+.sq.lt{background:var(--bl)}.sq.dk{background:var(--bd)}
+.sq .rl{position:absolute;top:1px;right:2px;font-size:7px;font-weight:700;opacity:.55;font-family:'Cairo',sans-serif;line-height:1}
+.sq .fl{position:absolute;bottom:1px;left:2px;font-size:7px;font-weight:700;opacity:.55;font-family:'Cairo',sans-serif;line-height:1}
+.sq.lt .rl,.sq.lt .fl{color:var(--bd)}.sq.dk .rl,.sq.dk .fl{color:var(--bl)}
+.pc{font-size:clamp(24px,5.5vw,38px);line-height:1;user-select:none}
+.pc.w{color:#fff;-webkit-text-stroke:1.2px #444;filter:drop-shadow(0 2px 3px rgba(0,0,0,.5))}
+.pc.b{color:#111;-webkit-text-stroke:.5px #000;filter:drop-shadow(0 2px 4px rgba(0,0,0,.65))}
+.ctrl{display:flex;align-items:center;gap:5px;margin-top:10px;direction:ltr;width:100%;max-width:400px}
+.cb{background:var(--bg3);border:1px solid var(--brd);color:var(--txt2);width:38px;height:38px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .15s;flex-shrink:0}
+.cb:hover,.cb:active{border-color:var(--gold3);color:var(--gold);background:var(--bg2)}
+.mc{flex:1;text-align:center;font-size:11px;color:var(--txt3);font-weight:600;padding:0 4px;line-height:1.3}
+.mb{display:flex;flex-wrap:wrap;gap:3px;margin-top:8px;width:100%;max-width:400px;max-height:68px;overflow-y:auto;direction:ltr}
+.mt{padding:3px 9px;border-radius:5px;font-size:11px;font-weight:700;font-family:'Courier New',monospace;background:var(--bg3);border:1px solid var(--brd);color:var(--txt3);cursor:pointer;transition:all .15s}
+.mt:hover{border-color:var(--gold3);color:var(--txt2)}
+.mt.active{background:var(--gold);border-color:var(--gold);color:#0a0c10}
+.mn{padding:3px 4px;font-size:10px;color:var(--txt3);font-family:monospace}
+.ip{width:100%;display:flex;flex-direction:column;gap:12px}
+.ic{background:var(--bg3);border:1px solid var(--brd);border-radius:10px;padding:16px}
+.ic h4{font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.ki{display:flex;gap:9px;padding:8px 0;border-bottom:1px solid var(--brd);align-items:flex-start}
+.ki:last-child{border-bottom:none;padding-bottom:0}
+.ki .ico{font-size:16px;flex-shrink:0;margin-top:1px}
+.ki .ktxt{font-size:13px;color:var(--txt2);line-height:1.6}
+.ki .ktxt strong{color:var(--txt)}
+.notebox{background:rgba(212,168,75,.07);border:1px solid rgba(212,168,75,.2);border-radius:10px;padding:14px 16px;width:100%}
+.notebox .ntitle{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.notebox p{font-size:13px;color:var(--txt2);line-height:1.75}
+.notebox p strong{color:var(--gold2)}
+.varbox{background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:12px 14px;margin-top:8px}
+.varbox-title{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--txt2);margin-bottom:8px}
+.var-item{display:flex;align-items:flex-start;gap:9px;padding:7px 0;border-bottom:1px solid var(--brd)}
+.var-item:last-child{border-bottom:none;padding-bottom:0}
+.var-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:6px}
+.var-txt{font-size:12.5px;color:var(--txt2);line-height:1.6}
+.var-txt strong{color:var(--txt)}
+.var-txt code{font-family:'Courier New',monospace;font-size:11.5px;color:var(--gold2);background:rgba(212,168,75,.1);padding:1px 5px;border-radius:4px}
+.nav-footer{display:flex;justify-content:space-between;align-items:center;width:100%;max-width:720px;margin-top:8px;padding-top:20px;border-top:1px solid var(--brd)}
+.nav-ep{display:flex;align-items:center;gap:8px;text-decoration:none;padding:10px 16px;border-radius:8px;border:1px solid var(--brd);background:var(--bg2);color:var(--txt2);font-family:'Cairo',sans-serif;font-size:12px;font-weight:600;transition:all .15s;cursor:pointer}
+.nav-ep:hover{border-color:var(--gold3);color:var(--gold)}
+.nav-ep.next{background:linear-gradient(135deg,var(--gold3),var(--gold));color:#0a0c10;border-color:transparent;font-weight:700}
+.nav-ep.next:hover{opacity:.9}
+@media(min-width:641px){.mob-nav{display:none!important}.sb{display:flex}}
+@media(max-width:640px){
+  .sb{display:none!important}
+  .mob-nav{display:flex!important}
+  .app{flex-direction:column;height:auto;overflow:visible}
+  .main{padding:16px 12px 40px;overflow:visible}
+  .ltitle{font-size:20px}
+}
+</style>
+</head>
+<body>
+<div class="tb">
+  <div class="tb-brand"><span class="tb-icon">♟</span><span class="tb-name">أكاديمية أسامة للشطرنج</span></div>
+  <span class="tb-badge">الحلقة ١٨ من ٢٨</span>
+</div>
+<div class="app">
+  <div class="sb">
+    <div class="sb-hd"><h3>الحلقة الثامنة عشرة</h3><p>The Scotch Gambit — مقدمة وPerreux Variation</p></div>
+    <div class="grp">
+      <button class="gtog open" onclick="tog(this)"><span>المقدمة</span><span style="display:flex;gap:7px;align-items:center"><span class="gnum">2</span><span class="arr">▼</span></span></button>
+      <div class="ll open">
+        <div class="li active" onclick="show(0,this)"><span class="ln">١</span><span class="lname">ما هو Scotch Gambit؟</span></div>
+        <div class="li" onclick="show(1,this)"><span class="ln">٢</span><span class="lname">3.d4! — الفرق عن Scotch Game الأصلية</span></div>
+      </div>
+    </div>
+    <div class="grp">
+      <button class="gtog open" onclick="tog(this)"><span>الخط الرئيسي 4...Nf6</span><span style="display:flex;gap:7px;align-items:center"><span class="gnum">3</span><span class="arr">▼</span></span></button>
+      <div class="ll open">
+        <div class="li" onclick="show(2,this)"><span class="ln">٣</span><span class="lname">5.e5! d5 6.Bb5 — الهجوم المتطور</span></div>
+        <div class="li" onclick="show(3,this)"><span class="ln">٤</span><span class="lname">السلسلة الكاملة حتى منتصف اللعبة</span></div>
+        <div class="li" onclick="show(4,this)"><span class="ln">٥</span><span class="lname">5.0-0! Nxe4 — Anderssen Attack</span></div>
+      </div>
+    </div>
+    <div class="grp">
+      <button class="gtog open" onclick="tog(this)"><span>Perreux وBc5</span><span style="display:flex;gap:7px;align-items:center"><span class="gnum">4</span><span class="arr">▼</span></span></button>
+      <div class="ll open">
+        <div class="li" onclick="show(5,this)"><span class="ln">٦</span><span class="lname">5.Ng5؟! — Perreux Variation المخادعة</span></div>
+        <div class="li" onclick="show(6,this)"><span class="ln">٧</span><span class="lname">4...Bc5 5.c3! — تحويل لـ Giuoco Piano</span></div>
+        <div class="li" onclick="show(7,this)"><span class="ln">٨</span><span class="lname">السلسلة الكاملة لخط Bc5 حتى Qb3</span></div>
+        <div class="li" onclick="show(8,this)"><span class="ln">٩</span><span class="lname">الخلاصة — تقييم شامل لـ Scotch Gambit</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="mob-nav">
+    <button class="mob-btn active" onclick="show(0,null,0)">١·مقدمة</button>
+    <button class="mob-btn" onclick="show(1,null,1)">٢·3.d4!</button>
+    <button class="mob-btn" onclick="show(2,null,2)">٣·5.e5! d5</button>
+    <button class="mob-btn" onclick="show(3,null,3)">٤·السلسلة</button>
+    <button class="mob-btn" onclick="show(4,null,4)">٥·Anderssen</button>
+    <button class="mob-btn" onclick="show(5,null,5)">٦·Perreux</button>
+    <button class="mob-btn" onclick="show(6,null,6)">٧·Bc5 c3!</button>
+    <button class="mob-btn" onclick="show(7,null,7)">٨·Nxe4</button>
+    <button class="mob-btn" onclick="show(8,null,8)">٩·الخلاصة</button>
+  </div>
+  <div class="main">
+
+    <div class="lc active" id="lc0">
+      <div class="lhd"><div class="ley">الحلقة الثامنة عشرة · الدرس الأول</div><div class="ltitle">ما هو Scotch Gambit؟</div><div class="lsub">بعد سلسلة طويلة من خطوط Two Knights Defense، نُغيّر المسار اليوم لافتتاح مختلف: Scotch Gambit. بدلاً من استعادة بيدق d4 فوراً (كما في Scotch Game الكلاسيكية)، الأبيض يُضحي به مؤقتاً ويُطوّر الفيل بسرعة نحو f7 — أسلوب هجومي حاد يجمع بين سرعة التطوير وقوة الافتتاح الإيطالي.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b0"></div></div><div class="ctrl"><button class="cb" onclick="nav(0,-2)">⏮</button><button class="cb" onclick="nav(0,-1)">◀</button><span class="mc" id="mc0">الوضع الابتدائي</span><button class="cb" onclick="nav(0,1)">▶</button><button class="cb" onclick="nav(0,99)">⏭</button></div><div class="mb" id="mb0"></div></div>
+      <div class="ip"><div class="ic"><h4>الخلفية التاريخية والفلسفة</h4><div class="ki"><span class="ico">📜</span><span class="ktxt">سُمّي نسبة لمباراة بالمراسلة بين إدنبرة ولندن عام 1824 — نفس أصل تسمية Scotch Game الكلاسيكية</span></div><div class="ki"><span class="ico">👑</span><span class="ktxt">أُحييَ بقوة في أواخر القرن العشرين بفضل <strong>Garry Kasparov</strong> الذي جادل بأنه يُسبب مشاكل استراتيجية دائمة للأسود دون الدخول في تحليلات Ruy Lopez المُفرطة</span></div><div class="ki"><span class="ico">⚡</span><span class="ktxt">الفرق الجوهري عن Scotch Game: <strong>4.Bc4</strong> بدلاً من <strong>4.Nxd4</strong> — تأخير استعادة البيدق مقابل تطوير سريع وضغط مباشر على f7</span></div></div><div class="notebox"><div class="ntitle">📌 لماذا هذا الافتتاح خاص؟</div><p>Scotch Gambit يجمع بين أفضل ما في عالمين: <strong>المركز المفتوح لـ Scotch Game</strong> والضغط المباشر على f7 المُميّز للافتتاح الإيطالي. هذا يخلق مواقف حادة جداً مع فرص هجومية واضحة لكلا الجانبين.</p></div></div></div>
+    </div>
+
+    <div class="lc" id="lc1">
+      <div class="lhd"><div class="ley">الحلقة الثامنة عشرة · الدرس الثاني</div><div class="ltitle">3.d4! — الفرق الجوهري عن Scotch Game الأصلية</div><div class="lsub">الأبيض يضرب المركز فوراً بـ 3.d4! قبل تطوير الفيل، تماماً كما في Scotch Game. لكن الفرق الحاسم يأتي في الحركة الرابعة: بدلاً من 4.Nxd4 التقليدية، الأبيض يلعب 4.Bc4! ويُؤجّل استعادة البيدق مقابل تطوير أسرع وضغط هجومي مباشر.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b1"></div></div><div class="ctrl"><button class="cb" onclick="nav(1,-2)">⏮</button><button class="cb" onclick="nav(1,-1)">◀</button><span class="mc" id="mc1">الوضع الابتدائي</span><button class="cb" onclick="nav(1,1)">▶</button><button class="cb" onclick="nav(1,99)">⏭</button></div><div class="mb" id="mb1"></div></div>
+      <div class="ip"><div class="ic"><h4>تحليل القرار الاستراتيجي الحاسم</h4><div class="ki"><span class="ico">①</span><span class="ktxt"><strong>3.d4! exd4</strong> — الأبيض يضرب المركز، الأسود يأخذ البيدق بشكل طبيعي وإلزامي تقريباً</span></div><div class="ki"><span class="ico">②</span><span class="ktxt"><strong>4.Bc4!</strong> — بدلاً من Nxd4 الفورية، الفيل يتطور مباشرة نحو f7 ويُحافظ على بيدق d4 كرهينة مؤقتة</span></div><div class="ki"><span class="ico">③</span><span class="ktxt">الأسود الآن أمام خيارين رئيسيين: <strong>4...Nf6</strong> (الأكثر شيوعاً، يُهاجم e4) أو <strong>4...Bc5</strong> (يحمي البيدق d4 مباشرة)</span></div></div><div class="varbox"><div class="varbox-title">لماذا تأجيل Nxd4 يستحق المخاطرة؟</div><div class="var-item"><span class="var-dot"></span><span class="var-txt">التطوير السريع للفيل على c4 <strong>يضغط على f7 فوراً</strong> — نفس الفكرة الإيطالية الكلاسيكية لكن بترتيب حركات مختلف</span></div><div class="var-item"><span class="var-dot"></span><span class="var-txt">الأبيض يستعيد البيدق d4 <strong>لاحقاً مع تطوير متقدم</strong> بدلاً من استعادته فوراً بدون أي ضغط إضافي</span></div></div></div></div>
+    </div>
+
+    <div class="lc" id="lc2">
+      <div class="lhd"><div class="ley">الحلقة الثامنة عشرة · الدرس الثالث</div><div class="ltitle">5.e5! d5 6.Bb5 — الهجوم المتطور بعد 4...Nf6</div><div class="lsub">4...Nf6 هو الرد الأكثر شيوعاً — الفارس يُهاجم e4 مباشرة، يُحوّل الموقف عملياً لشكل مطابق تماماً لـ Two Knights Defense! الأبيض يرد بـ 5.e5! يطرد الفارس لمربع غير مثالي، والأسود يُقابل بالضربة المركزية الصحيحة 5...d5! المعروفة من حلقات سابقة.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b2"></div></div><div class="ctrl"><button class="cb" onclick="nav(2,-2)">⏮</button><button class="cb" onclick="nav(2,-1)">◀</button><span class="mc" id="mc2">بعد 4.Bc4</span><button class="cb" onclick="nav(2,1)">▶</button><button class="cb" onclick="nav(2,99)">⏭</button></div><div class="mb" id="mb2"></div></div>
+      <div class="ip"><div class="ic"><h4>التحويل المهم لـ Two Knights Defense</h4><div class="ki"><span class="ico">🔀</span><span class="ktxt"><strong>4...Nf6!</strong> — يُحوّل الموقف لنفس البنية المعروفة من Two Knights Defense</span></div><div class="ki"><span class="ico">⚡</span><span class="ktxt"><strong>5.e5!</strong> — يطرد الفارس فوراً، يُجبره على إيجاد مربع جديد قبل التطور بشكل طبيعي</span></div><div class="ki"><span class="ico">✅</span><span class="ktxt"><strong>5...d5!</strong> — أفضل رد للأسود، يُهاجم الفيل c4 مباشرة ويفتح المجال لتطوير الفيل c8</span></div></div><div class="notebox"><div class="ntitle">📌 لماذا 5.Ng5 ضعيف هنا؟</div><p>الخيار البديل <strong>5.Ng5؟!</strong> (Perreux Variation) يبدو جذاباً لكنه أضعف نظرياً — سنُغطّيه بعمق في درس قادم خاص. الفكرة الرئيسية الآن: <strong>6.Bb5!</strong> يُهاجم الفارس c6 ويُحضّر لاستعادة البيدق d4 بأمان أكبر.</p></div></div></div>
+    </div>
+
+    <div class="lc" id="lc3">
+      <div class="lhd"><div class="ley">الحلقة الثامنة عشرة · الدرس الرابع</div><div class="ltitle">السلسلة الكاملة حتى منتصف اللعبة!</div><div class="lsub">هذا الدرس يُتابع السلسلة الرئيسية كاملة على مدى 14 حركة متتالية — من 6...Ne4 إلى 13.f4! نشهد مبادلات، إضعاف بنية بيدقية، تحصين، وهجوماً متصاعداً على الجناح الملكي حتى نصل لموقف استراتيجي ناضج في قلب منتصف اللعبة.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b3"></div></div><div class="ctrl"><button class="cb" onclick="nav(3,-2)">⏮</button><button class="cb" onclick="nav(3,-1)">◀</button><span class="mc" id="mc3">بعد 6.Bb5</span><button class="cb" onclick="nav(3,1)">▶</button><button class="cb" onclick="nav(3,99)">⏭</button></div><div class="mb" id="mb3"></div></div>
+      <div class="ip"><div class="ic"><h4>تحليل كل حركة في السلسلة الطويلة</h4><div class="ki"><span class="ico">①</span><span class="ktxt"><strong>6...Ne4! 7.Nxd4</strong> — الفارس يقفز بهجوم مزدوج، الأبيض يستعيد بيدقه الأصلي بفارس نشط جداً</span></div><div class="ki"><span class="ico">②</span><span class="ktxt"><strong>7...Bd7 8.Bxc6 bxc6 9.0-0</strong> — مبادلة الفيل بالفارس تُضعّف بنية الأسود (بيدقان مضاعفان) لكن الأبيض يتحصّن بسرعة</span></div><div class="ki"><span class="ico">③</span><span class="ktxt"><strong>9...Bc5 10.f3!</strong> — يُهاجم الفارس e4 فوراً، يُجبره على إيجاد ملاذ جديد فوري</span></div></div><div class="varbox"><div class="varbox-title">لماذا هذا الموقف مثير استراتيجياً؟</div><div class="var-item"><span class="var-dot"></span><span class="var-txt">الأبيض يحصل على <strong>بنية بيدقية أفضل وتطوير متقدم</strong>، مقابل خسارة زوج الفيلة بعد Bxc6</span></div><div class="var-item"><span class="var-dot"></span><span class="var-txt">بعد <strong>10...Ng5!</strong> الفارس يجد مربعاً نشطاً نسبياً، والموقف يتحوّل لمعركة استراتيجية طويلة المدى مع فرص متوازنة</span></div></div></div></div>
+    </div>
+
+    <div class="lc" id="lc4">
+      <div class="lhd"><div class="ley">الحلقة الثامنة عشرة · الدرس الخامس</div><div class="ltitle">5.0-0! Nxe4 — Anderssen Attack الكاملة حتى منتصف اللعبة</div><div class="lsub">بدلاً من 5.e5، الأبيض يستطيع التحصين الفوري بـ 5.0-0! ويترك بيدق e4 مكشوفاً عمداً. هذا الدرس يُتابع السلسلة كاملة على مدى 24 حركة متتالية — تضحيات متعددة، استرجاع كامل للمادة، وتحصينات على جناحين مختلفين حتى موقف منتصف لعبة غني بالفرص للطرفين.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b4"></div></div><div class="ctrl"><button class="cb" onclick="nav(4,-2)">⏮</button><button class="cb" onclick="nav(4,-1)">◀</button><span class="mc" id="mc4">بعد 4...Nf6</span><button class="cb" onclick="nav(4,1)">▶</button><button class="cb" onclick="nav(4,99)">⏭</button></div><div class="mb" id="mb4"></div></div>
+      <div class="ip"><div class="ic"><h4>تحليل سلسلة Anderssen Attack الكاملة</h4><div class="ki"><span class="ico">①</span><span class="ktxt"><strong>5.0-0! Nxe4</strong> — الأسود يأخذ البيدق الثاني بجرأة، يبدو رابحاً لمادة إضافية واضحة</span></div><div class="ki"><span class="ico">②</span><span class="ktxt"><strong>6.Re1! d5</strong> — الرخ يضغط على الفارس مباشرة، الأسود يدافع بحركة مركزية ضرورية</span></div><div class="ki"><span class="ico">③</span><span class="ktxt"><strong>7.Bxd5! Qxd5 8.Nc3!</strong> — تضحية ثانية تفتح هجوماً قاتلاً! الوزيرة الآن مُهدّدة بشوكة Nc3 المزدوجة</span></div></div><div class="notebox"><div class="ntitle">⚡ الفكرة التكتيكية الحاسمة</div><p>بعد <strong>8.Nc3!</strong> الوزيرة السوداء على d5 مُهدّدة مباشرة، والفارس e4 لا يستطيع الهروب بأمان — الأبيض يستعيد كل البيادق المفقودة <strong>مع موقف نشط جداً وتطوير متفوق</strong>، مما يُثبت قوة هذا الخط الهجومي الجريء.</p></div></div></div>
+    </div>
+
+    <div class="lc" id="lc5">
+      <div class="lhd"><div class="ley">الحلقة الثامنة عشرة · الدرس السادس</div><div class="ltitle">5.Ng5؟! — Perreux Variation الكاملة حتى منتصف اللعبة</div><div class="lsub">بديل جذاب المظهر لكنه أضعف نظرياً: 5.Ng5؟! يُحاول تكرار فكرة الفورك الإيطالية المعتادة. هذا الدرس يُتابع السلسلة الكاملة على مدى 23 حركة متتالية — كشوفات متلاحقة، تضحيات ثلاثية، وملك أبيض يتجوّل عبر نصف الرقعة قبل أن يستعيد الأبيض كل المادة المفقودة في موقف نشط جداً.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b5"></div></div><div class="ctrl"><button class="cb" onclick="nav(5,-2)">⏮</button><button class="cb" onclick="nav(5,-1)">◀</button><span class="mc" id="mc5">بعد 4...Nf6</span><button class="cb" onclick="nav(5,1)">▶</button><button class="cb" onclick="nav(5,99)">⏭</button></div><div class="mb" id="mb5"></div></div>
+      <div class="ip"><div class="ic"><h4>لماذا Perreux Variation غير موثوقة؟</h4><div class="ki"><span class="ico">❌</span><span class="ktxt"><strong>5.Ng5؟!</strong> — يبدو تهديداً مباشراً على f7 لكنه يتجاهل ضربة الأسود المركزية القوية</span></div><div class="ki"><span class="ico">⚡</span><span class="ktxt"><strong>5...d5! 6.exd5 Qe7+!</strong> — كشف فوري وقوي على الملك الأبيض الذي لم يتحصّن بعد</span></div><div class="ki"><span class="ico">🛡️</span><span class="ktxt"><strong>7.Kf1!</strong> — الحركة الإلزامية الوحيدة لتجنّب خسارة مادة إضافية، لكن الملك يفقد حق التحصين نهائياً</span></div></div><div class="varbox"><div class="varbox-title">تقييم نهائي لهذا الخط</div><div class="var-item"><span class="var-dot"></span><span class="var-txt">بعد <strong>7.Kf1</strong> الأسود يحصل على <strong>تعويض ممتاز جداً</strong> — بيدق إضافي مع ملك أبيض محروم من التحصين طوال اللعبة</span></div><div class="var-item"><span class="var-dot"></span><span class="var-txt">لهذا السبب الأبيض المُحضّر جيداً <strong>يتجنّب 5.Ng5 تماماً</strong> ويُفضّل 5.e5 أو 5.0-0 الأكثر موثوقية</span></div></div></div></div>
+    </div>
+
+    <div class="lc" id="lc6">
+      <div class="lhd"><div class="ley">الحلقة الثامنة عشرة · الدرس السابع</div><div class="ltitle">4...Bc5 5.c3! — تحويل ذكي لـ Giuoco Piano</div><div class="lsub">البديل الآخر للأسود: 4...Bc5 يحمي بيدق d4 مباشرة بدلاً من مهاجمة e4. الأبيض يرد بـ 5.c3! حركة ذكية تُضيف ضغطاً إضافياً على المركز وتُحوّل اللعبة تدريجياً نحو بنية مألوفة جداً من حلقات Giuoco Piano السابقة.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b6"></div></div><div class="ctrl"><button class="cb" onclick="nav(6,-2)">⏮</button><button class="cb" onclick="nav(6,-1)">◀</button><span class="mc" id="mc6">بعد 4.Bc4</span><button class="cb" onclick="nav(6,1)">▶</button><button class="cb" onclick="nav(6,99)">⏭</button></div><div class="mb" id="mb6"></div></div>
+      <div class="ip"><div class="ic"><h4>الفكرة الاستراتيجية وراء 5.c3</h4><div class="ki"><span class="ico">①</span><span class="ktxt"><strong>4...Bc5!</strong> — يحمي d4 مباشرة، يُطوّر الفيل بنشاط على القطر الهجومي f2-a7</span></div><div class="ki"><span class="ico">②</span><span class="ktxt"><strong>5.c3!</strong> — يُحضّر استعادة المركز بـ cxd4 لاحقاً مع دعم بيدقي كامل</span></div><div class="ki"><span class="ico">③</span><span class="ktxt">بعد <strong>5...Nf6 6.cxd4!</strong> — الموقف يتحوّل عملياً لخط معروف جداً من <strong>Giuoco Piano</strong> الكلاسيكية</span></div></div><div class="notebox"><div class="ntitle">🔀 لماذا هذا التحويل مفيد جداً للأبيض؟</div><p>الأبيض يستفيد من <strong>كل المعرفة النظرية المتراكمة</strong> عن مواقف Giuoco Piano، بينما يصل إليها بترتيب حركات قد يكون أقل مألوفاً للخصم — ميزة عملية حقيقية في الممارسة التنافسية!</p></div></div></div>
+    </div>
+
+    <div class="lc" id="lc7">
+      <div class="lhd"><div class="ley">الحلقة الثامنة عشرة · الدرس الثامن</div><div class="ltitle">السلسلة الكاملة لخط Bc5 حتى منتصف اللعبة</div><div class="lsub">نُتابع التحويل الكامل من Bc5 على مدى 19 حركة متتالية — ضغط وزيري مزدوج، شوكة Nxc2+ القاتلة، تطوير متكامل لكلا الجانبين، ومبادلات تكتيكية حتى نصل لمنتصف لعبة حاد جداً بمادة غير متساوية وتعقيدات مستمرة.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b7"></div></div><div class="ctrl"><button class="cb" onclick="nav(7,-2)">⏮</button><button class="cb" onclick="nav(7,-1)">◀</button><span class="mc" id="mc7">بعد 5.c3</span><button class="cb" onclick="nav(7,1)">▶</button><button class="cb" onclick="nav(7,99)">⏭</button></div><div class="mb" id="mb7"></div></div>
+      <div class="ip"><div class="ic"><h4>تحليل السلسلة الكاملة حتى الضغط الوزيري</h4><div class="ki"><span class="ico">①</span><span class="ktxt"><strong>5...Nf6 6.cxd4!</strong> — الأبيض يستعيد المركز بدعم بيدقي كامل، تطوير متقدم وموقف مهيمن</span></div><div class="ki"><span class="ico">②</span><span class="ktxt"><strong>6...Nxe4!</strong> — الأسود يأخذ بيدق e4 بجرأة، يستفيد من اللحظة قبل أن يُكمل الأبيض تطويره بالكامل</span></div><div class="ki"><span class="ico">③</span><span class="ktxt"><strong>7.Qb3!</strong> — ضغط وزيري مزدوج مباشر على f7 وb7 في آنٍ واحد — نفس الفكرة المعروفة من Greco Gambit بالضبط!</span></div></div><div class="varbox"><div class="varbox-title">لماذا هذا الموقف خطير جداً للأسود؟</div><div class="var-item"><span class="var-dot"></span><span class="var-txt">الأسود مُهدّد على جناحين مختلفين في آنٍ واحد — <strong>دفاع واحد فقط لا يكفي أبداً</strong></span></div><div class="var-item"><span class="var-dot"></span><span class="var-txt">هذا يُثبت كيف يستفيد الأبيض من <strong>المعرفة النظرية المتراكمة</strong> من حلقاتنا السابقة عن Giuoco Piano!</span></div></div></div></div>
+    </div>
+
+    <div class="lc" id="lc8">
+      <div class="lhd"><div class="ley">الحلقة الثامنة عشرة · الدرس التاسع</div><div class="ltitle">الخلاصة — تقييم شامل لـ Scotch Gambit</div><div class="lsub">بعد تغطية كل المسارات الرئيسية بعمق، نُلخّص بشكل شامل لماذا أحيا Kasparov هذا الافتتاح، وكيف يُقدّم للأبيض خيارات هجومية متنوعة تتجنّب التحليلات المُفرطة لـ Ruy Lopez مع الحفاظ على ضغط استراتيجي حقيقي ومستمر.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b8"></div></div><div class="ctrl"><button class="cb" onclick="nav(8,-2)">⏮</button><button class="cb" onclick="nav(8,-1)">◀</button><span class="mc" id="mc8">الموقف الرئيسي بعد 4.Bc4</span><button class="cb" onclick="nav(8,1)">▶</button><button class="cb" onclick="nav(8,99)">⏭</button></div><div class="mb" id="mb8"></div></div>
+      <div class="ip"><div class="ic"><h4>ملخص شامل لكل الحلقة</h4><div class="ki"><span class="ico">✅</span><span class="ktxt"><strong>4...Nf6 5.e5!</strong> أو <strong>5.0-0!</strong> كلاهما خط رئيسي قوي، يُحوّل عملياً لـ Two Knights Defense المألوفة</span></div><div class="ki"><span class="ico">⚠️</span><span class="ktxt"><strong>5.Ng5؟!</strong> (Perreux) ضعيف نظرياً — يُعطي الأسود تعويضاً ممتازاً عبر 5...d5!</span></div><div class="ki"><span class="ico">🔀</span><span class="ktxt"><strong>4...Bc5 5.c3!</strong> يُحوّل بذكاء لمواقف Giuoco Piano المألوفة بضغط وزيري قوي عبر Qb3</span></div></div><div class="notebox"><div class="ntitle">🎯 الدرس الرئيسي لكل الحلقة</div><p>Scotch Gambit يُثبت قيمة <strong>المرونة الاستراتيجية</strong> — يُمكن للأبيض اختيار بين عدة مسارات (e5 الهادئ نسبياً، 0-0 التضحية المزدوجة الجريئة، أو التحويل لـ Giuoco Piano) بحسب أسلوبه ومعرفة الخصم. هذا ما جعل <strong>Kasparov</strong> يُحييه بقوة — أداة عملية ضد خصوم لا يعرفون كل التفرعات النظرية الدقيقة، مع الحفاظ على سلامة نظرية حقيقية لمن يلعبه بدقة!</p></div></div></div>
+    </div>
+
+    <div class="nav-footer">
+      <a class="nav-ep" href="italian_ep17.html">← الحلقة السابعة عشرة</a>
+      <span style="font-size:11px;color:var(--txt3)">١٨ / ٢٨</span>
+      <a class="nav-ep next" href="italian_ep19.html">الحلقة التاسعة عشرة →</a>
+    </div>
+  </div>
+</div>
+
+<script>
+const Wp={K:'♔',Q:'♕',R:'♖',B:'♗',N:'♘',P:'♙'};
+const Bp={K:'♚',Q:'♛',R:'♜',B:'♝',N:'♞',P:'♟'};
+function parseFen(fen){const rows=fen.split(' ')[0].split('/'),b=[];for(let r=0;r<8;r++){const row=[];for(const c of rows[r]){if(isNaN(c))row.push(c);else for(let i=0;i<+c;i++)row.push(null);}b.push(row);}return b;}
+function pHtml(code){if(!code)return'';const w=code===code.toUpperCase();const m={K:Wp.K,Q:Wp.Q,R:Wp.R,B:Wp.B,N:Wp.N,P:Wp.P,k:Bp.K,q:Bp.Q,r:Bp.R,b:Bp.B,n:Bp.N,p:Bp.P};return`<span class="pc ${w?'w':'b'}">${m[code]}</span>`;}
+function drawBoard(id,fen){
+  const el=document.getElementById(id);if(!el)return;
+  const bd=parseFen(fen);el.innerHTML='';
+  const fl=['a','b','c','d','e','f','g','h'];
+  for(let r=0;r<8;r++){
+    for(let c=0;c<8;c++){
+      const sq=document.createElement('div');
+      const rank=8-r;
+      const file=c;
+      const isLight=(file+rank)%2===0;
+      sq.className='sq '+(isLight?'lt':'dk');
+      if(c===7) sq.innerHTML+=`<span class="rl">${rank}</span>`;
+      if(r===7) sq.innerHTML+=`<span class="fl">${fl[c]}</span>`;
+      sq.innerHTML+=pHtml(bd[r][c]);
+      el.appendChild(sq);
+    }
+  }
+}
+const S='rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
+const DATA=[
+  [{f:'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR',l:'الوضع الابتدائي',n:''},{f:'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR',l:'1.e4',n:''},{f:'rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR',l:'1...e5',n:''},{f:'rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R',l:'2.Nf3',n:''},{f:'r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R',l:'2...Nc6',n:''},{f:'r1bqkbnr/pppp1ppp/2n5/4p3/3PP3/5N2/PPP2PPP/RNBQKB1R',l:'3.d4!',n:'الفرق الجوهري عن Italian Game التقليدية'},{f:'r1bqkbnr/pppp1ppp/2n5/8/3pP3/5N2/PPP2PPP/RNBQKB1R',l:'3...exd4',n:''},{f:'r1bqkbnr/pppp1ppp/2n5/8/2BpP3/5N2/PPP2PPP/RNBQK2R',l:'4.Bc4!',n:'Scotch Gambit! يُؤجّل استعادة البيدق لتطوير أسرع'}],
+  [{f:'r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R',l:'بعد 2...Nc6',n:''},{f:'r1bqkbnr/pppp1ppp/2n5/4p3/3PP3/5N2/PPP2PPP/RNBQKB1R',l:'3.d4!',n:'ضربة مركزية فورية'},{f:'r1bqkbnr/pppp1ppp/2n5/8/3pP3/5N2/PPP2PPP/RNBQKB1R',l:'3...exd4',n:''},{f:'r1bqkbnr/pppp1ppp/2n5/8/2BpP3/5N2/PPP2PPP/RNBQK2R',l:'4.Bc4!',n:'تأجيل استعادة d4 لصالح تطوير أسرع وضغط مباشر'}],
+  [{f:'r1bqkbnr/pppp1ppp/2n5/8/2BpP3/5N2/PPP2PPP/RNBQK2R',l:'بعد 4.Bc4',n:''},{f:'r1bqkb1r/pppp1ppp/2n2n2/8/2BpP3/5N2/PPP2PPP/RNBQK2R',l:'4...Nf6!',n:'يُحوّل لبنية Two Knights Defense'},{f:'r1bqkb1r/pppp1ppp/2n2n2/4P3/2Bp4/5N2/PPP2PPP/RNBQK2R',l:'5.e5!',n:'يطرد الفارس فوراً'},{f:'r1bqkb1r/ppp2ppp/2n2n2/3pP3/2Bp4/5N2/PPP2PPP/RNBQK2R',l:'5...d5!',n:'أفضل رد — يُهاجم الفيل c4 مباشرة'},{f:'r1bqkb1r/ppp2ppp/2n2n2/1B1pP3/3p4/5N2/PPP2PPP/RNBQK2R',l:'6.Bb5!',n:'يُهاجم الفارس c6 ويُحضّر استعادة d4'}],
+  [{f:'r1bqkb1r/ppp2ppp/2n2n2/1B1pP3/3p4/5N2/PPP2PPP/RNBQK2R',l:'بعد 6.Bb5',n:''},{f:'r1bqkb1r/ppp2ppp/2n5/1B1pP3/3pn3/5N2/PPP2PPP/RNBQK2R',l:'6...Ne4!',n:'الفارس يقفز بهجوم مزدوج'},{f:'r1bqkb1r/ppp2ppp/2n5/1B1pP3/3Nn3/8/PPP2PPP/RNBQK2R',l:'7.Nxd4!',n:'الأبيض يستعيد بيدقه بفارس نشط'},{f:'r2qkb1r/pppb1ppp/2n5/1B1pP3/3Nn3/8/PPP2PPP/RNBQK2R',l:'7...Bd7',n:''},{f:'r2qkb1r/pppb1ppp/2B5/3pP3/3Nn3/8/PPP2PPP/RNBQK2R',l:'8.Bxc6!',n:'مبادلة مهمة تُضعّف بنية الأسود'},{f:'r2qkb1r/p1pb1ppp/2p5/3pP3/3Nn3/8/PPP2PPP/RNBQK2R',l:'8...bxc6',n:'بيدقان مضاعفان للأسود'},{f:'r2qkb1r/p1pb1ppp/2p5/3pP3/3Nn3/8/PPP2PPP/RNBQ1RK1',l:'9.0-0',n:'الأبيض يتحصّن بسرعة'},{f:'r2qk2r/p1pb1ppp/2p5/2bpP3/3Nn3/8/PPP2PPP/RNBQ1RK1',l:'9...Bc5',n:'الأسود يُطوّر بنشاط'},{f:'r2qk2r/p1pb1ppp/2p5/2bpP3/3Nn3/5P2/PPP3PP/RNBQ1RK1',l:'10.f3!',n:'يُهاجم الفارس e4 فوراً'},{f:'r2qk2r/p1pb1ppp/2p5/2bpP1n1/3N4/5P2/PPP3PP/RNBQ1RK1',l:'10...Ng5!',n:'الفارس يجد مربعاً نشطاً'},{f:'r2qk2r/p1pb1ppp/2p5/2bpP1n1/3N4/5P2/PPP3PP/RNB1QRK1',l:'11.Qe1!',n:'يُحضّر دعماً إضافياً ويُبعد الوزيرة عن خط d المفتوح'},{f:'r2qk2r/p1pb1pp1/2p4p/2bpP1n1/3N4/5P2/PPP3PP/RNB1QRK1',l:'11...h6',n:'الأسود يُثبّت الفارس على g5 ويُحضّر للتحصين'},{f:'r2qk2r/p1pb1pp1/2p4p/2bpP1n1/3N3P/5P2/PPP3P1/RNB1QRK1',l:'12.h4!',n:'يُهاجم الفارس مباشرة — هجوم على الجناح الملكي'},{f:'r2qk2r/p1pb1ppn/2p4p/2bpP3/3N3P/5P2/PPP3P1/RNB1QRK1',l:'12...Nh7',n:'الفارس يتراجع لزاوية منعزلة نسبياً'},{f:'r2qk2r/p1pb1ppn/2p4p/2bpP3/3N1P1P/8/PPP3P1/RNB1QRK1',l:'13.f4!',n:'الأبيض يستمر بالتوسّع الهجومي على الجناح الملكي — ضغط مستمر في منتصف اللعبة'}],
+  [{f:'r1bqkb1r/pppp1ppp/2n2n2/8/2BpP3/5N2/PPP2PPP/RNBQK2R',l:'بعد 4...Nf6',n:''},{f:'r1bqkb1r/pppp1ppp/2n2n2/8/2BpP3/5N2/PPP2PPP/RNBQ1RK1',l:'5.0-0!',n:'تضحية ثانية مقصودة! يترك e4 مكشوفاً عمداً'},{f:'r1bqkb1r/pppp1ppp/2n5/8/2Bpn3/5N2/PPP2PPP/RNBQ1RK1',l:'5...Nxe4!',n:'الأسود يأخذ الطعم'},{f:'r1bqkb1r/pppp1ppp/2n5/8/2Bpn3/5N2/PPP2PPP/RNBQR1K1',l:'6.Re1!',n:'الرخ يضغط على الفارس مباشرة'},{f:'r1bqkb1r/ppp2ppp/2n5/3p4/2Bpn3/5N2/PPP2PPP/RNBQR1K1',l:'6...d5!',n:'حركة دفاعية مركزية ضرورية'},{f:'r1bqkb1r/ppp2ppp/2n5/3B4/3pn3/5N2/PPP2PPP/RNBQR1K1',l:'7.Bxd5!',n:'تضحية ثانية تفتح هجوماً قاتلاً'},{f:'r1b1kb1r/ppp2ppp/2n5/3q4/3pn3/5N2/PPP2PPP/RNBQR1K1',l:'7...Qxd5',n:''},{f:'r1b1kb1r/ppp2ppp/2n5/3q4/3pn3/2N2N2/PPP2PPP/R1BQR1K1',l:'8.Nc3!',n:'شوكة مزدوجة على الوزيرة'},{f:'r1bqkb1r/ppp2ppp/2n5/8/3pn3/2N2N2/PPP2PPP/R1BQR1K1',l:'8...Qd8',n:'الوزيرة تتراجع بأمان'},{f:'r1bqkb1r/ppp2ppp/2n5/8/3pN3/5N2/PPP2PPP/R1BQR1K1',l:'9.Nxe4!',n:'الأبيض يستعيد المادة بالكامل'},{f:'r2qkb1r/ppp2ppp/2n1b3/8/3pN3/5N2/PPP2PPP/R1BQR1K1',l:'9...Be6',n:'الأسود يُطوّر بهدوء نسبي'},{f:'r2qkb1r/ppp2ppp/2n1b3/6B1/3pN3/5N2/PPP2PPP/R2QR1K1',l:'10.Bg5!',n:'يُهدد بمبادلة مفيدة على f6/e7'},{f:'r2qk2r/ppp1bppp/2n1b3/6B1/3pN3/5N2/PPP2PPP/R2QR1K1',l:'10...Be7',n:''},{f:'r2qk2r/ppp1Bppp/2n1b3/8/3pN3/5N2/PPP2PPP/R2QR1K1',l:'11.Bxe7!',n:'مبادلة تُحسّن بنية الأبيض'},{f:'r3k2r/ppp1qppp/2n1b3/8/3pN3/5N2/PPP2PPP/R2QR1K1',l:'11...Qxe7',n:''},{f:'r3k2r/ppp1qppp/2n1b3/8/3NN3/8/PPP2PPP/R2QR1K1',l:'12.Nxd4!',n:'الفارس يستعيد البيدق الأصلي — تطوير مهيمن'},{f:'r3k2r/ppp1qppp/4b3/8/3nN3/8/PPP2PPP/R2QR1K1',l:'12...Nxd4',n:'تبادل آخر يُبسّط الموقف'},{f:'r3k2r/ppp1qppp/4b3/8/3nN3/2P5/PP3PPP/R2QR1K1',l:'13.c3!',n:'يطرد الفارس d4 فوراً'},{f:'r3k2r/ppp1qppp/4b3/5n2/4N3/2P5/PP3PPP/R2QR1K1',l:'13...Nf5',n:'الفارس يتراجع لمربع نشط'},{f:'r3k2r/ppp1qppp/4b3/5n2/4N3/2P2Q2/PP3PPP/R3R1K1',l:'14.Qf3!',n:'الوزيرة تتمركز بنشاط في المنتصف'},{f:'2kr3r/ppp1qppp/4b3/5n2/4N3/2P2Q2/PP3PPP/R3R1K1',l:'14...O-O-O!',n:'الأسود يتحصّن على الجناح الآخر — موقف غير متماثل مثير'},{f:'2kr3r/ppp1qppp/4b3/2N2n2/8/2P2Q2/PP3PPP/R3R1K1',l:'15.Nc5!',n:'الفارس يقفز بنشاط نحو الجناح الملكي للأسود'},{f:'2kr3r/p1p1qppp/1p2b3/2N2n2/8/2P2Q2/PP3PPP/R3R1K1',l:'15...b6',n:'يطرد الفارس مباشرة'},{f:'2kr3r/p1p1qppp/1p2b3/5n2/4N3/2P2Q2/PP3PPP/R3R1K1',l:'16.Ne4!',n:'الفارس يتراجع لمربع مركزي قوي'},{f:'2kr3r/p1p2ppp/1p2bq2/5n2/4N3/2P2Q2/PP3PPP/R3R1K1',l:'16...Qf6!',n:'الوزيرة تُهدد f2 وتُحافظ على نشاط — منتصف لعبة متوازن وغني بالفرص للطرفين'}],
+  [{f:'r1bqkb1r/pppp1ppp/2n2n2/8/2BpP3/5N2/PPP2PPP/RNBQK2R',l:'بعد 4...Nf6',n:''},{f:'r1bqkb1r/pppp1ppp/2n2n2/6N1/2BpP3/8/PPP2PPP/RNBQK2R',l:'5.Ng5؟!',n:'Perreux Variation — يبدو تهديداً لكنه ضعيف'},{f:'r1bqkb1r/ppp2ppp/2n2n2/3p2N1/2BpP3/8/PPP2PPP/RNBQK2R',l:'5...d5!',n:'ضربة مركزية حاسمة'},{f:'r1bqkb1r/ppp2ppp/2n2n2/3P2N1/2Bp4/8/PPP2PPP/RNBQK2R',l:'6.exd5',n:''},{f:'r1b1kb1r/ppp1qppp/2n2n2/3P2N1/2Bp4/8/PPP2PPP/RNBQK2R',l:'6...Qe7+!',n:'كشف فوري — الملك لم يتحصّن بعد!'},{f:'r1b1kb1r/ppp1qppp/2n2n2/3P2N1/2Bp4/8/PPP2PPP/RNBQ1K1R',l:'7.Kf1!',n:'الحركة الإلزامية — يفقد حق التحصين'},{f:'r1b1kb1r/ppp1qppp/2n5/3n2N1/2Bp4/8/PPP2PPP/RNBQ1K1R',l:'7...Nxd5!',n:'الأسود يستعيد البيدق بفارس نشط'},{f:'r1b1kb1r/ppp1qNpp/2n5/3n4/2Bp4/8/PPP2PPP/RNBQ1K1R',l:'8.Nxf7؟!',n:'طمع إضافي! يُحاول مكاسب مادية أخرى'},{f:'r1b2b1r/ppp1qkpp/2n5/3n4/2Bp4/8/PPP2PPP/RNBQ1K1R',l:'8...Kxf7',n:'الملك مجبر على الأخذ'},{f:'r1b2b1r/ppp1qkpp/2n5/3n4/2Bp4/5Q2/PPP2PPP/RNB2K1R',l:'9.Qf3+!',n:'كشف فوري على الملك المكشوف'},{f:'r1b2b1r/ppp1q1pp/2n1k3/3n4/2Bp4/5Q2/PPP2PPP/RNB2K1R',l:'9...Ke6',n:'الملك يتراجع نحو المنتصف'},{f:'r1b2b1r/ppp1q1pp/2n1k3/3n4/2Bp2Q1/8/PPP2PPP/RNB2K1R',l:'10.Qg4+!',n:'كشف ثانٍ متواصل — هجوم لا يتوقف'},{f:'r1b2b1r/ppp1qkpp/2n5/3n4/2Bp2Q1/8/PPP2PPP/RNB2K1R',l:'10...Kf7',n:'الملك يتراجع مرة أخرى'},{f:'r1b2b1r/ppp1qkpp/2n5/3B4/3p2Q1/8/PPP2PPP/RNB2K1R',l:'11.Bxd5+!',n:'تضحية ثالثة تفتح هجوماً نهائياً'},{f:'r4b1r/ppp1qkpp/2n1b3/3B4/3p2Q1/8/PPP2PPP/RNB2K1R',l:'11...Be6',n:'الأسود يحجب الكشف بفيل نشط'},{f:'r4b1r/ppp1qkpp/2n1B3/8/3p2Q1/8/PPP2PPP/RNB2K1R',l:'12.Bxe6+!',n:'مبادلة تُبسّط لكن تُبقي الضغط'},{f:'r4b1r/ppp1q1pp/2n1k3/8/3p2Q1/8/PPP2PPP/RNB2K1R',l:'12...Kxe6',n:'الملك مجبر على الخروج للمنتصف تماماً'},{f:'r4b1r/ppp1q1pp/2n1k3/8/3p2Q1/2N5/PPP2PPP/R1B2K1R',l:'13.Nc3!',n:'الأبيض يُكمل تطويره بسرعة وسط كل هذا الهجوم'},{f:'r4b1r/ppp3pp/2nqk3/8/3p2Q1/2N5/PPP2PPP/R1B2K1R',l:'13...Qd6',n:'الوزيرة تُحاول حماية الملك المكشوف'},{f:'r4b1r/ppp3pp/2nqk3/8/3pQ3/2N5/PPP2PPP/R1B2K1R',l:'14.Qe4!',n:'ضغط مستمر على المركز والملك'},{f:'4rb1r/ppp3pp/2nqk3/8/3pQ3/2N5/PPP2PPP/R1B2K1R',l:'14...Re8',n:'الأسود يُحضّر رخه للدفاع'},{f:'4rb1r/ppp3pp/2nqk3/8/3pQ3/2N5/PPP2PPP/R1B3KR',l:'15.Kg1!',n:'الملك الأبيض يجد أماناً نسبياً أخيراً'},{f:'4rb1r/ppp2kpp/2nq4/8/3pQ3/2N5/PPP2PPP/R1B3KR',l:'15...Kf7',n:'الملك الأسود يتراجع لمكان أكثر أماناً'},{f:'4rb1r/ppp2kpp/2nq4/8/3Q4/2N5/PPP2PPP/R1B3KR',l:'16.Qxd4!',n:'الأبيض يستعيد كل المادة المفقودة — موقف نشط جداً في منتصف اللعبة بعد كل هذه التضحيات والشيكات المتتالية'}],
+  [{f:'r1bqkbnr/pppp1ppp/2n5/8/2BpP3/5N2/PPP2PPP/RNBQK2R',l:'بعد 4.Bc4',n:''},{f:'r1bqk1nr/pppp1ppp/2n5/2b5/2BpP3/5N2/PPP2PPP/RNBQK2R',l:'4...Bc5!',n:'بديل آخر — يحمي d4 مباشرة'},{f:'r1bqk1nr/pppp1ppp/2n5/2b5/2BpP3/2P2N2/PP3PPP/RNBQK2R',l:'5.c3!',n:'يُحضّر استعادة المركز بدعم بيدقي كامل'}],
+  [{f:'r1bqk1nr/pppp1ppp/2n5/2b5/2BpP3/2P2N2/PP3PPP/RNBQK2R',l:'بعد 5.c3',n:''},{f:'r1bqk2r/pppp1ppp/2n2n2/2b5/2BpP3/2P2N2/PP3PPP/RNBQK2R',l:'5...Nf6',n:''},{f:'r1bqk2r/pppp1ppp/2n2n2/2b5/2BPP3/5N2/PP3PPP/RNBQK2R',l:'6.cxd4!',n:'استعادة المركز — موقف Giuoco Piano مألوف'},{f:'r1bqk2r/pppp1ppp/2n5/2b5/2BPn3/5N2/PP3PPP/RNBQK2R',l:'6...Nxe4!',n:'الأسود يأخذ بيدق e4 بجرأة'},{f:'r1bqk2r/pppp1ppp/2n5/2b5/2BPn3/1Q3N2/PP3PPP/RNB1K2R',l:'7.Qb3!',n:'ضغط مزدوج على f7 وb7 — نفس فكرة Greco Gambit!'},{f:'r1bqk2r/pppp1ppp/8/2b5/2Bnn3/1Q3N2/PP3PPP/RNB1K2R',l:'7...Nxd4!',n:'الأسود يستمر بالمجازفة — يأخذ بيدق آخر'},{f:'r1bqk2r/pQpp1ppp/8/2b5/2Bnn3/5N2/PP3PPP/RNB1K2R',l:'8.Qxb7!',n:'الوزيرة تأخذ البيدق وتُهدد الرخ a8 أيضاً'},{f:'r1bqk2r/pQpp1ppp/8/2b5/2B1n3/5N2/PPn2PPP/RNB1K2R',l:'8...Nxc2+!',n:'شوكة مزدوجة! يُهدد الملك والرخ a1 في آنٍ واحد'},{f:'r1bqk2r/pQpp1ppp/8/2b5/2B1n3/5N2/PPn2PPP/RNBK3R',l:'9.Kd1!',n:'الملك مجبر على التراجع لتجنّب خسارة إضافية'},{f:'r1bqk2r/pQpp1ppp/3b4/8/2B1n3/5N2/PPn2PPP/RNBK3R',l:'9...Bd6',n:'الأسود يُطوّر فيله بهدوء وسط كل هذه التعقيدات'},{f:'r1bqk2r/pQpp1ppp/3b4/8/2B1n3/2N2N2/PPn2PPP/R1BK3R',l:'10.Nc3!',n:'الأبيض يُكمل تطويره بسرعة'},{f:'r1bq1rk1/pQpp1ppp/3b4/8/2B1n3/2N2N2/PPn2PPP/R1BK3R',l:'10...O-O!',n:'الأسود يتحصّن أخيراً بأمان'},{f:'r1bq1rk1/pQpp1ppp/3b4/3N4/2B1n3/5N2/PPn2PPP/R1BK3R',l:'11.Nd5!',n:'الفارس يقفز بنشاط نحو الجناح الملكي للأسود'},{f:'r1bqr1k1/pQpp1ppp/3b4/3N4/2B1n3/5N2/PPn2PPP/R1BK3R',l:'11...Re8',n:'الأسود يُحضّر دفاعاً إضافياً'},{f:'r1bqr1k1/pQpp1ppp/3b4/3N2B1/2B1n3/5N2/PPn2PPP/R2K3R',l:'12.Bg5!',n:'يُهدد بمبادلة مفيدة على f6'},{f:'r1bqr1k1/pQpp1pp1/3b3p/3N2B1/2B1n3/5N2/PPn2PPP/R2K3R',l:'12...h6',n:'يُهدد الفيل مباشرة'},{f:'r1bqr1k1/pQpp1pp1/3b1B1p/3N4/2B1n3/5N2/PPn2PPP/R2K3R',l:'13.Bxf6!',n:'مبادلة تُفكّك دفاعات الأسود'},{f:'r1b1r1k1/pQpp1pp1/3b1q1p/3N4/2B1n3/5N2/PPn2PPP/R2K3R',l:'13...Qxf6!',n:'الأسود يستعيد بوزيرته'},{f:'r1b1r1k1/pQpp1pp1/3b1q1p/3N4/2B1n3/5N2/PPn2PPP/2RK3R',l:'14.Rc1!',n:'الرخ يضغط على الفارس c2 الأسود مباشرة'},{f:'r3r1k1/pbpp1pp1/3b1q1p/3N4/2B1n3/5N2/PPn2PPP/2RK3R',l:'14...Bb7!',n:'الأسود يُطوّر فيله الأخير ويُحضّر دفاعاً كاملاً — منتصف لعبة حاد جداً بمادة غير متساوية وتعقيدات تكتيكية مستمرة لكلا الجانبين'}],
+  [{f:'r1bqkbnr/pppp1ppp/2n5/8/2BpP3/5N2/PPP2PPP/RNBQK2R',l:'الموقف الرئيسي بعد 4.Bc4',n:'نقطة انطلاق كل الخطوط الرئيسية'}],
+];
+const cur=DATA.map(()=>0);
+function buildMB(i){const b=document.getElementById('mb'+i);if(!b)return;b.innerHTML='';let n=1;DATA[i].forEach((m,j)=>{if(j===0)return;if(j%2===1){const s=document.createElement('span');s.className='mn';s.textContent=n+'.';b.appendChild(s);n++;}const t=document.createElement('span');t.className='mt';t.textContent=m.l;t.dataset.j=j;t.onclick=()=>setM(i,j);b.appendChild(t);});}
+function setM(i,idx){if(idx<0)idx=0;if(idx>=DATA[i].length)idx=DATA[i].length-1;cur[i]=idx;const fen=DATA[i][idx].f;drawBoard('b'+i,fen.includes(' ')?fen:fen+' w KQkq - 0 1');const mc=document.getElementById('mc'+i);if(mc)mc.textContent=idx===0?DATA[i][0].l:(DATA[i][idx].n||DATA[i][idx].l);document.querySelectorAll('#mb'+i+' .mt').forEach(t=>t.classList.toggle('active',+t.dataset.j===idx));}
+function nav(i,d){const max=DATA[i].length-1;setM(i,d===-2?0:d===99?max:Math.max(0,Math.min(max,cur[i]+d)));}
+function show(idx,el,mIdx){document.querySelectorAll('.lc').forEach(l=>l.classList.remove('active'));document.querySelectorAll('.li').forEach(l=>l.classList.remove('active'));document.querySelectorAll('.mob-btn').forEach(b=>b.classList.remove('active'));document.getElementById('lc'+idx).classList.add('active');if(el)el.classList.add('active');if(mIdx!==undefined)document.querySelectorAll('.mob-btn')[mIdx]?.classList.add('active');setM(idx,0);window.scrollTo({top:0,behavior:'smooth'});}
+function tog(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open');}
+window.addEventListener('DOMContentLoaded',()=>{for(let i=0;i<DATA.length;i++){buildMB(i);setM(i,0);}});
+</script>
+</body>
+</html>
