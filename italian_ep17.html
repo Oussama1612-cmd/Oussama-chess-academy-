@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>الافتتاح الإيطالي — الحلقة ١٧: The Anti-Fried-Liver Defense</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0f1117;--bg2:#181c24;--bg3:#1e2330;--brd:#2a3040;
+  --gold:#d4a84b;--gold2:#f0c96a;--gold3:#8a6528;
+  --txt:#e2e8f0;--txt2:#8896a8;--txt3:#4a5568;
+  --bl:#f0d9b5;--bd:#b58863;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;overflow-x:hidden}
+body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;display:flex;flex-direction:column}
+.tb{background:var(--bg2);border-bottom:1px solid var(--brd);height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;position:sticky;top:0;z-index:200;flex-shrink:0}
+.tb-brand{display:flex;align-items:center;gap:8px}
+.tb-icon{font-size:22px}
+.tb-name{font-family:'Amiri',serif;font-size:15px;color:var(--gold);font-weight:700}
+.tb-badge{background:linear-gradient(135deg,var(--gold3),var(--gold));color:#0a0c10;font-size:10px;font-weight:800;padding:4px 11px;border-radius:20px;letter-spacing:.4px;white-space:nowrap}
+.app{display:flex;flex:1;height:calc(100vh - 54px)}
+.sb{width:260px;background:var(--bg2);border-left:1px solid var(--brd);overflow-y:auto;flex-shrink:0;display:flex;flex-direction:column}
+.sb::-webkit-scrollbar{width:3px}.sb::-webkit-scrollbar-thumb{background:var(--brd)}
+.sb-hd{padding:16px 14px 10px;border-bottom:1px solid var(--brd);position:sticky;top:0;background:var(--bg2);z-index:5}
+.sb-hd h3{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
+.sb-hd p{font-size:11px;color:var(--txt3);margin-top:3px}
+.grp{border-bottom:1px solid var(--brd)}
+.gtog{width:100%;background:none;border:none;color:var(--txt);font-family:'Cairo',sans-serif;font-size:12px;font-weight:700;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;text-align:right;transition:background .15s}
+.gtog:hover{background:rgba(255,255,255,.03)}
+.gtog .arr{font-size:9px;color:var(--txt3);transition:transform .2s;flex-shrink:0}
+.gtog.open .arr{transform:rotate(180deg)}
+.gnum{background:var(--bg3);border:1px solid var(--brd);color:var(--txt3);font-size:10px;padding:1px 7px;border-radius:10px;font-weight:700}
+.ll{display:none}.ll.open{display:block}
+.li{display:flex;align-items:center;gap:8px;padding:8px 14px 8px 10px;cursor:pointer;transition:background .15s;border-right:3px solid transparent}
+.li:hover{background:rgba(255,255,255,.03)}
+.li.active{background:rgba(212,168,75,.09);border-right-color:var(--gold)}
+.li .ln{font-size:10px;font-weight:800;color:var(--txt3);min-width:18px;text-align:center;flex-shrink:0}
+.li.active .ln{color:var(--gold)}
+.li .lname{font-size:11.5px;color:var(--txt2);flex:1;line-height:1.4}
+.li.active .lname{color:var(--txt);font-weight:600}
+.mob-nav{display:none;background:var(--bg2);border-bottom:1px solid var(--brd);padding:10px 12px;gap:8px;overflow-x:auto;scrollbar-width:none;flex-shrink:0}
+.mob-nav::-webkit-scrollbar{display:none}
+.mob-btn{background:var(--bg3);border:1px solid var(--brd);color:var(--txt2);font-family:'Cairo',sans-serif;font-size:11px;font-weight:600;padding:7px 13px;border-radius:8px;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:all .15s}
+.mob-btn.active{background:rgba(212,168,75,.15);border-color:var(--gold);color:var(--gold)}
+.main{flex:1;overflow-y:auto;display:flex;flex-direction:column;align-items:center;padding:20px 16px 40px}
+.lc{display:none;flex-direction:column;gap:20px;width:100%;max-width:720px}
+.lc.active{display:flex}
+.lhd{width:100%}
+.ley{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.ltitle{font-family:'Amiri',serif;font-size:24px;font-weight:700;color:var(--txt);line-height:1.3;margin-bottom:7px}
+.lsub{font-size:13px;color:var(--txt2);line-height:1.75}
+.ba{display:flex;gap:18px;width:100%;align-items:flex-start;flex-wrap:wrap}
+.bwrap{display:flex;flex-direction:column;align-items:center;width:100%}
+.bcon{box-shadow:0 0 0 2px var(--bd),0 0 0 5px #000,0 16px 48px rgba(0,0,0,.7);border-radius:3px;overflow:hidden;width:100%;max-width:400px;direction:ltr}
+.board{display:grid;grid-template-columns:repeat(8,1fr);aspect-ratio:1;width:100%;direction:ltr}
+.sq{aspect-ratio:1;display:flex;align-items:center;justify-content:center;position:relative;direction:ltr}
+.sq.lt{background:var(--bl)}.sq.dk{background:var(--bd)}
+.sq .rl{position:absolute;top:1px;right:2px;font-size:7px;font-weight:700;opacity:.55;font-family:'Cairo',sans-serif;line-height:1}
+.sq .fl{position:absolute;bottom:1px;left:2px;font-size:7px;font-weight:700;opacity:.55;font-family:'Cairo',sans-serif;line-height:1}
+.sq.lt .rl,.sq.lt .fl{color:var(--bd)}.sq.dk .rl,.sq.dk .fl{color:var(--bl)}
+.pc{font-size:clamp(24px,5.5vw,38px);line-height:1;user-select:none}
+.pc.w{color:#fff;-webkit-text-stroke:1.2px #444;filter:drop-shadow(0 2px 3px rgba(0,0,0,.5))}
+.pc.b{color:#111;-webkit-text-stroke:.5px #000;filter:drop-shadow(0 2px 4px rgba(0,0,0,.65))}
+.ctrl{display:flex;align-items:center;gap:5px;margin-top:10px;direction:ltr;width:100%;max-width:400px}
+.cb{background:var(--bg3);border:1px solid var(--brd);color:var(--txt2);width:38px;height:38px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .15s;flex-shrink:0}
+.cb:hover,.cb:active{border-color:var(--gold3);color:var(--gold);background:var(--bg2)}
+.mc{flex:1;text-align:center;font-size:11px;color:var(--txt3);font-weight:600;padding:0 4px;line-height:1.3}
+.mb{display:flex;flex-wrap:wrap;gap:3px;margin-top:8px;width:100%;max-width:400px;max-height:68px;overflow-y:auto;direction:ltr}
+.mt{padding:3px 9px;border-radius:5px;font-size:11px;font-weight:700;font-family:'Courier New',monospace;background:var(--bg3);border:1px solid var(--brd);color:var(--txt3);cursor:pointer;transition:all .15s}
+.mt:hover{border-color:var(--gold3);color:var(--txt2)}
+.mt.active{background:var(--gold);border-color:var(--gold);color:#0a0c10}
+.mn{padding:3px 4px;font-size:10px;color:var(--txt3);font-family:monospace}
+.ip{width:100%;display:flex;flex-direction:column;gap:12px}
+.ic{background:var(--bg3);border:1px solid var(--brd);border-radius:10px;padding:16px}
+.ic h4{font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.ki{display:flex;gap:9px;padding:8px 0;border-bottom:1px solid var(--brd);align-items:flex-start}
+.ki:last-child{border-bottom:none;padding-bottom:0}
+.ki .ico{font-size:16px;flex-shrink:0;margin-top:1px}
+.ki .ktxt{font-size:13px;color:var(--txt2);line-height:1.6}
+.ki .ktxt strong{color:var(--txt)}
+.notebox{background:rgba(212,168,75,.07);border:1px solid rgba(212,168,75,.2);border-radius:10px;padding:14px 16px;width:100%}
+.notebox .ntitle{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.notebox p{font-size:13px;color:var(--txt2);line-height:1.75}
+.notebox p strong{color:var(--gold2)}
+.varbox{background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:12px 14px;margin-top:8px}
+.varbox-title{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--txt2);margin-bottom:8px}
+.var-item{display:flex;align-items:flex-start;gap:9px;padding:7px 0;border-bottom:1px solid var(--brd)}
+.var-item:last-child{border-bottom:none;padding-bottom:0}
+.var-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:6px}
+.var-txt{font-size:12.5px;color:var(--txt2);line-height:1.6}
+.var-txt strong{color:var(--txt)}
+.var-txt code{font-family:'Courier New',monospace;font-size:11.5px;color:var(--gold2);background:rgba(212,168,75,.1);padding:1px 5px;border-radius:4px}
+.nav-footer{display:flex;justify-content:space-between;align-items:center;width:100%;max-width:720px;margin-top:8px;padding-top:20px;border-top:1px solid var(--brd)}
+.nav-ep{display:flex;align-items:center;gap:8px;text-decoration:none;padding:10px 16px;border-radius:8px;border:1px solid var(--brd);background:var(--bg2);color:var(--txt2);font-family:'Cairo',sans-serif;font-size:12px;font-weight:600;transition:all .15s;cursor:pointer}
+.nav-ep:hover{border-color:var(--gold3);color:var(--gold)}
+.nav-ep.next{background:linear-gradient(135deg,var(--gold3),var(--gold));color:#0a0c10;border-color:transparent;font-weight:700}
+.nav-ep.next:hover{opacity:.9}
+@media(min-width:641px){.mob-nav{display:none!important}.sb{display:flex}}
+@media(max-width:640px){
+  .sb{display:none!important}
+  .mob-nav{display:flex!important}
+  .app{flex-direction:column;height:auto;overflow:visible}
+  .main{padding:16px 12px 40px;overflow:visible}
+  .ltitle{font-size:20px}
+}
+</style>
+</head>
+<body>
+<div class="tb">
+  <div class="tb-brand"><span class="tb-icon">♟</span><span class="tb-name">أكاديمية أسامة للشطرنج</span></div>
+  <span class="tb-badge">الحلقة ١٧ من ٢٨</span>
+</div>
+<div class="app">
+  <div class="sb">
+    <div class="sb-hd"><h3>الحلقة السابعة عشرة</h3><p>The Anti-Fried-Liver Defense — 3...h6</p></div>
+    <div class="grp">
+      <button class="gtog open" onclick="tog(this)"><span>المقدمة</span><span style="display:flex;gap:7px;align-items:center"><span class="gnum">2</span><span class="arr">▼</span></span></button>
+      <div class="ll open">
+        <div class="li active" onclick="show(0,this)"><span class="ln">١</span><span class="lname">ما هو Anti-Fried-Liver Defense؟</span></div>
+        <div class="li" onclick="show(1,this)"><span class="ln">٢</span><span class="lname">لماذا h6 شائعة جداً على مستوى الأندية؟</span></div>
+      </div>
+    </div>
+    <div class="grp">
+      <button class="gtog open" onclick="tog(this)"><span>4.d4! — الرد الأقوى</span><span style="display:flex;gap:7px;align-items:center"><span class="gnum">3</span><span class="arr">▼</span></span></button>
+      <div class="ll open">
+        <div class="li" onclick="show(2,this)"><span class="ln">٣</span><span class="lname">4.d4! exd4 5.Nxd4 — ضرب المركز فوراً</span></div>
+        <div class="li" onclick="show(3,this)"><span class="ln">٤</span><span class="lname">5...Bc5 6.Be3! — التطوير المباشر</span></div>
+        <div class="li" onclick="show(4,this)"><span class="ln">٥</span><span class="lname">5...Nf6 6.Nc3 Bc5 7.Be3 — البديل الآخر</span></div>
+      </div>
+    </div>
+    <div class="grp">
+      <button class="gtog open" onclick="tog(this)"><span>السر-غامبيط وَبدائل</span><span style="display:flex;gap:7px;align-items:center"><span class="gnum">4</span><span class="arr">▼</span></span></button>
+      <div class="ll open">
+        <div class="li" onclick="show(5,this)"><span class="ln">٦</span><span class="lname">5...g5!؟ — السر-غامبيط الهجومي</span></div>
+        <div class="li" onclick="show(6,this)"><span class="ln">٧</span><span class="lname">4.c3 — بديل أبيض هادئ</span></div>
+        <div class="li" onclick="show(7,this)"><span class="ln">٨</span><span class="lname">4.0-0! — البديل الأكثر مرونة</span></div>
+        <div class="li" onclick="show(8,this)"><span class="ln">٩</span><span class="lname">الخلاصة — تقييم h6 الشامل</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="mob-nav">
+    <button class="mob-btn active" onclick="show(0,null,0)">١·مقدمة</button>
+    <button class="mob-btn" onclick="show(1,null,1)">٢·شعبية h6</button>
+    <button class="mob-btn" onclick="show(2,null,2)">٣·4.d4!</button>
+    <button class="mob-btn" onclick="show(3,null,3)">٤·Be3!</button>
+    <button class="mob-btn" onclick="show(4,null,4)">٥·Nf6</button>
+    <button class="mob-btn" onclick="show(5,null,5)">٦·g5!؟</button>
+    <button class="mob-btn" onclick="show(6,null,6)">٧·4.c3</button>
+    <button class="mob-btn" onclick="show(7,null,7)">٨·4.0-0!</button>
+    <button class="mob-btn" onclick="show(8,null,8)">٩·الخلاصة</button>
+  </div>
+  <div class="main">
+
+    <div class="lc active" id="lc0">
+      <div class="lhd"><div class="ley">الحلقة السابعة عشرة · الدرس الأول</div><div class="ltitle">ما هو Anti-Fried-Liver Defense؟</div><div class="lsub">بعد كل ما تعلمناه عن خطورة Fried Liver وLolli وTraxler، نتعرف اليوم على رد دفاعي بسيط جداً انتشر بشكل كبير على مستوى الأندية: 3...h6!؟ يمنع الفارس الأبيض من الذهاب لـ g5 نهائياً، مُجنّباً الأسود كل التعقيدات التكتيكية الخطيرة التي درسناها سابقاً.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b0"></div></div><div class="ctrl"><button class="cb" onclick="nav(0,-2)">⏮</button><button class="cb" onclick="nav(0,-1)">◀</button><span class="mc" id="mc0">الوضع الابتدائي</span><button class="cb" onclick="nav(0,1)">▶</button><button class="cb" onclick="nav(0,99)">⏭</button></div><div class="mb" id="mb0"></div></div>
+      <div class="ip"><div class="ic"><h4>الفكرة الجوهرية لهذا الخط</h4><div class="ki"><span class="ico">🛡️</span><span class="ktxt"><strong>3...h6!؟</strong> يمنع 4.Ng5 نهائياً — لا مزيد من القلق بخصوص Fried Liver أو Lolli Attack</span></div><div class="ki"><span class="ico">⚠️</span><span class="ktxt">يُسمى أيضاً <strong>"Semi-Italian Opening"</strong> (تسمية Euwe) — لأنه يُغيّر طابع اللعبة عن الإيطالية التقليدية</span></div><div class="ki"><span class="ico">📊</span><span class="ktxt">موضوعياً، h6 حركة <strong>"ضعيفة" نظرياً</strong> — لا تُساهم في السيطرة على المركز ولا تُطوّر أي قطعة</span></div></div><div class="notebox"><div class="ntitle">⚠️ تحذير نظري مهم</div><p>بحسب كل قواعد الشطرنج الأساسية: في الافتتاح يجب <strong>السيطرة على المركز، تطوير القطع، والتحصين</strong> — h6 لا تُحقق أي من هذه الأهداف الثلاثة! إنها بمعنى ما "حركة مجانية" تُعطى للأبيض.</p></div></div></div>
+    </div>
+
+    <div class="lc" id="lc1">
+      <div class="lhd"><div class="ley">الحلقة السابعة عشرة · الدرس الثاني</div><div class="ltitle">لماذا h6 شائعة جداً على مستوى الأندية؟</div><div class="lsub">رغم ضعفها النظري الواضح، يلعبها 99 من كل 100 لاعب هاوٍ يواجه الإيطالية! السبب بسيط: الخوف الشديد من Fried Liver Attack يجعل اللاعبين يبحثون عن "حل سحري". هنا نرى مباشرة كيف يستغل الأبيض هذا الخطأ التكتيكي بضربة 4.d4! الفورية، مما يُجبر الأسود على التنازل عن مركزه منذ الحركة الرابعة فقط.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b1"></div></div><div class="ctrl"><button class="cb" onclick="nav(1,-2)">⏮</button><button class="cb" onclick="nav(1,-1)">◀</button><span class="mc" id="mc1">بعد 3...h6</span><button class="cb" onclick="nav(1,1)">▶</button><button class="cb" onclick="nav(1,99)">⏭</button></div><div class="mb" id="mb1"></div></div>
+      <div class="ip"><div class="ic"><h4>تحليل ظاهرة الانتشار الواسع</h4><div class="ki"><span class="ico">①</span><span class="ktxt"><strong>الخوف من المعرفة الناقصة</strong> — اللاعبون يعرفون اسم "Fried Liver" لكن لا يعرفون كيف يردون عليه بدقة</span></div><div class="ki"><span class="ico">②</span><span class="ktxt"><strong>سهولة الفهم الفوري</strong> — "إذا منعت Ng5، فأنا بأمان" منطق بسيط جداً يبدو منطقياً ظاهرياً</span></div><div class="ki"><span class="ico">③</span><span class="ktxt">المفارقة: الأبيض المُحضّر جيداً <strong>يحصل على أفضلية أكبر</strong> من لو لعب الأسود Bc5 أو Nf6 بشكل صحيح!</span></div></div><div class="varbox"><div class="varbox-title">لماذا يجب على كل لاعب أبيض معرفة هذه الحلقة؟</div><div class="var-item"><span class="var-dot"></span><span class="var-txt">ستُواجه h6 <strong>كثيراً جداً</strong> على مستوى الأندية والمسابقات السريعة عبر الإنترنت</span></div><div class="var-item"><span class="var-dot"></span><span class="var-txt">معرفة الرد الصحيح <strong>4.d4!</strong> تُحوّل "حركة مجانية" للأبيض إلى أفضلية حقيقية وملموسة</span></div></div></div></div>
+    </div>
+
+    <div class="lc" id="lc2">
+      <div class="lhd"><div class="ley">الحلقة السابعة عشرة · الدرس الثالث</div><div class="ltitle">4.d4! exd4 5.Nxd4 — ضرب المركز فوراً</div><div class="lsub">4.d4! هو الرد الأقوى نظرياً والأكثر طبيعية — الأبيض يستفيد فوراً من حقيقة أن الأسود "أهدر" نقلته الثالثة على h6 بدلاً من المساهمة في صراع المركز، فيضرب e5 مباشرة ويُحصّل أفضلية مساحية واضحة منذ الحركة الرابعة فقط.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b2"></div></div><div class="ctrl"><button class="cb" onclick="nav(2,-2)">⏮</button><button class="cb" onclick="nav(2,-1)">◀</button><span class="mc" id="mc2">بعد 3...h6</span><button class="cb" onclick="nav(2,1)">▶</button><button class="cb" onclick="nav(2,99)">⏭</button></div><div class="mb" id="mb2"></div></div>
+      <div class="ip"><div class="ic"><h4>لماذا d4 الرد الطبيعي الأقوى هنا؟</h4><div class="ki"><span class="ico">①</span><span class="ktxt"><strong>4.d4!</strong> — يضرب بيدق e5 فوراً، يستغل غياب أي دفاع حقيقي عنه من قطع الأسود</span></div><div class="ki"><span class="ico">②</span><span class="ktxt"><strong>4...exd4 5.Nxd4!</strong> — الأبيض يستعيد بالفارس، يحصل على مركز مهيمن وتطوير متقدم</span></div><div class="ki"><span class="ico">③</span><span class="ktxt">الأسود الآن أمام خيارين رئيسيين للتطوير: <strong>5...Bc5</strong> أو <strong>5...Nf6</strong></span></div></div><div class="notebox"><div class="ntitle">📊 تقييم محرك الشطرنج</div><p>بحسب التحليل الحاسوبي، الموقف بعد <strong>5.Nxd4</strong> يُعطي الأبيض أفضلية واضحة <strong>(≈+0.7 إلى +0.8)</strong> — أكثر بكثير من الأفضلية الطبيعية المتوقعة في خطوط الإيطالية الهادئة الأخرى!</p></div></div></div>
+    </div>
+
+    <div class="lc" id="lc3">
+      <div class="lhd"><div class="ley">الحلقة السابعة عشرة · الدرس الرابع</div><div class="ltitle">5...Bc5 6.Be3! — التطوير المباشر والتبادل المفيد</div><div class="lsub">5...Bc5 هو الرد الأكثر طبيعية — الفيل يهاجم الفارس d4 مباشرة، مُهدداً بأخذه. الأبيض يرد بـ 6.Be3! حركة مزدوجة الهدف: تحمي الفارس وتُهدد بمبادلة مفيدة تُحسّن بنية الأبيض البيدقية بشكل واضح.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b3"></div></div><div class="ctrl"><button class="cb" onclick="nav(3,-2)">⏮</button><button class="cb" onclick="nav(3,-1)">◀</button><span class="mc" id="mc3">بعد 5.Nxd4</span><button class="cb" onclick="nav(3,1)">▶</button><button class="cb" onclick="nav(3,99)">⏭</button></div><div class="mb" id="mb3"></div></div>
+      <div class="ip"><div class="ic"><h4>تحليل المبادلة المفيدة على d4</h4><div class="ki"><span class="ico">①</span><span class="ktxt"><strong>5...Bc5</strong> — تطوير طبيعي، يُهدد الفارس d4 مباشرة بالأخذ</span></div><div class="ki"><span class="ico">②</span><span class="ktxt"><strong>6.Be3!</strong> — يحمي الفارس ويُهدد بـ Bxc5 إذا لم يتراجع الأسود أو يُبادل</span></div><div class="ki"><span class="ico">③</span><span class="ktxt">بعد <strong>6...Bxd4 7.Bxd4 Nf6</strong> — الأبيض يحصل على زوج الفيلة وفيل مركزي قوي جداً على d4</span></div></div><div class="varbox"><div class="varbox-title">لماذا هذه المبادلة تُفيد الأبيض بشكل خاص؟</div><div class="var-item"><span class="var-dot"></span><span class="var-txt">الفيل على d4 بعد المبادلة <strong>يُهيمن على القطر الطويل بأكمله</strong> (a1-h8)</span></div><div class="var-item"><span class="var-dot"></span><span class="var-txt">الأسود خسر <strong>إمكانية اللعب بزوج الفيلة</strong> — ميزة استراتيجية طويلة المدى للأبيض</span></div></div></div></div>
+    </div>
+
+    <div class="lc" id="lc4">
+      <div class="lhd"><div class="ley">الحلقة السابعة عشرة · الدرس الخامس</div><div class="ltitle">5...Nf6 6.Nc3 Bc5 7.Be3 — البديل الآخر للأسود</div><div class="lsub">بديل آخر للأسود: تطوير الفارس أولاً قبل الفيل. النتيجة النهائية مشابهة جداً للخط السابق لكن بترتيب حركات مختلف قليلاً — الأبيض لا يزال يستهدف نفس الهدف: تثبيت الفيل على d4 والاستفادة من أفضليته المساحية المستمرة.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b4"></div></div><div class="ctrl"><button class="cb" onclick="nav(4,-2)">⏮</button><button class="cb" onclick="nav(4,-1)">◀</button><span class="mc" id="mc4">بعد 5.Nxd4</span><button class="cb" onclick="nav(4,1)">▶</button><button class="cb" onclick="nav(4,99)">⏭</button></div><div class="mb" id="mb4"></div></div>
+      <div class="ip"><div class="ic"><h4>مقارنة بين ترتيبَي الحركات</h4><div class="ki"><span class="ico">①</span><span class="ktxt"><strong>5...Nf6</strong> — يُطوّر الفارس أولاً، يُحافظ على مرونة أكبر للفيل</span></div><div class="ki"><span class="ico">②</span><span class="ktxt"><strong>6.Nc3 Bc5!</strong> — الأبيض يُطوّر الفارس b1، الأسود يُتابع بتطوير الفيل بنفس الفكرة السابقة</span></div><div class="ki"><span class="ico">③</span><span class="ktxt"><strong>7.Be3</strong> — نفس الفكرة الاستراتيجية: حماية الفارس d4 والتحضير لمبادلة مفيدة</span></div></div><div class="notebox"><div class="ntitle">💡 الدرس الاستراتيجي العميق</div><p>بغض النظر عن <strong>ترتيب الحركات</strong> (Bc5 أولاً أو Nf6 أولاً)، خطة الأبيض الاستراتيجية واحدة: تثبيت السيطرة المركزية عبر الفارس d4، تطوير سريع ومتناسق، ثم الاستفادة من أفضليته المساحية المستمرة طوال اللعبة.</p></div></div></div>
+    </div>
+
+    <div class="lc" id="lc5">
+      <div class="lhd"><div class="ley">الحلقة السابعة عشرة · الدرس السادس</div><div class="ltitle">5...g5!؟ — السر-غامبيط ولماذا يُعاقَب فوراً</div><div class="lsub">بديل جريء وغير متوقع تماماً للأسود! بدلاً من التطوير الهادئ، الأسود يدفع 5...g5!؟ مباشرة — توسّع جريء على الجناح الملكي. لكن إذا استمر الأسود بالمجازفة بـ 6...g4؟ بدون حساب دقيق، الأبيض يرد فوراً بضربة تكتيكية تستغل المركز المُهمل بالكامل.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b5"></div></div><div class="ctrl"><button class="cb" onclick="nav(5,-2)">⏮</button><button class="cb" onclick="nav(5,-1)">◀</button><span class="mc" id="mc5">بعد 5.Nxd4</span><button class="cb" onclick="nav(5,1)">▶</button><button class="cb" onclick="nav(5,99)">⏭</button></div><div class="mb" id="mb5"></div></div>
+      <div class="ip"><div class="ic"><h4>الفكرة الجريئة وراء g5؟!</h4><div class="ki"><span class="ico">⚡</span><span class="ktxt"><strong>5...g5!؟</strong> — توسّع جريء وغير معتاد، يُحضّر Bg7 على القطر الطويل a1-h8</span></div><div class="ki"><span class="ico">🎯</span><span class="ktxt">الفكرة: استغلال حقيقة أن <strong>الأبيض لعب h6 ضده</strong> (المربع g5 محمي من قطعة الفيل البيضاء عادة، لكن لا توجد فارس أبيض هناك لاستغلاله)</span></div><div class="ki"><span class="ico">⚠️</span><span class="ktxt">حركة <strong>حادة ومجازفة جداً</strong> — تُضعف بنية الأسود البيدقية على الجناح الملكي بشكل كبير</span></div></div><div class="varbox"><div class="varbox-title">تقييم نقدي لهذا الخط</div><div class="var-item"><span class="var-dot"></span><span class="var-txt">يُسمى أحياناً <strong>"السر-غامبيط"</strong> في بعض المصادر الشعبية، لكنه ليس غامبيط مادي حقيقي — فقط مجازفة موضعية</span></div><div class="var-item"><span class="var-dot"></span><span class="var-txt">الأبيض المُحضّر جيداً يستطيع استهداف <strong>ضعف المربعات الداكنة</strong> على جناح الأسود الملكي بسهولة</span></div></div></div></div>
+    </div>
+
+    <div class="lc" id="lc6">
+      <div class="lhd"><div class="ley">الحلقة السابعة عشرة · الدرس السابع</div><div class="ltitle">4.c3 — بديل أبيض هادئ ومتين</div><div class="lsub">بديل آخر للأبيض بدلاً من الضرب المباشر بـ d4: 4.c3 يُعدّ بهدوء لكسر d4 مستقبلاً بدعم كامل من بيدق c3، ويُؤخّر القرار الحاسم إلى وقت أكثر نضجاً في اللعبة عندما يكتمل التطوير بشكل أفضل.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b6"></div></div><div class="ctrl"><button class="cb" onclick="nav(6,-2)">⏮</button><button class="cb" onclick="nav(6,-1)">◀</button><span class="mc" id="mc6">بعد 3...h6</span><button class="cb" onclick="nav(6,1)">▶</button><button class="cb" onclick="nav(6,99)">⏭</button></div><div class="mb" id="mb6"></div></div>
+      <div class="ip"><div class="ic"><h4>لماذا يُفضّل بعض اللاعبين c3 على d4 المباشر؟</h4><div class="ki"><span class="ico">①</span><span class="ktxt"><strong>4.c3</strong> — يُعدّ بدعم كامل لكسر d4 مستقبلاً دون الكشف الفوري عن النية</span></div><div class="ki"><span class="ico">②</span><span class="ktxt">يُجنّب الأبيض أي <strong>تبادل سريع للقطع</strong> في المركز، يحتفظ بمرونة أكبر للخطط المستقبلية</span></div><div class="ki"><span class="ico">③</span><span class="ktxt">المصدر النظري Hanging Pawns يُشير إلى أن c3 يُعطي الأبيض <strong>فرصاً أفضل عملياً</strong> لأنه أقل بداهة من d4 للأسود غير المُحضّر</span></div></div><div class="notebox"><div class="ntitle">⚖️ مقارنة سريعة بين d4 وَc3</div><p><strong>4.d4</strong> أقوى نظرياً ومباشراً (يُحقق أفضلية فورية وملموسة)، بينما <strong>4.c3</strong> أكثر مرونة ويُؤخّر الالتزام بخطة محددة — كلاهما رد جيد، لكن d4 يبقى الموصى به أكثر بحسب المحركات الحديثة.</p></div></div></div>
+    </div>
+
+    <div class="lc" id="lc7">
+      <div class="lhd"><div class="ley">الحلقة السابعة عشرة · الدرس الثامن</div><div class="ltitle">4.0-0! — البديل الأكثر مرونة وأماناً</div><div class="lsub">بديل آخر مهم جداً: 4.0-0! الأبيض يتحصّن فوراً، ثم يستمر بنفس فكرة ضرب المركز عبر d4 لاحقاً — لكن هذه المرة بعد التحصين الكامل، مما يُقلّل أي مخاطر مستقبلية على ملكه ويُحافظ على نفس الأفضلية المركزية.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b7"></div></div><div class="ctrl"><button class="cb" onclick="nav(7,-2)">⏮</button><button class="cb" onclick="nav(7,-1)">◀</button><span class="mc" id="mc7">بعد 3...h6</span><button class="cb" onclick="nav(7,1)">▶</button><button class="cb" onclick="nav(7,99)">⏭</button></div><div class="mb" id="mb7"></div></div>
+      <div class="ip"><div class="ic"><h4>مزايا 4.0-0 كرد مرن</h4><div class="ki"><span class="ico">①</span><span class="ktxt"><strong>4.0-0!</strong> — التحصين الفوري، الملك بأمان كامل قبل أي مغامرة في المركز</span></div><div class="ki"><span class="ico">②</span><span class="ktxt">يُحافظ على <strong>المرونة الكاملة</strong> — الأبيض يُمكنه اللعب بـ d4 الحاد أو d3 الهادئ بحسب رد الأسود التالي</span></div><div class="ki"><span class="ico">③</span><span class="ktxt">المصدر النظري يُشير إلى أن هذا أقل خطورة من <strong>4.Bxf7+؟؟</strong> (محاولة Jerome Gambit) التي تُعتبر خاطئة تماماً هنا!</span></div></div><div class="varbox"><div class="varbox-title">تحذير مهم — لا تُجرّب Jerome Gambit هنا!</div><div class="var-item"><span class="var-dot"></span><span class="var-txt"><code>4.Bxf7+؟؟ Kxf7</code> — تضحية غير سليمة بالكامل، الأسود يحصل على ملك أكثر أماناً من المتوقع ومادة زائدة واضحة</span></div><div class="var-item"><span class="var-dot"></span><span class="var-txt">التحليل الحاسوبي يُؤكّد: هذه التضحية <strong>"بلندر"</strong> فعلي وليس مجرد مجازفة مقبولة</span></div></div></div></div>
+    </div>
+
+    <div class="lc" id="lc8">
+      <div class="lhd"><div class="ley">الحلقة السابعة عشرة · الدرس التاسع</div><div class="ltitle">الخلاصة — تقييم شامل لـ h6 الدفاعية</div><div class="lsub">بعد تغطية كل المسارات الرئيسية لـ Anti-Fried-Liver Defense، نُلخّص بشكل شامل: لماذا هذا الخط منتشر جداً على مستوى الأندية رغم ضعفه النظري الواضح، وكيف يجب على كل لاعب أبيض أن يستغله بأقصى فعالية ممكنة.</div></div>
+      <div class="ba"><div class="bwrap"><div class="bcon"><div class="board" id="b8"></div></div><div class="ctrl"><button class="cb" onclick="nav(8,-2)">⏮</button><button class="cb" onclick="nav(8,-1)">◀</button><span class="mc" id="mc8">الموقف الرئيسي بعد 3...h6</span><button class="cb" onclick="nav(8,1)">▶</button><button class="cb" onclick="nav(8,99)">⏭</button></div><div class="mb" id="mb8"></div></div>
+      <div class="ip"><div class="ic"><h4>ملخص شامل لكل الحلقة</h4><div class="ki"><span class="ico">✅</span><span class="ktxt"><strong>4.d4!</strong> — الرد الأقوى والأكثر طبيعية، يستغل تأخر تطوير الأسود فوراً</span></div><div class="ki"><span class="ico">🎯</span><span class="ktxt">المتابعة <strong>5.Nxd4 Bc5 6.Be3!</strong> تُعطي الأبيض زوج الفيلة وفيلاً مركزياً مهيمناً</span></div><div class="ki"><span class="ico">⚠️</span><span class="ktxt"><strong>5...g5!؟</strong> خيار حاد جداً للأسود، يُضعف بنيته البيدقية بشكل ملموس</span></div><div class="ki"><span class="ico">🛡️</span><span class="ktxt"><strong>4.c3</strong> و<strong>4.0-0!</strong> بدائل مرنة وجيدة أيضاً، تُحافظ على خيارات مفتوحة</span></div></div><div class="notebox"><div class="ntitle">🎯 الدرس الرئيسي لكل الحلقة</div><p>Anti-Fried-Liver Defense يُثبت <strong>مفارقة شطرنجية مهمة</strong>: الخوف من فخ معين قد يدفع اللاعب لخيار أضعف موضوعياً من البدائل المتاحة! بدلاً من تعلّم الرد الصحيح على Fried Liver، كثير من اللاعبين يلعبون h6 ويُعطون الأبيض أفضلية واضحة بدون أي مقابل. الدرس لكل لاعب أبيض: <strong>اضرب المركز فوراً بـ 4.d4!</strong> واستغل هذه الهدية النظرية الثمينة بأقصى فعالية!</p></div></div></div>
+    </div>
+
+    <div class="nav-footer">
+      <a class="nav-ep" href="italian_ep16.html">← الحلقة السادسة عشرة</a>
+      <span style="font-size:11px;color:var(--txt3)">١٧ / ٢٨</span>
+      <a class="nav-ep next" href="italian_ep18.html">الحلقة الثامنة عشرة →</a>
+    </div>
+  </div>
+</div>
+
+<script>
+const Wp={K:'♔',Q:'♕',R:'♖',B:'♗',N:'♘',P:'♙'};
+const Bp={K:'♚',Q:'♛',R:'♜',B:'♝',N:'♞',P:'♟'};
+function parseFen(fen){const rows=fen.split(' ')[0].split('/'),b=[];for(let r=0;r<8;r++){const row=[];for(const c of rows[r]){if(isNaN(c))row.push(c);else for(let i=0;i<+c;i++)row.push(null);}b.push(row);}return b;}
+function pHtml(code){if(!code)return'';const w=code===code.toUpperCase();const m={K:Wp.K,Q:Wp.Q,R:Wp.R,B:Wp.B,N:Wp.N,P:Wp.P,k:Bp.K,q:Bp.Q,r:Bp.R,b:Bp.B,n:Bp.N,p:Bp.P};return`<span class="pc ${w?'w':'b'}">${m[code]}</span>`;}
+function drawBoard(id,fen){
+  const el=document.getElementById(id);if(!el)return;
+  const bd=parseFen(fen);el.innerHTML='';
+  const fl=['a','b','c','d','e','f','g','h'];
+  for(let r=0;r<8;r++){
+    for(let c=0;c<8;c++){
+      const sq=document.createElement('div');
+      const rank=8-r;
+      const file=c;
+      const isLight=(file+rank)%2===0;
+      sq.className='sq '+(isLight?'lt':'dk');
+      if(c===7) sq.innerHTML+=`<span class="rl">${rank}</span>`;
+      if(r===7) sq.innerHTML+=`<span class="fl">${fl[c]}</span>`;
+      sq.innerHTML+=pHtml(bd[r][c]);
+      el.appendChild(sq);
+    }
+  }
+}
+const S='rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
+const DATA=[
+  [{f:'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR',l:'الوضع الابتدائي',n:''},{f:'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR',l:'1.e4',n:''},{f:'rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR',l:'1...e5',n:''},{f:'rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R',l:'2.Nf3',n:''},{f:'r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R',l:'2...Nc6',n:''},{f:'r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R',l:'3.Bc4',n:''},{f:'r1bqkbnr/pppp1pp1/2n4p/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R',l:'3...h6!؟',n:'Anti-Fried-Liver Defense! يمنع 4.Ng5 نهائياً'}],
+  [{f:'r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R',l:'بعد 3.Bc4',n:''},{f:'r1bqkbnr/pppp1pp1/2n4p/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R',l:'3...h6!؟',n:'حركة شائعة جداً على مستوى الأندية لكنها ضعيفة نظرياً'},{f:'r1bqkbnr/pppp1pp1/2n4p/4p3/2BPP3/5N2/PPP2PPP/RNBQK2R',l:'4.d4!',n:'الأبيض يستغل ضياع نقلة الأسود فوراً'},{f:'r1bqkbnr/pppp1pp1/2n4p/8/2BpP3/5N2/PPP2PPP/RNBQK2R',l:'4...exd4',n:'الأسود مجبر على التنازل عن المركز'}],
+  [{f:'r1bqkbnr/pppp1pp1/2n4p/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R',l:'بعد 3...h6',n:''},{f:'r1bqkbnr/pppp1pp1/2n4p/4p3/2BPP3/5N2/PPP2PPP/RNBQK2R',l:'4.d4!',n:'الرد الأقوى — يضرب المركز فوراً'},{f:'r1bqkbnr/pppp1pp1/2n4p/8/2BpP3/5N2/PPP2PPP/RNBQK2R',l:'4...exd4',n:''},{f:'r1bqkbnr/pppp1pp1/2n4p/8/2BNP3/8/PPP2PPP/RNBQK2R',l:'5.Nxd4!',n:'مركز مهيمن وتطوير متقدم للأبيض'}],
+  [{f:'r1bqkbnr/pppp1pp1/2n4p/8/2BNP3/8/PPP2PPP/RNBQK2R',l:'بعد 5.Nxd4',n:''},{f:'r1bqk1nr/pppp1pp1/2n4p/2b5/2BNP3/8/PPP2PPP/RNBQK2R',l:'5...Bc5',n:'يُهدد الفارس d4 مباشرة'},{f:'r1bqk1nr/pppp1pp1/2n4p/2b5/2BNP3/4B3/PPP2PPP/RN1QK2R',l:'6.Be3!',n:'يحمي الفارس ويُهدد بمبادلة مفيدة'},{f:'r1bqk1nr/pppp1pp1/2n4p/8/2BbP3/4B3/PPP2PPP/RN1QK2R',l:'6...Bxd4',n:''},{f:'r1bqk1nr/pppp1pp1/2n4p/8/2BBP3/8/PPP2PPP/RN1QK2R',l:'7.Bxd4',n:'فيل مركزي مهيمن — زوج الفيلة للأبيض'},{f:'r1bqk2r/pppp1pp1/2n2n1p/8/2BBP3/8/PPP2PPP/RN1QK2R',l:'7...Nf6',n:'الأسود يُكمل تطويره الطبيعي'}],
+  [{f:'r1bqkbnr/pppp1pp1/2n4p/8/2BNP3/8/PPP2PPP/RNBQK2R',l:'بعد 5.Nxd4',n:''},{f:'r1bqkb1r/pppp1pp1/2n2n1p/8/2BNP3/8/PPP2PPP/RNBQK2R',l:'5...Nf6',n:'يُطوّر الفارس أولاً'},{f:'r1bqkb1r/pppp1pp1/2n2n1p/8/2BNP3/2N5/PPP2PPP/R1BQK2R',l:'6.Nc3',n:''},{f:'r1bqk2r/pppp1pp1/2n2n1p/2b5/2BNP3/2N5/PPP2PPP/R1BQK2R',l:'6...Bc5!',n:'نفس الفكرة بترتيب مختلف'},{f:'r1bqk2r/pppp1pp1/2n2n1p/2b5/2BNP3/2N1B3/PPP2PPP/R2QK2R',l:'7.Be3',n:'نفس الخطة الاستراتيجية تماماً'}],
+  [{f:'r1bqkbnr/pppp1pp1/2n4p/8/2BNP3/8/PPP2PPP/RNBQK2R',l:'بعد 5.Nxd4',n:''},{f:'r1bqkbnr/pppp1p2/2n4p/6p1/2BNP3/8/PPP2PPP/RNBQK2R',l:'5...g5!؟',n:'السر-غامبيط! توسّع جريء وحاد جداً'},{f:'r1bqkbnr/pppp1p2/2n4p/6p1/2B1P3/5N2/PPP2PPP/RNBQK2R',l:'6.Nf3',n:'الفارس يتراجع بأمان — يستفيد من ضعف g5'},{f:'r1bqkbnr/pppp1p2/2n4p/8/2B1P1p1/5N2/PPP2PPP/RNBQK2R',l:'6...g4؟',n:'الأسود يستمر بالمجازفة — يطرد الفارس مجدداً'},{f:'r1bqkbnr/pppp1p2/2n4p/4N3/2B1P1p1/8/PPP2PPP/RNBQK2R',l:'7.Nxe5!',n:'العقاب الفوري! الفارس يستغل ضعف المركز ويربح بيدقاً'}],
+  [{f:'r1bqkbnr/pppp1pp1/2n4p/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R',l:'بعد 3...h6',n:''},{f:'r1bqkbnr/pppp1pp1/2n4p/4p3/2B1P3/2P2N2/PP1P1PPP/RNBQK2R',l:'4.c3',n:'بديل هادئ — يُعدّ لكسر d4 مستقبلاً'},{f:'r1bqkb1r/pppp1pp1/2n2n1p/4p3/2B1P3/2P2N2/PP1P1PPP/RNBQK2R',l:'4...Nf6',n:'تطوير طبيعي للأسود'}],
+  [{f:'r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R',l:'بعد 3.Bc4',n:''},{f:'r1bqkbnr/pppp1pp1/2n4p/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R',l:'3...h6',n:''},{f:'r1bqkbnr/pppp1pp1/2n4p/4p3/2B1P3/5N2/PPPP1PPP/RNBQ1RK1',l:'4.0-0!',n:'تحصين فوري — يُحافظ على كل المرونة الاستراتيجية'},{f:'r1bqkb1r/pppp1pp1/2n2n1p/4p3/2B1P3/5N2/PPPP1PPP/RNBQ1RK1',l:'4...Nf6',n:'الأسود يُطوّر طبيعياً'},{f:'r1bqkb1r/pppp1pp1/2n2n1p/4p3/2BPP3/5N2/PPP2PPP/RNBQ1RK1',l:'5.d4!',n:'الأبيض يضرب المركز بعد التحصين — نفس الفكرة، توقيت مختلف'},{f:'r1bqkb1r/pppp1pp1/2n2n1p/8/2BpP3/5N2/PPP2PPP/RNBQ1RK1',l:'5...exd4',n:''},{f:'r1bqkb1r/pppp1pp1/2n2n1p/8/2BNP3/8/PPP2PPP/RNBQ1RK1',l:'6.Nxd4!',n:'نفس النتيجة بترتيب أكثر أماناً — الملك محصّن منذ البداية'}],
+  [{f:'r1bqkbnr/pppp1pp1/2n4p/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R',l:'الموقف الرئيسي بعد 3...h6',n:'نقطة انطلاق كل الردود النظرية المتاحة'}],
+];
+const cur=DATA.map(()=>0);
+function buildMB(i){const b=document.getElementById('mb'+i);if(!b)return;b.innerHTML='';let n=1;DATA[i].forEach((m,j)=>{if(j===0)return;if(j%2===1){const s=document.createElement('span');s.className='mn';s.textContent=n+'.';b.appendChild(s);n++;}const t=document.createElement('span');t.className='mt';t.textContent=m.l;t.dataset.j=j;t.onclick=()=>setM(i,j);b.appendChild(t);});}
+function setM(i,idx){if(idx<0)idx=0;if(idx>=DATA[i].length)idx=DATA[i].length-1;cur[i]=idx;const fen=DATA[i][idx].f;drawBoard('b'+i,fen.includes(' ')?fen:fen+' w KQkq - 0 1');const mc=document.getElementById('mc'+i);if(mc)mc.textContent=idx===0?DATA[i][0].l:(DATA[i][idx].n||DATA[i][idx].l);document.querySelectorAll('#mb'+i+' .mt').forEach(t=>t.classList.toggle('active',+t.dataset.j===idx));}
+function nav(i,d){const max=DATA[i].length-1;setM(i,d===-2?0:d===99?max:Math.max(0,Math.min(max,cur[i]+d)));}
+function show(idx,el,mIdx){document.querySelectorAll('.lc').forEach(l=>l.classList.remove('active'));document.querySelectorAll('.li').forEach(l=>l.classList.remove('active'));document.querySelectorAll('.mob-btn').forEach(b=>b.classList.remove('active'));document.getElementById('lc'+idx).classList.add('active');if(el)el.classList.add('active');if(mIdx!==undefined)document.querySelectorAll('.mob-btn')[mIdx]?.classList.add('active');setM(idx,0);window.scrollTo({top:0,behavior:'smooth'});}
+function tog(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open');}
+window.addEventListener('DOMContentLoaded',()=>{for(let i=0;i<DATA.length;i++){buildMB(i);setM(i,0);}});
+</script>
+</body>
+</html>
