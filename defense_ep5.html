@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الدرس الخامس: الدفاع النشط أم الدفاع السلبي؟ | أكاديمية أسامة للشطرنج</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0f1117; --panel:#161923; --panel2:#1c202c;
+    --gold:#d4a84b; --gold-soft:#e8c876;
+    --text:#e7e9ee; --text-dim:#a8adba; --border:#2a2f3d;
+    --blue:#5b8fd6; --green:#5bb98c;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--bg); color:var(--text); font-family:'Cairo', sans-serif; line-height:1.9; }
+
+  .progress-wrap{ position:sticky; top:0; z-index:50; background:var(--panel); border-bottom:1px solid var(--border); }
+  .progress-bar{ height:6px; background:linear-gradient(90deg, var(--gold), var(--gold-soft)); width:40%; transition:width .3s ease; }
+  .progress-label{ text-align:center; font-size:0.8rem; color:var(--text-dim); padding:6px 10px 4px; }
+
+  .container{ max-width:820px; margin:0 auto; padding:24px 20px 80px; }
+
+  header.hero{ text-align:center; padding:30px 10px 20px; border-bottom:2px solid var(--border); margin-bottom:26px; }
+  header.hero .eyebrow{ color:var(--gold); font-weight:700; font-size:0.95rem; letter-spacing:1px; }
+  header.hero h1{ font-size:1.9rem; margin:10px 0 6px; color:var(--text); }
+  header.hero p.sub{ color:var(--text-dim); font-size:1rem; margin:0; }
+
+  .tabs{ display:flex; gap:10px; margin-bottom:30px; position:sticky; top:38px; z-index:40; background:var(--bg); padding:10px 0; }
+  .tab-btn{ flex:1; background:var(--panel); border:1px solid var(--border); color:var(--text-dim); padding:14px 10px; border-radius:10px; font-family:'Cairo', sans-serif; font-weight:700; font-size:1rem; cursor:pointer; transition:all .2s; display:flex; align-items:center; justify-content:center; gap:8px; }
+  .tab-btn.active{ background:var(--gold); color:#141414; border-color:var(--gold); }
+  .tab-panel{ display:none; }
+  .tab-panel.active{ display:block; }
+
+  section{ margin-bottom:34px; }
+  h2.section-title{ display:flex; align-items:center; gap:10px; font-size:1.35rem; color:var(--gold-soft); border-right:4px solid var(--gold); padding-right:12px; margin-bottom:16px; }
+  p{ color:var(--text); font-size:1.05rem; margin:0 0 14px; }
+  ul.point-list{ margin:0 0 14px; padding-right:22px; }
+  ul.point-list li{ margin-bottom:8px; font-size:1.02rem; }
+
+  .note-box{ background:var(--panel); border:1px solid var(--border); border-right:4px solid var(--blue); border-radius:10px; padding:16px 18px; margin:18px 0; display:flex; gap:12px; align-items:flex-start; }
+  .note-box .icon{ font-size:1.4rem; line-height:1; }
+  .note-box .content{ flex:1; }
+  .note-box .content strong{ color:var(--blue); display:block; margin-bottom:4px; }
+
+  .quote-box{ background:var(--panel2); border:1px solid var(--border); border-right:4px solid var(--gold); border-radius:10px; padding:20px 22px; margin:20px 0; font-family:'Amiri', serif; font-size:1.25rem; color:var(--gold-soft); position:relative; }
+  .quote-box::before{ content:"“"; font-size:2.4rem; color:var(--gold); position:absolute; top:-6px; right:14px; opacity:0.5; }
+
+  .divider{ text-align:center; color:var(--border); margin:30px 0; letter-spacing:6px; }
+
+  .compare-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:18px 0; }
+  .compare-card{ background:var(--panel); border-radius:12px; padding:16px; }
+  .compare-card.passive{ border:1px solid #6b7280; border-top:4px solid #6b7280; }
+  .compare-card.active{ border:1px solid var(--green); border-top:4px solid var(--green); }
+  .compare-card h4{ margin:0 0 10px; font-size:1.05rem; }
+  .compare-card.passive h4{ color:#9ca3af; }
+  .compare-card.active h4{ color:var(--green); }
+  .compare-card ul{ margin:0; padding-right:18px; font-size:0.92rem; color:var(--text-dim); }
+  .compare-card li{ margin-bottom:6px; }
+  @media (max-width:600px){ .compare-grid{ grid-template-columns:1fr; } }
+
+  .summary-box{ background:var(--panel); border:1px solid var(--gold); border-radius:14px; padding:22px; margin-top:40px; }
+  .summary-box h3{ color:var(--gold); margin:0 0 14px; display:flex; align-items:center; gap:8px; font-size:1.2rem; }
+  .summary-box ul{ margin:0; padding-right:22px; }
+  .summary-box li{ margin-bottom:10px; font-size:1.02rem; }
+
+  .next-box{ background:linear-gradient(135deg, #1c2233, #171a24); border:1px solid var(--blue); border-radius:14px; padding:22px; margin-top:22px; }
+  .next-box h3{ color:var(--blue); margin:0 0 10px; display:flex; align-items:center; gap:8px; font-size:1.2rem; }
+  .next-box p{ color:var(--text-dim); margin:0; }
+
+  footer{ text-align:center; color:var(--text-dim); font-size:0.85rem; margin-top:50px; padding-top:20px; border-top:1px solid var(--border); }
+
+  .practical-intro{ background:linear-gradient(135deg, rgba(212,168,75,0.12), rgba(212,168,75,0.03)); border:1px solid var(--gold); border-radius:14px; padding:20px 22px; margin-bottom:30px; }
+
+  .exercise-card{ background:var(--panel); border:1px solid var(--border); border-radius:14px; padding:22px; margin-bottom:28px; }
+  .exercise-tag{ display:inline-block; background:rgba(212,168,75,0.12); color:var(--gold-soft); border:1px solid var(--gold); border-radius:20px; padding:4px 14px; font-size:0.78rem; font-weight:700; margin-bottom:12px; }
+  .exercise-title{ font-size:1.2rem; color:var(--text); margin:0 0 4px; font-weight:700; }
+  .exercise-meta{ color:var(--text-dim); font-size:0.85rem; margin-bottom:14px; }
+  .exercise-context{ color:var(--text-dim); background:var(--panel2); border-radius:8px; padding:12px 16px; margin-bottom:16px; font-size:0.98rem; }
+  .question-box{ background:rgba(91,143,214,0.1); border:1px solid var(--blue); border-radius:10px; padding:14px 16px; margin-bottom:14px; color:var(--blue); font-weight:700; text-align:center; }
+  .reveal-btn{ display:block; width:100%; background:var(--gold); color:#141414; border:none; border-radius:10px; padding:12px; font-family:'Cairo', sans-serif; font-weight:800; font-size:1rem; cursor:pointer; transition:background .2s; }
+  .reveal-btn:hover{ background:var(--gold-soft); }
+  .answer-box{ display:none; margin-top:16px; background:rgba(91,185,140,0.08); border:1px solid var(--green); border-radius:10px; padding:16px 18px; }
+  .answer-box.show{ display:block; }
+  .answer-box h4{ color:var(--green); margin:0 0 10px; font-size:1.05rem; }
+  .answer-box p{ font-size:0.98rem; margin-bottom:10px; }
+  .move-seq{ background:var(--panel2); border-radius:8px; padding:10px 14px; font-family:'Amiri', serif; direction:ltr; text-align:center; color:var(--gold-soft); font-size:1.05rem; margin:10px 0; }
+
+  
+.bcon{ direction:ltr; display:flex; justify-content:center; margin:20px 0; }
+.board{
+  direction:ltr;
+  display:grid;
+  grid-template-columns: repeat(8, minmax(0,1fr));
+  grid-template-rows: repeat(8, minmax(0,1fr));
+  width: min(100%, 380px);
+  aspect-ratio: 1/1;
+  border: 3px solid #47566b;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.sq{ position:relative; display:flex; align-items:center; justify-content:center; }
+.sq.lt{ background:#cbd5e1; }
+.sq.dk{ background:#47566b; }
+.pc{ width:82%; height:82%; }
+.pc.w{ color:#f5f4f0; stroke:#2a2f3d; stroke-width:1.2; stroke-linecap:round; stroke-linejoin:round; }
+.pc.b{ color:#1a1d24; stroke:#0a0a0a; stroke-width:1.2; stroke-linecap:round; stroke-linejoin:round; }
+.pc path, .pc circle{ fill:currentColor; }
+.pc.w path.slit{ stroke:rgba(0,0,0,0.4); }
+.pc.b path.slit{ stroke:rgba(255,255,255,0.4); }
+
+
+  @media (max-width:600px){
+    header.hero h1{ font-size:1.5rem; }
+    h2.section-title{ font-size:1.15rem; }
+    p, ul.point-list li{ font-size:1rem; }
+    .quote-box{ font-size:1.1rem; }
+    .tabs{ top:36px; }
+    .tab-btn{ font-size:0.9rem; padding:12px 6px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-wrap">
+  <div class="progress-bar"></div>
+  <div class="progress-label">الدرس 5 من 20 — فن الدفاع في الشطرنج</div>
+</div>
+
+<div class="container">
+
+  <header class="hero">
+    <div class="eyebrow">أكاديمية أسامة للشطرنج</div>
+    <h1>الدفاع النشط أم الدفاع السلبي؟</h1>
+    <p class="sub">الدرس الخامس — دورة فن الدفاع في الشطرنج</p>
+  </header>
+
+  <div class="tabs">
+    <button class="tab-btn active" id="tab-btn-theory" onclick="showTab('theory')">📘 الجزء النظري</button>
+    <button class="tab-btn" id="tab-btn-practice" onclick="showTab('practice')">♟️ الجزء التطبيقي</button>
+  </div>
+
+  <!-- ================= THEORY TAB ================= -->
+  <div class="tab-panel active" id="panel-theory">
+
+  <section>
+    <h2 class="section-title">🎯 مقدمة</h2>
+    <p>عندما يتعرض اللاعب للهجوم، تكون أمامه طريقتان للدفاع.</p>
+    <p>الطريقة الأولى هي التراجع المستمر، وحماية القطع، وانتظار انتهاء هجوم الخصم.</p>
+    <p>أما الطريقة الثانية فهي البحث عن وسيلة لإزعاج الخصم، وتقليل قوة هجومه، وخلق تهديدات تجبره على تغيير خطته.</p>
+    <p>الطريقة الأولى تُسمى الدفاع السلبي. أما الثانية فتُسمى الدفاع النشط.</p>
+    <p>ومعرفة الفرق بينهما من أهم أسرار الدفاع الاحترافي.</p>
+  </section>
+
+  <div class="divider">◆ ◆ ◆</div>
+
+  <section>
+    <h2 class="section-title">⚖️ المقارنة</h2>
+    <div class="compare-grid">
+      <div class="compare-card passive">
+        <h4>🛡️ الدفاع السلبي</h4>
+        <ul>
+          <li>تتراجع القطع باستمرار</li>
+          <li>تصبح قطعك محصورة في نصف رقعتك</li>
+          <li>يفقد جيشك التنسيق</li>
+          <li>الخصم يملك حرية كاملة لتنفيذ خطته</li>
+        </ul>
+      </div>
+      <div class="compare-card active">
+        <h4>⚡ الدفاع النشط</h4>
+        <ul>
+          <li>تنشيط قطعة خاملة</li>
+          <li>السيطرة على مربع مهم</li>
+          <li>تهديد إحدى قطع الخصم</li>
+          <li>إجبار الخصم على الدفاع بدلًا من الهجوم</li>
+        </ul>
+      </div>
+    </div>
+    <p>قد ينجح الدفاع السلبي في تأخير الخسارة، لكنه نادرًا ما يحل المشكلة من جذورها.</p>
+  </section>
+
+  <div class="divider">◆ ◆ ◆</div>
+
+  <section>
+    <h2 class="section-title">💪 لماذا يفضل اللاعبون الأقوياء الدفاع النشط؟</h2>
+    <p>لأنهم يعلمون أن الهجوم يحتاج إلى تنسيق.</p>
+    <p>إذا أجبرت المهاجم على تغيير خطته، أو الدفاع عن إحدى قطعه، فإن قوة هجومه ستنخفض تلقائيًا.</p>
+    <p>ولهذا فإن أفضل المدافعين لا يكتفون بإيقاف التهديد، بل يحاولون كسب المبادرة تدريجيًا.</p>
+  </section>
+
+  <div class="divider">◆ ◆ ◆</div>
+
+  <section>
+    <h2 class="section-title">🤔 متى يكون الدفاع السلبي مقبولًا؟</h2>
+    <p>ليس الدفاع السلبي خطأ دائمًا.</p>
+    <p>في بعض المواقف، لا تملك الوقت للبحث عن اللعب النشط.</p>
+    <p>إذا كان ملكك معرضًا لخطر مباشر، أو كنت تواجه تهديدًا تكتيكيًا قويًا، فقد يكون الدفاع الهادئ هو الخيار الصحيح.</p>
+    <div class="note-box">
+      <div class="icon">💡</div>
+      <div class="content">
+        <strong>لكن يجب أن يكون حلًا مؤقتًا</strong>
+        لا أسلوبًا دائمًا. بمجرد أن يخف الضغط، ابحث عن فرصة لاستعادة نشاط قطعك.
+      </div>
+    </div>
+  </section>
+
+  <div class="divider">◆ ◆ ◆</div>
+
+  <section>
+    <h2 class="section-title">🚩 علامات تدل على أنك تدافع بطريقة سلبية</h2>
+    <p>إذا لاحظت هذه الأمور في مبارياتك، فاحذر:</p>
+    <ul class="point-list">
+      <li>جميع قطعك تدافع ولا تهاجم.</li>
+      <li>خصمك ينفذ خطته دون أي إزعاج.</li>
+      <li>تتراجع في كل نقلة تقريبًا.</li>
+      <li>تشعر أنك تنتظر الخطأ من خصمك بدلًا من صنع الفرص بنفسك.</li>
+    </ul>
+  </section>
+
+  <div class="divider">◆ ◆ ◆</div>
+
+  <section>
+    <h2 class="section-title">🔄 كيف تحول الدفاع إلى لعب نشط؟</h2>
+    <p>اسأل نفسك أثناء الدفاع:</p>
+    <ul class="point-list">
+      <li>هل يمكنني تهديد قطعة من قطع الخصم؟</li>
+      <li>هل أستطيع تبديل إحدى قطعه الهجومية؟</li>
+      <li>هل توجد قطعة عندي يمكن تحسين مكانها؟</li>
+      <li>هل أستطيع كسب نقلة زمنية بإجبار الخصم على الرد؟</li>
+    </ul>
+  </section>
+
+  <div class="divider">◆ ◆ ◆</div>
+
+  <section>
+    <h2 class="section-title">⚠️ أخطاء شائعة</h2>
+    <ul class="point-list">
+      <li>الاعتقاد أن الدفاع يعني التراجع دائمًا.</li>
+      <li>تحريك نفس القطعة مرات عديدة دون هدف.</li>
+      <li>ترك جميع المبادرات بيد الخصم.</li>
+      <li>نسيان أن كل نقلة دفاعية يجب أن تحسن وضع قطعك.</li>
+      <li>الخوف من خلق تهديدات أثناء الدفاع.</li>
+    </ul>
+  </section>
+
+  <div class="quote-box">
+    أفضل دفاع هو الذي يجبر خصمك على التفكير في الدفاع أيضًا.
+  </div>
+  <p>كلما نجحت في إشغال خصمك بمشكلاته، قلّت قدرته على مواصلة الهجوم.</p>
+
+  <div class="divider">◆ ◆ ◆</div>
+
+  <section>
+    <h2 class="section-title">🏁 خاتمة</h2>
+    <p>الدفاع الحقيقي ليس انتظار نهاية الهجوم.</p>
+    <p>بل هو البحث عن اللحظة التي تستعيد فيها زمام المبادرة.</p>
+    <p>المدافع القوي لا يكتفي بإيقاف الخطر، بل يبدأ في بناء فرصه الخاصة حتى وهو تحت الضغط.</p>
+  </section>
+
+  </div><!-- /panel-theory -->
+
+  <!-- ================= PRACTICE TAB ================= -->
+  <div class="tab-panel" id="panel-practice">
+
+  <section>
+    <div class="practical-intro">
+      <p style="margin:0;">سنطبق الآن الفرق بين الدفاع النشط والسلبي على مواقف حقيقية من مباريات موثقة. قبل الكشف عن الفكرة، حاول أن تسأل: <strong>هل هذا دفاع سلبي أم نشط؟</strong></p>
+    </div>
+  </section>
+
+  <div class="exercise-card">
+    <span class="exercise-tag">أشهر مثال على الدفاع النشط في تاريخ الشطرنج</span>
+    <h3 class="exercise-title">تمرين 1 — التضحية التي حوّلت موقفًا خانقًا إلى موقف حي</h3>
+    <div class="exercise-meta">ريشيفسكي × بتروسيان — زيورخ 1953 (دور المرشحين لبطولة العالم)</div>
+    <div class="exercise-context">
+      وصلت المباراة إلى هذا الموقف بعد 25.Rfe1. قطع الأسود كلها محصورة في الصفوف الثلاثة الأخيرة، وبيادق الأبيض المركزية (d4, e5) جاهزة للانطلاق بدعم كامل من قطعه.
+    </div>
+    <div class="bcon"><div class="board" id="board-e5-1"><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc b"><path d="M12 8 L18 8 L18 11 L14 11 L14 14 L21 14 L21 11 L24 11 L24 14 L31 14 L31 11 L27 11 L27 8 L33 8 L33 14 L30 14 L31 33 L14 33 L15 14 L12 14 Z"/><path d="M11 36 L34 36 L34 39 L11 39 Z"/></svg></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><circle cx="10" cy="10" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="22.5" cy="5" r="2"/><circle cx="27" cy="6" r="2"/><circle cx="35" cy="10" r="2"/><path d="M10 12 L35 12 L32 26 L13 26 Z"/><path d="M13 26 L32 26 L33 33 L12 33 Z"/><path d="M11 36 L34 36 L34 39 L11 39 Z"/></svg></div><div class="sq dk"></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><path d="M21 5 L24 5 L24 9 L28 9 L28 12 L24 12 L24 16 L21 16 L21 12 L17 12 L17 9 L21 9 Z"/><path d="M22.5 16 L30 24 L30 30 C30 33 26 35 22.5 35 C19 35 15 33 15 30 L15 24 Z"/><path d="M14 35 L31 35 L31 38 L14 38 Z"/><path class="slit" d="M17 27 C20 24 25 24 28 27" stroke-width="1.4" fill="none"/></svg></div><div class="sq dk"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc b"><path d="M12 8 L18 8 L18 11 L14 11 L14 14 L21 14 L21 11 L24 11 L24 14 L31 14 L31 11 L27 11 L27 8 L33 8 L33 14 L30 14 L31 33 L14 33 L15 14 L12 14 Z"/><path d="M11 36 L34 36 L34 39 L11 39 Z"/></svg></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><path d="M11 37 L11 30 C9 27 8 25 9 22 C8 19 8 15 8 12 L11 8 L10 4 L14 7 L13 10 C16 8 20 6 24 7 C28 8 32 11 35 15 C33 17.5 33.5 18 32 19 L35 20.5 C32 22 29 21.5 26 20.5 C24 22.5 22 23.5 22.5 25 C24 27 26 29 27 32 L29 37 Z"/></svg></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="6.5" r="2.1"/><path d="M22.5 9 C25.5 9 27.5 11.5 27.5 14.5 C27.5 17 26.5 18.8 24.8 20.5 C27.5 24 29.5 28.5 29.5 32.5 C29.5 35.3 26.5 37 22.5 37 C18.5 37 15.5 35.3 15.5 32.5 C15.5 28.5 17.5 24 20.2 20.5 C18.5 18.8 17.5 17 17.5 14.5 C17.5 11.5 19.5 9 22.5 9 Z"/><path d="M13 37 L32 37 L32 40 L13 40 Z"/><path class="slit" d="M18.5 16 L26.5 21" stroke-width="1.4" fill="none"/></svg></div><div class="sq dk"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq lt"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><circle cx="10" cy="10" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="22.5" cy="5" r="2"/><circle cx="27" cy="6" r="2"/><circle cx="35" cy="10" r="2"/><path d="M10 12 L35 12 L32 26 L13 26 Z"/><path d="M13 26 L32 26 L33 33 L12 33 Z"/><path d="M11 36 L34 36 L34 39 L11 39 Z"/></svg></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="6.5" r="2.1"/><path d="M22.5 9 C25.5 9 27.5 11.5 27.5 14.5 C27.5 17 26.5 18.8 24.8 20.5 C27.5 24 29.5 28.5 29.5 32.5 C29.5 35.3 26.5 37 22.5 37 C18.5 37 15.5 35.3 15.5 32.5 C15.5 28.5 17.5 24 20.2 20.5 C18.5 18.8 17.5 17 17.5 14.5 C17.5 11.5 19.5 9 22.5 9 Z"/><path d="M13 37 L32 37 L32 40 L13 40 Z"/><path class="slit" d="M18.5 16 L26.5 21" stroke-width="1.4" fill="none"/></svg></div><div class="sq dk"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq lt"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq lt"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><path d="M12 8 L18 8 L18 11 L14 11 L14 14 L21 14 L21 11 L24 11 L24 14 L31 14 L31 11 L27 11 L27 8 L33 8 L33 14 L30 14 L31 33 L14 33 L15 14 L12 14 Z"/><path d="M11 36 L34 36 L34 39 L11 39 Z"/></svg></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq lt"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="6.5" r="2.1"/><path d="M22.5 9 C25.5 9 27.5 11.5 27.5 14.5 C27.5 17 26.5 18.8 24.8 20.5 C27.5 24 29.5 28.5 29.5 32.5 C29.5 35.3 26.5 37 22.5 37 C18.5 37 15.5 35.3 15.5 32.5 C15.5 28.5 17.5 24 20.2 20.5 C18.5 18.8 17.5 17 17.5 14.5 C17.5 11.5 19.5 9 22.5 9 Z"/><path d="M13 37 L32 37 L32 40 L13 40 Z"/><path class="slit" d="M18.5 16 L26.5 21" stroke-width="1.4" fill="none"/></svg></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><path d="M12 8 L18 8 L18 11 L14 11 L14 14 L21 14 L21 11 L24 11 L24 14 L31 14 L31 11 L27 11 L27 8 L33 8 L33 14 L30 14 L31 33 L14 33 L15 14 L12 14 Z"/><path d="M11 36 L34 36 L34 39 L11 39 Z"/></svg></div><div class="sq lt"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><path d="M21 5 L24 5 L24 9 L28 9 L28 12 L24 12 L24 16 L21 16 L21 12 L17 12 L17 9 L21 9 Z"/><path d="M22.5 16 L30 24 L30 30 C30 33 26 35 22.5 35 C19 35 15 33 15 30 L15 24 Z"/><path d="M14 35 L31 35 L31 38 L14 38 Z"/><path class="slit" d="M17 27 C20 24 25 24 28 27" stroke-width="1.4" fill="none"/></svg></div><div class="sq lt"></div></div></div>
+    <div class="question-box">الأسود في موقف ضيق كلاسيكي — دفاع سلبي كامل. هل يستمر في التراجع، أم يوجد حل نشط ولو بثمن مادي؟</div>
+    <button class="reveal-btn" onclick="document.getElementById('e5ans1').classList.toggle('show')">🔓 اكشف الفكرة</button>
+    <div class="answer-box" id="e5ans1">
+      <h4>الفكرة</h4>
+      <p>بتروسيان أدرك أن قطعه ستبقى سلبية إلى الأبد طالما الرخ يحتل e7 (المربع الوحيد الذي يمنع الحصان من الوصول إلى d5 المربع المثالي). فبدل الاستمرار في الدفاع السلبي، ضحّى بالجودة كاملة:</p>
+      <div class="move-seq">25...Re6!! 26.a4 Ne7 27.Bxe6 fxe6 28.Qf1 Nd5</div>
+      <p>الآن الحصان يجلس على d5 بشكل لا يمكن طرده منه، بيادق الأبيض المركزية مجمّدة تمامًا، وفيل الأبيض على b2 أصبح قطعة شبه ميتة. هذا أشهر مثال في تاريخ الشطرنج على تحويل موقف سلبي خانق إلى مبادرة نشطة — حتى لو كلّف ذلك خسارة مادية. المباراة انتهت بالتعادل رغم أن الأبيض كان يملك جودة زائدة معظم الوقت.</p>
+    </div>
+  </div>
+
+  <div class="exercise-card">
+    <span class="exercise-tag">علامات الدفاع السلبي</span>
+    <h3 class="exercise-title">تمرين 2 — عندما تتحرك نفس القطعة بلا هدف واضح</h3>
+    <div class="exercise-meta">توري × لاسكر — موسكو 1925</div>
+    <div class="exercise-context">
+      وصلت المباراة إلى هذا الموقف بعد 23...Qd5. وزير الأسود تحرك من a5 إلى f5 ثم إلى d5 خلال نقلات قليلة، دون أن يهدد شيئًا محددًا في كل مرة.
+    </div>
+    <div class="bcon"><div class="board" id="board-e5-2"><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><path d="M12 8 L18 8 L18 11 L14 11 L14 14 L21 14 L21 11 L24 11 L24 14 L31 14 L31 11 L27 11 L27 8 L33 8 L33 14 L30 14 L31 33 L14 33 L15 14 L12 14 Z"/><path d="M11 36 L34 36 L34 39 L11 39 Z"/></svg></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><path d="M12 8 L18 8 L18 11 L14 11 L14 14 L21 14 L21 11 L24 11 L24 14 L31 14 L31 11 L27 11 L27 8 L33 8 L33 14 L30 14 L31 33 L14 33 L15 14 L12 14 Z"/><path d="M11 36 L34 36 L34 39 L11 39 Z"/></svg></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc b"><path d="M11 37 L11 30 C9 27 8 25 9 22 C8 19 8 15 8 12 L11 8 L10 4 L14 7 L13 10 C16 8 20 6 24 7 C28 8 32 11 35 15 C33 17.5 33.5 18 32 19 L35 20.5 C32 22 29 21.5 26 20.5 C24 22.5 22 23.5 22.5 25 C24 27 26 29 27 32 L29 37 Z"/></svg></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><path d="M21 5 L24 5 L24 9 L28 9 L28 12 L24 12 L24 16 L21 16 L21 12 L17 12 L17 9 L21 9 Z"/><path d="M22.5 16 L30 24 L30 30 C30 33 26 35 22.5 35 C19 35 15 33 15 30 L15 24 Z"/><path d="M14 35 L31 35 L31 38 L14 38 Z"/><path class="slit" d="M17 27 C20 24 25 24 28 27" stroke-width="1.4" fill="none"/></svg></div><div class="sq dk"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="6.5" r="2.1"/><path d="M22.5 9 C25.5 9 27.5 11.5 27.5 14.5 C27.5 17 26.5 18.8 24.8 20.5 C27.5 24 29.5 28.5 29.5 32.5 C29.5 35.3 26.5 37 22.5 37 C18.5 37 15.5 35.3 15.5 32.5 C15.5 28.5 17.5 24 20.2 20.5 C18.5 18.8 17.5 17 17.5 14.5 C17.5 11.5 19.5 9 22.5 9 Z"/><path d="M13 37 L32 37 L32 40 L13 40 Z"/><path class="slit" d="M18.5 16 L26.5 21" stroke-width="1.4" fill="none"/></svg></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq lt"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><circle cx="10" cy="10" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="22.5" cy="5" r="2"/><circle cx="27" cy="6" r="2"/><circle cx="35" cy="10" r="2"/><path d="M10 12 L35 12 L32 26 L13 26 Z"/><path d="M13 26 L32 26 L33 33 L12 33 Z"/><path d="M11 36 L34 36 L34 39 L11 39 Z"/></svg></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="6.5" r="2.1"/><path d="M22.5 9 C25.5 9 27.5 11.5 27.5 14.5 C27.5 17 26.5 18.8 24.8 20.5 C27.5 24 29.5 28.5 29.5 32.5 C29.5 35.3 26.5 37 22.5 37 C18.5 37 15.5 35.3 15.5 32.5 C15.5 28.5 17.5 24 20.2 20.5 C18.5 18.8 17.5 17 17.5 14.5 C17.5 11.5 19.5 9 22.5 9 Z"/><path d="M13 37 L32 37 L32 40 L13 40 Z"/><path class="slit" d="M18.5 16 L26.5 21" stroke-width="1.4" fill="none"/></svg></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc w"><circle cx="10" cy="10" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="22.5" cy="5" r="2"/><circle cx="27" cy="6" r="2"/><circle cx="35" cy="10" r="2"/><path d="M10 12 L35 12 L32 26 L13 26 Z"/><path d="M13 26 L32 26 L33 33 L12 33 Z"/><path d="M11 36 L34 36 L34 39 L11 39 Z"/></svg></div><div class="sq lt"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc w"><path d="M11 37 L11 30 C9 27 8 25 9 22 C8 19 8 15 8 12 L11 8 L10 4 L14 7 L13 10 C16 8 20 6 24 7 C28 8 32 11 35 15 C33 17.5 33.5 18 32 19 L35 20.5 C32 22 29 21.5 26 20.5 C24 22.5 22 23.5 22.5 25 C24 27 26 29 27 32 L29 37 Z"/></svg></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><path d="M12 8 L18 8 L18 11 L14 11 L14 14 L21 14 L21 11 L24 11 L24 14 L31 14 L31 11 L27 11 L27 8 L33 8 L33 14 L30 14 L31 33 L14 33 L15 14 L12 14 Z"/><path d="M11 36 L34 36 L34 39 L11 39 Z"/></svg></div><div class="sq lt"></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><path d="M12 8 L18 8 L18 11 L14 11 L14 14 L21 14 L21 11 L24 11 L24 14 L31 14 L31 11 L27 11 L27 8 L33 8 L33 14 L30 14 L31 33 L14 33 L15 14 L12 14 Z"/><path d="M11 36 L34 36 L34 39 L11 39 Z"/></svg></div><div class="sq lt"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><path d="M21 5 L24 5 L24 9 L28 9 L28 12 L24 12 L24 16 L21 16 L21 12 L17 12 L17 9 L21 9 Z"/><path d="M22.5 16 L30 24 L30 30 C30 33 26 35 22.5 35 C19 35 15 33 15 30 L15 24 Z"/><path d="M14 35 L31 35 L31 38 L14 38 Z"/><path class="slit" d="M17 27 C20 24 25 24 28 27" stroke-width="1.4" fill="none"/></svg></div><div class="sq lt"></div></div></div>
+    <div class="question-box">هل هذا التنقل المتكرر للوزير علامة دفاع نشط أم سلبي؟ وما الثمن الذي يدفعه الأسود؟</div>
+    <button class="reveal-btn" onclick="document.getElementById('e5ans2').classList.toggle('show')">🔓 اكشف الفكرة</button>
+    <div class="answer-box" id="e5ans2">
+      <h4>الفكرة</h4>
+      <p>هذا مثال دقيق على "تحريك نفس القطعة مرات عديدة دون هدف" — أحد الأخطاء الشائعة المذكورة في هذا الدرس. الوزير الأسود يهرب من تهديد إلى تهديد آخر (a5 تحت هجوم b4، ثم f5 تحت هجوم Rg3، والآن d5) دون أن يخلق أي إزعاج حقيقي للأبيض.</p>
+      <p>بينما ينشغل الأسود بهذه التنقلات الدفاعية البحتة، يواصل الأبيض بهدوء تحسين موقعه (Ne3 ثم لاحقًا Bf6!!) — وهي بالضبط النقلات التي أدّت إلى هجوم "الطاحونة" الذي حلّلناه بالتفصيل في الدرس الثاني. هذه بالضبط النتيجة الطبيعية للدفاع السلبي المستمر: الخصم يحصل على حرية كاملة لتنفيذ خطته، لأن الأسود لم يخلق ولو تهديدًا واحدًا طوال هذه النقلات.</p>
+    </div>
+  </div>
+
+  <div class="exercise-card">
+    <span class="exercise-tag">من الدفاع المؤقت إلى النشاط</span>
+    <h3 class="exercise-title">تمرين 3 — الخطر زال... فمتى نعود للنشاط؟</h3>
+    <div class="exercise-meta">كابابلانكا × مارشال — نيويورك 1918</div>
+    <div class="exercise-context">
+      وصلت المباراة إلى هذا الموقف بعد 20...Bxf2. لعدة نقلات متتالية، كان الأبيض مضطرًا لنقلات دفاعية بحتة (تحريك الملك بعيدًا عن الكش المتكرر). الآن الكشوفات توقفت مؤقتًا.
+    </div>
+    <div class="bcon"><div class="board" id="board-e5-3"><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><path d="M12 8 L18 8 L18 11 L14 11 L14 14 L21 14 L21 11 L24 11 L24 14 L31 14 L31 11 L27 11 L27 8 L33 8 L33 14 L30 14 L31 33 L14 33 L15 14 L12 14 Z"/><path d="M11 36 L34 36 L34 39 L11 39 Z"/></svg></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc b"><path d="M12 8 L18 8 L18 11 L14 11 L14 14 L21 14 L21 11 L24 11 L24 14 L31 14 L31 11 L27 11 L27 8 L33 8 L33 14 L30 14 L31 33 L14 33 L15 14 L12 14 Z"/><path d="M11 36 L34 36 L34 39 L11 39 Z"/></svg></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><path d="M21 5 L24 5 L24 9 L28 9 L28 12 L24 12 L24 16 L21 16 L21 12 L17 12 L17 9 L21 9 Z"/><path d="M22.5 16 L30 24 L30 30 C30 33 26 35 22.5 35 C19 35 15 33 15 30 L15 24 Z"/><path d="M14 35 L31 35 L31 38 L14 38 Z"/><path class="slit" d="M17 27 C20 24 25 24 28 27" stroke-width="1.4" fill="none"/></svg></div><div class="sq dk"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq dk"></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq dk"></div><div class="sq dk"></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="6.5" r="2.1"/><path d="M22.5 9 C25.5 9 27.5 11.5 27.5 14.5 C27.5 17 26.5 18.8 24.8 20.5 C27.5 24 29.5 28.5 29.5 32.5 C29.5 35.3 26.5 37 22.5 37 C18.5 37 15.5 35.3 15.5 32.5 C15.5 28.5 17.5 24 20.2 20.5 C18.5 18.8 17.5 17 17.5 14.5 C17.5 11.5 19.5 9 22.5 9 Z"/><path d="M13 37 L32 37 L32 40 L13 40 Z"/><path class="slit" d="M18.5 16 L26.5 21" stroke-width="1.4" fill="none"/></svg></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc w"><circle cx="10" cy="10" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="22.5" cy="5" r="2"/><circle cx="27" cy="6" r="2"/><circle cx="35" cy="10" r="2"/><path d="M10 12 L35 12 L32 26 L13 26 Z"/><path d="M13 26 L32 26 L33 33 L12 33 Z"/><path d="M11 36 L34 36 L34 39 L11 39 Z"/></svg></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc w"><path d="M21 5 L24 5 L24 9 L28 9 L28 12 L24 12 L24 16 L21 16 L21 12 L17 12 L17 9 L21 9 Z"/><path d="M22.5 16 L30 24 L30 30 C30 33 26 35 22.5 35 C19 35 15 33 15 30 L15 24 Z"/><path d="M14 35 L31 35 L31 38 L14 38 Z"/><path class="slit" d="M17 27 C20 24 25 24 28 27" stroke-width="1.4" fill="none"/></svg></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="6.5" r="2.1"/><path d="M22.5 9 C25.5 9 27.5 11.5 27.5 14.5 C27.5 17 26.5 18.8 24.8 20.5 C27.5 24 29.5 28.5 29.5 32.5 C29.5 35.3 26.5 37 22.5 37 C18.5 37 15.5 35.3 15.5 32.5 C15.5 28.5 17.5 24 20.2 20.5 C18.5 18.8 17.5 17 17.5 14.5 C17.5 11.5 19.5 9 22.5 9 Z"/><path d="M13 37 L32 37 L32 40 L13 40 Z"/><path class="slit" d="M18.5 16 L26.5 21" stroke-width="1.4" fill="none"/></svg></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq dk"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><path d="M12 8 L18 8 L18 11 L14 11 L14 14 L21 14 L21 11 L24 11 L24 14 L31 14 L31 11 L27 11 L27 8 L33 8 L33 14 L30 14 L31 33 L14 33 L15 14 L12 14 Z"/><path d="M11 36 L34 36 L34 39 L11 39 Z"/></svg></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc w"><path d="M11 37 L11 30 C9 27 8 25 9 22 C8 19 8 15 8 12 L11 8 L10 4 L14 7 L13 10 C16 8 20 6 24 7 C28 8 32 11 35 15 C33 17.5 33.5 18 32 19 L35 20.5 C32 22 29 21.5 26 20.5 C24 22.5 22 23.5 22.5 25 C24 27 26 29 27 32 L29 37 Z"/></svg></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="6.5" r="2.1"/><path d="M22.5 9 C25.5 9 27.5 11.5 27.5 14.5 C27.5 17 26.5 18.8 24.8 20.5 C27.5 24 29.5 28.5 29.5 32.5 C29.5 35.3 26.5 37 22.5 37 C18.5 37 15.5 35.3 15.5 32.5 C15.5 28.5 17.5 24 20.2 20.5 C18.5 18.8 17.5 17 17.5 14.5 C17.5 11.5 19.5 9 22.5 9 Z"/><path d="M13 37 L32 37 L32 40 L13 40 Z"/><path class="slit" d="M18.5 16 L26.5 21" stroke-width="1.4" fill="none"/></svg></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><circle cx="10" cy="10" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="22.5" cy="5" r="2"/><circle cx="27" cy="6" r="2"/><circle cx="35" cy="10" r="2"/><path d="M10 12 L35 12 L32 26 L13 26 Z"/><path d="M13 26 L32 26 L33 33 L12 33 Z"/><path d="M11 36 L34 36 L34 39 L11 39 Z"/></svg></div></div></div>
+    <div class="question-box">هل يستمر الأبيض في نقلات دفاعية حذرة، أم حان وقت العودة للنشاط؟</div>
+    <button class="reveal-btn" onclick="document.getElementById('e5ans3').classList.toggle('show')">🔓 اكشف الفكرة</button>
+    <div class="answer-box" id="e5ans3">
+      <h4>الفكرة</h4>
+      <p>الدفاع السلبي (مشي الملك المتكرر هربًا من الكش) كان مقبولًا تمامًا في النقلات السابقة، لأن التهديد كان تكتيكيًا مباشرًا لا مجال لتجاهله. لكن الآن، بمجرد أن توقفت الكشوفات، ينتقل الأبيض فورًا لنقلة تطويرية نشطة بدل الاستمرار في الحذر الزائد:</p>
+      <div class="move-seq">21.Bd2! Bh4 22.Qh3</div>
+      <p>الفيل ينضم أخيرًا للعبة بعد أن بقي على c1 بلا دور طوال المباراة، والوزير يجد طريقه لدعم الهجوم القادم على الجناح الملكي. هذا تطبيق دقيق لقاعدة الدرس: الدفاع السلبي حل مؤقت فقط — وبمجرد أن يخف الضغط، يجب البحث فورًا عن نشاط.</p>
+    </div>
+  </div>
+
+  <div class="summary-box">
+    <h3>✅ ما الذي تعلمته؟</h3>
+    <ul>
+      <li>الدفاع السلبي يكتفي برد التهديدات؛ الدفاع النشط يخلق مشاكل مضادة للخصم.</li>
+      <li>أشهر مثال في التاريخ: بتروسيان يضحي بالجودة لتحويل موقف خانق إلى موقف حي (25...Re6!!).</li>
+      <li>من علامات الدفاع السلبي: تحريك نفس القطعة مرارًا دون هدف واضح.</li>
+      <li>الدفاع السلبي مقبول مؤقتًا عند خطر تكتيكي حقيقي على الملك — لكن يجب العودة للنشاط بمجرد زوال الخطر.</li>
+      <li>أفضل دفاع هو الذي يجبر خصمك على التفكير في مشاكله الخاصة أيضًا.</li>
+    </ul>
+  </div>
+
+  <div class="next-box">
+    <h3>➡️ استعد للدرس القادم</h3>
+    <p>في الدرس القادم، سنتعلم كيف نزيل مصدر الهجوم نفسه، لأن إيقاف التهديدات واحدًا تلو الآخر ليس دائمًا أفضل حل، وأحيانًا يكون القضاء على مصدرها هو الطريق الأقصر للدفاع الناجح.</p>
+  </div>
+
+  </div><!-- /panel-practice -->
+
+  <footer>
+    أكاديمية أسامة للشطرنج — كورس فن الدفاع
+  </footer>
+
+</div>
+
+<script>
+  function showTab(name) {
+    document.getElementById('panel-theory').classList.remove('active');
+    document.getElementById('panel-practice').classList.remove('active');
+    document.getElementById('tab-btn-theory').classList.remove('active');
+    document.getElementById('tab-btn-practice').classList.remove('active');
+    document.getElementById('panel-' + name).classList.add('active');
+    document.getElementById('tab-btn-' + name).classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+</script>
+</body>
+</html>
