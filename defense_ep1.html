@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الدرس الأول: ما هو الدفاع الحقيقي؟ | أكاديمية أسامة للشطرنج</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0f1117;
+    --panel:#161923;
+    --panel2:#1c202c;
+    --gold:#d4a84b;
+    --gold-soft:#e8c876;
+    --text:#e7e9ee;
+    --text-dim:#a8adba;
+    --border:#2a2f3d;
+    --blue:#5b8fd6;
+    --green:#5bb98c;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Cairo', sans-serif;
+    line-height:1.9;
+  }
+
+  /* progress bar */
+  .progress-wrap{
+    position:sticky; top:0; z-index:50;
+    background:var(--panel);
+    border-bottom:1px solid var(--border);
+  }
+  .progress-bar{
+    height:6px;
+    background:linear-gradient(90deg, var(--gold), var(--gold-soft));
+    width:8%;
+    transition:width .3s ease;
+  }
+  .progress-label{
+    text-align:center;
+    font-size:0.8rem;
+    color:var(--text-dim);
+    padding:6px 10px 4px;
+  }
+
+  .container{
+    max-width:820px;
+    margin:0 auto;
+    padding:24px 20px 80px;
+  }
+
+  header.hero{
+    text-align:center;
+    padding:30px 10px 20px;
+    border-bottom:2px solid var(--border);
+    margin-bottom:36px;
+  }
+  header.hero .eyebrow{
+    color:var(--gold);
+    font-weight:700;
+    font-size:0.95rem;
+    letter-spacing:1px;
+  }
+  header.hero h1{
+    font-size:1.9rem;
+    margin:10px 0 6px;
+    color:var(--text);
+  }
+  header.hero p.sub{
+    color:var(--text-dim);
+    font-size:1rem;
+    margin:0;
+  }
+
+  section{
+    margin-bottom:34px;
+  }
+
+  h2.section-title{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:1.35rem;
+    color:var(--gold-soft);
+    border-right:4px solid var(--gold);
+    padding-right:12px;
+    margin-bottom:16px;
+  }
+
+  p{
+    color:var(--text);
+    font-size:1.05rem;
+    margin:0 0 14px;
+  }
+
+  ul.point-list{
+    margin:0 0 14px;
+    padding-right:22px;
+  }
+  ul.point-list li{
+    margin-bottom:8px;
+    font-size:1.02rem;
+  }
+
+  .note-box{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-right:4px solid var(--blue);
+    border-radius:10px;
+    padding:16px 18px;
+    margin:18px 0;
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+  }
+  .note-box .icon{ font-size:1.4rem; line-height:1; }
+  .note-box .content{ flex:1; }
+  .note-box .content strong{ color:var(--blue); display:block; margin-bottom:4px; }
+
+  .quote-box{
+    background:var(--panel2);
+    border:1px solid var(--border);
+    border-right:4px solid var(--gold);
+    border-radius:10px;
+    padding:20px 22px;
+    margin:20px 0;
+    font-family:'Amiri', serif;
+    font-size:1.25rem;
+    color:var(--gold-soft);
+    position:relative;
+  }
+  .quote-box::before{
+    content:"“";
+    font-size:2.4rem;
+    color:var(--gold);
+    position:absolute;
+    top:-6px;
+    right:14px;
+    opacity:0.5;
+  }
+
+  .divider{
+    text-align:center;
+    color:var(--border);
+    margin:30px 0;
+    letter-spacing:6px;
+  }
+
+  .summary-box{
+    background:var(--panel);
+    border:1px solid var(--gold);
+    border-radius:14px;
+    padding:22px;
+    margin-top:40px;
+  }
+  .summary-box h3{
+    color:var(--gold);
+    margin:0 0 14px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:1.2rem;
+  }
+  .summary-box ul{
+    margin:0;
+    padding-right:22px;
+  }
+  .summary-box li{
+    margin-bottom:10px;
+    font-size:1.02rem;
+  }
+
+  .next-box{
+    background:linear-gradient(135deg, #1c2233, #171a24);
+    border:1px solid var(--blue);
+    border-radius:14px;
+    padding:22px;
+    margin-top:22px;
+  }
+  .next-box h3{
+    color:var(--blue);
+    margin:0 0 10px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:1.2rem;
+  }
+  .next-box p{
+    color:var(--text-dim);
+    margin:0;
+  }
+
+  footer{
+    text-align:center;
+    color:var(--text-dim);
+    font-size:0.85rem;
+    margin-top:50px;
+    padding-top:20px;
+    border-top:1px solid var(--border);
+  }
+
+  @media (max-width:600px){
+    header.hero h1{ font-size:1.5rem; }
+    h2.section-title{ font-size:1.15rem; }
+    p, ul.point-list li{ font-size:1rem; }
+    .quote-box{ font-size:1.1rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-wrap">
+  <div class="progress-bar"></div>
+  <div class="progress-label">الدرس 1 من 20 — فن الدفاع في الشطرنج</div>
+</div>
+
+<div class="container">
+
+  <header class="hero">
+    <div class="eyebrow">أكاديمية أسامة للشطرنج</div>
+    <h1>ما هو الدفاع الحقيقي؟</h1>
+    <p class="sub">الدرس الأول — دورة فن الدفاع في الشطرنج</p>
+  </header>
+
+  <section>
+    <h2 class="section-title">🛡️ مقدمة</h2>
+    <p>مرحبًا بك في دورة فن الدفاع في الشطرنج.</p>
+    <p>قبل أن نتعلم كيف ندافع، يجب أولًا أن نفهم معنى الدفاع.</p>
+    <p>معظم لاعبي الشطرنج يعتقدون أن الدفاع يعني التراجع، أو حماية القطع، أو انتظار انتهاء هجوم الخصم.</p>
+    <p>لكن الحقيقة مختلفة تمامًا.</p>
+    <p>الدفاع ليس علامة ضعف، وليس أسلوبًا سلبيًا.</p>
+    <p>الدفاع هو أحد أعمدة الشطرنج الأربعة إلى جانب التطور، والهجوم، والنهايات.</p>
+    <p>ولا يوجد لاعب عظيم في تاريخ الشطرنج وصل إلى القمة لأنه كان يعرف الهجوم فقط.</p>
+    <p>كل بطل عظيم عرف كيف يدافع عندما يتطلب الموقف ذلك.</p>
+
+    <div class="note-box">
+      <div class="icon">💡</div>
+      <div class="content">
+        <strong>في هذه الدورة</strong>
+        لن نتعلم فقط كيف نمنع تهديدات الخصم، بل سنتعلم كيف نفكر عندما نكون تحت الضغط، وكيف نحافظ على هدوئنا، وكيف نحول أصعب المواقف إلى فرص.
+      </div>
+    </div>
+
+    <p>هذه الدورة ليست عن النقلات.</p>
+    <p>إنها عن طريقة التفكير.</p>
+  </section>
+
+  <div class="divider">◆ ◆ ◆</div>
+
+  <section>
+    <h2 class="section-title">❓ لماذا خصصنا دورة كاملة للدفاع؟</h2>
+    <p>يحب معظم اللاعبين دراسة الافتتاحات، والتكتيكات، والهجمات الجميلة.</p>
+    <p>لكن عندما تبدأ المباراة بالانقلاب ضدهم، يشعرون بالارتباك، ويبدأون في لعب نقلات متسرعة، رغم أنهم قد يكونون متفوقين في المركز.</p>
+    <p>والسبب بسيط.</p>
+    <p>لأنهم تعلموا كيف يهاجمون...</p>
+    <p>لكنهم لم يتعلموا كيف يدافعون.</p>
+    <p>ولهذا فإن كثيرًا من المباريات لا تُحسم بسبب هجوم رائع، بل بسبب دفاع سيئ.</p>
+  </section>
+
+  <div class="divider">◆ ◆ ◆</div>
+
+  <section>
+    <h2 class="section-title">⚠️ المفهوم الخاطئ عن الدفاع</h2>
+    <p>هناك اعتقاد شائع يقول:</p>
+
+    <div class="quote-box">الدفاع هو أن تحاول النجاة.</div>
+
+    <p>لكن هذا ليس صحيحًا.</p>
+    <p>الدفاع الحقيقي لا يعني أن تبقى على قيد الحياة فقط.</p>
+    <p>بل يعني أن تمنع الخصم من تحقيق هدفه، مع الحفاظ على فرصك في قلب الموقف لصالحك.</p>
+    <p>قد تكون في موقف صعب...</p>
+    <p>لكن طالما أن لديك دفاعًا جيدًا، فما زالت لديك فرصة للفوز.</p>
+  </section>
+
+  <div class="divider">◆ ◆ ◆</div>
+
+  <section>
+    <h2 class="section-title">🎯 ما هو الدفاع الحقيقي؟</h2>
+    <p>الدفاع هو فن التعامل مع تهديدات الخصم بأقل قدر ممكن من التنازلات.</p>
+    <p>بمعنى آخر:</p>
+    <ul class="point-list">
+      <li>لا تدافع أكثر مما يجب.</li>
+      <li>لا تضعف مركزك دون داعٍ.</li>
+      <li>لا تستسلم للضغط النفسي.</li>
+      <li>ولا تبحث عن النجاة فقط.</li>
+    </ul>
+
+    <p>المدافع الجيد لا يسأل:</p>
+    <div class="quote-box">كيف أحمي نفسي؟</div>
+
+    <p>بل يسأل:</p>
+    <div class="quote-box">ما الذي يحاول خصمي تحقيقه؟</div>
+
+    <p>وعندما يفهم ذلك، يصبح إيجاد أفضل وسيلة للدفاع أسهل بكثير.</p>
+  </section>
+
+  <div class="divider">◆ ◆ ◆</div>
+
+  <section>
+    <h2 class="section-title">🔄 الدفاع ليس عكس الهجوم</h2>
+    <p>يعتقد كثير من اللاعبين أن الهجوم والدفاع ضدان.</p>
+    <p>لكن الحقيقة أن اللاعب القوي ينتقل بينهما باستمرار.</p>
+    <p>قد تبدأ الموقف مدافعًا...</p>
+    <p>ثم بعد عدة نقلات تصبح أنت المهاجم.</p>
+    <p>ولهذا فإن أفضل المدافعين هم غالبًا أفضل من يعرف متى يحين وقت الانتقال من الدفاع إلى المبادرة.</p>
+    <p>وسنتعلم خلال هذه الدورة كيف نميز تلك اللحظة.</p>
+  </section>
+
+  <div class="divider">◆ ◆ ◆</div>
+
+  <section>
+    <h2 class="section-title">📘 ماذا ستتعلم في هذه الدورة؟</h2>
+    <p>خلال هذه الدورة ستتعلم:</p>
+    <ul class="point-list">
+      <li>كيف تكتشف تهديدات الخصم قبل أن تصبح خطيرة.</li>
+      <li>كيف تقيّم قوة الهجوم.</li>
+      <li>كيف تحدد أولوياتك أثناء الدفاع.</li>
+      <li>كيف تختار أفضل وسيلة دفاع.</li>
+      <li>متى تبدل القطع.</li>
+      <li>متى تغلق المركز.</li>
+      <li>متى تقدم تنازلًا مؤقتًا.</li>
+      <li>متى تضحي بمادة من أجل النجاة.</li>
+      <li>متى يتحول الدفاع إلى هجوم مضاد.</li>
+      <li>كيف تحافظ على هدوئك تحت الضغط.</li>
+      <li>وكيف يفكر أفضل المدافعين في العالم.</li>
+    </ul>
+    <p>لن نحفظ قواعد فقط.</p>
+    <p>بل سنبني طريقة تفكير جديدة.</p>
+  </section>
+
+  <div class="divider">◆ ◆ ◆</div>
+
+  <section>
+    <h2 class="section-title">📝 كيف تدرس هذه الدورة؟</h2>
+    <p>لتحصل على أكبر فائدة، لا تتعامل مع الدروس على أنها معلومات فقط.</p>
+    <p>بعد كل درس، حاول تطبيق الأفكار في مبارياتك.</p>
+    <p>لا يهم إن أخطأت.</p>
+    <p>المهم أن تبدأ في التفكير بالطريقة الصحيحة.</p>
+    <p>ومع تقدمك في الدورة ستلاحظ أنك أصبحت ترى الهجمات بصورة أوضح، وتتخذ قرارات أكثر هدوءًا وثقة.</p>
+  </section>
+
+  <div class="divider">◆ ◆ ◆</div>
+
+  <section>
+    <h2 class="section-title">🏁 خاتمة</h2>
+    <p>الدفاع ليس مهارة ثانوية.</p>
+    <p>بل هو أساس يبنى عليه الهجوم الناجح.</p>
+    <p>فاللاعب الذي لا يعرف كيف يدافع، لن يستطيع استغلال فرصه عندما تتعقد المباراة.</p>
+    <p>أما اللاعب الذي يتقن الدفاع، فلن يخاف من أي هجوم، لأنه يعرف أن لكل هجوم نقاط ضعف، ولكل ضغط طريقة صحيحة للتعامل معه.</p>
+    <p>في الدرس القادم سنبدأ أول خطوة عملية في هذه الرحلة، وسنتعلم كيف نكتشف تهديدات الخصم قبل أن تتحول إلى هجوم حقيقي.</p>
+    <p>مرحبًا بك في عالم الدفاع الاحترافي.</p>
+  </section>
+
+  <div class="summary-box">
+    <h3>✅ ما الذي تعلمته؟</h3>
+    <ul>
+      <li>الدفاع ركن أساسي في الشطرنج، وليس علامة ضعف أو أسلوبًا سلبيًا.</li>
+      <li>الدفاع الحقيقي لا يعني النجاة فقط، بل منع الخصم من تحقيق هدفه مع الحفاظ على فرص الفوز.</li>
+      <li>المدافع الجيد يسأل "ماذا يريد خصمي؟" وليس "كيف أحمي نفسي؟" فقط.</li>
+      <li>الدفاع والهجوم ليسا ضدين، بل اللاعب القوي ينتقل بينهما باستمرار.</li>
+      <li>هذه الدورة تبني طريقة تفكير جديدة، وليست مجرد حفظ قواعد.</li>
+    </ul>
+  </div>
+
+  <div class="next-box">
+    <h3>➡️ استعد للدرس القادم</h3>
+    <p>في الدرس القادم، سنأخذ أول خطوة عملية في رحلة الدفاع، وسنبدأ بتعلم كيف نكتشف تهديدات الخصم قبل أن تتحول إلى هجوم حقيقي.</p>
+  </div>
+
+  <footer>
+    أكاديمية أسامة للشطرنج — دورة فن الدفاع
+  </footer>
+
+</div>
+
+</body>
+</html>
