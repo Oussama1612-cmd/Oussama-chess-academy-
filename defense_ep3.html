@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الدرس الثالث: تقييم خطورة التهديدات وترتيب الأولويات | أكاديمية أسامة للشطرنج</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0f1117; --panel:#161923; --panel2:#1c202c;
+    --gold:#d4a84b; --gold-soft:#e8c876;
+    --text:#e7e9ee; --text-dim:#a8adba; --border:#2a2f3d;
+    --blue:#5b8fd6; --green:#5bb98c;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--bg); color:var(--text); font-family:'Cairo', sans-serif; line-height:1.9; }
+
+  .progress-wrap{ position:sticky; top:0; z-index:50; background:var(--panel); border-bottom:1px solid var(--border); }
+  .progress-bar{ height:6px; background:linear-gradient(90deg, var(--gold), var(--gold-soft)); width:24%; transition:width .3s ease; }
+  .progress-label{ text-align:center; font-size:0.8rem; color:var(--text-dim); padding:6px 10px 4px; }
+
+  .container{ max-width:820px; margin:0 auto; padding:24px 20px 80px; }
+
+  header.hero{ text-align:center; padding:30px 10px 20px; border-bottom:2px solid var(--border); margin-bottom:26px; }
+  header.hero .eyebrow{ color:var(--gold); font-weight:700; font-size:0.95rem; letter-spacing:1px; }
+  header.hero h1{ font-size:1.9rem; margin:10px 0 6px; color:var(--text); }
+  header.hero p.sub{ color:var(--text-dim); font-size:1rem; margin:0; }
+
+  .tabs{ display:flex; gap:10px; margin-bottom:30px; position:sticky; top:38px; z-index:40; background:var(--bg); padding:10px 0; }
+  .tab-btn{ flex:1; background:var(--panel); border:1px solid var(--border); color:var(--text-dim); padding:14px 10px; border-radius:10px; font-family:'Cairo', sans-serif; font-weight:700; font-size:1rem; cursor:pointer; transition:all .2s; display:flex; align-items:center; justify-content:center; gap:8px; }
+  .tab-btn.active{ background:var(--gold); color:#141414; border-color:var(--gold); }
+  .tab-panel{ display:none; }
+  .tab-panel.active{ display:block; }
+
+  section{ margin-bottom:34px; }
+  h2.section-title{ display:flex; align-items:center; gap:10px; font-size:1.35rem; color:var(--gold-soft); border-right:4px solid var(--gold); padding-right:12px; margin-bottom:16px; }
+  p{ color:var(--text); font-size:1.05rem; margin:0 0 14px; }
+  ul.point-list{ margin:0 0 14px; padding-right:22px; }
+  ul.point-list li{ margin-bottom:8px; font-size:1.02rem; }
+
+  .note-box{ background:var(--panel); border:1px solid var(--border); border-right:4px solid var(--blue); border-radius:10px; padding:16px 18px; margin:18px 0; display:flex; gap:12px; align-items:flex-start; }
+  .note-box .icon{ font-size:1.4rem; line-height:1; }
+  .note-box .content{ flex:1; }
+  .note-box .content strong{ color:var(--blue); display:block; margin-bottom:4px; }
+
+  .quote-box{ background:var(--panel2); border:1px solid var(--border); border-right:4px solid var(--gold); border-radius:10px; padding:20px 22px; margin:20px 0; font-family:'Amiri', serif; font-size:1.25rem; color:var(--gold-soft); position:relative; }
+  .quote-box::before{ content:"“"; font-size:2.4rem; color:var(--gold); position:absolute; top:-6px; right:14px; opacity:0.5; }
+
+  .divider{ text-align:center; color:var(--border); margin:30px 0; letter-spacing:6px; }
+
+  .priority-rank{ display:flex; align-items:center; gap:14px; background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:14px 18px; margin-bottom:12px; }
+  .priority-rank .num{ font-family:'Amiri', serif; font-size:1.6rem; color:var(--gold); min-width:32px; text-align:center; }
+  .priority-rank.p1{ border-right:4px solid #e05656; }
+  .priority-rank.p2{ border-right:4px solid var(--gold); }
+  .priority-rank.p3{ border-right:4px solid var(--blue); }
+  .priority-rank.p4{ border-right:4px solid var(--text-dim); }
+  .priority-rank h4{ margin:0 0 4px; font-size:1.05rem; color:var(--text); }
+  .priority-rank p{ margin:0; font-size:0.92rem; color:var(--text-dim); }
+
+  .summary-box{ background:var(--panel); border:1px solid var(--gold); border-radius:14px; padding:22px; margin-top:40px; }
+  .summary-box h3{ color:var(--gold); margin:0 0 14px; display:flex; align-items:center; gap:8px; font-size:1.2rem; }
+  .summary-box ul{ margin:0; padding-right:22px; }
+  .summary-box li{ margin-bottom:10px; font-size:1.02rem; }
+
+  .next-box{ background:linear-gradient(135deg, #1c2233, #171a24); border:1px solid var(--blue); border-radius:14px; padding:22px; margin-top:22px; }
+  .next-box h3{ color:var(--blue); margin:0 0 10px; display:flex; align-items:center; gap:8px; font-size:1.2rem; }
+  .next-box p{ color:var(--text-dim); margin:0; }
+
+  footer{ text-align:center; color:var(--text-dim); font-size:0.85rem; margin-top:50px; padding-top:20px; border-top:1px solid var(--border); }
+
+  .practical-intro{ background:linear-gradient(135deg, rgba(212,168,75,0.12), rgba(212,168,75,0.03)); border:1px solid var(--gold); border-radius:14px; padding:20px 22px; margin-bottom:30px; }
+
+  .exercise-card{ background:var(--panel); border:1px solid var(--border); border-radius:14px; padding:22px; margin-bottom:28px; }
+  .exercise-tag{ display:inline-block; background:rgba(212,168,75,0.12); color:var(--gold-soft); border:1px solid var(--gold); border-radius:20px; padding:4px 14px; font-size:0.78rem; font-weight:700; margin-bottom:12px; }
+  .exercise-title{ font-size:1.2rem; color:var(--text); margin:0 0 4px; font-weight:700; }
+  .exercise-meta{ color:var(--text-dim); font-size:0.85rem; margin-bottom:14px; }
+  .exercise-context{ color:var(--text-dim); background:var(--panel2); border-radius:8px; padding:12px 16px; margin-bottom:16px; font-size:0.98rem; }
+  .question-box{ background:rgba(91,143,214,0.1); border:1px solid var(--blue); border-radius:10px; padding:14px 16px; margin-bottom:14px; color:var(--blue); font-weight:700; text-align:center; }
+  .reveal-btn{ display:block; width:100%; background:var(--gold); color:#141414; border:none; border-radius:10px; padding:12px; font-family:'Cairo', sans-serif; font-weight:800; font-size:1rem; cursor:pointer; transition:background .2s; }
+  .reveal-btn:hover{ background:var(--gold-soft); }
+  .answer-box{ display:none; margin-top:16px; background:rgba(91,185,140,0.08); border:1px solid var(--green); border-radius:10px; padding:16px 18px; }
+  .answer-box.show{ display:block; }
+  .answer-box h4{ color:var(--green); margin:0 0 10px; font-size:1.05rem; }
+  .answer-box p{ font-size:0.98rem; margin-bottom:10px; }
+  .move-seq{ background:var(--panel2); border-radius:8px; padding:10px 14px; font-family:'Amiri', serif; direction:ltr; text-align:center; color:var(--gold-soft); font-size:1.05rem; margin:10px 0; }
+
+  
+.bcon{ direction:ltr; display:flex; justify-content:center; margin:20px 0; }
+.board{
+  direction:ltr;
+  display:grid;
+  grid-template-columns: repeat(8, minmax(0,1fr));
+  grid-template-rows: repeat(8, minmax(0,1fr));
+  width: min(100%, 380px);
+  aspect-ratio: 1/1;
+  border: 3px solid #47566b;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.sq{ position:relative; display:flex; align-items:center; justify-content:center; }
+.sq.lt{ background:#cbd5e1; }
+.sq.dk{ background:#47566b; }
+.pc{ width:82%; height:82%; }
+.pc.w{ color:#f5f4f0; stroke:#2a2f3d; stroke-width:1.2; stroke-linecap:round; stroke-linejoin:round; }
+.pc.b{ color:#1a1d24; stroke:#0a0a0a; stroke-width:1.2; stroke-linecap:round; stroke-linejoin:round; }
+.pc path, .pc circle{ fill:currentColor; }
+.pc.w path.slit{ stroke:rgba(0,0,0,0.4); }
+.pc.b path.slit{ stroke:rgba(255,255,255,0.4); }
+
+
+  @media (max-width:600px){
+    header.hero h1{ font-size:1.5rem; }
+    h2.section-title{ font-size:1.15rem; }
+    p, ul.point-list li{ font-size:1rem; }
+    .quote-box{ font-size:1.1rem; }
+    .tabs{ top:36px; }
+    .tab-btn{ font-size:0.9rem; padding:12px 6px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-wrap">
+  <div class="progress-bar"></div>
+  <div class="progress-label">الدرس 3 من 20 — فن الدفاع في الشطرنج</div>
+</div>
+
+<div class="container">
+
+  <header class="hero">
+    <div class="eyebrow">أكاديمية أسامة للشطرنج</div>
+    <h1>تقييم خطورة التهديدات وترتيب الأولويات</h1>
+    <p class="sub">الدرس الثالث — دورة فن الدفاع في الشطرنج</p>
+  </header>
+
+  <div class="tabs">
+    <button class="tab-btn active" id="tab-btn-theory" onclick="showTab('theory')">📘 الجزء النظري</button>
+    <button class="tab-btn" id="tab-btn-practice" onclick="showTab('practice')">♟️ الجزء التطبيقي</button>
+  </div>
+
+  <!-- ================= THEORY TAB ================= -->
+  <div class="tab-panel active" id="panel-theory">
+
+  <section>
+    <h2 class="section-title">🎯 مقدمة</h2>
+    <p>في الدرس السابق تعلمنا كيف نكتشف تهديدات الخصم.</p>
+    <p>لكن اكتشاف التهديد ليس سوى الخطوة الأولى.</p>
+    <p>فاللاعب القوي لا يدافع عن كل تهديد يراه، بل يقيم أولًا مدى خطورته، ثم يحدد أولوياته قبل أن يختار طريقة الدفاع.</p>
+    <p>كثير من المباريات تُخسر لأن اللاعب ركز على تهديد ثانوي، بينما تجاهل الخطر الحقيقي.</p>
+    <p>ولهذا فإن تقييم التهديدات يعد من أهم المهارات الدفاعية في الشطرنج.</p>
+  </section>
+
+  <div class="divider">◆ ◆ ◆</div>
+
+  <section>
+    <h2 class="section-title">❓ لماذا يجب أن نقيم التهديدات؟</h2>
+    <p>في بعض المواقف، يهاجمك الخصم في أكثر من مكان في الوقت نفسه.</p>
+    <p>قد يهاجم بيدقًا، ويضغط على أحد الأعمدة، ويحاول في الوقت نفسه تحسين وضع قطعه.</p>
+    <p>إذا حاولت الدفاع عن كل شيء، فستفقد المبادرة، وربما تخسر المباراة.</p>
+    <p>أما إذا عرفت ما هو التهديد الأخطر، فستتخذ القرار الصحيح بثقة.</p>
+  </section>
+
+  <div class="divider">◆ ◆ ◆</div>
+
+  <section>
+    <h2 class="section-title">🚦 ليس كل تهديد يستحق الرد</h2>
+    <p>من أكثر الأخطاء انتشارًا بين اللاعبين أنهم يردون تلقائيًا على أول تهديد يشاهدونه.</p>
+    <p>لكن الشطرنج ليس لعبة ردود أفعال.</p>
+    <p>بل هو لعبة أولويات.</p>
+    <p>قد يهاجم خصمك بيدقًا، بينما هدفه الحقيقي هو فتح خط على ملكك.</p>
+    <p>وقد يهاجم قطعة، بينما يريد إجبارك على نقلها لاحتلال مربع مهم.</p>
+    <p>إذا نظرت إلى ظاهر التهديد فقط، فقد تقع في الفخ.</p>
+  </section>
+
+  <div class="divider">◆ ◆ ◆</div>
+
+  <section>
+    <h2 class="section-title">🪜 سلم الأولويات الدفاعية</h2>
+    <p>عند تقييم أي موقف دفاعي، اسأل نفسك وفق هذا الترتيب:</p>
+
+    <div class="priority-rank p1">
+      <div class="num">١</div>
+      <div>
+        <h4>سلامة الملك</h4>
+        <p>إذا كان الملك في خطر، فهو الأولوية المطلقة. لا توجد قطعة أو بيدق أهم من حماية الملك.</p>
+      </div>
+    </div>
+
+    <div class="priority-rank p2">
+      <div class="num">٢</div>
+      <div>
+        <h4>الخسائر التكتيكية</h4>
+        <p>هل يوجد تهديد يؤدي إلى: كسب قطعة؟ تنفيذ شوكة؟ كش مكتشف؟ تثبيت خطير؟ إذا كانت الإجابة نعم، فيجب التعامل معه بسرعة.</p>
+      </div>
+    </div>
+
+    <div class="priority-rank p3">
+      <div class="num">٣</div>
+      <div>
+        <h4>الأخطار الاستراتيجية</h4>
+        <p>قد لا يخسر اللاعب شيئًا مباشرة، لكن خصمه يحاول: احتلال مربع قوي، السيطرة على عمود مفتوح، إنشاء بيدق سالك، أو تحسين تمركز إحدى قطعه. هذه الأخطار تحتاج إلى الانتباه قبل أن تتحول إلى مشاكل أكبر.</p>
+      </div>
+    </div>
+
+    <div class="priority-rank p4">
+      <div class="num">٤</div>
+      <div>
+        <h4>التهديدات الثانوية</h4>
+        <p>مثل مهاجمة بيدق يمكن الدفاع عنه لاحقًا، أو الضغط على جناح بعيد عن مركز اللعب. في كثير من الأحيان يمكن تجاهل هذه التهديدات مؤقتًا إذا كان لديك ما هو أهم.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider">◆ ◆ ◆</div>
+
+  <section>
+    <h2 class="section-title">🎭 كيف تميز بين التهديد الحقيقي والضغط؟</h2>
+    <p>اسأل نفسك:</p>
+    <ul class="point-list">
+      <li>ماذا سيحدث إذا تجاهلت هذا التهديد؟</li>
+      <li>هل سيحقق خصمي مكسبًا واضحًا؟</li>
+      <li>أم أنه فقط يحاول دفعي إلى موقف سلبي؟</li>
+    </ul>
+    <p>إذا لم يكن هناك مكسب حقيقي، فقد يكون ما تراه مجرد ضغط نفسي.</p>
+  </section>
+
+  <div class="divider">◆ ◆ ◆</div>
+
+  <section>
+    <h2 class="section-title">🚫 لا تدافع عن كل شيء</h2>
+    <p>يحاول بعض اللاعبين حماية جميع البيادق وجميع القطع.</p>
+    <p>لكن هذا مستحيل.</p>
+    <p>أحيانًا يكون من الأفضل أن تقبل خسارة بيدق، مقابل الحفاظ على نشاط قطعك أو منع هجوم خطير.</p>
+    <div class="note-box">
+      <div class="icon">💡</div>
+      <div class="content">
+        <strong>القاعدة</strong>
+        الدفاع الجيد لا يعني حماية كل شيء. بل يعني حماية ما هو مهم.
+      </div>
+    </div>
+  </section>
+
+  <div class="divider">◆ ◆ ◆</div>
+
+  <section>
+    <h2 class="section-title">🧭 ترتيب الأولويات يصنع القرار</h2>
+    <p>كلما واجهت أكثر من تهديد، لا تبحث مباشرة عن النقلة.</p>
+    <p>ابدأ بترتيب الأخطار. اسأل نفسك:</p>
+    <ul class="point-list">
+      <li>أي تهديد يمكنه تغيير نتيجة المباراة؟</li>
+      <li>أي تهديد يمكن تأجيله؟</li>
+      <li>وما الذي يمكن تجاهله تمامًا؟</li>
+    </ul>
+    <p>عندما تصبح هذه الأسئلة عادة، ستلاحظ أن قراراتك أصبحت أكثر هدوءًا ودقة.</p>
+  </section>
+
+  <div class="divider">◆ ◆ ◆</div>
+
+  <section>
+    <h2 class="section-title">⚠️ أخطاء شائعة</h2>
+    <ul class="point-list">
+      <li>الدفاع عن أول قطعة تتعرض للهجوم دون تقييم الموقف.</li>
+      <li>التضحية بنشاط القطع من أجل حماية بيدق غير مهم.</li>
+      <li>تجاهل سلامة الملك بسبب التركيز على المكاسب المادية.</li>
+      <li>الخلط بين الضغط والتهديد الحقيقي.</li>
+      <li>محاولة حماية كل شيء في الوقت نفسه.</li>
+    </ul>
+  </section>
+
+  <div class="quote-box">
+    الدفاع الناجح لا يبدأ بالنقلة الصحيحة، بل بتحديد الخطر الصحيح.
+  </div>
+  <p>كلما أحسنت ترتيب أولوياتك، أصبحت قراراتك أوضح، وقلت أخطاؤك تحت الضغط.</p>
+
+  <div class="divider">◆ ◆ ◆</div>
+
+  <section>
+    <h2 class="section-title">🏁 خاتمة</h2>
+    <p>المدافع القوي لا يملك قدرة خارقة على رؤية كل شيء.</p>
+    <p>لكنه يعرف كيف يميز بين المهم والأهم.</p>
+    <p>وهذه المهارة هي التي تمنحه الهدوء، وتجعله يتخذ القرار الصحيح حتى في أصعب المواقف.</p>
+  </section>
+
+  </div><!-- /panel-theory -->
+
+  <!-- ================= PRACTICE TAB ================= -->
+  <div class="tab-panel" id="panel-practice">
+
+  <section>
+    <div class="practical-intro">
+      <p style="margin:0;">سنطبق الآن سلّم الأولويات على مواقف حقيقية من مباريات موثقة. في كل تمرين، قبل الكشف عن الفكرة، حاول أن تحدد: <strong>ما الأولوية الصحيحة هنا؟</strong></p>
+    </div>
+  </section>
+
+  <div class="exercise-card">
+    <span class="exercise-tag">لا تدافع عمّا لم يعد يستحق</span>
+    <h3 class="exercise-title">تمرين 1 — الجودة مقابل ملك عالق في المنتصف</h3>
+    <div class="exercise-meta">أندرسن × دوفريسن — برلين 1852 ("المباراة الخضراء الخالدة")</div>
+    <div class="exercise-context">
+      وصلت المباراة إلى هذا الموقف بعد 19...Qxf3. الأسود التقط حصان الأبيض للتو ويبدو متفوقًا ماديًا، لكن ملكه لا يزال عالقًا في المنتصف ولم يُرحَّل بعد.
+    </div>
+    <div class="bcon"><div class="board" id="board-e3-1"><div class="sq lt"><span class="coord rank-label">8</span></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc b"><path d="M12 8 L18 8 L18 11 L14 11 L14 14 L21 14 L21 11 L24 11 L24 14 L31 14 L31 11 L27 11 L27 8 L33 8 L33 14 L30 14 L31 33 L14 33 L15 14 L12 14 Z"/><path d="M11 36 L34 36 L34 39 L11 39 Z"/></svg></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><path d="M21 5 L24 5 L24 9 L28 9 L28 12 L24 12 L24 16 L21 16 L21 12 L17 12 L17 9 L21 9 Z"/><path d="M22.5 16 L30 24 L30 30 C30 33 26 35 22.5 35 C19 35 15 33 15 30 L15 24 Z"/><path d="M14 35 L31 35 L31 38 L14 38 Z"/><path class="slit" d="M17 27 C20 24 25 24 28 27" stroke-width="1.4" fill="none"/></svg></div><div class="sq dk"></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><path d="M12 8 L18 8 L18 11 L14 11 L14 14 L21 14 L21 11 L24 11 L24 14 L31 14 L31 11 L27 11 L27 8 L33 8 L33 14 L30 14 L31 33 L14 33 L15 14 L12 14 Z"/><path d="M11 36 L34 36 L34 39 L11 39 Z"/></svg></div><div class="sq dk"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg><span class="coord rank-label">7</span></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="6.5" r="2.1"/><path d="M22.5 9 C25.5 9 27.5 11.5 27.5 14.5 C27.5 17 26.5 18.8 24.8 20.5 C27.5 24 29.5 28.5 29.5 32.5 C29.5 35.3 26.5 37 22.5 37 C18.5 37 15.5 35.3 15.5 32.5 C15.5 28.5 17.5 24 20.2 20.5 C18.5 18.8 17.5 17 17.5 14.5 C17.5 11.5 19.5 9 22.5 9 Z"/><path d="M13 37 L32 37 L32 40 L13 40 Z"/><path class="slit" d="M18.5 16 L26.5 21" stroke-width="1.4" fill="none"/></svg></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc b"><path d="M11 37 L11 30 C9 27 8 25 9 22 C8 19 8 15 8 12 L11 8 L10 4 L14 7 L13 10 C16 8 20 6 24 7 C28 8 32 11 35 15 C33 17.5 33.5 18 32 19 L35 20.5 C32 22 29 21.5 26 20.5 C24 22.5 22 23.5 22.5 25 C24 27 26 29 27 32 L29 37 Z"/></svg></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq dk"></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq lt"><span class="coord rank-label">6</span></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="6.5" r="2.1"/><path d="M22.5 9 C25.5 9 27.5 11.5 27.5 14.5 C27.5 17 26.5 18.8 24.8 20.5 C27.5 24 29.5 28.5 29.5 32.5 C29.5 35.3 26.5 37 22.5 37 C18.5 37 15.5 35.3 15.5 32.5 C15.5 28.5 17.5 24 20.2 20.5 C18.5 18.8 17.5 17 17.5 14.5 C17.5 11.5 19.5 9 22.5 9 Z"/><path d="M13 37 L32 37 L32 40 L13 40 Z"/><path class="slit" d="M18.5 16 L26.5 21" stroke-width="1.4" fill="none"/></svg></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><path d="M11 37 L11 30 C9 27 8 25 9 22 C8 19 8 15 8 12 L11 8 L10 4 L14 7 L13 10 C16 8 20 6 24 7 C28 8 32 11 35 15 C33 17.5 33.5 18 32 19 L35 20.5 C32 22 29 21.5 26 20.5 C24 22.5 22 23.5 22.5 25 C24 27 26 29 27 32 L29 37 Z"/></svg></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq dk"><span class="coord rank-label">5</span></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc w"><circle cx="10" cy="10" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="22.5" cy="5" r="2"/><circle cx="27" cy="6" r="2"/><circle cx="35" cy="10" r="2"/><path d="M10 12 L35 12 L32 26 L13 26 Z"/><path d="M13 26 L32 26 L33 33 L12 33 Z"/><path d="M11 36 L34 36 L34 39 L11 39 Z"/></svg><span class="coord rank-label">4</span></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="6.5" r="2.1"/><path d="M22.5 9 C25.5 9 27.5 11.5 27.5 14.5 C27.5 17 26.5 18.8 24.8 20.5 C27.5 24 29.5 28.5 29.5 32.5 C29.5 35.3 26.5 37 22.5 37 C18.5 37 15.5 35.3 15.5 32.5 C15.5 28.5 17.5 24 20.2 20.5 C18.5 18.8 17.5 17 17.5 14.5 C17.5 11.5 19.5 9 22.5 9 Z"/><path d="M13 37 L32 37 L32 40 L13 40 Z"/><path class="slit" d="M18.5 16 L26.5 21" stroke-width="1.4" fill="none"/></svg><span class="coord rank-label">3</span></div><div class="sq lt"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="6.5" r="2.1"/><path d="M22.5 9 C25.5 9 27.5 11.5 27.5 14.5 C27.5 17 26.5 18.8 24.8 20.5 C27.5 24 29.5 28.5 29.5 32.5 C29.5 35.3 26.5 37 22.5 37 C18.5 37 15.5 35.3 15.5 32.5 C15.5 28.5 17.5 24 20.2 20.5 C18.5 18.8 17.5 17 17.5 14.5 C17.5 11.5 19.5 9 22.5 9 Z"/><path d="M13 37 L32 37 L32 40 L13 40 Z"/><path class="slit" d="M18.5 16 L26.5 21" stroke-width="1.4" fill="none"/></svg></div><div class="sq dk"></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><circle cx="10" cy="10" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="22.5" cy="5" r="2"/><circle cx="27" cy="6" r="2"/><circle cx="35" cy="10" r="2"/><path d="M10 12 L35 12 L32 26 L13 26 Z"/><path d="M13 26 L32 26 L33 33 L12 33 Z"/><path d="M11 36 L34 36 L34 39 L11 39 Z"/></svg></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg><span class="coord rank-label">2</span></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq dk"><span class="coord rank-label">1</span><span class="coord file-label">a</span></div><div class="sq lt"><span class="coord file-label">b</span></div><div class="sq dk"><span class="coord file-label">c</span></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc w"><path d="M12 8 L18 8 L18 11 L14 11 L14 14 L21 14 L21 11 L24 11 L24 14 L31 14 L31 11 L27 11 L27 8 L33 8 L33 14 L30 14 L31 33 L14 33 L15 14 L12 14 Z"/><path d="M11 36 L34 36 L34 39 L11 39 Z"/></svg><span class="coord file-label">d</span></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><path d="M12 8 L18 8 L18 11 L14 11 L14 14 L21 14 L21 11 L24 11 L24 14 L31 14 L31 11 L27 11 L27 8 L33 8 L33 14 L30 14 L31 33 L14 33 L15 14 L12 14 Z"/><path d="M11 36 L34 36 L34 39 L11 39 Z"/></svg><span class="coord file-label">e</span></div><div class="sq lt"><span class="coord file-label">f</span></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><path d="M21 5 L24 5 L24 9 L28 9 L28 12 L24 12 L24 16 L21 16 L21 12 L17 12 L17 9 L21 9 Z"/><path d="M22.5 16 L30 24 L30 30 C30 33 26 35 22.5 35 C19 35 15 33 15 30 L15 24 Z"/><path d="M14 35 L31 35 L31 38 L14 38 Z"/><path class="slit" d="M17 27 C20 24 25 24 28 27" stroke-width="1.4" fill="none"/></svg><span class="coord file-label">g</span></div><div class="sq lt"><span class="coord file-label">h</span></div></div></div>
+    <div class="question-box">الأبيض خسر حصانًا للتو. هل يستعيد التوازن المادي، أم توجد أولوية أهم بكثير؟</div>
+    <button class="reveal-btn" onclick="document.getElementById('e3ans1').classList.toggle('show')">🔓 اكشف الفكرة</button>
+    <div class="answer-box" id="e3ans1">
+      <h4>الفكرة</h4>
+      <p>عدد القطع لا يهم هنا على الإطلاق. ملك الأسود لم يُرحَّل بعد ولا يزال في المنتصف — وهذا يجعل التهديد به أولوية مطلقة تفوق أي حساب مادي. الأبيض يواصل التضحية بمزيد من المادة لإبقاء الملك الأسود مكشوفًا:</p>
+      <div class="move-seq">20.Rxe7+! Nxe7 21.Qxd7+!! Kxd7 22.Bf5+ Ke8 23.Bd7+ Kf8 24.Bxe7#</div>
+      <p>الأبيض ضحّى بالرخ ثم بالوزير نفسه — مادة هائلة — لأن الهدف لم يكن أبدًا التعادل في عدد القطع، بل استغلال حقيقة أن ملك الأسود عالق بلا أي حماية. هذا أوضح مثال ممكن على أن بعض الأولويات (هنا: كشف الملك) لا تُقاس بالمادة إطلاقًا.</p>
+    </div>
+  </div>
+
+  <div class="exercise-card">
+    <span class="exercise-tag">أولوية 1 — سلامة الملك تسبق كل تقييم آخر</span>
+    <h3 class="exercise-title">تمرين 2 — عندما يتوقف كل تفكير آخر فورًا</h3>
+    <div class="exercise-meta">كابابلانكا × مارشال — نيويورك 1918 (نفس المباراة، لاحقًا)</div>
+    <div class="exercise-context">
+      بعد سلسلة طويلة من المبادلات والكشوفات، وصلت المباراة إلى هذا الموقف بعد 22...Rae8+. ملك الأبيض بالفعل مشى من g1 إلى e2.
+    </div>
+    <div class="bcon"><div class="board" id="board-e3-2"><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><path d="M12 8 L18 8 L18 11 L14 11 L14 14 L21 14 L21 11 L24 11 L24 14 L31 14 L31 11 L27 11 L27 8 L33 8 L33 14 L30 14 L31 33 L14 33 L15 14 L12 14 Z"/><path d="M11 36 L34 36 L34 39 L11 39 Z"/></svg></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc b"><path d="M12 8 L18 8 L18 11 L14 11 L14 14 L21 14 L21 11 L24 11 L24 14 L31 14 L31 11 L27 11 L27 8 L33 8 L33 14 L30 14 L31 33 L14 33 L15 14 L12 14 Z"/><path d="M11 36 L34 36 L34 39 L11 39 Z"/></svg></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><path d="M21 5 L24 5 L24 9 L28 9 L28 12 L24 12 L24 16 L21 16 L21 12 L17 12 L17 9 L21 9 Z"/><path d="M22.5 16 L30 24 L30 30 C30 33 26 35 22.5 35 C19 35 15 33 15 30 L15 24 Z"/><path d="M14 35 L31 35 L31 38 L14 38 Z"/><path class="slit" d="M17 27 C20 24 25 24 28 27" stroke-width="1.4" fill="none"/></svg></div><div class="sq dk"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq dk"></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="6.5" r="2.1"/><path d="M22.5 9 C25.5 9 27.5 11.5 27.5 14.5 C27.5 17 26.5 18.8 24.8 20.5 C27.5 24 29.5 28.5 29.5 32.5 C29.5 35.3 26.5 37 22.5 37 C18.5 37 15.5 35.3 15.5 32.5 C15.5 28.5 17.5 24 20.2 20.5 C18.5 18.8 17.5 17 17.5 14.5 C17.5 11.5 19.5 9 22.5 9 Z"/><path d="M13 37 L32 37 L32 40 L13 40 Z"/><path class="slit" d="M18.5 16 L26.5 21" stroke-width="1.4" fill="none"/></svg></div><div class="sq dk"></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="6.5" r="2.1"/><path d="M22.5 9 C25.5 9 27.5 11.5 27.5 14.5 C27.5 17 26.5 18.8 24.8 20.5 C27.5 24 29.5 28.5 29.5 32.5 C29.5 35.3 26.5 37 22.5 37 C18.5 37 15.5 35.3 15.5 32.5 C15.5 28.5 17.5 24 20.2 20.5 C18.5 18.8 17.5 17 17.5 14.5 C17.5 11.5 19.5 9 22.5 9 Z"/><path d="M13 37 L32 37 L32 40 L13 40 Z"/><path class="slit" d="M18.5 16 L26.5 21" stroke-width="1.4" fill="none"/></svg></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc w"><circle cx="10" cy="10" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="22.5" cy="5" r="2"/><circle cx="27" cy="6" r="2"/><circle cx="35" cy="10" r="2"/><path d="M10 12 L35 12 L32 26 L13 26 Z"/><path d="M13 26 L32 26 L33 33 L12 33 Z"/><path d="M11 36 L34 36 L34 39 L11 39 Z"/></svg></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq lt"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="6.5" r="2.1"/><path d="M22.5 9 C25.5 9 27.5 11.5 27.5 14.5 C27.5 17 26.5 18.8 24.8 20.5 C27.5 24 29.5 28.5 29.5 32.5 C29.5 35.3 26.5 37 22.5 37 C18.5 37 15.5 35.3 15.5 32.5 C15.5 28.5 17.5 24 20.2 20.5 C18.5 18.8 17.5 17 17.5 14.5 C17.5 11.5 19.5 9 22.5 9 Z"/><path d="M13 37 L32 37 L32 40 L13 40 Z"/><path class="slit" d="M18.5 16 L26.5 21" stroke-width="1.4" fill="none"/></svg></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc w"><path d="M21 5 L24 5 L24 9 L28 9 L28 12 L24 12 L24 16 L21 16 L21 12 L17 12 L17 9 L21 9 Z"/><path d="M22.5 16 L30 24 L30 30 C30 33 26 35 22.5 35 C19 35 15 33 15 30 L15 24 Z"/><path d="M14 35 L31 35 L31 38 L14 38 Z"/><path class="slit" d="M17 27 C20 24 25 24 28 27" stroke-width="1.4" fill="none"/></svg></div><div class="sq dk"></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq dk"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><path d="M12 8 L18 8 L18 11 L14 11 L14 14 L21 14 L21 11 L24 11 L24 14 L31 14 L31 11 L27 11 L27 8 L33 8 L33 14 L30 14 L31 33 L14 33 L15 14 L12 14 Z"/><path d="M11 36 L34 36 L34 39 L11 39 Z"/></svg></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc w"><path d="M11 37 L11 30 C9 27 8 25 9 22 C8 19 8 15 8 12 L11 8 L10 4 L14 7 L13 10 C16 8 20 6 24 7 C28 8 32 11 35 15 C33 17.5 33.5 18 32 19 L35 20.5 C32 22 29 21.5 26 20.5 C24 22.5 22 23.5 22.5 25 C24 27 26 29 27 32 L29 37 Z"/></svg></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><circle cx="10" cy="10" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="22.5" cy="5" r="2"/><circle cx="27" cy="6" r="2"/><circle cx="35" cy="10" r="2"/><path d="M10 12 L35 12 L32 26 L13 26 Z"/><path d="M13 26 L32 26 L33 33 L12 33 Z"/><path d="M11 36 L34 36 L34 39 L11 39 Z"/></svg></div></div></div>
+    <div class="question-box">ملك الأبيض تحت كش مباشر الآن. ما الأولوية الوحيدة المسموح بالتفكير فيها في هذه اللحظة؟</div>
+    <button class="reveal-btn" onclick="document.getElementById('e3ans2').classList.toggle('show')">🔓 اكشف الفكرة</button>
+    <div class="answer-box" id="e3ans2">
+      <h4>الفكرة</h4>
+      <p>عندما يكون الملك تحت كش فعلي، تتوقف كل الأولويات الأخرى تمامًا — لا مجال للتفكير في مكاسب مادية أو خطط استراتيجية حتى يُحل الكش أولًا. الخيارات المتاحة هنا هي إما تحريك الملك أو اعتراض الكش بقطعة (كالفيل عبر e3)، لكن يبقى المبدأ واحدًا: <strong>لا شيء آخر يُناقَش قبل سلامة الملك.</strong></p>
+      <div class="move-seq">23.Kd3 Qf1+ 24.Kc2 Bf2</div>
+      <p>كابابلانكا اختار مواصلة مسير الملك بدل الاعتراض، لأنه كان قد قيّم الموقف مسبقًا وتأكد أن ملكه — رغم مشيه الطويل عبر منتصف الرقعة — لن يتعرض لكش مات فعلي، وفاز لاحقًا بالمباراة.</p>
+    </div>
+  </div>
+
+  <div class="exercise-card">
+    <span class="exercise-tag">أولوية 2 — الخسائر التكتيكية</span>
+    <h3 class="exercise-title">تمرين 3 — نقلة تجمع بين التهديد والتحسين</h3>
+    <div class="exercise-meta">توري × لاسكر — موسكو 1925</div>
+    <div class="exercise-context">
+      وصلت المباراة إلى هذا الموقف بعد 20...Qa5. أمام الأبيض عدة خيارات: تطوير قطعة، حماية بيدق c3، أو فكرة أخرى.
+    </div>
+    <div class="bcon"><div class="board" id="board-e3-3"><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><path d="M12 8 L18 8 L18 11 L14 11 L14 14 L21 14 L21 11 L24 11 L24 14 L31 14 L31 11 L27 11 L27 8 L33 8 L33 14 L30 14 L31 33 L14 33 L15 14 L12 14 Z"/><path d="M11 36 L34 36 L34 39 L11 39 Z"/></svg></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><path d="M12 8 L18 8 L18 11 L14 11 L14 14 L21 14 L21 11 L24 11 L24 14 L31 14 L31 11 L27 11 L27 8 L33 8 L33 14 L30 14 L31 33 L14 33 L15 14 L12 14 Z"/><path d="M11 36 L34 36 L34 39 L11 39 Z"/></svg></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc b"><path d="M11 37 L11 30 C9 27 8 25 9 22 C8 19 8 15 8 12 L11 8 L10 4 L14 7 L13 10 C16 8 20 6 24 7 C28 8 32 11 35 15 C33 17.5 33.5 18 32 19 L35 20.5 C32 22 29 21.5 26 20.5 C24 22.5 22 23.5 22.5 25 C24 27 26 29 27 32 L29 37 Z"/></svg></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><path d="M21 5 L24 5 L24 9 L28 9 L28 12 L24 12 L24 16 L21 16 L21 12 L17 12 L17 9 L21 9 Z"/><path d="M22.5 16 L30 24 L30 30 C30 33 26 35 22.5 35 C19 35 15 33 15 30 L15 24 Z"/><path d="M14 35 L31 35 L31 38 L14 38 Z"/><path class="slit" d="M17 27 C20 24 25 24 28 27" stroke-width="1.4" fill="none"/></svg></div><div class="sq dk"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="6.5" r="2.1"/><path d="M22.5 9 C25.5 9 27.5 11.5 27.5 14.5 C27.5 17 26.5 18.8 24.8 20.5 C27.5 24 29.5 28.5 29.5 32.5 C29.5 35.3 26.5 37 22.5 37 C18.5 37 15.5 35.3 15.5 32.5 C15.5 28.5 17.5 24 20.2 20.5 C18.5 18.8 17.5 17 17.5 14.5 C17.5 11.5 19.5 9 22.5 9 Z"/><path d="M13 37 L32 37 L32 40 L13 40 Z"/><path class="slit" d="M18.5 16 L26.5 21" stroke-width="1.4" fill="none"/></svg></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc b"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc b"><circle cx="10" cy="10" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="22.5" cy="5" r="2"/><circle cx="27" cy="6" r="2"/><circle cx="35" cy="10" r="2"/><path d="M10 12 L35 12 L32 26 L13 26 Z"/><path d="M13 26 L32 26 L33 33 L12 33 Z"/><path d="M11 36 L34 36 L34 39 L11 39 Z"/></svg></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="6.5" r="2.1"/><path d="M22.5 9 C25.5 9 27.5 11.5 27.5 14.5 C27.5 17 26.5 18.8 24.8 20.5 C27.5 24 29.5 28.5 29.5 32.5 C29.5 35.3 26.5 37 22.5 37 C18.5 37 15.5 35.3 15.5 32.5 C15.5 28.5 17.5 24 20.2 20.5 C18.5 18.8 17.5 17 17.5 14.5 C17.5 11.5 19.5 9 22.5 9 Z"/><path d="M13 37 L32 37 L32 40 L13 40 Z"/><path class="slit" d="M18.5 16 L26.5 21" stroke-width="1.4" fill="none"/></svg></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc w"><circle cx="10" cy="10" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="22.5" cy="5" r="2"/><circle cx="27" cy="6" r="2"/><circle cx="35" cy="10" r="2"/><path d="M10 12 L35 12 L32 26 L13 26 Z"/><path d="M13 26 L32 26 L33 33 L12 33 Z"/><path d="M11 36 L34 36 L34 39 L11 39 Z"/></svg></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><path d="M11 37 L11 30 C9 27 8 25 9 22 C8 19 8 15 8 12 L11 8 L10 4 L14 7 L13 10 C16 8 20 6 24 7 C28 8 32 11 35 15 C33 17.5 33.5 18 32 19 L35 20.5 C32 22 29 21.5 26 20.5 C24 22.5 22 23.5 22.5 25 C24 27 26 29 27 32 L29 37 Z"/></svg></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc w"><path d="M12 8 L18 8 L18 11 L14 11 L14 14 L21 14 L21 11 L24 11 L24 14 L31 14 L31 11 L27 11 L27 8 L33 8 L33 14 L30 14 L31 33 L14 33 L15 14 L12 14 Z"/><path d="M11 36 L34 36 L34 39 L11 39 Z"/></svg></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq lt"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><circle cx="22.5" cy="14" r="6"/><path d="M17 25 L28 25 L31 36 L14 36 Z"/><path d="M12 36 L33 36 L33 39 L12 39 Z"/></svg></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"></div><div class="sq lt"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><path d="M12 8 L18 8 L18 11 L14 11 L14 14 L21 14 L21 11 L24 11 L24 14 L31 14 L31 11 L27 11 L27 8 L33 8 L33 14 L30 14 L31 33 L14 33 L15 14 L12 14 Z"/><path d="M11 36 L34 36 L34 39 L11 39 Z"/></svg></div><div class="sq lt"></div><div class="sq dk"><svg viewBox="0 0 45 45" class="pc w"><path d="M21 5 L24 5 L24 9 L28 9 L28 12 L24 12 L24 16 L21 16 L21 12 L17 12 L17 9 L21 9 Z"/><path d="M22.5 16 L30 24 L30 30 C30 33 26 35 22.5 35 C19 35 15 33 15 30 L15 24 Z"/><path d="M14 35 L31 35 L31 38 L14 38 Z"/><path class="slit" d="M17 27 C20 24 25 24 28 27" stroke-width="1.4" fill="none"/></svg></div><div class="sq lt"></div></div></div>
+    <div class="question-box">ما النقلة التي تحقق تهديدًا تكتيكيًا فوريًا وتحسّن الموقف في آن واحد؟</div>
+    <button class="reveal-btn" onclick="document.getElementById('e3ans3').classList.toggle('show')">🔓 اكشف الفكرة</button>
+    <div class="answer-box" id="e3ans3">
+      <h4>الفكرة</h4>
+      <p>الأبيض لعب <strong>21.b4!</strong> — نقلة تهاجم وزير الأسود مباشرة (خسارة تكتيكية محتملة تستوجب ردًا فوريًا من الدرجة الثانية في سلّم الأولويات)، بينما تكسب مساحة على جناح الوزير في الوقت نفسه.</p>
+      <div class="move-seq">21.b4! Qf5 22.Rg3 h6 23.Nc4</div>
+      <p>الأسود اضطر لتحريك الوزير فورًا، ما منح الأبيض تمبو مجانيًا لمواصلة تحسين موقعه — وهي بالضبط نفس النقلات التي مهّدت لاحقًا لهجوم "الطاحونة" الذي رأيناه في الدرس الثاني.</p>
+    </div>
+  </div>
+
+  <div class="summary-box">
+    <h3>✅ ما الذي تعلمته؟</h3>
+    <ul>
+      <li>اكتشاف التهديد ليس سوى الخطوة الأولى — يجب أيضًا تقييم خطورته وترتيب أولويات التعامل معه.</li>
+      <li>سلّم الأولويات: سلامة الملك أولًا، ثم الخسائر التكتيكية، ثم الأخطار الاستراتيجية، ثم التهديدات الثانوية.</li>
+      <li>عندما يكون الملك تحت كش فعلي، تتوقف كل الأولويات الأخرى حتى يُحل الكش.</li>
+      <li>ليس كل تهديد يستحق نقلة دفاعية؛ أحيانًا القرار الصحيح هو قبول خسارة صغيرة أو التخلي عن قطعة استُثمرت بالفعل.</li>
+      <li>السؤال الذهبي: أي تهديد يمكنه تغيير نتيجة المباراة، وأيها يمكن تأجيله أو تجاهله تمامًا؟</li>
+    </ul>
+  </div>
+
+  <div class="next-box">
+    <h3>➡️ استعد للدرس القادم</h3>
+    <p>في الدرس القادم، سنتعلم كيف نختار وسيلة الدفاع المناسبة لكل نوع من أنواع التهديدات، ولماذا لا يوجد حل دفاعي واحد يصلح لجميع المواقف.</p>
+  </div>
+
+  </div><!-- /panel-practice -->
+
+  <footer>
+    أكاديمية أسامة للشطرنج — كورس فن الدفاع
+  </footer>
+
+</div>
+
+<script>
+  function showTab(name) {
+    document.getElementById('panel-theory').classList.remove('active');
+    document.getElementById('panel-practice').classList.remove('active');
+    document.getElementById('tab-btn-theory').classList.remove('active');
+    document.getElementById('tab-btn-practice').classList.remove('active');
+    document.getElementById('panel-' + name).classList.add('active');
+    document.getElementById('tab-btn-' + name).classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+</script>
+</body>
+</html>
